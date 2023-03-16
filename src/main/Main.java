@@ -28,6 +28,7 @@ public class Main {
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		
+		
 		/*Es wird über gamePanel die MEthode startGameThread aufgerufen.*/
 		gamePanel.startGameThread();
 	}
