@@ -12,7 +12,7 @@ import entity.Player;
 public class GamePanel extends JPanel implements Runnable{
 
 	public final int originaleFeldGroeﬂe = 16; 
-	public final int skala = 5;
+	public final int skala = 7;
 	
 	public final int feldGroeﬂe = originaleFeldGroeﬂe * skala;
 	public final int maxBildSpalte = 20;
