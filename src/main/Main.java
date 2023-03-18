@@ -1,6 +1,12 @@
 package main;
 
+import java.awt.Color;
+
+import java.awt.Toolkit;
+
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+
 
 public class Main {
 
@@ -15,10 +21,13 @@ public class Main {
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
 		
-		window.pack();
+		
 		
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
+		window.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		window.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK,4));
 		
 		gamePanel.startGameThread();
 	}
