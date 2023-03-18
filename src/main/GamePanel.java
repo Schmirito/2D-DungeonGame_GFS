@@ -7,22 +7,26 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 
 	public final int originaleFeldGroeﬂe = 16; 
 	public final int skala = 5;
 	
-	final int feldGroeﬂe = originaleFeldGroeﬂe * skala;
-	final int maxBildSpalte = 20;
-	final int maxBildReihe = 12;
-	final int BildBreite = feldGroeﬂe * maxBildSpalte;
-	final int BildHoehe = feldGroeﬂe * maxBildReihe;
+	public final int feldGroeﬂe = originaleFeldGroeﬂe * skala;
+	public final int maxBildSpalte = 20;
+	public final int maxBildReihe = 12;
+	public final int BildBreite = feldGroeﬂe * maxBildSpalte;
+	public final int BildHoehe = feldGroeﬂe * maxBildReihe;
 	
 	public int FPS = 60;
 	
 	KeyHandler keyH = new KeyHandler();
 	
 	Thread gameThread;
+	
+	public Player player = new Player(this, keyH);
 	
 	public GamePanel() {
 		
