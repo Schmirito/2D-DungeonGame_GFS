@@ -23,6 +23,7 @@ public class Player extends Entity {
 		//getPlayerImage();
 	}
 	
+	
 	public void setDefaultValuables() {
 		worldX = 23  * gp.feldGroeﬂe;
 		worldY = 21 * gp.feldGroeﬂe;
