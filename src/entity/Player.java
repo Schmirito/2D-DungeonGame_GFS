@@ -16,6 +16,7 @@ public class Player extends Entity {
 	KeyHandler keyH;
 	public int bildX;
 	public int bildY;
+	public int framesUnbewegt;
 
 	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
 	public Player(GamePanel gp, KeyHandler keyH) {
@@ -24,6 +25,7 @@ public class Player extends Entity {
 
 		bildX = gp.BildBreite / 2 - (gp.feldGroeße / 2);
 		bildY = gp.BildHoehe / 2 - (gp.feldGroeße / 2);
+		framesUnbewegt = 0;
 
 		setDefaultValuables();
 		getPlayerImage();
@@ -33,7 +35,7 @@ public class Player extends Entity {
 		weltX = bildX; //13 * gp.feldGroeße;
 		weltY = bildY; //13 * gp.feldGroeße;
 		geschwindigkeit = gp.skala;
-		richtung = "unten";
+		richtung = "steht";
 	}
 
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
@@ -58,7 +60,8 @@ public class Player extends Entity {
 	}
 	
 	/** Wenn tasten in die entsprechende Richtung gedrückt wurden, wird die Spielerposition neu berechnet.
-	 * Außerdem wird einer Anzahl an frames die Variable für die Animation erhöht bzw zurückgesetzt. */
+	 * Außerdem wird einer Anzahl an frames die Variable für die Animation erhöht bzw zurückgesetzt. 
+	 * Wenn der Character eine gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt. */
 	public void update() {
 		if (keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) {
 			if (keyH.obenGedrückt == true) {
@@ -76,6 +79,7 @@ public class Player extends Entity {
 			}
 			bildX = weltX;
 			bildY = weltY;
+			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {
 				spriteNumber++;
@@ -85,6 +89,11 @@ public class Player extends Entity {
 				frameCounter = 0;
 			}
 		}
+		framesUnbewegt++;
+		if (framesUnbewegt >= 16) {
+			richtung = "steht";
+		}
+		
 	}
 	 
 	/** Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende Sprite ausgewählt und
@@ -157,6 +166,9 @@ public class Player extends Entity {
 				charSprite = rightRV;
 				break;
 			}
+			break;
+		case "steht":
+			charSprite = down;
 			break;
 		}
 
