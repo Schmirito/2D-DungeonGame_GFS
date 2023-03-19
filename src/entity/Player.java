@@ -91,7 +91,7 @@ public class Player extends Entity {
 		}
 		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {
-			richtung = "steht";
+			spriteNumber = 0;
 		}
 		
 	}
@@ -167,10 +167,6 @@ public class Player extends Entity {
 				break;
 			}
 			break;
-		case "steht":
-			charSprite = down;
-			break;
-		}
 
 		g2.drawImage(charSprite, bildX, bildY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 	}
