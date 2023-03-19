@@ -35,7 +35,7 @@ public class Player extends Entity {
 		weltX = bildX; //13 * gp.feldGroeﬂe;
 		weltY = bildY; //13 * gp.feldGroeﬂe;
 		geschwindigkeit = gp.skala;
-		richtung = "down";
+		richtung = "unten";
 	}
 
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
