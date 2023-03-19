@@ -35,7 +35,7 @@ public class Player extends Entity {
 		weltX = bildX; //13 * gp.feldGroeﬂe;
 		weltY = bildY; //13 * gp.feldGroeﬂe;
 		geschwindigkeit = gp.skala;
-		richtung = "steht";
+		richtung = "down";
 	}
 
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
@@ -167,7 +167,7 @@ public class Player extends Entity {
 				break;
 			}
 			break;
-
+		}
 		g2.drawImage(charSprite, bildX, bildY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 	}
 
