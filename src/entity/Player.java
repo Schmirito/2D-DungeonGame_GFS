@@ -28,9 +28,11 @@ public class Player extends Entity {
 		bildY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
 		
-		kamera = gp.giveKamera();
 		setDefaultValuables();
 		getPlayerImage();
+	}
+	public void receiveKamera() {
+		kamera = gp.giveKamera();
 	}
 
 	public void setDefaultValuables() {
