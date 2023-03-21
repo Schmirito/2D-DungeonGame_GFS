@@ -25,8 +25,8 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
-	public Kamera kamera = new Kamera(this);
 	public Player player = new Player(this, keyH);
+	public Kamera kamera = new Kamera(this, keyH, player);
 	
 	public GamePanel() {
 		
@@ -35,8 +35,11 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		
 	}
-	
+	public Kamera giveKamera() {
+		return kamera;
+	}
 	public void startGameThread() {
 		
 		gameThread = new Thread(this);
@@ -73,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		player.update();
+		kamera.update();
 		
 	}
 	public void paintComponent(Graphics g) {
