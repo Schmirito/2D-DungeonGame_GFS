@@ -12,12 +12,15 @@ public class Kamera {
 	GamePanel gp;
 	KeyHandler keyH;
 	Player player;
+	
 	public Kamera(GamePanel gp, KeyHandler keyH, Player player) {
 		this.gp = gp;
 		this.keyH = keyH;
 		this.player = player;
 		bildschirmX = gp.BildBreite/2;
 		bildschirmY = gp.BildHoehe/2;
+		weltX = gp.BildBreite/2;
+		weltY = gp.BildHoehe/2;
 		
 	}
 	

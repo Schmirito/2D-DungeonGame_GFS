@@ -169,8 +169,8 @@ public class Player extends Entity {
 			break;
 		}
 		// bildX und bildY berechnen
-		bildX = weltX - kamera.weltX - (gp.feldGroeﬂe/2);
-		bildY = weltY - kamera.weltY - (gp.feldGroeﬂe/2);
+		bildX = kamera.bildschirmX + kamera.weltX - weltX - (gp.feldGroeﬂe/2);
+		bildY = kamera.bildschirmY + kamera.weltY - weltY - (gp.feldGroeﬂe/2);
 		
 		g2.drawImage(charSprite, bildX, bildY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 	}
