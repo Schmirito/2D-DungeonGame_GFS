@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 
@@ -37,26 +38,37 @@ public class Player extends Entity {
 		geschwindigkeit = gp.skala;
 		richtung = "unten";
 	}
-
+	
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
 	public void getPlayerImage() {
-		try {
-			up = ImageIO.read(getClass().getResourceAsStream("/player/char-Up.png"));
-			upLV = ImageIO.read(getClass().getResourceAsStream("/player/char-UpLV.png"));
-			upRV = ImageIO.read(getClass().getResourceAsStream("/player/char-UpRV.png"));
-			down = ImageIO.read(getClass().getResourceAsStream("/player/char-Down.png"));
-			downLV = ImageIO.read(getClass().getResourceAsStream("/player/char-DownLV.png"));
-			downRV = ImageIO.read(getClass().getResourceAsStream("/player/char-DownRV.png"));
-			left = ImageIO.read(getClass().getResourceAsStream("/player/char-Left.png"));
-			leftLV = ImageIO.read(getClass().getResourceAsStream("/player/char-LeftLV.png"));
-			leftRV = ImageIO.read(getClass().getResourceAsStream("/player/char-LeftRV.png"));
-			right = ImageIO.read(getClass().getResourceAsStream("/player/char-Right.png"));
-			rightLV = ImageIO.read(getClass().getResourceAsStream("/player/char-RightLV.png"));
-			rightRV = ImageIO.read(getClass().getResourceAsStream("/player/char-RightRV.png"));
+		
+			up = setup("char-Up");
+			upLV = setup("char-UpLV");
+			upRV = setup("char-UpRV");
+			down = setup("char-Down");
+			downLV = setup("char-DownLV");
+			downRV = setup("char-DownRV");
+			left = setup("char-Left");
+			leftLV = setup("char-LeftLV");
+			leftRV = setup("char-LeftRV");
+			right = setup("char-Right");
+			rightLV = setup("char-RightLV");
+			rightRV = setup("char-RightRV");
 
+	}
+	/**Der Player wird jetzt in der methode setup skaliert, was die performance verbessern kann.*/
+	public BufferedImage setup(String bildName) {
+		
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage bild = null;
+		
+		try {
+			bild = ImageIO.read(getClass().getResourceAsStream("/player/"+bildName+".png"));
+			bild = uTool.skalaBild(bild, gp.feldGroeße, gp.feldGroeße);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return bild;
 	}
 	
 	/** Wenn tasten in die entsprechende Richtung gedrückt wurden, wird die Spielerposition neu berechnet.
