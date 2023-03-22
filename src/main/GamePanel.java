@@ -18,8 +18,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int feldGroeﬂe = originaleFeldGroeﬂe * skala;
 	public final int maxBildSpalte = 20;
 	public final int maxBildReihe = 12;
-	public final int BildBreite = feldGroeﬂe * maxBildSpalte;
-	public final int BildHoehe = feldGroeﬂe * maxBildReihe;
+	public final int BildBreite = 1920;//feldGroeﬂe * maxBildSpalte;
+	public final int BildHoehe = 1080;//feldGroeﬂe * maxBildReihe;
 	
 	public int FPS = 60;
 	
@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		player.receiveKamera();
 		
 	}
 	public Kamera giveKamera() {
