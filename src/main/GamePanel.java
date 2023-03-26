@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Kamera;
 import entity.Player;
 import felder.FeldManager;
 
@@ -18,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int feldGroeﬂe = originaleFeldGroeﬂe * skala;
 	public final int maxBildSpalte = 20;
 	public final int maxBildReihe = 12;
-	public final int BildBreite = feldGroeﬂe * maxBildSpalte;
-	public final int BildHoehe = feldGroeﬂe * maxBildReihe;
+	public final int BildBreite = 1920;//feldGroeﬂe * maxBildSpalte;
+	public final int BildHoehe = 1080;//feldGroeﬂe * maxBildReihe;
 	
 	public int FPS = 60;
 	
@@ -27,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public Player player = new Player(this, keyH);
+	public Kamera kamera = new Kamera(this, keyH, player);
 	
 	public GamePanel() {
 		
@@ -35,8 +37,12 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		player.receiveKamera();
+		
 	}
-	
+	public Kamera giveKamera() {
+		return kamera;
+	}
 	public void startGameThread() {
 		
 		gameThread = new Thread(this);
@@ -73,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		player.update();
+		kamera.update();
 		
 	}
 	/**Methode in der g2 die gew¸nschten sachen zeichnen kann.*/

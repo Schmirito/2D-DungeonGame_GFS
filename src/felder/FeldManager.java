@@ -32,7 +32,7 @@ public class FeldManager {
 	public void loadMap() {
 		
 		try {
-			InputStream is = getClass().getResourceAsStream("/maps/test.txt");
+			InputStream is = getClass().getResourceAsStream("/maps/world01.txt");
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			int spalte = 0;

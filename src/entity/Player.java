@@ -15,6 +15,7 @@ public class Player extends Entity {
 	/** Deklaration der Variablen */
 	GamePanel gp;
 	KeyHandler keyH;
+	Kamera kamera;
 	public int bildX;
 	public int bildY;
 	public int framesUnbewegt;
@@ -24,12 +25,15 @@ public class Player extends Entity {
 		this.gp = gp;
 		this.keyH = keyH;
 
-		bildX = gp.BildBreite / 2 - (gp.feldGroeﬂe / 2);
-		bildY = gp.BildHoehe / 2 - (gp.feldGroeﬂe / 2);
+		bildX = gp.BildBreite / 2;
+		bildY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
-
+		
 		setDefaultValuables();
 		getPlayerImage();
+	}
+	public void receiveKamera() {
+		kamera = gp.giveKamera();
 	}
 
 	public void setDefaultValuables() {
@@ -89,8 +93,6 @@ public class Player extends Entity {
 				richtung = "rechts";
 				weltX += geschwindigkeit;
 			}
-			bildX = weltX;
-			bildY = weltY;
 			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {
@@ -180,6 +182,10 @@ public class Player extends Entity {
 			}
 			break;
 		}
+		// bildX und bildY berechnen
+		bildX = kamera.bildschirmX + kamera.weltX - weltX - (gp.feldGroeﬂe/2);
+		bildY = kamera.bildschirmY + kamera.weltY - weltY - (gp.feldGroeﬂe/2);
+		
 		g2.drawImage(charSprite, bildX, bildY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 	}
 
