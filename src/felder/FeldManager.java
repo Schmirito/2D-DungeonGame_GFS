@@ -17,13 +17,14 @@ public class FeldManager {
 	GamePanel gp;
 	Feld[] feld;
 	int mapFeldNr[][];
+	public int groeﬂe = 50;
 	
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
 		
 		feld = new Feld[60];
 		
-		mapFeldNr = new int[gp.maxBildSpalte][gp.maxBildReihe];
+		mapFeldNr = new int[50][50];
 		
 		getFeldBild();
 		loadMap();
@@ -32,16 +33,17 @@ public class FeldManager {
 	public void loadMap() {
 		
 		try {
-			InputStream is = getClass().getResourceAsStream("/maps/world01.txt");
+			InputStream is = getClass().getResourceAsStream("/maps/test.txt");
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			int spalte = 0;
 			int reihe = 0;
 			
-			while(spalte < gp.maxBildSpalte && reihe < gp.maxBildReihe) {
+			
+			while(spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
 				String line = br.readLine();
 				
-				while(spalte < gp.maxBildSpalte) {
+				while(spalte < gp.mapGroeﬂe) {
 					String nummern[] = line.split(" ");
 					
 					int num = Integer.parseInt(nummern[spalte]);
@@ -49,7 +51,7 @@ public class FeldManager {
 					mapFeldNr[spalte][reihe] = num;
 					spalte++;
 				}
-				if (reihe == gp.maxBildSpalte) {
+				if (spalte >= gp.mapGroeﬂe) {
 					spalte  = 0;
 					reihe++;
 				}
@@ -132,10 +134,11 @@ public class FeldManager {
 		
 		int spalte = 0;
 		int reihe = 0;
-		int x = 0;
-		int y = 0;
+		int x = 0 - gp.kamera.weltX + (gp.BildBreite / 2);
+		int y = 0 - gp.kamera.weltY + (gp.BildHoehe / 2);
 		
-		while(spalte < gp.maxBildSpalte && reihe < gp.maxBildReihe) {
+		
+		while(spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
 			
 			int feldNr = mapFeldNr[spalte][reihe];
 			
@@ -143,9 +146,9 @@ public class FeldManager {
 			spalte++;
 			x += gp.feldGroeﬂe;
 			
-			if (spalte == gp.maxBildSpalte) {
+			if (spalte == gp.mapGroeﬂe) {
 				spalte =0;
-				x = 0;
+				x = 0 - gp.kamera.weltX + (gp.BildBreite / 2);
 				reihe ++;
 				y += gp.feldGroeﬂe;
 			}

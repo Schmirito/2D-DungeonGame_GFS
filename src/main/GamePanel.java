@@ -21,10 +21,11 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxBildReihe = 12;
 	public final int BildBreite = 1920;//feldGroeﬂe * maxBildSpalte;
 	public final int BildHoehe = 1080;//feldGroeﬂe * maxBildReihe;
+	public final int mapGroeﬂe = 30;
 	
 	public int FPS = 60;
 	
-	FeldManager feldM = new FeldManager(this);
+	public FeldManager feldM = new FeldManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public Player player = new Player(this, keyH);
