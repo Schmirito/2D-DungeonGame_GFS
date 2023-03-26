@@ -25,7 +25,7 @@ public class Kamera {
 	}
 
 	public void update() {
-		/** Wenn die Kamera am Rand angekommen ist, bewegt sich der Spieler ohne die Kamera in die entsrpechenden Richtungen,
+		/** Wenn die Kamera am Rand angekommen ist, bewegt sich der Spieler ohne die Kamera in die entsprechenden Richtungen,
 		 * bis der Spieler auf der entsprechenden Achse wieder in der Mitte des Bildschirms ist
 		 */
 
