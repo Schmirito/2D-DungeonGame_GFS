@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -17,14 +18,23 @@ public class FeldManager {
 	GamePanel gp;
 	Feld[] feld;
 	int mapFeldNr[][];
-	public int groeße = 50;
+	public int groeße = 30;
+	
+	public int mapNr = 1;
+	public int neueNummer;
+	
+	//Etwas unschön gelößt, aber keine zeit.
+	public String[] mapAuswahl = {"/maps/Room1-Test.txt","/maps/Room2-Test.txt","/maps/Room3-Test.txt",
+								"/maps/Room4-Test.txt","/maps/Room5-Test.txt","/maps/Room6-Test.txt",
+								"/maps/Room7-Test.txt","/maps/Room8-Test.txt","/maps/Room9-Test.txt",
+								"/maps/Room10-Test.txt","/maps/Room11-Test.txt","/maps/Room12-Test.txt"};
 	
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
 		
 		feld = new Feld[60];
 		
-		mapFeldNr = new int[50][50];
+		mapFeldNr = new int[30][30];
 		
 		getFeldBild();
 		loadMap();
@@ -32,8 +42,79 @@ public class FeldManager {
 	/**Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet.*/
 	public void loadMap() {
 		
+		switch (mapNr) {
+		case 2:
+		case 4:
+		case 10:
+			//Könnte man in Methode auslagern, ist aber nicht nötig. (weil zu wenig code = lohnt sich nicht.
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 1; 
+			}
+			if (neueNummer == 1) {
+				mapNr = 2;
+			}
+			if (neueNummer == 2) {
+				mapNr = 3;
+			}
+			break;
+			
+		case 1:
+		case 5:
+		case 7:
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 4; 
+			}
+			if (neueNummer == 1) {
+				mapNr = 5;
+			}
+			if (neueNummer == 2) {
+				mapNr = 6;
+			}
+			break;
+		
+		case 6:
+		case 8:
+		case 12:
+			int neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 7;
+			}
+			if (neueNummer == 1) {
+				mapNr = 8;
+			}
+			if (neueNummer == 2) {
+				mapNr = 9;
+			}
+			break;
+			
+		case 3:
+		case 9:
+		case 11:
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 10; 
+			}
+			if (neueNummer == 1) {
+				mapNr = 11;
+			}
+			if (neueNummer == 2) {
+				mapNr = 12;
+			}
+			break;
+			
+		default:
+			break;
+		}	//switch case klammer
+		
+		
 		try {
-			InputStream is = getClass().getResourceAsStream("/maps/11_E-L_A-R.txt");
+			InputStream is = getClass().getResourceAsStream(mapAuswahl[mapNr]);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			int spalte = 0;
