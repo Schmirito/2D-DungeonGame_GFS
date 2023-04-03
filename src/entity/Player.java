@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -29,55 +30,70 @@ public class Player extends Entity {
 		bildY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
 		
+		// Hitbox des Spielers festlegen
+		hitBox = new Rectangle();
+		hitBox.x = gp.feldGroeﬂe/4;
+		hitBox.y = gp.feldGroeﬂe/2;
+		hitBox.height = gp.feldGroeﬂe/2;
+		hitBox.width = gp.feldGroeﬂe/2;
+
 		setDefaultValuables();
 		getPlayerImage();
 	}
+
 	public void receiveKamera() {
 		kamera = gp.giveKamera();
 	}
 
 	public void setDefaultValuables() {
-		weltX = bildX; //13 * gp.feldGroeﬂe;
-		weltY = bildY; //13 * gp.feldGroeﬂe;
+		weltX = bildX; // 13 * gp.feldGroeﬂe;
+		weltY = bildY; // 13 * gp.feldGroeﬂe;
 		geschwindigkeit = gp.skala;
 		richtung = "unten";
 	}
-	
+
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
 	public void getPlayerImage() {
-		
-			up = setup("char-Up");
-			upLV = setup("char-UpLV");
-			upRV = setup("char-UpRV");
-			down = setup("char-Down");
-			downLV = setup("char-DownLV");
-			downRV = setup("char-DownRV");
-			left = setup("char-Left");
-			leftLV = setup("char-LeftLV");
-			leftRV = setup("char-LeftRV");
-			right = setup("char-Right");
-			rightLV = setup("char-RightLV");
-			rightRV = setup("char-RightRV");
+
+		up = setup("char-Up");
+		upLV = setup("char-UpLV");
+		upRV = setup("char-UpRV");
+		down = setup("char-Down");
+		downLV = setup("char-DownLV");
+		downRV = setup("char-DownRV");
+		left = setup("char-Left");
+		leftLV = setup("char-LeftLV");
+		leftRV = setup("char-LeftRV");
+		right = setup("char-Right");
+		rightLV = setup("char-RightLV");
+		rightRV = setup("char-RightRV");
 
 	}
-	/**Der Player wird jetzt in der methode setup skaliert, was die performance verbessern kann.*/
+
+	/**
+	 * Der Player wird jetzt in der methode setup skaliert, was die performance
+	 * verbessern kann.
+	 */
 	public BufferedImage setup(String bildName) {
-		
+
 		UtilityTool uTool = new UtilityTool();
 		BufferedImage bild = null;
-		
+
 		try {
-			bild = ImageIO.read(getClass().getResourceAsStream("/player/"+bildName+".png"));
+			bild = ImageIO.read(getClass().getResourceAsStream("/player/" + bildName + ".png"));
 			bild = uTool.skalaBild(bild, gp.feldGroeﬂe, gp.feldGroeﬂe);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return bild;
 	}
-	
-	/** Wenn tasten in die entsprechende Richtung gedr¸ckt wurden, wird die Spielerposition neu berechnet.
-	 * Auﬂerdem wird einer Anzahl an frames die Variable f¸r die Animation erhˆht bzw zur¸ckgesetzt. 
-	 * Wenn der Character eine gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt. */
+
+	/**
+	 * Wenn tasten in die entsprechende Richtung gedr¸ckt wurden, wird die
+	 * Spielerposition neu berechnet. Auﬂerdem wird einer Anzahl an frames die
+	 * Variable f¸r die Animation erhˆht bzw zur¸ckgesetzt. Wenn der Character eine
+	 * gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt.
+	 */
 	public void update() {
 		if (keyH.obenGedr¸ckt || keyH.untenGedr¸ckt || keyH.linksGedr¸ckt || keyH.rechtsGedr¸ckt) {
 			if (keyH.obenGedr¸ckt == true) {
@@ -107,11 +123,13 @@ public class Player extends Entity {
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
 		}
-		
+
 	}
-	 
-	/** Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende Sprite ausgew‰hlt und
-	 * Schlussendlich an entsprechender Position angezeigt. */
+
+	/**
+	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
+	 * Sprite ausgew‰hlt und Schlussendlich an entsprechender Position angezeigt.
+	 */
 	public void draw(Graphics2D g2) {
 
 		BufferedImage charSprite = null;
@@ -183,9 +201,9 @@ public class Player extends Entity {
 			break;
 		}
 		// bildX und bildY berechnen
-		bildX = weltX - kamera.weltX - (gp.feldGroeﬂe/2) + kamera.bildschirmX;
-		bildY = weltY - kamera.weltY - (gp.feldGroeﬂe/2) + kamera.bildschirmY;
-		
+		bildX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
+		bildY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
+
 		g2.drawImage(charSprite, bildX, bildY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 	}
 
