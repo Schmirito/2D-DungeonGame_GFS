@@ -109,6 +109,10 @@ public class Player extends Entity {
 				richtung = "rechts";
 				weltX += geschwindigkeit;
 			}
+			
+			kollisionAn = false;
+			gp.kPruefer.pruefeFeld(this);
+			
 			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {
