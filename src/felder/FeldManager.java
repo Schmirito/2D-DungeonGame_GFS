@@ -16,8 +16,8 @@ import main.UtilityTool;
 public class FeldManager {
 
 	GamePanel gp;
-	Feld[] feld;
-	int mapFeldNr[][];
+	public Feld[] feld;
+	public int mapFeldNr[][];
 	public int groeﬂe = 30;
 	
 	public int mapNr = 1;

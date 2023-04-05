@@ -29,13 +29,13 @@ public class Player extends Entity {
 		bildX = gp.BildBreite / 2;
 		bildY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
-		
+
 		// Hitbox des Spielers festlegen
 		hitBox = new Rectangle();
-		hitBox.x = gp.feldGroeße/4;
-		hitBox.y = gp.feldGroeße/2;
-		hitBox.height = gp.feldGroeße/2;
-		hitBox.width = gp.feldGroeße/2;
+		hitBox.x = gp.feldGroeße / 4;
+		hitBox.y = gp.feldGroeße / 2;
+		hitBox.height = gp.feldGroeße / 2;
+		hitBox.width = gp.feldGroeße / 2;
 
 		setDefaultValuables();
 		getPlayerImage();
@@ -98,21 +98,36 @@ public class Player extends Entity {
 		if (keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
-				weltY -= geschwindigkeit;
 			} else if (keyH.untenGedrückt) {
 				richtung = "unten";
-				weltY += geschwindigkeit;
 			} else if (keyH.linksGedrückt) {
 				richtung = "links";
-				weltX -= geschwindigkeit;
 			} else if (keyH.rechtsGedrückt) {
 				richtung = "rechts";
-				weltX += geschwindigkeit;
 			}
-			
+			// PRUEFE KOLLISION
 			kollisionAn = false;
 			gp.kPruefer.pruefeFeld(this);
+			// WENN PLAYER NICHT KOLLIDIERT
+			if (kollisionAn == false) {
+				switch (richtung) {
+				case "oben":
+					weltY -= geschwindigkeit;
+					break;
+				case "unten":
+					weltY += geschwindigkeit;
+					break;
+				case "links":
+					weltX -= geschwindigkeit;
+					break;
+				case "rechts":
+					weltX += geschwindigkeit;
+					break;
+				}
+				
+			}
 			
+
 			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {
