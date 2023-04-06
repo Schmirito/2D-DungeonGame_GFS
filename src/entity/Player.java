@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -106,10 +107,10 @@ public class Player extends Entity {
 				richtung = "rechts";
 			}
 			// PRUEFE KOLLISION
-			kollisionAn = false;
+			kollidiert = false;
 			gp.kPruefer.pruefeFeld(this);
 			// WENN PLAYER NICHT KOLLIDIERT
-			if (kollisionAn == false) {
+			if (kollidiert == false) {
 				switch (richtung) {
 				case "oben":
 					weltY -= geschwindigkeit;
