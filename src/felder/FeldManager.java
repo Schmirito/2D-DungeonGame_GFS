@@ -91,7 +91,7 @@ public class FeldManager {
 				mapNr = 9;
 			}
 			break;
-			
+		
 		case 3:
 		case 9:
 		case 11:
