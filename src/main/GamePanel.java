@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import entity.Kamera;
 import entity.Player;
 import felder.FeldManager;
+import objekte.SuperObjekt;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -31,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public KollisionPruefer kPruefer = new KollisionPruefer(this);
 	public Player player = new Player(this, keyH);
 	public Kamera kamera = new Kamera(this, keyH, player);
+	public SuperObjekt objekte[] = new SuperObjekt[10];			// maximale Anzahl an Objekten: 10
+	
 	
 	public GamePanel() {
 		

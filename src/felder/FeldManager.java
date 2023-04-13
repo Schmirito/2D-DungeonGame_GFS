@@ -46,7 +46,7 @@ public class FeldManager {
 		case 2:
 		case 4:
 		case 10:
-			//Könnte man in Methode auslagern, ist aber nicht nötig. (weil zu wenig code = lohnt sich nicht.
+			//Könnte man in Methode auslagern, ist aber nicht nötig. (weil zu wenig code = lohnt sich nicht.)
 			neueNummer = (int) (Math.random()*3);
 
 			if (neueNummer == 0) {
@@ -79,7 +79,7 @@ public class FeldManager {
 		case 6:
 		case 8:
 		case 12:
-			int neueNummer = (int) (Math.random()*3);
+			neueNummer = (int) (Math.random()*3);
 
 			if (neueNummer == 0) {
 				mapNr = 7;
