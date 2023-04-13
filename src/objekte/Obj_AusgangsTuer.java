@@ -10,6 +10,7 @@ public class Obj_AusgangsTuer extends SuperObjekt {
 		bild = null;
 		this.weltX = weltX;
 		this.weltY = weltY;
+		kollision = true;
 		
 	}
 }

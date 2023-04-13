@@ -18,8 +18,8 @@ public class Player extends Entity {
 	GamePanel gp;
 	KeyHandler keyH;
 	Kamera kamera;
-	public int bildX;
-	public int bildY;
+	public int bildschirmX;
+	public int bildschirmY;
 	public int framesUnbewegt;
 
 	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
@@ -27,8 +27,8 @@ public class Player extends Entity {
 		this.gp = gp;
 		this.keyH = keyH;
 
-		bildX = gp.BildBreite / 2;
-		bildY = gp.BildHoehe / 2;
+		bildschirmX = gp.BildBreite / 2;
+		bildschirmY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
 
 		// Hitbox des Spielers festlegen
@@ -47,8 +47,8 @@ public class Player extends Entity {
 	}
 
 	public void setDefaultValuables() {
-		weltX = bildX; // 13 * gp.feldGroeﬂe;
-		weltY = bildY; // 13 * gp.feldGroeﬂe;
+		weltX = bildschirmX; // 13 * gp.feldGroeﬂe;
+		weltY = bildschirmY; // 13 * gp.feldGroeﬂe;
 		geschwindigkeit = gp.skala;
 		richtung = "unten";
 	}
@@ -221,10 +221,10 @@ public class Player extends Entity {
 			break;
 		}
 		// bildX und bildY berechnen
-		bildX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
-		bildY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
+		bildschirmX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
+		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
 
-		g2.drawImage(charSprite, bildX, bildY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 	}
 
 }
