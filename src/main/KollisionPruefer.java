@@ -65,4 +65,17 @@ public class KollisionPruefer {
 		}
 
 	}
+	public boolean[] pruefeObjekt() {
+		boolean objGetroffen[] = new boolean[gp.objekte.length];
+		
+		for (int i = 0; i < objGetroffen.length; i++) {
+			if (gp.objekte[i] != null) {
+				
+			} else {
+				objGetroffen[i] = false;
+			}
+		}
+		
+		return objGetroffen;
+	}
 }
