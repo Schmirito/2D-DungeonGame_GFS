@@ -11,7 +11,7 @@ public class KollisionPruefer {
 	public KollisionPruefer(GamePanel gp) {
 		this.gp = gp;
 	}
-
+	/** Es wird geprüft ob ein Feld auf welches das Entity laufen will Kollision hat, dementsprechend 'entity.kollidiert' gesetzt*/
 	public void pruefeFeld(Entity entity) {
 
 		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeße/2) + entity.hitBox.x;
