@@ -20,6 +20,7 @@ public class Platzierer {
 	}
 	
 	public void setzeAusgang() {
+		indexObjekte = 0;
 		int spalte = 0;
 		int reihe = 0;
 		

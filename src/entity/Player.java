@@ -14,7 +14,6 @@ import main.UtilityTool;
 public class Player extends Entity {
 
 	/** Deklaration der Variablen */
-	GamePanel gp;
 	KeyHandler keyH;
 	Kamera kamera;
 	public int bildschirmX;
@@ -23,7 +22,7 @@ public class Player extends Entity {
 
 	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
 	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+		super(gp);
 		this.keyH = keyH;
 
 		bildschirmX = gp.BildBreite / 2;
@@ -110,6 +109,7 @@ public class Player extends Entity {
 			gp.kPruefer.pruefeFeld(this);
 			// PRUEFE OBJEKT KOLLISION
 			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
+			interagiereMitObjekt(objGetroffen);
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {
@@ -129,7 +129,6 @@ public class Player extends Entity {
 				
 			}
 			
-
 			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {

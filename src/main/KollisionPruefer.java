@@ -67,6 +67,9 @@ public class KollisionPruefer {
 	}
 	public boolean[] pruefeObjekt(Entity entity, boolean kannInteragieren) {
 		boolean objGetroffen[] = new boolean[gp.objekte.length];
+		for (int i = 0; i < objGetroffen.length; i++) {
+			objGetroffen[i] = false;
+		}
 		
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (gp.objekte[i] != null) {
@@ -89,24 +92,48 @@ public class KollisionPruefer {
 				case "oben":
 					entity.hitBox.y -= entity.geschwindigkeit;
 					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							entity.kollidiert = true;
+						}
+						if (kannInteragieren) {
+							objGetroffen[i] = true;
+						}
 						System.out.println("oben Kollision");
 					}
 					break;
 				case "unten":
 					entity.hitBox.y += entity.geschwindigkeit;
 					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							entity.kollidiert = true;
+						}
+						if (kannInteragieren) {
+							objGetroffen[i] = true;
+						}
 						System.out.println("unten Kollision");
 					}
 					break;
 				case "links":
 					entity.hitBox.x -= entity.geschwindigkeit;
 					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							entity.kollidiert = true;
+						}
+						if (kannInteragieren) {
+							objGetroffen[i] = true;
+						}
 						System.out.println("links Kollision");
 					}
 					break;
 				case "rechts":
 					entity.hitBox.x += entity.geschwindigkeit;
 					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							entity.kollidiert = true;
+						}
+						if (kannInteragieren) {
+							objGetroffen[i] = true;
+						}
 						System.out.println("rechts Kollision");
 					}
 					break;
@@ -120,7 +147,9 @@ public class KollisionPruefer {
 				gp.objekte[i].hitBox.x = altesObjektHitboxX;
 				gp.objekte[i].hitBox.y = altesObjektHitboxY;
 			} else {
-				objGetroffen[i] = false;
+				if (kannInteragieren) {
+					objGetroffen[i] = false;
+				}
 			}
 		}
 		

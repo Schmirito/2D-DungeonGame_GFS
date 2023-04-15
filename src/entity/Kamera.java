@@ -21,7 +21,6 @@ public class Kamera {
 		bildschirmY = gp.BildHoehe / 2;
 		weltX = gp.BildBreite / 2;
 		weltY = gp.BildHoehe / 2;
-
 	}
 
 	public void update() {
