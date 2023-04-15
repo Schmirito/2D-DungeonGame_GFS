@@ -47,7 +47,7 @@ public class Player extends Entity {
 	public void setDefaultValuables() {
 		weltX = bildschirmX; // 13 * gp.feldGroeﬂe;
 		weltY = bildschirmY; // 13 * gp.feldGroeﬂe;
-		geschwindigkeit = gp.skala;
+		geschwindigkeit = gp.skala*2;
 		richtung = "unten";
 	}
 
