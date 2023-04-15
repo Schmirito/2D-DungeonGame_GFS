@@ -114,7 +114,7 @@ public class FeldManager {
 		
 		
 		try {
-			InputStream is = getClass().getResourceAsStream(mapAuswahl[mapNr]);
+			InputStream is = getClass().getResourceAsStream(mapAuswahl[mapNr-1]);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			int spalte = 0;
