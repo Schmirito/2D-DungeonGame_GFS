@@ -3,6 +3,8 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import entity.Player;
+
 public class KeyHandler implements KeyListener{
 
 	public boolean obenGedrückt,untenGedrückt,linksGedrückt,rechtsGedrückt;
