@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 		return kamera;
 	}
 	public void setupGame() {
-		
+		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 	}
 	public void startGameThread() {
@@ -96,8 +96,15 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		// FELDER
 		feldM.draw(g2);
-		objekte[0].draw(g2);
+		// OBJEKTE
+		for (int i = 0; i < objekte.length; i++) {
+			if(objekte[i] != null) {
+				objekte[i].draw(g2);
+			}
+		}
+		// SPIELER
 		player.draw(g2);
 		
 		g2.dispose();

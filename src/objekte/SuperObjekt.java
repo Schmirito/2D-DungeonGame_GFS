@@ -21,8 +21,8 @@ public class SuperObjekt {
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		hitBox = new Rectangle(0,0,gp.feldGroeﬂe,gp.feldGroeﬂe);
-		this.weltX = weltX * gp.feldGroeﬂe;
-		this.weltY = weltY * gp.feldGroeﬂe;
+		this.weltX = weltX;
+		this.weltY = weltY;
 		try {
 			bild = ImageIO.read(getClass().getResourceAsStream("/objekte/Obj001Test.png"));
 		} catch (IOException e) {
