@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public KollisionPruefer kPruefer = new KollisionPruefer(this);
+	public Platzierer platzierer = new Platzierer(this);
 	public Player player = new Player(this, keyH);
 	public Kamera kamera = new Kamera(this, keyH, player);
 	public SuperObjekt objekte[] = new SuperObjekt[10];			// maximale Anzahl an Objekten: 10
@@ -47,6 +48,10 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public Kamera giveKamera() {
 		return kamera;
+	}
+	public void setupGame() {
+		
+		platzierer.setzeObjekt();
 	}
 	public void startGameThread() {
 		
@@ -92,6 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		feldM.draw(g2);
+		objekte[0].draw(g2);
 		player.draw(g2);
 		
 		g2.dispose();

@@ -106,9 +106,11 @@ public class Player extends Entity {
 			} else if (keyH.rechtsGedrückt) {
 				richtung = "rechts";
 			}
-			// PRUEFE KOLLISION
 			kollidiert = false;
+			// PRUEFE FELD KOLLISION
 			gp.kPruefer.pruefeFeld(this);
+			// PRUEFE OBJEKT KOLLISION
+			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {

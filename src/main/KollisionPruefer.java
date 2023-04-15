@@ -65,12 +65,60 @@ public class KollisionPruefer {
 		}
 
 	}
-	public boolean[] pruefeObjekt() {
+	public boolean[] pruefeObjekt(Entity entity, boolean kannInteragieren) {
 		boolean objGetroffen[] = new boolean[gp.objekte.length];
 		
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (gp.objekte[i] != null) {
 				
+				// Alte Werte Sichern
+				int altesEntityHitboxX = entity.hitBox.x;
+				int altesEntityHitboxY = entity.hitBox.y;
+				// Hitbox Weltposition bestimmen
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße/2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße/2);
+				
+				// Alte Werte Sichern
+				int altesObjektHitboxX =  gp.objekte[i].hitBox.x;
+				int altesObjektHitboxY =  gp.objekte[i].hitBox.y;
+				// Hitbox Weltposition bestimmen
+				gp.objekte[i].hitBox.x = gp.objekte[i].weltX + gp.objekte[i].hitBox.x;
+				gp.objekte[i].hitBox.y = gp.objekte[i].weltY + gp.objekte[i].hitBox.y;
+				
+				switch (entity.richtung) {
+				case "oben":
+					entity.hitBox.y -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						System.out.println("oben Kollision");
+					}
+					break;
+				case "unten":
+					entity.hitBox.y += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						System.out.println("unten Kollision");
+					}
+					break;
+				case "links":
+					entity.hitBox.x -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						System.out.println("links Kollision");
+					}
+					break;
+				case "rechts":
+					entity.hitBox.x += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						System.out.println("rechts Kollision");
+					}
+					break;
+				default:
+					System.out.println("Fehler in: Kollisionpruefer -> pruefeObjekt -> switch-case");
+					break;
+				}
+				// Hitbox X und Y zuruecksetzen
+				entity.hitBox.x = altesEntityHitboxX;
+				entity.hitBox.y = altesEntityHitboxY;
+				gp.objekte[i].hitBox.x = altesObjektHitboxX;
+				gp.objekte[i].hitBox.y = altesObjektHitboxY;
 			} else {
 				objGetroffen[i] = false;
 			}

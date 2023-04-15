@@ -11,11 +11,8 @@ public class Platzierer {
 	}
 	
 	public void setzeObjekt() {
+		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
+		gp.objekte[0] = new SuperObjekt(gp, 10, 10);
 		
-		/*
-		gp.objekte[0] = new SuperObjekt();
-		gp.objekte[0].weltX = ;
-		gp.objekte[0].weltX = ;
-		*/
 	}
 }
