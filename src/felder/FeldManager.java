@@ -205,11 +205,22 @@ public class FeldManager {
 			feld[index] = new Feld();
 			feld[index].image = ImageIO.read(getClass().getResourceAsStream("/feld/"+bildName+".png"));
 			feld[index].image = uTool.skalaBild(feld[index].image, gp.feldGroeﬂe, gp.feldGroeﬂe);
+			feld[index].bildName = bildName;
 			feld[index].kollision = kollision;
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public int getFeldIndex(String bildName) {
+		int index = -1;
+		for (int i = 0; i < feld.length; i++) {
+			if(feld[i].bildName.equals(bildName)) {
+				index = i;
+				i=feld.length;
+			}
+		}
+		return index;
 	}
 	public void draw(Graphics2D g2) {
 		

@@ -105,11 +105,13 @@ public class Player extends Entity {
 				richtung = "rechts";
 			}
 			kollidiert = false;
+			
 			// PRUEFE FELD KOLLISION
 			gp.kPruefer.pruefeFeld(this);
 			// PRUEFE OBJEKT KOLLISION
 			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 			interagiereMitObjekt(objGetroffen);
+			
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {
@@ -225,6 +227,7 @@ public class Player extends Entity {
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
 
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+		g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 	}
 
 }
