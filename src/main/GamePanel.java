@@ -7,8 +7,10 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Kamera;
 import entity.Player;
 import felder.FeldManager;
+import objekte.SuperObjekt;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -18,15 +20,21 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int feldGroeﬂe = originaleFeldGroeﬂe * skala;
 	public final int maxBildSpalte = 20;
 	public final int maxBildReihe = 12;
-	public final int BildBreite = feldGroeﬂe * maxBildSpalte;
-	public final int BildHoehe = feldGroeﬂe * maxBildReihe;
+	public final int BildBreite = 1920;//feldGroeﬂe * maxBildSpalte;
+	public final int BildHoehe = 1080;//feldGroeﬂe * maxBildReihe;
+	public final int mapGroeﬂe = 30;
 	
 	public int FPS = 60;
 	
-	FeldManager feldM = new FeldManager(this);
+	public FeldManager feldM = new FeldManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
+	public KollisionPruefer kPruefer = new KollisionPruefer(this);
+	public Platzierer platzierer = new Platzierer(this);
 	public Player player = new Player(this, keyH);
+	public Kamera kamera = new Kamera(this, keyH, player);
+	public SuperObjekt objekte[] = new SuperObjekt[10];			// maximale Anzahl an Objekten: 10
+	
 	
 	public GamePanel() {
 		
@@ -35,8 +43,17 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		player.receiveKamera();
+		
 	}
-	
+	public Kamera giveKamera() {
+		return kamera;
+	}
+	public void setupGame() {
+		platzierer.setzeAusgang();
+		platzierer.setzeObjekt();
+		player.geheZuEingang(true);
+	}
 	public void startGameThread() {
 		
 		gameThread = new Thread(this);
@@ -73,13 +90,22 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		player.update();
+		kamera.update();
 		
 	}
 	/**Methode in der g2 die gew¸nschten sachen zeichnen kann.*/
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		// FELDER
 		feldM.draw(g2);
+		// OBJEKTE
+		for (int i = 0; i < objekte.length; i++) {
+			if(objekte[i] != null) {
+				objekte[i].draw(g2);
+			}
+		}
+		// SPIELER
 		player.draw(g2);
 		
 		g2.dispose();

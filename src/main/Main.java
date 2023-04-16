@@ -27,8 +27,9 @@ public class Main {
 		window.setVisible(true);
 		window.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		window.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK,4));
+		//window.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK,4));
 		
+		gamePanel.setupGame();
 		gamePanel.startGameThread();
 	}
 

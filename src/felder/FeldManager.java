@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -15,15 +16,25 @@ import main.UtilityTool;
 public class FeldManager {
 
 	GamePanel gp;
-	Feld[] feld;
-	int mapFeldNr[][];
+	public Feld[] feld;
+	public int mapFeldNr[][];
+	public int groeße = 30;
+	
+	public int mapNr = 1;
+	public int neueNummer;
+	
+	//Etwas unschön gelößt, aber keine zeit.
+	public String[] mapAuswahl = {"/maps/Room1-Test.txt","/maps/Room2-Test.txt","/maps/Room3-Test.txt",
+								"/maps/Room4-Test.txt","/maps/Room5-Test.txt","/maps/Room6-Test.txt",
+								"/maps/Room7-Test.txt","/maps/Room8-Test.txt","/maps/Room9-Test.txt",
+								"/maps/Room10-Test.txt","/maps/Room11-Test.txt","/maps/Room12-Test.txt"};
 	
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
 		
 		feld = new Feld[60];
 		
-		mapFeldNr = new int[gp.maxBildSpalte][gp.maxBildReihe];
+		mapFeldNr = new int[30][30];
 		
 		getFeldBild();
 		loadMap();
@@ -31,17 +42,89 @@ public class FeldManager {
 	/**Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet.*/
 	public void loadMap() {
 		
+		switch (mapNr) {
+		case 2:
+		case 4:
+		case 10:
+			//Könnte man in Methode auslagern, ist aber nicht nötig. (weil zu wenig code = lohnt sich nicht.)
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 1; 
+			}
+			if (neueNummer == 1) {
+				mapNr = 2;
+			}
+			if (neueNummer == 2) {
+				mapNr = 3;
+			}
+			break;
+			
+		case 1:
+		case 5:
+		case 7:
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 4; 
+			}
+			if (neueNummer == 1) {
+				mapNr = 5;
+			}
+			if (neueNummer == 2) {
+				mapNr = 6;
+			}
+			break;
+		
+		case 6:
+		case 8:
+		case 12:
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 7;
+			}
+			if (neueNummer == 1) {
+				mapNr = 8;
+			}
+			if (neueNummer == 2) {
+				mapNr = 9;
+			}
+			break;
+		
+		case 3:
+		case 9:
+		case 11:
+			neueNummer = (int) (Math.random()*3);
+
+			if (neueNummer == 0) {
+				mapNr = 10; 
+			}
+			if (neueNummer == 1) {
+				mapNr = 11;
+			}
+			if (neueNummer == 2) {
+				mapNr = 12;
+			}
+			break;
+			
+		default:
+			break;
+		}	//switch case klammer
+		
+		
 		try {
-			InputStream is = getClass().getResourceAsStream("/maps/test.txt");
+			InputStream is = getClass().getResourceAsStream(mapAuswahl[mapNr-1]);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			int spalte = 0;
 			int reihe = 0;
 			
-			while(spalte < gp.maxBildSpalte && reihe < gp.maxBildReihe) {
+			
+			while(spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
 				String line = br.readLine();
 				
-				while(spalte < gp.maxBildSpalte) {
+				while(spalte < gp.mapGroeße) {
 					String nummern[] = line.split(" ");
 					
 					int num = Integer.parseInt(nummern[spalte]);
@@ -49,7 +132,7 @@ public class FeldManager {
 					mapFeldNr[spalte][reihe] = num;
 					spalte++;
 				}
-				if (reihe == gp.maxBildSpalte) {
+				if (spalte >= gp.mapGroeße) {
 					spalte  = 0;
 					reihe++;
 				}
@@ -122,30 +205,43 @@ public class FeldManager {
 			feld[index] = new Feld();
 			feld[index].image = ImageIO.read(getClass().getResourceAsStream("/feld/"+bildName+".png"));
 			feld[index].image = uTool.skalaBild(feld[index].image, gp.feldGroeße, gp.feldGroeße);
+			feld[index].bildName = bildName;
 			feld[index].kollision = kollision;
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	public int getFeldIndex(String bildName) {
+		int index = -1;
+		for (int i = 0; i < feld.length; i++) {
+			if(feld[i].bildName.equals(bildName)) {
+				index = i;
+				i=feld.length;
+			}
+		}
+		return index;
+	}
 	public void draw(Graphics2D g2) {
 		
 		int spalte = 0;
 		int reihe = 0;
-		int x = 0;
-		int y = 0;
+		int x = 0 - gp.kamera.weltX + (gp.BildBreite / 2);
+		int y = 0 - gp.kamera.weltY + (gp.BildHoehe / 2);
 		
-		while(spalte < gp.maxBildSpalte && reihe < gp.maxBildReihe) {
+		
+		while(spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
 			
 			int feldNr = mapFeldNr[spalte][reihe];
 			
 			g2.drawImage(feld[feldNr].image, x, y, gp.feldGroeße, gp.feldGroeße, null);
+			g2.drawRect(x, y, gp.feldGroeße, gp.feldGroeße);
 			spalte++;
 			x += gp.feldGroeße;
 			
-			if (spalte == gp.maxBildSpalte) {
+			if (spalte == gp.mapGroeße) {
 				spalte =0;
-				x = 0;
+				x = 0 - gp.kamera.weltX + (gp.BildBreite / 2);
 				reihe ++;
 				y += gp.feldGroeße;
 			}
