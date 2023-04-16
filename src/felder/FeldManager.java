@@ -235,6 +235,7 @@ public class FeldManager {
 			int feldNr = mapFeldNr[spalte][reihe];
 			
 			g2.drawImage(feld[feldNr].image, x, y, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+			g2.drawRect(x, y, gp.feldGroeﬂe, gp.feldGroeﬂe);
 			spalte++;
 			x += gp.feldGroeﬂe;
 			
