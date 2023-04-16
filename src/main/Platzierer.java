@@ -15,8 +15,8 @@ public class Platzierer {
 	public void setzeObjekt() {
 		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
 		indexObjekte = 4;
-		gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeﬂe, 10*gp.feldGroeﬂe);
-		indexObjekte++;
+		//gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeﬂe, 10*gp.feldGroeﬂe);
+		//indexObjekte++;
 		
 	}
 	
