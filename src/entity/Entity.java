@@ -31,11 +31,11 @@ public class Entity {
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.feldM.loadMap();
-					
+
 					geheZuEingang(true);
 					// PLATZIERE NEUE AUSGAENGE
 					gp.platzierer.setzeAusgang();
-					
+
 					i = objGetroffen.length;
 					break;
 				default:
@@ -44,6 +44,7 @@ public class Entity {
 			}
 		}
 	}
+
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
@@ -57,48 +58,56 @@ public class Entity {
 			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
 
 			if (feldNr == indexTuerOben) {
-				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				weltY = (reihe+1) * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				if(weltX > (gp.BildBreite/2 ) && weltX < (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2))) {
-					gp.kamera.weltX = weltX;
-				} else if (weltX < (gp.BildBreite/2 )) {
-					gp.kamera.weltX = gp.BildBreite/2 ;
-				} else if (weltX > (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2))) {
-					gp.kamera.weltX = gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2);
+				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltY = (reihe + 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				if (auchKamera) {
+					if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
+						gp.kamera.weltX = weltX;
+					} else if (weltX < (gp.BildBreite / 2)) {
+						gp.kamera.weltX = gp.BildBreite / 2;
+					} else if (weltX > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
+						gp.kamera.weltX = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2);
+					}
+					gp.kamera.weltY = gp.BildHoehe / 2;
 				}
-				gp.kamera.weltY = gp.BildHoehe/2;
 			} else if (feldNr == indexTuerUnten) {
-				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				weltY = (reihe-1) * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				if(weltX > (gp.BildBreite/2 ) && weltX < (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2))) {
-					gp.kamera.weltX = weltX;
-				} else if (weltX < (gp.BildBreite/2 )) {
-					gp.kamera.weltX = gp.BildBreite/2 ;
-				} else if (weltX > (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2))) {
-					gp.kamera.weltX = gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2);
+				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltY = (reihe - 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				if (auchKamera) {
+					if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
+						gp.kamera.weltX = weltX;
+					} else if (weltX < (gp.BildBreite / 2)) {
+						gp.kamera.weltX = gp.BildBreite / 2;
+					} else if (weltX > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
+						gp.kamera.weltX = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2);
+					}
+					gp.kamera.weltY = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2);
 				}
-				gp.kamera.weltY = gp.mapGroeﬂe*gp.feldGroeﬂe-(gp.BildHoehe/2);
 			} else if (feldNr == indexTuerLinks) {
-				weltX = (spalte+1) * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				gp.kamera.weltX = gp.BildBreite/2;
-				if(weltY > (gp.BildHoehe/2 ) && weltY < (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2))) {
-					gp.kamera.weltY = weltY; 
-				} else if (weltY < (gp.BildHoehe/2 )) {
-					gp.kamera.weltY = gp.BildHoehe/2 ;
-				} else if (weltY > (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2))) {
-					gp.kamera.weltY = gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2);
+				weltX = (spalte + 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				if (auchKamera) {
+					gp.kamera.weltX = gp.BildBreite / 2;
+					if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
+						gp.kamera.weltY = weltY;
+					} else if (weltY < (gp.BildHoehe / 2)) {
+						gp.kamera.weltY = gp.BildHoehe / 2;
+					} else if (weltY > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
+						gp.kamera.weltY = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2);
+					}
 				}
 			} else if (feldNr == indexTuerRechts) {
-				weltX = (spalte-1) * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe/2);
-				gp.kamera.weltX = gp.kamera.weltX = gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildBreite/2);
-				if(weltY > (gp.BildHoehe/2 ) && weltY < (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2))) {
-					gp.kamera.weltY = weltY; 
-				} else if (weltY < (gp.BildHoehe/2 )) {
-					gp.kamera.weltY = gp.BildHoehe/2 ;
-				} else if (weltY > (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2))) {
-					gp.kamera.weltY = gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2);
+				weltX = (spalte - 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				if (auchKamera) {
+					gp.kamera.weltX = gp.kamera.weltX = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2);
+					if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
+						gp.kamera.weltY = weltY;
+					} else if (weltY < (gp.BildHoehe / 2)) {
+						gp.kamera.weltY = gp.BildHoehe / 2;
+					} else if (weltY > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
+						gp.kamera.weltY = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2);
+					}
 				}
 			}
 
