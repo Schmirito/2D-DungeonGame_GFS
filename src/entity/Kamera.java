@@ -50,15 +50,6 @@ public class Kamera {
 
 			}
 		}
-
-		/*
-		 * if (keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt ||
-		 * keyH.rechtsGedrückt) { if (keyH.obenGedrückt == true) { weltY -=
-		 * player.geschwindigkeit; } else if (keyH.untenGedrückt) { weltY +=
-		 * player.geschwindigkeit; } else if (keyH.linksGedrückt) { weltX -=
-		 * player.geschwindigkeit; } else if (keyH.rechtsGedrückt) { weltX +=
-		 * player.geschwindigkeit; } }
-		 */
 	}
 
 }
