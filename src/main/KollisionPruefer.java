@@ -15,9 +15,9 @@ public class KollisionPruefer {
 	public void pruefeFeld(Entity entity) {
 
 		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x;
-		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x + entity.hitBox.width;
+		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x + entity.hitBox.width-1;
 		int hitBoxOberesWeltY = entity.weltY - (gp.feldGroeﬂe/2) + entity.hitBox.y;
-		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroeﬂe/2) + entity.hitBox.y + entity.hitBox.height;
+		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroeﬂe/2) + entity.hitBox.y + entity.hitBox.height-1;
 
 		int hitBoxLinkeSpalte = hitBoxLinkesWeltX / gp.feldGroeﬂe;
 		int hitBoxRechteSpalte = hitBoxRechtesWeltX / gp.feldGroeﬂe;
