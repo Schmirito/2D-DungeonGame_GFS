@@ -14,12 +14,14 @@ public class Platzierer {
 	
 	public void setzeObjekt() {
 		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
+		indexObjekte = 4;
 		gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeße, 10*gp.feldGroeße);
 		indexObjekte++;
 		
 	}
 	
 	public void setzeAusgang() {
+		// Wenn in der alten map mehr ausgaenge als in der neuen map sind, so werden die alten überschüssigen Ausgänge nicht gelöscht
 		indexObjekte = 0;
 		int spalte = 0;
 		int reihe = 0;
