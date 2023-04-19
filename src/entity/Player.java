@@ -149,6 +149,8 @@ public class Player extends Entity {
 	}
 
 	/**
+	 * @param g2 
+	 * 
 	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
 	 * Sprite ausgewählt und Schlussendlich an entsprechender Position angezeigt.
 	 */
