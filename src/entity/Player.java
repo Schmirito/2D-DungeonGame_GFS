@@ -221,7 +221,6 @@ public class Player extends Entity {
 				break;
 			}
 			break;
-			
 		}
 		// bildX und bildY berechnen
 		bildschirmX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
