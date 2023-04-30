@@ -1,5 +1,7 @@
 package main;
 
+import entity.Entity;
+import entity.Zombie;
 import objekte.Obj_AusgangsTuer;
 import objekte.SuperObjekt;
 
@@ -17,6 +19,11 @@ public class Platzierer {
 		indexObjekte = 4;
 		//gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeﬂe, 10*gp.feldGroeﬂe);
 		//indexObjekte++;
+		
+	}
+	
+	public void setzeEntity() {
+		gp.entities[0] = new Zombie(gp, 20, 20);
 		
 	}
 	

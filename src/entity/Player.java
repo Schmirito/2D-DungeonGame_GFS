@@ -60,18 +60,18 @@ public class Player extends Entity {
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
 	public void getPlayerImage() {
 
-		up = setup("char-Up");
-		upLV = setup("char-UpLV");
-		upRV = setup("char-UpRV");
-		down = setup("char-Down");
-		downLV = setup("char-DownLV");
-		downRV = setup("char-DownRV");
-		left = setup("char-Left");
-		leftLV = setup("char-LeftLV");
-		leftRV = setup("char-LeftRV");
-		right = setup("char-Right");
-		rightLV = setup("char-RightLV");
-		rightRV = setup("char-RightRV");
+		up = setup("/player/char-Up");
+		upLV = setup("/player/char-UpLV");
+		upRV = setup("/player/char-UpRV");
+		down = setup("/player/char-Down");
+		downLV = setup("/player/char-DownLV");
+		downRV = setup("/player/char-DownRV");
+		left = setup("/player/char-Left");
+		leftLV = setup("/player/char-LeftLV");
+		leftRV = setup("/player/char-LeftRV");
+		right = setup("/player/char-Right");
+		rightLV = setup("/player/char-RightLV");
+		rightRV = setup("/player/char-RightRV");
 
 	}
 
@@ -79,19 +79,7 @@ public class Player extends Entity {
 	 * Der Player wird jetzt in der methode setup skaliert, was die performance
 	 * verbessern kann.
 	 */
-	public BufferedImage setup(String bildName) {
-
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage bild = null;
-
-		try {
-			bild = ImageIO.read(getClass().getResourceAsStream("/player/" + bildName + ".png"));
-			bild = uTool.skalaBild(bild, gp.feldGroeße, gp.feldGroeße);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return bild;
-	}
+	
 
 	/**
 	 * Wenn tasten in die entsprechende Richtung gedrückt wurden, wird die

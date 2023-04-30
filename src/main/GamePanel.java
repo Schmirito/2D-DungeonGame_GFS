@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Kamera;
 import entity.Player;
 import felder.FeldManager;
@@ -33,7 +34,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public Platzierer platzierer = new Platzierer(this);
 	public Player player = new Player(this, keyH);
 	public Kamera kamera = new Kamera(this, keyH, player);
+	// ENTITY, OBJEKTE, ...
 	public SuperObjekt objekte[] = new SuperObjekt[10];			// maximale Anzahl an Objekten: 10
+	public Entity entities[] = new Entity[10];
 	
 	
 	public GamePanel() {
@@ -103,6 +106,12 @@ public class GamePanel extends JPanel implements Runnable{
 		for (int i = 0; i < objekte.length; i++) {
 			if(objekte[i] != null) {
 				objekte[i].draw(g2);
+			}
+		}
+		// ENTITIES
+		for (int i = 0; i < objekte.length; i++) {
+			if(objekte[i] != null) {
+				entities[i].draw(g2);
 			}
 		}
 		// SPIELER
