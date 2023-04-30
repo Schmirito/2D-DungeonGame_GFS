@@ -117,13 +117,13 @@ public class FeldManager {
 			}
 			if (startRaum == 0) {
 				neueNummer = (int) (Math.random() * 3);
-				if (neueNummer == 1) {
+				if (neueNummer == 0) {
 					mapNr = 3;
 				}
-				if (neueNummer == 2) {
+				if (neueNummer == 1) {
 					mapNr = 9;
 				}
-				if (neueNummer == 3) {
+				if (neueNummer == 2) {
 					mapNr = 11;
 				}
 				startRaum++;

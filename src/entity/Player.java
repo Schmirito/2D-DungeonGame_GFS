@@ -103,14 +103,7 @@ public class Player extends Entity {
 		if (keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
-				if (leben<gp.feldGroeße) {
-					leben++;	
-				}
 			} else if (keyH.untenGedrückt) {
-				if (leben>0) {
-					leben--;
-				}
-
 				richtung = "unten";
 			} else if (keyH.linksGedrückt) {
 				richtung = "links";
