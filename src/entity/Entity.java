@@ -1,7 +1,10 @@
 package entity;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Formatter.BigDecimalLayoutForm;
 
 import main.GamePanel;
 
@@ -20,10 +23,22 @@ public class Entity {
 	public boolean kollidiert = false;
 	GamePanel gp;
 
+	public int leben;
+	public int lebensanzeigeBreite;
+	public int lebensanzeigeHoehe;
+	public int bogenBreite = 4;
+	public int bogenHoehe = 4;
+	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
-
+	public void lebensanzeige(Graphics2D g2, int bildschirmX, int bildschirmY, int breite, int hoehe, int leben){
+		g2.setColor(Color.BLACK);
+		g2.drawRoundRect(bildschirmX, bildschirmY, breite, hoehe, bogenBreite, bogenHoehe);
+		g2.setColor(Color.RED);
+		g2.fillRoundRect(bildschirmX, bildschirmY, leben, hoehe, bogenBreite, bogenHoehe);
+		
+	}
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {

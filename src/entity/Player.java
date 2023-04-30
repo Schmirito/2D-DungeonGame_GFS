@@ -20,11 +20,13 @@ public class Player extends Entity {
 	public int bildschirmY;
 	public int framesUnbewegt;
 
+	
+
 	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
-
+		
 		bildschirmX = gp.BildBreite / 2;
 		bildschirmY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
@@ -49,6 +51,10 @@ public class Player extends Entity {
 		weltY = gp.feldGroeße*16; // 13 * gp.feldGroeße;
 		geschwindigkeit = gp.skala*2;
 		richtung = "unten";
+		
+		leben = gp.feldGroeße;
+		lebensanzeigeBreite = gp.feldGroeße;
+		lebensanzeigeHoehe = gp.skala*2;
 	}
 
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
@@ -97,7 +103,14 @@ public class Player extends Entity {
 		if (keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
+				if (leben<gp.feldGroeße) {
+					leben++;	
+				}
 			} else if (keyH.untenGedrückt) {
+				if (leben>0) {
+					leben--;
+				}
+
 				richtung = "unten";
 			} else if (keyH.linksGedrückt) {
 				richtung = "links";
@@ -227,7 +240,7 @@ public class Player extends Entity {
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeße / 2) + kamera.bildschirmY;
 
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeße, gp.feldGroeße, null);
-
+		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
 		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 
 	}
