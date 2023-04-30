@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
+		platzierer.setzeEntity();
 		player.geheZuEingang(true);
 	}
 	public void startGameThread() {
@@ -108,9 +109,9 @@ public class GamePanel extends JPanel implements Runnable{
 				objekte[i].draw(g2);
 			}
 		}
-		// ENTITIES
+		// ENTITIES 
 		for (int i = 0; i < objekte.length; i++) {
-			if(objekte[i] != null) {
+			if(entities[i] != null) {
 				entities[i].draw(g2);
 			}
 		}

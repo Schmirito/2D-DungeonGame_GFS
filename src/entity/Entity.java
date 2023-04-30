@@ -10,6 +10,7 @@ import java.util.Formatter.BigDecimalLayoutForm;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.Platzierer;
 import main.UtilityTool;
 
 public class Entity {
@@ -46,7 +47,6 @@ public class Entity {
 	}
 
 	public void draw(Graphics2D g2) {
-
 		BufferedImage charSprite = null;
 
 		switch (richtung) {
@@ -115,11 +115,19 @@ public class Entity {
 			}
 			break;
 		}
-		// bildX und bildY berechnen
-		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmX;
-		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmY;
+		if(charSprite != null) {
+			
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
+			
+			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
+				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
+				weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY && 
+				weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
-		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+			}
+		}
 	}
 
 	public BufferedImage setup(String bildName) {
@@ -151,11 +159,8 @@ public class Entity {
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.feldM.loadMap();
-
-					geheZuEingang(true);
-					// PLATZIERE NEUE AUSGAENGE
-					gp.platzierer.setzeAusgang();
-
+					gp.setupGame();
+					
 					i = objGetroffen.length;
 					break;
 				default:

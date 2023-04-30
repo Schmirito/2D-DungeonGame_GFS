@@ -23,6 +23,7 @@ public class FeldManager {
 	public int mapNr = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
+	public boolean start = true;
 
 	// Etwas unschön gelößt, aber keine zeit.
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt", "/maps/Room3-Test.txt",
@@ -46,6 +47,13 @@ public class FeldManager {
 
 		switch (mapNr) {
 		case 0: // Startraum implementieren
+			// Zum Testen
+			if(start) {
+				start = false;
+			} else {
+				neueNummer = (int) (Math.random() * 12 +1);
+				mapNr = neueNummer;
+			}
 			break;
 		case 2:
 		case 4:
