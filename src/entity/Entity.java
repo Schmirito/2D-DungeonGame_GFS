@@ -36,9 +36,12 @@ public class Entity {
 	public int lebensanzeigeHoehe;
 	public int bogenBreite = 4;
 	public int bogenHoehe = 4;
+	
+	Rectangle hit = new Rectangle(0,0,0,0);
 
 	public Entity(GamePanel gp) {
 		this.gp = gp;
+		leben = gp.skala;
 		hitBox = new Rectangle();
 		hitBox.x = gp.feldGroeﬂe / 4;
 		hitBox.y = gp.feldGroeﬂe / 2;
@@ -129,7 +132,45 @@ public class Entity {
 			}
 		}
 	}
-
+	
+	public void schlag() {
+		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmX;
+		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmY;
+		if (gp.keyH.obenGedr¸ckt == false && gp.keyH.untenGedr¸ckt == false && gp.keyH.linksGedr¸ckt == false && gp.keyH.rechtsGedr¸ckt == false) {
+			
+			if(gp.keyH.pfeilHochGedr¸ckt) {
+				hit = new Rectangle(bildschirmX,bildschirmY-(gp.feldGroeﬂe/2),gp.feldGroeﬂe,gp.feldGroeﬂe);
+				richtung = "oben";
+				System.out.println("schlag");
+			} else if (gp.keyH.pfeilRunterGedr¸ckt) {
+				hit = new Rectangle(bildschirmX,bildschirmY+(gp.feldGroeﬂe),gp.feldGroeﬂe,gp.feldGroeﬂe);
+				richtung = "unten";
+				System.out.println("schlag");
+			} else if (gp.keyH.pfeilLinksGedr¸ckt) {
+				hit = new Rectangle(bildschirmX-(gp.feldGroeﬂe/2)-(gp.feldGroeﬂe/4),bildschirmY,gp.feldGroeﬂe,gp.feldGroeﬂe);
+				richtung = "links";
+				System.out.println("schlag");
+			} else if (gp.keyH.pfeilRechtsGedr¸ckt) {
+				hit = new Rectangle(bildschirmX+(gp.feldGroeﬂe/2)+(gp.feldGroeﬂe/4),bildschirmY,gp.feldGroeﬂe,gp.feldGroeﬂe);
+				richtung = "rechts";
+				System.out.println("schlag");
+			}
+			if (hit.x != 0) {
+				for (int i = 0; i < gp.entities.length; i++) {
+					if (gp.entities[i] != null) {
+						if (hit.intersects(gp.entities[i].hitBox)) {
+							gp.entities[i].getroffen(this);
+						}
+					}
+					
+				}
+			}
+		}
+	}
+	
+	public void getroffen(Entity entity) {
+		leben -= 1;
+	}
 	public BufferedImage setup(String bildName) {
 
 		UtilityTool uTool = new UtilityTool();

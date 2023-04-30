@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public int FPS = 60;
 	
 	public FeldManager feldM = new FeldManager(this);
-	KeyHandler keyH = new KeyHandler();
+	public KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public KollisionPruefer kPruefer = new KollisionPruefer(this);
 	public Platzierer platzierer = new Platzierer(this);

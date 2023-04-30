@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -124,7 +125,6 @@ public class Player extends Entity {
 				}
 				
 			}
-			
 			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {
@@ -135,6 +135,9 @@ public class Player extends Entity {
 				frameCounter = 0;
 			}
 		}
+		
+		hit.x = 0;
+		schlag();
 		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
@@ -222,6 +225,11 @@ public class Player extends Entity {
 
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
+		// ZEICHNE SCHLAG
+		if (hit.x != 0) {
+			g2.setColor(Color.RED);
+			g2.drawRect(hit.x, hit.y, hit.width, hit.height);;
+		}
 		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 
 	}
