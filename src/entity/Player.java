@@ -20,11 +20,13 @@ public class Player extends Entity {
 	public int bildschirmY;
 	public int framesUnbewegt;
 
+	
+
 	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
-
+		
 		bildschirmX = gp.BildBreite / 2;
 		bildschirmY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
@@ -45,10 +47,14 @@ public class Player extends Entity {
 	}
 
 	public void setDefaultValuables() {
-		weltX = bildschirmX; // 13 * gp.feldGroeﬂe;
-		weltY = bildschirmY; // 13 * gp.feldGroeﬂe;
+		weltX = gp.feldGroeﬂe*5-(gp.feldGroeﬂe/2); // 13 * gp.feldGroeﬂe;
+		weltY = gp.feldGroeﬂe*16; // 13 * gp.feldGroeﬂe;
 		geschwindigkeit = gp.skala*2;
 		richtung = "unten";
+		
+		leben = gp.feldGroeﬂe;
+		lebensanzeigeBreite = gp.feldGroeﬂe;
+		lebensanzeigeHoehe = gp.skala*2;
 	}
 
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
@@ -149,8 +155,6 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * @param g2 
-	 * 
 	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
 	 * Sprite ausgew‰hlt und Schlussendlich an entsprechender Position angezeigt.
 	 */
@@ -229,7 +233,9 @@ public class Player extends Entity {
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
 
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
-		g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
+		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
+		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
+
 	}
 
 }
