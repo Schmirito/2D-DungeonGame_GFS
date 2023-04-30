@@ -31,11 +31,11 @@ public class Entity {
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.feldM.loadMap();
-					
+
 					geheZuEingang(true);
 					// PLATZIERE NEUE AUSGAENGE
 					gp.platzierer.setzeAusgang();
-					
+
 					i = objGetroffen.length;
 					break;
 				default:
@@ -99,6 +99,7 @@ public class Entity {
 					gp.kamera.weltY = gp.BildHoehe/2 ;
 				} else if (weltY > (gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2))) {
 					gp.kamera.weltY = gp.mapGroeﬂe*gp.feldGroeﬂe - (gp.BildHoehe/2);
+
 				}
 			}
 
