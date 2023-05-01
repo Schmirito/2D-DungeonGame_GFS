@@ -28,7 +28,7 @@ public class Entity {
 	public int spriteNumber = 0;
 	
 	public int hitCooldownFrames = 0;
-	public int hitCooldownSekunden = 1;
+	public double hitCooldownSekunden = 0.5;
 	public Schlag schlag;
 
 	public Rectangle hitBox;
@@ -139,27 +139,29 @@ public class Entity {
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeße / 2) + gp.kamera.bildschirmX;
 		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeße / 2) + gp.kamera.bildschirmY;
-		if (gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false && gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false && hitCooldownFrames <= 0) {
+		if (
+				//gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false && gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false && 
+				hitCooldownFrames <= 0) {
 			
 			if(gp.keyH.pfeilHochGedrückt) {
 				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2), weltY-(gp.feldGroeße / 2)-(gp.feldGroeße/2));
 				richtung = "oben";
-				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
+				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRunterGedrückt) {
 				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2), weltY-(gp.feldGroeße / 2)+(gp.feldGroeße));
 				richtung = "unten";
-				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
+				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilLinksGedrückt) {
 				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2)-(gp.feldGroeße/2)-(gp.feldGroeße/4), weltY-(gp.feldGroeße / 2));
 				richtung = "links";
-				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
+				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRechtsGedrückt) {
 				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2)+(gp.feldGroeße/2)+(gp.feldGroeße/4), weltY-(gp.feldGroeße / 2));
 				richtung = "rechts";
-				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
+				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			}
 			if (schlag != null) {
@@ -167,27 +169,40 @@ public class Entity {
 				for (int i = 0; i < gp.entities.length; i++) {
 					if (gp.entities[i] != null) {
 						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
-							gp.entities[i].getroffen(this);
+							gp.entities[i].getroffen(this, schlag);
 						}
 					}
 					
 				}
 			}
 		}
-		if (hitCooldownFrames > 54) {
-			kollidiert = true;
-		} else {
-			kollidiert = false;
-		}
+
 		if (hitCooldownFrames < 9*((hitCooldownSekunden * gp.FPS)/10)) {
 			schlag = null;
+			kollidiert = false;
+		} else {
+			kollidiert = true;
 		}
 		if (hitCooldownFrames > 0) {
 			hitCooldownFrames--;
 		}
 	}
 	
-	public void getroffen(Entity entity) {
+	public void getroffen(Entity entity,Schlag schlag) {
+		switch (schlag.schlagRichtung) {
+		case "oben":
+			weltY -= gp.skala*4;
+			break;
+		case "unten":
+			weltY += gp.skala*4;
+			break;
+		case "links":
+			weltX -= gp.skala*4;
+			break;
+		case "rechts":
+			weltX += gp.skala*4;
+			break;
+		}
 		leben -= 1;
 	}
 	public BufferedImage setup(String bildName) {
