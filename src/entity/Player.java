@@ -90,7 +90,7 @@ public class Player extends Entity {
 	 */
 	public void update() {
 		schlage();
-		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt)) {
+		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) && kollidiert == false) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
 			} else if (keyH.untenGedrückt) {
@@ -135,7 +135,7 @@ public class Player extends Entity {
 				frameCounter = 0;
 			}
 		}
-		
+
 
 		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {

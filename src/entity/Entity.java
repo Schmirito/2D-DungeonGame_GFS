@@ -174,7 +174,12 @@ public class Entity {
 				}
 			}
 		}
-		if (hitCooldownFrames < 8*((hitCooldownSekunden * gp.FPS)/10)) {
+		if (hitCooldownFrames > 54) {
+			kollidiert = true;
+		} else {
+			kollidiert = false;
+		}
+		if (hitCooldownFrames < 9*((hitCooldownSekunden * gp.FPS)/10)) {
 			schlag = null;
 		}
 		if (hitCooldownFrames > 0) {
