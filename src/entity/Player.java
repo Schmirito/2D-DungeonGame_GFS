@@ -89,8 +89,8 @@ public class Player extends Entity {
 	 * gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
-		schlag();
-		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) && kollidiert == false) {
+		schlage();
+		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt)) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
 			} else if (keyH.untenGedrückt) {
@@ -221,14 +221,14 @@ public class Player extends Entity {
 		// bildX und bildY berechnen
 		bildschirmX = weltX - kamera.weltX - (gp.feldGroeße / 2) + kamera.bildschirmX;
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeße / 2) + kamera.bildschirmY;
-
+		
+		// ZEICHNE SCHLAG
+		if (schlag != null) {
+			schlag.draw(g2);
+		}
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeße, gp.feldGroeße, null);
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
-		// ZEICHNE SCHLAG
-		if (hit.x != 0) {
-			g2.setColor(Color.RED);
-			g2.drawRect(hit.x, hit.y, hit.width, hit.height);;
-		}
+
 		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 
 	}

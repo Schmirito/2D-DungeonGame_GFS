@@ -18,6 +18,9 @@ public class SuperObjekt {
 	public int weltX, weltY;
 	public Rectangle hitBox;
 	
+	public int bildschirmX;
+	public int bildschirmY;
+	
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		name = "SuperObjekt";
@@ -34,8 +37,8 @@ public class SuperObjekt {
 	public void draw(Graphics2D g2) {
 		if(bild != null) {
 			
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
+			bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
+			bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
 			
 			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
 				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 

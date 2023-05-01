@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.Platzierer;
 import main.UtilityTool;
+import objekte.Schlag;
 
 public class Entity {
 	/** Deklaration der Variablen */
@@ -25,7 +26,10 @@ public class Entity {
 
 	public int frameCounter = 0;
 	public int spriteNumber = 0;
-	public int hitCooldown = 0;
+	
+	public int hitCooldownFrames = 0;
+	public int hitCooldownSekunden = 1;
+	public Schlag schlag;
 
 	public Rectangle hitBox;
 
@@ -134,36 +138,36 @@ public class Entity {
 		}
 	}
 	
-	public void schlag() {
+	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeße / 2) + gp.kamera.bildschirmX;
 		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeße / 2) + gp.kamera.bildschirmY;
-		if (gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false && gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false && hitCooldown <= 0) {
+		if (gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false && gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false && hitCooldownFrames <= 0) {
 			
 			if(gp.keyH.pfeilHochGedrückt) {
-				hit = new Rectangle(bildschirmX,bildschirmY-(gp.feldGroeße/2),gp.feldGroeße,gp.feldGroeße);
+				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2), weltY-(gp.feldGroeße / 2)-(gp.feldGroeße/2));
 				richtung = "oben";
-				hitCooldown = 60;
+				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRunterGedrückt) {
-				hit = new Rectangle(bildschirmX,bildschirmY+(gp.feldGroeße),gp.feldGroeße,gp.feldGroeße);
+				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2), weltY-(gp.feldGroeße / 2)+(gp.feldGroeße));
 				richtung = "unten";
-				hitCooldown = 60;
+				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilLinksGedrückt) {
-				hit = new Rectangle(bildschirmX-(gp.feldGroeße/2)-(gp.feldGroeße/4),bildschirmY,gp.feldGroeße,gp.feldGroeße);
+				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2)-(gp.feldGroeße/2)-(gp.feldGroeße/4), weltY-(gp.feldGroeße / 2));
 				richtung = "links";
-				hitCooldown = 60;
+				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRechtsGedrückt) {
-				hit = new Rectangle(bildschirmX+(gp.feldGroeße/2)+(gp.feldGroeße/4),bildschirmY,gp.feldGroeße,gp.feldGroeße);
+				schlag = new Schlag(gp, weltX-(gp.feldGroeße / 2)+(gp.feldGroeße/2)+(gp.feldGroeße/4), weltY-(gp.feldGroeße / 2));
 				richtung = "rechts";
-				hitCooldown = 60;
+				hitCooldownFrames = hitCooldownSekunden * gp.FPS;
 				System.out.println("schlag");
 			}
-			if (hit.x != 0) {
+			if (schlag != null) {
 				for (int i = 0; i < gp.entities.length; i++) {
 					if (gp.entities[i] != null) {
-						if (hit.intersects(gp.entities[i].hitBox)) {
+						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
 							gp.entities[i].getroffen(this);
 						}
 					}
@@ -171,15 +175,11 @@ public class Entity {
 				}
 			}
 		}
-		if (hitCooldown >= 30) {
-			kollidiert = true;
+		if (hitCooldownFrames < ((hitCooldownSekunden * gp.FPS)/10)) {
+			schlag = null;
 		}
-		if (hitCooldown < 30) {
-			hit.x = 0;
-			kollidiert = false;
-		}
-		if (hitCooldown > 0) {
-			hitCooldown--;
+		if (hitCooldownFrames > 0) {
+			hitCooldownFrames--;
 		}
 	}
 	
