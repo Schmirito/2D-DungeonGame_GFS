@@ -41,8 +41,6 @@ public class Entity {
 	public int lebensanzeigeHoehe;
 	public int bogenBreite = 4;
 	public int bogenHoehe = 4;
-	
-	Rectangle hit = new Rectangle(0,0,0,0);
 
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -165,6 +163,7 @@ public class Entity {
 				System.out.println("schlag");
 			}
 			if (schlag != null) {
+				schlag.schlagRichtung = richtung;
 				for (int i = 0; i < gp.entities.length; i++) {
 					if (gp.entities[i] != null) {
 						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
@@ -175,7 +174,7 @@ public class Entity {
 				}
 			}
 		}
-		if (hitCooldownFrames < ((hitCooldownSekunden * gp.FPS)/10)) {
+		if (hitCooldownFrames < 8*((hitCooldownSekunden * gp.FPS)/10)) {
 			schlag = null;
 		}
 		if (hitCooldownFrames > 0) {

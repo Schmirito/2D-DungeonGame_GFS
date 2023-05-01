@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class SuperObjekt {
 	
@@ -48,5 +49,18 @@ public class SuperObjekt {
 				g2.drawImage(bild, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 			}
 		}
+	}
+	public BufferedImage setup(String bildName) {
+
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage bild = null;
+
+		try {
+			bild = ImageIO.read(getClass().getResourceAsStream("/objekte/" + bildName + ".png"));
+			bild = uTool.skalaBild(bild, gp.feldGroeﬂe, gp.feldGroeﬂe);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return bild;
 	}
 }
