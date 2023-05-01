@@ -89,7 +89,8 @@ public class Player extends Entity {
 	 * gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
-		if (keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) {
+		schlag();
+		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) && kollidiert == false) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
 			} else if (keyH.untenGedrückt) {
@@ -106,7 +107,6 @@ public class Player extends Entity {
 			// PRUEFE OBJEKT KOLLISION
 			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 			interagiereMitObjekt(objGetroffen);
-			
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {
@@ -136,8 +136,7 @@ public class Player extends Entity {
 			}
 		}
 		
-		hit.x = 0;
-		schlag();
+
 		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;

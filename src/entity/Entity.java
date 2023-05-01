@@ -25,6 +25,7 @@ public class Entity {
 
 	public int frameCounter = 0;
 	public int spriteNumber = 0;
+	public int hitCooldown = 0;
 
 	public Rectangle hitBox;
 
@@ -136,23 +137,27 @@ public class Entity {
 	public void schlag() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeße / 2) + gp.kamera.bildschirmX;
 		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeße / 2) + gp.kamera.bildschirmY;
-		if (gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false && gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false) {
+		if (gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false && gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false && hitCooldown <= 0) {
 			
 			if(gp.keyH.pfeilHochGedrückt) {
 				hit = new Rectangle(bildschirmX,bildschirmY-(gp.feldGroeße/2),gp.feldGroeße,gp.feldGroeße);
 				richtung = "oben";
+				hitCooldown = 60;
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRunterGedrückt) {
 				hit = new Rectangle(bildschirmX,bildschirmY+(gp.feldGroeße),gp.feldGroeße,gp.feldGroeße);
 				richtung = "unten";
+				hitCooldown = 60;
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilLinksGedrückt) {
 				hit = new Rectangle(bildschirmX-(gp.feldGroeße/2)-(gp.feldGroeße/4),bildschirmY,gp.feldGroeße,gp.feldGroeße);
 				richtung = "links";
+				hitCooldown = 60;
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRechtsGedrückt) {
 				hit = new Rectangle(bildschirmX+(gp.feldGroeße/2)+(gp.feldGroeße/4),bildschirmY,gp.feldGroeße,gp.feldGroeße);
 				richtung = "rechts";
+				hitCooldown = 60;
 				System.out.println("schlag");
 			}
 			if (hit.x != 0) {
@@ -165,6 +170,16 @@ public class Entity {
 					
 				}
 			}
+		}
+		if (hitCooldown >= 30) {
+			kollidiert = true;
+		}
+		if (hitCooldown < 30) {
+			hit.x = 0;
+			kollidiert = false;
+		}
+		if (hitCooldown > 0) {
+			hitCooldown--;
 		}
 	}
 	
