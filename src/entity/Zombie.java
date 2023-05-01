@@ -16,7 +16,38 @@ public class Zombie extends Entity {
 	}
 	
 	public void update() {
-
+		// MOVEMENT
+		if (rundenAnzahlGetroffen > 0) {
+			rundenAnzahlGetroffen--;
+			switch (stoßRichtung) {
+			case "oben":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+					weltY -= gp.skala*entityGetroffen.rückstoß/4;
+				}
+				break;
+				
+			case "unten":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+					weltY += gp.skala*entityGetroffen.rückstoß/4;
+				}
+				break;
+				
+			case "links":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+					weltX -= gp.skala*entityGetroffen.rückstoß/4;
+				}
+				break;
+				
+			case "rechts":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+					weltX += gp.skala*entityGetroffen.rückstoß/4;
+				}
+				break;
+				
+			}
+		} else {
+			
+		}
 		
 	}
 	

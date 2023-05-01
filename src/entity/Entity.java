@@ -30,8 +30,10 @@ public class Entity {
 	public int hitCooldownFrames = 0;
 	public double hitCooldownSekunden = 0.5;
 	public Schlag schlag;
-	public int rückstoß = 8;
-	public int rundenZuvorGetroffen;
+	public int rückstoß = 16;
+	public int rundenAnzahlGetroffen;
+	public String stoßRichtung;
+	public Entity entityGetroffen;
 
 	public Rectangle hitBox;
 
@@ -203,34 +205,10 @@ public class Entity {
 		}
 	}
 	
-	public void getroffen(Entity entity,Schlag schlag) {
-		rundenZuvorGetroffen = 2;
-		switch (schlag.schlagRichtung) {
-		case "oben":
-			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, rückstoß)==false) {
-				weltY -= gp.skala*entity.rückstoß;
-			}
-			break;
-			
-		case "unten":
-			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, rückstoß)==false) {
-				weltY += gp.skala*entity.rückstoß;
-			}
-			break;
-			
-		case "links":
-			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, rückstoß)==false) {
-				weltX -= gp.skala*entity.rückstoß;
-			}
-			break;
-			
-		case "rechts":
-			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, rückstoß)==false) {
-				weltX += gp.skala*entity.rückstoß;
-			}
-			break;
-			
-		}
+	public void getroffen(Entity entity, Schlag schlag) {
+		rundenAnzahlGetroffen = 4;
+		stoßRichtung = schlag.schlagRichtung;
+		entityGetroffen = entity;
 		leben -= 1;
 	}
 	public BufferedImage setup(String bildName) {
