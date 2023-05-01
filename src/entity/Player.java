@@ -224,7 +224,7 @@ public class Player extends Entity {
 		
 		// ZEICHNE SCHLAG
 		if (schlag != null) {
-			schlag.draw(g2);
+			schlag.draw(g2,this);
 		}
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);

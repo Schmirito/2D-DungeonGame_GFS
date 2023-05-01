@@ -19,9 +19,11 @@ public class Schlag extends SuperObjekt {
 		bildR = setup("FaustRechts");
 	}
 
-	public void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2, Entity entity) {
 		if (bild != null) {
-			
+			if (entity.hitCooldownFrames/entity.hitCooldownSekunden > 0.1) {
+				
+			}
 			bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
 			bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
 			
