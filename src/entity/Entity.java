@@ -30,6 +30,8 @@ public class Entity {
 	public int hitCooldownFrames = 0;
 	public double hitCooldownSekunden = 0.5;
 	public Schlag schlag;
+	public int r¸ckstoﬂ = 8;
+	public int rundenZuvorGetroffen;
 
 	public Rectangle hitBox;
 
@@ -50,6 +52,9 @@ public class Entity {
 		hitBox.y = gp.feldGroeﬂe / 2;
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
+	}
+	public void update() {
+		
 	}
 
 	public void draw(Graphics2D g2) {
@@ -123,8 +128,8 @@ public class Entity {
 		}
 		if(charSprite != null) {
 			
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe/2);
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe/2);
 			
 			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
 				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
@@ -164,13 +169,23 @@ public class Entity {
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			}
+
+			
 			if (schlag != null) {
 				schlag.schlagRichtung = richtung;
 				for (int i = 0; i < gp.entities.length; i++) {
 					if (gp.entities[i] != null) {
+						int altEntHitBoxX = gp.entities[i].hitBox.x;
+						int altEntHitBoxY = gp.entities[i].hitBox.y;
+						gp.entities[i].hitBox.x += gp.entities[i].weltX - (gp.feldGroeﬂe/2);
+						gp.entities[i].hitBox.y += gp.entities[i].weltY - (gp.feldGroeﬂe/2);
 						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
+							gp.entities[i].hitBox.x = altEntHitBoxX;
+							gp.entities[i].hitBox.y = altEntHitBoxY;
 							gp.entities[i].getroffen(this, schlag);
 						}
+						gp.entities[i].hitBox.x = altEntHitBoxX;
+						gp.entities[i].hitBox.y = altEntHitBoxY;
 					}
 					
 				}
@@ -189,19 +204,32 @@ public class Entity {
 	}
 	
 	public void getroffen(Entity entity,Schlag schlag) {
+		rundenZuvorGetroffen = 2;
 		switch (schlag.schlagRichtung) {
 		case "oben":
-			weltY -= gp.skala*4;
+			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, r¸ckstoﬂ)==false) {
+				weltY -= gp.skala*entity.r¸ckstoﬂ;
+			}
 			break;
+			
 		case "unten":
-			weltY += gp.skala*4;
+			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, r¸ckstoﬂ)==false) {
+				weltY += gp.skala*entity.r¸ckstoﬂ;
+			}
 			break;
+			
 		case "links":
-			weltX -= gp.skala*4;
+			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, r¸ckstoﬂ)==false) {
+				weltX -= gp.skala*entity.r¸ckstoﬂ;
+			}
 			break;
+			
 		case "rechts":
-			weltX += gp.skala*4;
+			if (gp.kPruefer.pruefeFeld(this, schlag.schlagRichtung, r¸ckstoﬂ)==false) {
+				weltX += gp.skala*entity.r¸ckstoﬂ;
+			}
 			break;
+			
 		}
 		leben -= 1;
 	}

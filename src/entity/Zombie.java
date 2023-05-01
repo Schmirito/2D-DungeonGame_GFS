@@ -15,6 +15,11 @@ public class Zombie extends Entity {
 		getImage();
 	}
 	
+	public void update() {
+
+		
+	}
+	
 	public void getImage() {
 
 		up = setup("/zombie/zombie-Down.png");
