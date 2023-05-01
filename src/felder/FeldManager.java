@@ -229,12 +229,10 @@ public class FeldManager {
 
 		int spalte = 0;
 		int reihe = 0;
-		int x;
-		int y;
+		int x = 0 - gp.kamera.weltX + gp.kamera.bildschirmX;
+		int y = 0 - gp.kamera.weltY + gp.kamera.bildschirmY;
 
 		while (spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
-			x = (spalte * gp.feldGroeﬂe) - gp.kamera.weltX + gp.kamera.bildschirmX;
-			y = (reihe * gp.feldGroeﬂe) - gp.kamera.weltY + gp.kamera.bildschirmY;
 
 			if (x + gp.feldGroeﬂe > 0
 					&& x - gp.feldGroeﬂe < gp.BildBreite
@@ -245,11 +243,13 @@ public class FeldManager {
 			}
 			// g2.drawRect(x, y, gp.feldGroeﬂe, gp.feldGroeﬂe);
 			spalte++;
+			x += gp.feldGroeﬂe;
 
 			if (spalte == gp.mapGroeﬂe) {
 				spalte = 0;
-
+				x = 0 - gp.kamera.weltX + gp.kamera.bildschirmX;
 				reihe++;
+				y += gp.feldGroeﬂe;
 			}
 		}
 	}
