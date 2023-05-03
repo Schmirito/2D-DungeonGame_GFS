@@ -210,6 +210,7 @@ public class Entity {
 		stoﬂRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
 		leben -= 1;
+		System.out.println(""+leben);
 	}
 	public BufferedImage setup(String bildName) {
 
