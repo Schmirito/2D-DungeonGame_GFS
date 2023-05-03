@@ -74,7 +74,7 @@ public class Zombie extends Entity {
 		
 	    if  (diffSpielerY <= 0) {
 	    	richtungY = "unten";
-	    	diffSpielerY = gp.player.weltX - weltY;
+	    	diffSpielerY = gp.player.weltY - weltY;
 	    }
 		else {
 			richtungY = "oben";	
