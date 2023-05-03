@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class SuperObjekt {
 	
@@ -18,10 +19,13 @@ public class SuperObjekt {
 	public int weltX, weltY;
 	public Rectangle hitBox;
 	
+	public int bildschirmX;
+	public int bildschirmY;
+	
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		name = "SuperObjekt";
-		hitBox = new Rectangle(0,0,gp.feldGroeﬂe,gp.feldGroeﬂe);
+		hitBox = new Rectangle(weltX,weltY,gp.feldGroeﬂe,gp.feldGroeﬂe);
 		this.weltX = weltX;
 		this.weltY = weltY;
 		try {
@@ -34,8 +38,8 @@ public class SuperObjekt {
 	public void draw(Graphics2D g2) {
 		if(bild != null) {
 			
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
+			bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
+			bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
 			
 			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
 				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
@@ -45,5 +49,18 @@ public class SuperObjekt {
 				g2.drawImage(bild, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 			}
 		}
+	}
+	public BufferedImage setup(String bildName) {
+
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage bild = null;
+
+		try {
+			bild = ImageIO.read(getClass().getResourceAsStream("/objekte/" + bildName + ".png"));
+			bild = uTool.skalaBild(bild, gp.feldGroeﬂe, gp.feldGroeﬂe);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return bild;
 	}
 }

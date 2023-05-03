@@ -23,11 +23,10 @@ public class Kamera {
 		weltY = player.weltY;
 		
 	}
-
+	/* Die Methode bewegt die Kamera, außer der Spieler kollidiert, die Kamera stößt am Rand an oder der Spieler ist noch nicht wieder mittig im Bildschirm platziert. 
+	 * 
+	 */
 	public void update() {
-		/** Wenn die Kamera am Rand angekommen ist, bewegt sich der Spieler ohne die Kamera in die entsprechenden Richtungen,
-		 * bis der Spieler auf der entsprechenden Achse wieder in der Mitte des Bildschirms ist
-		 */
 		if (gp.player.kollidiert == false) {
 			if ((weltY - bildschirmY) > 0 && player.weltY <= (gp.mapGroeße * gp.feldGroeße) - bildschirmY
 					&& keyH.obenGedrückt) {

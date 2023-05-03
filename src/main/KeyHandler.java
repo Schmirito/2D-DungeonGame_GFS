@@ -7,7 +7,7 @@ import entity.Player;
 
 public class KeyHandler implements KeyListener{
 
-	public boolean obenGedrückt,untenGedrückt,linksGedrückt,rechtsGedrückt;
+	public boolean obenGedrückt,untenGedrückt,linksGedrückt,rechtsGedrückt,pfeilHochGedrückt,pfeilRunterGedrückt,pfeilLinksGedrückt,pfeilRechtsGedrückt;
 	
 	@Override
 	public void keyTyped(KeyEvent e) {	
@@ -30,6 +30,18 @@ public class KeyHandler implements KeyListener{
 		if (tastenCode == KeyEvent.VK_D) {
 			rechtsGedrückt = true;
 		}
+		if (tastenCode == KeyEvent.VK_UP) {
+			pfeilHochGedrückt = true;
+		}
+		if (tastenCode == KeyEvent.VK_DOWN) {
+			pfeilRunterGedrückt = true;
+		}
+		if (tastenCode == KeyEvent.VK_LEFT) {
+			pfeilLinksGedrückt = true;
+		}
+		if (tastenCode == KeyEvent.VK_RIGHT) {
+			pfeilRechtsGedrückt = true;
+		}
 		
 	}
 	
@@ -49,6 +61,18 @@ public class KeyHandler implements KeyListener{
 		}
 		if (tastenCode == KeyEvent.VK_D) {
 			rechtsGedrückt = false;
+		}
+		if (tastenCode == KeyEvent.VK_UP) {
+			pfeilHochGedrückt = false;
+		}
+		if (tastenCode == KeyEvent.VK_DOWN) {
+			pfeilRunterGedrückt = false;
+		}
+		if (tastenCode == KeyEvent.VK_LEFT) {
+			pfeilLinksGedrückt = false;
+		}
+		if (tastenCode == KeyEvent.VK_RIGHT) {
+			pfeilRechtsGedrückt = false;
 		}
 		
 	}

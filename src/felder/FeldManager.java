@@ -23,12 +23,13 @@ public class FeldManager {
 	public int mapNr = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
+	public boolean start = true;
 
 	// Etwas unschön gelößt, aber keine zeit.
-	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt", "/maps/Room3-Test.txt",
-			"/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt", "/maps/Room7-Test.txt",
-			"/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt", "/maps/Room11-Test.txt",
-			"/maps/Room12-Test.txt" };
+	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
+			"/maps/Room3-Test.txt", "/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt",
+			"/maps/Room7-Test.txt", "/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt",
+			"/maps/Room11-Test.txt", "/maps/Room12-Test.txt" };
 
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
@@ -46,6 +47,13 @@ public class FeldManager {
 
 		switch (mapNr) {
 		case 0: // Startraum implementieren
+			// Zum Testen
+			if (start) {
+				start = false;
+			} else {
+				neueNummer = (int) (Math.random() * 12 + 1);
+				mapNr = neueNummer;
+			}
 			break;
 		case 2:
 		case 4:
@@ -206,7 +214,6 @@ public class FeldManager {
 		}
 	}
 
-
 	public int getFeldIndex(String bildName) {
 		int index = -1;
 		for (int i = 0; i < feld.length; i++) {
@@ -222,21 +229,25 @@ public class FeldManager {
 
 		int spalte = 0;
 		int reihe = 0;
-		int x = 0 - gp.kamera.weltX + (gp.BildBreite / 2);
-		int y = 0 - gp.kamera.weltY + (gp.BildHoehe / 2);
+		int x = 0 - gp.kamera.weltX + gp.kamera.bildschirmX;
+		int y = 0 - gp.kamera.weltY + gp.kamera.bildschirmY;
 
 		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
 
-			int feldNr = mapFeldNr[spalte][reihe];
-
-			g2.drawImage(feld[feldNr].image, x, y, gp.feldGroeße, gp.feldGroeße, null);
+			if (x + gp.feldGroeße > 0
+					&& x - gp.feldGroeße < gp.BildBreite
+					&& y + gp.feldGroeße > 0
+					&& y - gp.feldGroeße < gp.BildHoehe) {
+				int feldNr = mapFeldNr[spalte][reihe];
+				g2.drawImage(feld[feldNr].image, x, y, gp.feldGroeße, gp.feldGroeße, null);
+			}
 			// g2.drawRect(x, y, gp.feldGroeße, gp.feldGroeße);
 			spalte++;
 			x += gp.feldGroeße;
 
 			if (spalte == gp.mapGroeße) {
 				spalte = 0;
-				x = 0 - gp.kamera.weltX + (gp.BildBreite / 2);
+				x = 0 - gp.kamera.weltX + gp.kamera.bildschirmX;
 				reihe++;
 				y += gp.feldGroeße;
 			}

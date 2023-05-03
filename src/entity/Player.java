@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -60,18 +61,18 @@ public class Player extends Entity {
 	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
 	public void getPlayerImage() {
 
-		up = setup("char-Up");
-		upLV = setup("char-UpLV");
-		upRV = setup("char-UpRV");
-		down = setup("char-Down");
-		downLV = setup("char-DownLV");
-		downRV = setup("char-DownRV");
-		left = setup("char-Left");
-		leftLV = setup("char-LeftLV");
-		leftRV = setup("char-LeftRV");
-		right = setup("char-Right");
-		rightLV = setup("char-RightLV");
-		rightRV = setup("char-RightRV");
+		up = setup("/player/char-Up");
+		upLV = setup("/player/char-UpLV");
+		upRV = setup("/player/char-UpRV");
+		down = setup("/player/char-Down");
+		downLV = setup("/player/char-DownLV");
+		downRV = setup("/player/char-DownRV");
+		left = setup("/player/char-Left");
+		leftLV = setup("/player/char-LeftLV");
+		leftRV = setup("/player/char-LeftRV");
+		right = setup("/player/char-Right");
+		rightLV = setup("/player/char-RightLV");
+		rightRV = setup("/player/char-RightRV");
 
 	}
 
@@ -79,19 +80,7 @@ public class Player extends Entity {
 	 * Der Player wird jetzt in der methode setup skaliert, was die performance
 	 * verbessern kann.
 	 */
-	public BufferedImage setup(String bildName) {
-
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage bild = null;
-
-		try {
-			bild = ImageIO.read(getClass().getResourceAsStream("/player/" + bildName + ".png"));
-			bild = uTool.skalaBild(bild, gp.feldGroeﬂe, gp.feldGroeﬂe);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return bild;
-	}
+	
 
 	/**
 	 * Wenn tasten in die entsprechende Richtung gedr¸ckt wurden, wird die
@@ -100,7 +89,8 @@ public class Player extends Entity {
 	 * gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
-		if (keyH.obenGedr¸ckt || keyH.untenGedr¸ckt || keyH.linksGedr¸ckt || keyH.rechtsGedr¸ckt) {
+		schlage();
+		if ((keyH.obenGedr¸ckt || keyH.untenGedr¸ckt || keyH.linksGedr¸ckt || keyH.rechtsGedr¸ckt) && kollidiert == false) {
 			if (keyH.obenGedr¸ckt == true) {
 				richtung = "oben";
 			} else if (keyH.untenGedr¸ckt) {
@@ -117,7 +107,6 @@ public class Player extends Entity {
 			// PRUEFE OBJEKT KOLLISION
 			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 			interagiereMitObjekt(objGetroffen);
-			
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {
@@ -136,7 +125,6 @@ public class Player extends Entity {
 				}
 				
 			}
-			
 			framesUnbewegt = 0;
 			frameCounter++;
 			if (frameCounter > 8) {
@@ -147,6 +135,8 @@ public class Player extends Entity {
 				frameCounter = 0;
 			}
 		}
+
+
 		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
@@ -231,9 +221,14 @@ public class Player extends Entity {
 		// bildX und bildY berechnen
 		bildschirmX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
-
+		
+		// ZEICHNE SCHLAG
+		if (schlag != null) {
+			schlag.draw(g2,this);
+		}
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
+
 		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 
 	}

@@ -12,7 +12,7 @@ public class KollisionPruefer {
 		this.gp = gp;
 	}
 	/** Es wird gepr¸ft ob ein Feld auf welches das Entity laufen will Kollision hat, dementsprechend 'entity.kollidiert' gesetzt*/
-	public void pruefeFeld(Entity entity) {
+	public boolean pruefeFeld(Entity entity) {
 
 		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x;
 		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x + entity.hitBox.width-1;
@@ -25,6 +25,8 @@ public class KollisionPruefer {
 		int hitBoxUntereReihe = hitBoxUnteresWeltY / gp.feldGroeﬂe;
 
 		int feldNr1, feldNr2;
+		
+		boolean kollidiert = false;
 
 		switch (entity.richtung) {
 		case "oben":
@@ -33,6 +35,7 @@ public class KollisionPruefer {
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
 				entity.kollidiert = true;
+				kollidiert = true;
 			}
 			break;
 		case "unten":
@@ -41,6 +44,7 @@ public class KollisionPruefer {
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
 				entity.kollidiert = true;
+				kollidiert = true;
 			}
 			break;
 		case "links":
@@ -49,6 +53,7 @@ public class KollisionPruefer {
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
 				entity.kollidiert = true;
+				kollidiert = true;
 			}
 			break;
 		case "rechts":
@@ -57,12 +62,76 @@ public class KollisionPruefer {
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
 				entity.kollidiert = true;
+				kollidiert = true;
 			}
 			break;
 		default:
 			System.out.println("In "+ this.getClass().getSimpleName() + "wurde in 'PruefeFeld' kein case f¸r diese Richtung gew‰hlt.");
 			break;
 		}
+		return kollidiert;
+
+	}
+	public boolean pruefeFeld(Entity entity, String richtung, int bewegung) {
+
+		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x;
+		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroeﬂe/2) + entity.hitBox.x + entity.hitBox.width-1;
+		int hitBoxOberesWeltY = entity.weltY - (gp.feldGroeﬂe/2) + entity.hitBox.y;
+		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroeﬂe/2) + entity.hitBox.y + entity.hitBox.height-1;
+
+		int hitBoxLinkeSpalte = hitBoxLinkesWeltX / gp.feldGroeﬂe;
+		int hitBoxRechteSpalte = hitBoxRechtesWeltX / gp.feldGroeﬂe;
+		int hitBoxObereReihe = hitBoxOberesWeltY / gp.feldGroeﬂe;
+		int hitBoxUntereReihe = hitBoxUnteresWeltY / gp.feldGroeﬂe;
+
+		int feldNr1, feldNr2;
+		
+		boolean kollidiert = false;
+
+		switch (richtung) {
+		case "oben":
+			hitBoxObereReihe = (hitBoxOberesWeltY - bewegung) / gp.feldGroeﬂe;
+			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxObereReihe];
+			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
+			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
+				entity.kollidiert = true;
+				kollidiert = true;
+			}
+			break;
+		case "unten":
+			hitBoxUntereReihe = (hitBoxUnteresWeltY + bewegung) / gp.feldGroeﬂe;
+			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
+			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
+			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
+				entity.kollidiert = true;
+				kollidiert = true;
+			}
+			break;
+		case "links":
+			hitBoxLinkeSpalte = (hitBoxLinkesWeltX - bewegung) / gp.feldGroeﬂe;
+			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxObereReihe];
+			feldNr2 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
+			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
+				entity.kollidiert = true;
+				kollidiert = true;
+			}
+			break;
+		case "rechts":
+			hitBoxRechteSpalte = (hitBoxRechtesWeltX + bewegung) / gp.feldGroeﬂe;
+			System.out.println("rechteSpalte: "+hitBoxRechteSpalte);
+			System.out.println("obereReihe: "+hitBoxObereReihe);
+			feldNr1 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
+			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
+			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
+				entity.kollidiert = true;
+				kollidiert = true;
+			}
+			break;
+		default:
+			System.out.println("In "+ this.getClass().getSimpleName() + "wurde in 'PruefeFeld' kein case f¸r diese Richtung gew‰hlt.");
+			break;
+		}
+		return kollidiert;
 
 	}
 	public boolean[] pruefeObjekt(Entity entity, boolean kannInteragieren) {
