@@ -6,8 +6,8 @@ public class Zombie extends Entity {
 
 	public Zombie(GamePanel gp, int weltX, int weltY) {
 		super(gp);
-		this.weltX = weltX*gp.feldGroeﬂe;
-		this.weltY = weltY*gp.feldGroeﬂe;
+		this.weltX = weltX;
+		this.weltY = weltY;
 		
 		richtung = "unten";
 		geschwindigkeit = gp.skala;
