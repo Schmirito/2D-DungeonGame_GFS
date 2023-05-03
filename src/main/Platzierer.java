@@ -1,5 +1,7 @@
 package main;
 
+import entity.Entity;
+import entity.Zombie;
 import objekte.Obj_AusgangsTuer;
 import objekte.SuperObjekt;
 
@@ -15,8 +17,15 @@ public class Platzierer {
 	public void setzeObjekt() {
 		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
 		indexObjekte = 4;
-		gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeﬂe, 10*gp.feldGroeﬂe);
-		indexObjekte++;
+
+		//gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeﬂe, 10*gp.feldGroeﬂe);
+		//indexObjekte++;
+		
+	}
+	
+	public void setzeEntity() {
+		gp.entities[0] = new Zombie(gp, 20, 20);
+
 		
 	}
 	
@@ -25,12 +34,16 @@ public class Platzierer {
 		indexObjekte = 0;
 		int spalte = 0;
 		int reihe = 0;
+		int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
+		int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
+		int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
+		int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 		
 		while(spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
-			
+
 			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
 			
-			if (feldNr>6 && feldNr<11) {
+			if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks || feldNr == indexTuerRechts) {
 				int weltX = spalte * gp.feldGroeﬂe;
 				int weltY = reihe * gp.feldGroeﬂe;
 				gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
