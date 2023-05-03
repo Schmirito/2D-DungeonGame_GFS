@@ -8,7 +8,7 @@ public class Zombie extends Entity {
 		super(gp);
 		this.weltX = weltX*gp.feldGroeße;
 		this.weltY = weltY*gp.feldGroeße;
-		
+	
 		richtung = "unten";
 		geschwindigkeit = gp.skala;
 		
@@ -16,6 +16,9 @@ public class Zombie extends Entity {
 	}
 	
 	public void update() {
+		
+		laufeZumSpieler();
+		
 		// MOVEMENT
 		if (rundenAnzahlGetroffen > 0) {
 			rundenAnzahlGetroffen--;
@@ -48,6 +51,10 @@ public class Zombie extends Entity {
 		} else {
 			
 		}
+		
+	}
+	
+	public void laufeZumSpieler() {
 		
 	}
 	
