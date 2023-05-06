@@ -12,8 +12,8 @@ public class Zombie extends Entity {
 	
 	public Zombie(GamePanel gp, int weltX, int weltY) {
 		super(gp);
-		this.weltX = weltX*gp.feldGroeße;
-		this.weltY = weltY*gp.feldGroeße;
+		this.weltX = weltX;
+		this.weltY = weltY;
 	
 		richtung = "unten";
 		geschwindigkeit = gp.skala;
@@ -23,6 +23,7 @@ public class Zombie extends Entity {
 	
 	public void update() {
 		
+
 		laufeZumSpieler();
 		
 		// MOVEMENT
@@ -30,25 +31,25 @@ public class Zombie extends Entity {
 			rundenAnzahlGetroffen--;
 			switch (stoßRichtung) {
 			case "oben":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
 					weltY -= gp.skala*entityGetroffen.rückstoß/4;
 				}
 				break;
 				
 			case "unten":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
 					weltY += gp.skala*entityGetroffen.rückstoß/4;
 				}
 				break;
 				
 			case "links":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
 					weltX -= gp.skala*entityGetroffen.rückstoß/4;
 				}
 				break;
 				
 			case "rechts":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
+				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
 					weltX += gp.skala*entityGetroffen.rückstoß/4;
 				}
 				break;
@@ -86,6 +87,8 @@ public class Zombie extends Entity {
 	    else if(diffSpielerY > diffSpielerX){
 			richtung = richtungY;
 		}
+	    kollidiert = false;
+	    gp.kPruefer.pruefeFeld(this);
 	    
 	    if (kollidiert == false) {
 			switch (richtung) {

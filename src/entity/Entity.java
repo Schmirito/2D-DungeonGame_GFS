@@ -175,19 +175,19 @@ public class Entity {
 			
 			if (schlag != null) {
 				schlag.schlagRichtung = richtung;
-				for (int i = 0; i < gp.entities.length; i++) {
-					if (gp.entities[i] != null) {
-						int altEntHitBoxX = gp.entities[i].hitBox.x;
-						int altEntHitBoxY = gp.entities[i].hitBox.y;
-						gp.entities[i].hitBox.x += gp.entities[i].weltX - (gp.feldGroeße/2);
-						gp.entities[i].hitBox.y += gp.entities[i].weltY - (gp.feldGroeße/2);
-						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
-							gp.entities[i].hitBox.x = altEntHitBoxX;
-							gp.entities[i].hitBox.y = altEntHitBoxY;
-							gp.entities[i].getroffen(this, schlag);
+				for (int i = 0; i < gp.entity.length; i++) {
+					if (gp.entity[i] != null) {
+						int altEntHitBoxX = gp.entity[i].hitBox.x;
+						int altEntHitBoxY = gp.entity[i].hitBox.y;
+						gp.entity[i].hitBox.x += gp.entity[i].weltX - (gp.feldGroeße/2);
+						gp.entity[i].hitBox.y += gp.entity[i].weltY - (gp.feldGroeße/2);
+						if (schlag.hitBox.intersects(gp.entity[i].hitBox)) {
+							gp.entity[i].hitBox.x = altEntHitBoxX;
+							gp.entity[i].hitBox.y = altEntHitBoxY;
+							gp.entity[i].getroffen(this, schlag);
 						}
-						gp.entities[i].hitBox.x = altEntHitBoxX;
-						gp.entities[i].hitBox.y = altEntHitBoxY;
+						gp.entity[i].hitBox.x = altEntHitBoxX;
+						gp.entity[i].hitBox.y = altEntHitBoxY;
 					}
 					
 				}

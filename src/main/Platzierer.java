@@ -23,14 +23,14 @@ public class Platzierer {
 	}
 	
 	public void setzeEntity() {
-		gp.entities[0] = new Zombie(gp, 20, 20);
-		gp.entities[1] = new Zombie(gp, 30, 20);
-		gp.entities[2] = new Zombie(gp, 23, 10);
-		gp.entities[3] = new Zombie(gp, 27, 5);
-		gp.entities[4] = new Zombie(gp, 15, 20);
-		gp.entities[5] = new Zombie(gp, 19, 18);
-		gp.entities[6] = new Zombie(gp, 7, 16);
-		gp.entities[7] = new Zombie(gp, 25, 23);
+		gp.entity[0] = new Zombie(gp, 20*gp.feldGroeﬂe, 20*gp.feldGroeﬂe);
+		gp.entity[1] = new Zombie(gp, 29*gp.feldGroeﬂe, 20*gp.feldGroeﬂe);
+		gp.entity[2] = new Zombie(gp, 23*gp.feldGroeﬂe, 10*gp.feldGroeﬂe);
+		gp.entity[3] = new Zombie(gp, 27*gp.feldGroeﬂe, 5*gp.feldGroeﬂe);
+		gp.entity[4] = new Zombie(gp, 15*gp.feldGroeﬂe, 20*gp.feldGroeﬂe);
+		gp.entity[5] = new Zombie(gp, 19*gp.feldGroeﬂe, 18*gp.feldGroeﬂe);
+		gp.entity[6] = new Zombie(gp, 7*gp.feldGroeﬂe, 16*gp.feldGroeﬂe);
+		gp.entity[7] = new Zombie(gp, 25*gp.feldGroeﬂe, 23*gp.feldGroeﬂe);
 		
 	}
 	
