@@ -34,6 +34,7 @@ public class Entity {
 	public int rundenAnzahlGetroffen;
 	public String stoﬂRichtung;
 	public Entity entityGetroffen;
+	public boolean kollision = true;
 
 	public Rectangle hitBox;
 

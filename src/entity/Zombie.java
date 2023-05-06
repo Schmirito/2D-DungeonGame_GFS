@@ -89,6 +89,8 @@ public class Zombie extends Entity {
 		}
 	    kollidiert = false;
 	    gp.kPruefer.pruefeFeld(this);
+	    gp.kPruefer.pruefeObjekt(this, false);
+	    gp.kPruefer.pruefeEntity(this, false, richtung);
 	    
 	    if (kollidiert == false) {
 			switch (richtung) {
