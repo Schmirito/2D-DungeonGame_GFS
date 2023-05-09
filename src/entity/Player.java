@@ -107,6 +107,10 @@ public class Player extends Entity {
 			// PRUEFE OBJEKT KOLLISION
 			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 			interagiereMitObjekt(objGetroffen);
+			// PRUEFE ENTITY KOLLISION
+			boolean entGetroffen[] = gp.kPruefer.pruefeEntity(this, true);
+			interagiereMitEntity(entGetroffen);
+			
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {

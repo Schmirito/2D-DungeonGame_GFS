@@ -20,13 +20,14 @@ public class Entity {
 	public int bildschirmX;
 	public int bildschirmY;
 	public int geschwindigkeit;
+	public boolean kollision = true;
 
 	public BufferedImage up, upLV, upRV, down, downLV, downRV, left, leftLV, leftRV, right, rightLV, rightRV;
 	public String richtung;
 
 	public int frameCounter = 0;
 	public int spriteNumber = 0;
-	
+
 	public int hitCooldownFrames = 0;
 	public double hitCooldownSekunden = 0.5;
 	public Schlag schlag;
@@ -34,6 +35,7 @@ public class Entity {
 	public int rundenAnzahlGetroffen;
 	public String stoﬂRichtung;
 	public Entity entityGetroffen;
+	public int framesBewegungsunfaehig = 0;
 
 	public Rectangle hitBox;
 
@@ -55,8 +57,9 @@ public class Entity {
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
 	}
+
 	public void update() {
-		
+
 	}
 
 	public void draw(Graphics2D g2) {
@@ -128,59 +131,61 @@ public class Entity {
 			}
 			break;
 		}
-		if(charSprite != null) {
-			
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe/2);
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe/2);
-			
-			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
-				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
-				weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY && 
-				weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+		if (charSprite != null) {
+
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe / 2);
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe / 2);
+
+			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX
+					&& weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX
+					&& weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY
+					&& weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
 				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 			}
 		}
 	}
-	
+
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmX;
 		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmY;
 		if (
-				//gp.keyH.obenGedr¸ckt == false && gp.keyH.untenGedr¸ckt == false && gp.keyH.linksGedr¸ckt == false && gp.keyH.rechtsGedr¸ckt == false && 
-				hitCooldownFrames <= 0) {
-			
-			if(gp.keyH.pfeilHochGedr¸ckt) {
-				schlag = new Schlag(gp, weltX-(gp.feldGroeﬂe / 2), weltY-(gp.feldGroeﬂe / 2)-(gp.feldGroeﬂe/2));
+		// gp.keyH.obenGedr¸ckt == false && gp.keyH.untenGedr¸ckt == false &&
+		// gp.keyH.linksGedr¸ckt == false && gp.keyH.rechtsGedr¸ckt == false &&
+		hitCooldownFrames <= 0) {
+
+			if (gp.keyH.pfeilHochGedr¸ckt) {
+				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2), weltY - (gp.feldGroeﬂe / 2) - (gp.feldGroeﬂe / 2));
 				richtung = "oben";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRunterGedr¸ckt) {
-				schlag = new Schlag(gp, weltX-(gp.feldGroeﬂe / 2), weltY-(gp.feldGroeﬂe / 2)+(gp.feldGroeﬂe));
+				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2), weltY - (gp.feldGroeﬂe / 2) + (gp.feldGroeﬂe));
 				richtung = "unten";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilLinksGedr¸ckt) {
-				schlag = new Schlag(gp, weltX-(gp.feldGroeﬂe / 2)-(gp.feldGroeﬂe/2)-(gp.feldGroeﬂe/4), weltY-(gp.feldGroeﬂe / 2));
+				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2) - (gp.feldGroeﬂe / 2) - (gp.feldGroeﬂe / 4),
+						weltY - (gp.feldGroeﬂe / 2));
 				richtung = "links";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRechtsGedr¸ckt) {
-				schlag = new Schlag(gp, weltX-(gp.feldGroeﬂe / 2)+(gp.feldGroeﬂe/2)+(gp.feldGroeﬂe/4), weltY-(gp.feldGroeﬂe / 2));
+				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2) + (gp.feldGroeﬂe / 2) + (gp.feldGroeﬂe / 4),
+						weltY - (gp.feldGroeﬂe / 2));
 				richtung = "rechts";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 				System.out.println("schlag");
 			}
 
-			
 			if (schlag != null) {
 				schlag.schlagRichtung = richtung;
 				for (int i = 0; i < gp.entities.length; i++) {
 					if (gp.entities[i] != null) {
 						int altEntHitBoxX = gp.entities[i].hitBox.x;
 						int altEntHitBoxY = gp.entities[i].hitBox.y;
-						gp.entities[i].hitBox.x += gp.entities[i].weltX - (gp.feldGroeﬂe/2);
-						gp.entities[i].hitBox.y += gp.entities[i].weltY - (gp.feldGroeﬂe/2);
+						gp.entities[i].hitBox.x += gp.entities[i].weltX - (gp.feldGroeﬂe / 2);
+						gp.entities[i].hitBox.y += gp.entities[i].weltY - (gp.feldGroeﬂe / 2);
 						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
 							gp.entities[i].hitBox.x = altEntHitBoxX;
 							gp.entities[i].hitBox.y = altEntHitBoxY;
@@ -189,12 +194,12 @@ public class Entity {
 						gp.entities[i].hitBox.x = altEntHitBoxX;
 						gp.entities[i].hitBox.y = altEntHitBoxY;
 					}
-					
+
 				}
 			}
 		}
 
-		if (hitCooldownFrames < 9*((hitCooldownSekunden * gp.FPS)/10)) {
+		if (hitCooldownFrames < 9 * ((hitCooldownSekunden * gp.FPS) / 10)) {
 			schlag = null;
 			kollidiert = false;
 		} else {
@@ -204,14 +209,15 @@ public class Entity {
 			hitCooldownFrames--;
 		}
 	}
-	
+
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
 		stoﬂRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
 		leben -= 1;
-		System.out.println(""+leben);
+		System.out.println("" + leben);
 	}
+
 	public BufferedImage setup(String bildName) {
 
 		UtilityTool uTool = new UtilityTool();
@@ -234,6 +240,38 @@ public class Entity {
 
 	}
 
+	public void interagiereMitEntity(boolean entGetroffen[]) {
+		for (int i = 0; i < entGetroffen.length; i++) {
+			if (entGetroffen[i] == true) {
+				System.out.println("objekt getroffen: " + i);
+				switch (gp.entities[i].getClass().getSimpleName()) {
+				case "Zombie":
+					leben -= 1;
+					gp.entities[i].framesBewegungsunfaehig = 6;
+					switch (richtung) {
+					case "oben":
+						weltY+= gp.entities[i].r¸ckstoﬂ * 16;
+						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
+						break;
+					case "unten":
+						weltY-= gp.entities[i].r¸ckstoﬂ * 16;
+						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
+						break;
+					case "links":
+						weltX+= gp.entities[i].r¸ckstoﬂ * 16;
+						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
+						break;
+					case "rechts":
+						weltX-= gp.entities[i].r¸ckstoﬂ * 16;
+						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
+						break;
+					}
+
+				}
+			}
+		}
+	}
+
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
@@ -242,7 +280,7 @@ public class Entity {
 				case "Ausgang":
 					gp.feldM.loadMap();
 					gp.setupGame();
-					
+
 					i = objGetroffen.length;
 					break;
 				default:

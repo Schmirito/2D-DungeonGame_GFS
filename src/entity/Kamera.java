@@ -51,5 +51,31 @@ public class Kamera {
 			}
 		}
 	}
+	
+	public void versucheBewegung(int bewegung) {
+		if (gp.player.kollidiert == false) {
+			if ((weltY - bildschirmY) > 0 && player.weltY <= (gp.mapGroeße * gp.feldGroeße) - bildschirmY
+					&& keyH.obenGedrückt) {
+
+				weltY -= bewegung;
+
+			} else if ((weltY + bildschirmY) < (gp.mapGroeße * gp.feldGroeße) && player.weltY >= bildschirmY
+					&& keyH.untenGedrückt) {
+
+				weltY += bewegung;
+
+			} else if ((weltX - bildschirmX) > 0 && player.weltX <= (gp.mapGroeße * gp.feldGroeße) - bildschirmX
+					&& keyH.linksGedrückt && !keyH.obenGedrückt && !keyH.untenGedrückt ) {
+
+				weltX -= bewegung;
+
+			} else if ((weltX + bildschirmX) < (gp.mapGroeße * gp.feldGroeße) && player.weltX >= bildschirmX
+					&& keyH.rechtsGedrückt && !keyH.obenGedrückt && !keyH.untenGedrückt) {
+
+				weltX += bewegung;
+
+			}
+		}
+	}
 
 }
