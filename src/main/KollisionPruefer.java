@@ -105,6 +105,7 @@ public class KollisionPruefer {
 						}
 						if (kannMitEntityInteragieren) {
 							entGetroffen[i] = true;
+							entity.stoﬂRichtung = "unten";
 						}
 						System.out.println("oben Kollision");
 					}
@@ -117,6 +118,7 @@ public class KollisionPruefer {
 						}
 						if (kannMitEntityInteragieren) {
 							entGetroffen[i] = true;
+							entity.stoﬂRichtung = "oben";
 						}
 						System.out.println("unten Kollision");
 					}
@@ -129,6 +131,7 @@ public class KollisionPruefer {
 						}
 						if (kannMitEntityInteragieren) {
 							entGetroffen[i] = true;
+							entity.stoﬂRichtung = "rechts";
 						}
 						System.out.println("links Kollision");
 					}
@@ -141,6 +144,7 @@ public class KollisionPruefer {
 						}
 						if (kannMitEntityInteragieren) {
 							entGetroffen[i] = true;
+							entity.stoﬂRichtung = "links";
 						}
 						System.out.println("rechts Kollision");
 					}
