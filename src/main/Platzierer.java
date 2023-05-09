@@ -30,8 +30,7 @@ public class Platzierer {
 		gp.entities[3] = new Zombie(gp, 27, 5);
 		gp.entities[4] = new Zombie(gp, 15, 20);
 		gp.entities[5] = new Zombie(gp, 19, 18);
-		gp.entities[6] = new Zombie(gp, 7, 16);
-		gp.entities[7] = new Zombie(gp, 25, 23);
+		gp.entities[6] = new Zombie(gp, 25, 23);
 
 		
 	}
