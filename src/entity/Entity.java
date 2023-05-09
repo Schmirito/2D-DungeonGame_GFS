@@ -37,6 +37,7 @@ public class Entity {
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
 
+
 	public Rectangle hitBox;
 
 	public boolean kollidiert = false;
@@ -56,6 +57,94 @@ public class Entity {
 		hitBox.y = gp.feldGroeﬂe / 2;
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
+	}
+	public void update() {
+		
+	}
+
+	public void draw(Graphics2D g2) {
+		BufferedImage charSprite = null;
+
+		switch (richtung) {
+		case "oben":
+			switch (spriteNumber) {
+			case 0:
+				charSprite = up;
+				break;
+			case 1:
+				charSprite = upLV;
+				break;
+			case 2:
+				charSprite = up;
+				break;
+			case 3:
+				charSprite = upRV;
+				break;
+			}
+			break;
+		case "unten":
+			switch (spriteNumber) {
+			case 0:
+				charSprite = down;
+				break;
+			case 1:
+				charSprite = downLV;
+				break;
+			case 2:
+				charSprite = down;
+				break;
+			case 3:
+				charSprite = downRV;
+				break;
+			}
+			break;
+		case "links":
+			switch (spriteNumber) {
+			case 0:
+				charSprite = left;
+				break;
+			case 1:
+				charSprite = leftLV;
+				break;
+			case 2:
+				charSprite = left;
+				break;
+			case 3:
+				charSprite = leftRV;
+				break;
+			}
+			break;
+		case "rechts":
+			switch (spriteNumber) {
+			case 0:
+				charSprite = right;
+				break;
+			case 1:
+				charSprite = rightLV;
+				break;
+			case 2:
+				charSprite = right;
+				break;
+			case 3:
+				charSprite = rightRV;
+				break;
+			}
+			break;
+		}
+		if(charSprite != null) {
+			
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe/2);
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe/2);
+			
+			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
+				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
+				weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY && 
+				weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+
+				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+			}
+		}
+
 	}
 
 	public void update() {
@@ -270,6 +359,7 @@ public class Entity {
 				}
 			}
 		}
+
 	}
 
 	public void interagiereMitObjekt(boolean objGetroffen[]) {

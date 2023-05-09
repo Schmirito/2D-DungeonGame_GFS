@@ -23,7 +23,16 @@ public class Platzierer {
 	}
 	
 	public void setzeEntity() {
-		gp.entities[0] = new Zombie(gp, 20*gp.feldGroeﬂe, 20*gp.feldGroeﬂe);
+
+		gp.entities[0] = new Zombie(gp, 20, 20);
+		gp.entities[1] = new Zombie(gp, 30, 20);
+		gp.entities[2] = new Zombie(gp, 23, 10);
+		gp.entities[3] = new Zombie(gp, 27, 5);
+		gp.entities[4] = new Zombie(gp, 15, 20);
+		gp.entities[5] = new Zombie(gp, 19, 18);
+		gp.entities[6] = new Zombie(gp, 7, 16);
+		gp.entities[7] = new Zombie(gp, 25, 23);
+
 		
 	}
 	

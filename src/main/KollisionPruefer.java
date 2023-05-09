@@ -72,6 +72,7 @@ public class KollisionPruefer {
 		return kollidiert;
 
 	}
+
 	
 	public boolean[] pruefeEntity(Entity entity, boolean kannMitEntityInteragieren) {
 		boolean entGetroffen[] = new boolean[gp.entities.length];
