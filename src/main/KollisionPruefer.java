@@ -73,13 +73,10 @@ public class KollisionPruefer {
 
 	}
 	
-	public boolean[] pruefeEntity(Entity entity, boolean kannMitEntityInteragieren) {
-		boolean entGetroffen[] = new boolean[gp.entities.length];
-		for (int i = 0; i < entGetroffen.length; i++) {
-			entGetroffen[i] = false;
-		}
+	public void pruefeEntity(Entity entity) {
+
 		
-		for (int i = 0; i < entGetroffen.length; i++) {
+		for (int i = 0; i < gp.entities.length; i++) {
 			if (gp.entities[i] != null) {
 				
 				// Alte Werte Sichern
@@ -103,10 +100,6 @@ public class KollisionPruefer {
 						if (gp.entities[i].kollision==true) {
 							entity.kollidiert = true;
 						}
-						if (kannMitEntityInteragieren) {
-							entGetroffen[i] = true;
-							entity.stoßRichtung = "unten";
-						}
 						System.out.println("oben Kollision");
 					}
 					break;
@@ -115,10 +108,6 @@ public class KollisionPruefer {
 					if (entity.hitBox.intersects(gp.entities[i].hitBox)) {
 						if (gp.entities[i].kollision==true) {
 							entity.kollidiert = true;
-						}
-						if (kannMitEntityInteragieren) {
-							entGetroffen[i] = true;
-							entity.stoßRichtung = "oben";
 						}
 						System.out.println("unten Kollision");
 					}
@@ -129,10 +118,6 @@ public class KollisionPruefer {
 						if (gp.entities[i].kollision==true) {
 							entity.kollidiert = true;
 						}
-						if (kannMitEntityInteragieren) {
-							entGetroffen[i] = true;
-							entity.stoßRichtung = "rechts";
-						}
 						System.out.println("links Kollision");
 					}
 					break;
@@ -141,10 +126,6 @@ public class KollisionPruefer {
 					if (entity.hitBox.intersects(gp.entities[i].hitBox)) {
 						if (gp.entities[i].kollision==true) {
 							entity.kollidiert = true;
-						}
-						if (kannMitEntityInteragieren) {
-							entGetroffen[i] = true;
-							entity.stoßRichtung = "links";
 						}
 						System.out.println("rechts Kollision");
 					}
@@ -158,14 +139,10 @@ public class KollisionPruefer {
 				entity.hitBox.y = altesEntityHitboxY;
 				gp.entities[i].hitBox.x = altesObjektHitboxX;
 				gp.entities[i].hitBox.y = altesObjektHitboxY;
-			} else {
-				if (kannMitEntityInteragieren) {
-					entGetroffen[i] = false;
-				}
 			}
+			
 		}
 		
-		return entGetroffen;
 	}
 	
 	public boolean pruefeFeld(Entity entity, String richtung, int bewegung) {

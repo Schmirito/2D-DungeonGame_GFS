@@ -239,7 +239,7 @@ public class Entity {
 		g2.fillRoundRect(bildschirmX, bildschirmY, leben, hoehe, bogenBreite, bogenHoehe);
 
 	}
-
+	/*
 	public void interagiereMitEntity(boolean entGetroffen[]) {
 		for (int i = 0; i < entGetroffen.length; i++) {
 			if (entGetroffen[i] == true) {
@@ -271,7 +271,7 @@ public class Entity {
 			}
 		}
 	}
-
+	*/
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
