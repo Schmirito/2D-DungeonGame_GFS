@@ -100,7 +100,9 @@ public class GamePanel extends JPanel implements Runnable {
 		// ENTITIES
 		for (int i = 0; i < objekte.length; i++) {
 			if (entities[i] != null) {
+				System.out.println("Entity "+i+"  "+entities[i].hitBox.x+" "+entities[i].hitBox.y);
 				entities[i].update();
+				System.out.println("Entity "+i+"  "+entities[i].hitBox.x+" "+entities[i].hitBox.y);
 			}
 		}
 

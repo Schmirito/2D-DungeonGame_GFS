@@ -75,21 +75,22 @@ public class KollisionPruefer {
 
 	
 	public void pruefeEntity(Entity entity) {
-
 		
 		for (int i = 0; i < gp.entities.length; i++) {
-			if (gp.entities[i] != null) {
+			if (gp.entities[i] != null && !(entity.equals(gp.entities[i]))) {
 				
 				// Alte Werte Sichern
+				System.out.println("Entity pE before save  "+entity.hitBox.x+" "+entity.hitBox.y);
 				int altesEntityHitboxX = entity.hitBox.x;
 				int altesEntityHitboxY = entity.hitBox.y;
-				// Hitbox Weltposition bestimmen
-				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße/2);
-				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße/2);
-				
+				System.out.println("Entity pE a  "+altesEntityHitboxX+" "+altesEntityHitboxY);
 				// Alte Werte Sichern
 				int altesObjektHitboxX =  gp.entities[i].hitBox.x;
 				int altesObjektHitboxY =  gp.entities[i].hitBox.y;
+				
+				// Hitbox Weltposition bestimmen
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße/2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße/2);
 				// Hitbox Weltposition bestimmen
 				gp.entities[i].hitBox.x = gp.entities[i].weltX + gp.entities[i].hitBox.x - (gp.feldGroeße/2);
 				gp.entities[i].hitBox.y = gp.entities[i].weltY + gp.entities[i].hitBox.y - (gp.feldGroeße/2);
@@ -138,12 +139,12 @@ public class KollisionPruefer {
 				// Hitbox X und Y zuruecksetzen
 				entity.hitBox.x = altesEntityHitboxX;
 				entity.hitBox.y = altesEntityHitboxY;
+				System.out.println("Entity pE  "+entity.hitBox.x+" "+entity.hitBox.y);
 				gp.entities[i].hitBox.x = altesObjektHitboxX;
 				gp.entities[i].hitBox.y = altesObjektHitboxY;
+				System.out.println("new Round");
 			}
-			
 		}
-		
 	}
 	
 	public boolean pruefeFeld(Entity entity, String richtung, int bewegung) {

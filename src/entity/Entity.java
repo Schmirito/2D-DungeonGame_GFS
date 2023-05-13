@@ -5,12 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Formatter.BigDecimalLayoutForm;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
-import main.Platzierer;
 import main.UtilityTool;
 import objekte.Schlag;
 
@@ -37,7 +35,6 @@ public class Entity {
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
 
-
 	public Rectangle hitBox;
 
 	public boolean kollidiert = false;
@@ -58,8 +55,9 @@ public class Entity {
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
 	}
+
 	public void update() {
-		
+
 	}
 
 	public void draw(Graphics2D g2) {
@@ -131,24 +129,21 @@ public class Entity {
 			}
 			break;
 		}
-		if(charSprite != null) {
-			
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe/2);
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe/2);
-			
-			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
-				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
-				weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY && 
-				weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+		if (charSprite != null) {
+
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe / 2);
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe / 2);
+
+			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX
+					&& weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX
+					&& weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY
+					&& weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
 				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 			}
 		}
 
 	}
-
-	
-	
 
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmX;
@@ -243,50 +238,14 @@ public class Entity {
 		g2.fillRoundRect(bildschirmX, bildschirmY, leben, hoehe, bogenBreite, bogenHoehe);
 
 	}
-	/*
-	public void interagiereMitEntity(boolean entGetroffen[]) {
-		for (int i = 0; i < entGetroffen.length; i++) {
-			if (entGetroffen[i] == true) {
-				System.out.println("objekt getroffen: " + i);
-				switch (gp.entities[i].getClass().getSimpleName()) {
-				case "Zombie":
-					leben -= 1;
-					gp.entities[i].framesBewegungsunfaehig = 6;
-					switch (richtung) {
-					case "oben":
-						weltY+= gp.entities[i].r¸ckstoﬂ * 16;
-						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
-						break;
-					case "unten":
-						weltY-= gp.entities[i].r¸ckstoﬂ * 16;
-						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
-						break;
-					case "links":
-						weltX+= gp.entities[i].r¸ckstoﬂ * 16;
-						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
-						break;
-					case "rechts":
-						weltX-= gp.entities[i].r¸ckstoﬂ * 16;
-						gp.kamera.versucheBewegung(gp.entities[i].r¸ckstoﬂ * 16);
-						break;
-					}
 
-				}
-			}
-		}
-
-	}
-	*/
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
 				System.out.println("objekt getroffen: " + i);
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
-					gp.feldM.loadMap();
-					gp.setupGame();
-
-					i = objGetroffen.length;
+					geheZuEingang();
 					break;
 				default:
 					break;
@@ -295,7 +254,7 @@ public class Entity {
 		}
 	}
 
-	public void geheZuEingang(boolean auchKamera) {
+	public void geheZuEingang() {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
 		int reihe = 0;
@@ -310,48 +269,16 @@ public class Entity {
 			if (feldNr == indexTuerOben) {
 				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
 				weltY = (reihe + 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
-					gp.kamera.weltX = weltX;
-				} else if (weltX < (gp.BildBreite / 2)) {
-					gp.kamera.weltX = gp.BildBreite / 2;
-				} else if (weltX > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
-					gp.kamera.weltX = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2);
-				}
-				gp.kamera.weltY = gp.BildHoehe / 2;
 			} else if (feldNr == indexTuerUnten) {
 				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
 				weltY = (reihe - 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
-					gp.kamera.weltX = weltX;
-				} else if (weltX < (gp.BildBreite / 2)) {
-					gp.kamera.weltX = gp.BildBreite / 2;
-				} else if (weltX > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2))) {
-					gp.kamera.weltX = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2);
-				}
-				gp.kamera.weltY = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2);
 			} else if (feldNr == indexTuerLinks) {
 				weltX = (spalte + 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
 				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				gp.kamera.weltX = gp.BildBreite / 2;
-				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
-					gp.kamera.weltY = weltY;
-				} else if (weltY < (gp.BildHoehe / 2)) {
-					gp.kamera.weltY = gp.BildHoehe / 2;
-				} else if (weltY > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
-					gp.kamera.weltY = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2);
-				}
+
 			} else if (feldNr == indexTuerRechts) {
 				weltX = (spalte - 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
 				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				gp.kamera.weltX = gp.kamera.weltX = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildBreite / 2);
-				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
-					gp.kamera.weltY = weltY;
-				} else if (weltY < (gp.BildHoehe / 2)) {
-					gp.kamera.weltY = gp.BildHoehe / 2;
-				} else if (weltY > (gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2))) {
-					gp.kamera.weltY = gp.mapGroeﬂe * gp.feldGroeﬂe - (gp.BildHoehe / 2);
-
-				}
 			}
 
 			spalte++;
