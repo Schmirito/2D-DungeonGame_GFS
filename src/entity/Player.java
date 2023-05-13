@@ -89,7 +89,9 @@ public class Player extends Entity {
 	 * gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
+
 		schlage();
+
 		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) && kollidiert == false) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";

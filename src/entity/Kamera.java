@@ -50,6 +50,7 @@ public class Kamera {
 
 			}
 		}
+
 	}
 	
 	public void versucheBewegung(int bewegung) {
@@ -73,6 +74,7 @@ public class Kamera {
 
 			}
 		}
+
 	}
 
 }

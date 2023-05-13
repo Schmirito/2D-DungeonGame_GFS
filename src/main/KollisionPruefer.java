@@ -72,6 +72,7 @@ public class KollisionPruefer {
 		return kollidiert;
 
 	}
+
 	
 	public void pruefeEntity(Entity entity) {
 

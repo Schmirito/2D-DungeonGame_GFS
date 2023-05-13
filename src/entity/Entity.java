@@ -37,6 +37,7 @@ public class Entity {
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
 
+
 	public Rectangle hitBox;
 
 	public boolean kollidiert = false;
@@ -57,9 +58,8 @@ public class Entity {
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
 	}
-
 	public void update() {
-
+		
 	}
 
 	public void draw(Graphics2D g2) {
@@ -131,20 +131,24 @@ public class Entity {
 			}
 			break;
 		}
-		if (charSprite != null) {
-
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe / 2);
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe / 2);
-
-			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX
-					&& weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX
-					&& weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY
-					&& weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+		if(charSprite != null) {
+			
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe/2);
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe/2);
+			
+			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
+				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
+				weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY && 
+				weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
 				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 			}
 		}
+
 	}
+
+	
+	
 
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmX;
@@ -270,6 +274,7 @@ public class Entity {
 				}
 			}
 		}
+
 	}
 	*/
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
