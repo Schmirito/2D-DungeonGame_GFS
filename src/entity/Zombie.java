@@ -20,7 +20,7 @@ public class Zombie extends Entity {
 		hitBox = new Rectangle();
 		hitBox.x = gp.feldGroeße / 4;
 		hitBox.y = gp.feldGroeße / 2;
-		hitBox.height = gp.feldGroeße / 2;
+		hitBox.height = gp.feldGroeße;
 		hitBox.width = gp.feldGroeße / 2;
 
 		richtung = "unten";
@@ -34,51 +34,50 @@ public class Zombie extends Entity {
 
 		// PRUEFE FELD KOLLISION
 		gp.kPruefer.pruefeFeld(this);
-		System.out.println("Entity pF  "+hitBox.x+" "+hitBox.y);
+		System.out.println("Entity pF  " + hitBox.x + " " + hitBox.y);
 		// PRUEFE OBJEKT KOLLISION
 		boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 		interagiereMitObjekt(objGetroffen);
-		System.out.println("Entity pO  "+hitBox.x+" "+hitBox.y);
+		System.out.println("Entity pO  " + hitBox.x + " " + hitBox.y);
 		// PRUEFE ENTITY KOLLISION
 		gp.kPruefer.pruefeEntity(this);
-		System.out.println("Entity pE  "+hitBox.x+" "+hitBox.y);
+		System.out.println("Entity pE  " + hitBox.x + " " + hitBox.y);
+		// PRUEFE PLAYER KOLLISION
+		gp.kPruefer.pruefePlayer(this);
 
-		// WENN PLAYER NICHT KOLLIDIERT
-		if (kollidiert == false) {
-			laufeZumSpieler();
+		laufeZumSpieler();
 
-			// MOVEMENT
-			if (rundenAnzahlGetroffen > 0) {
-				rundenAnzahlGetroffen--;
-				switch (stoßRichtung) {
-				case "oben":
-					if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-						weltY -= gp.skala * entityGetroffen.rückstoß / 4;
-					}
-					break;
-
-				case "unten":
-					if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-						weltY += gp.skala * entityGetroffen.rückstoß / 4;
-					}
-					break;
-
-				case "links":
-					if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-						weltX -= gp.skala * entityGetroffen.rückstoß / 4;
-					}
-					break;
-
-				case "rechts":
-					if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-						weltX += gp.skala * entityGetroffen.rückstoß / 4;
-					}
-					break;
-
+		// MOVEMENT
+		if (rundenAnzahlGetroffen > 0) {
+			rundenAnzahlGetroffen--;
+			switch (stoßRichtung) {
+			case "oben":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+					weltY -= gp.skala * entityGetroffen.rückstoß / 4;
 				}
-			} else {
+				break;
+
+			case "unten":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+					weltY += gp.skala * entityGetroffen.rückstoß / 4;
+				}
+				break;
+
+			case "links":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+					weltX -= gp.skala * entityGetroffen.rückstoß / 4;
+				}
+				break;
+
+			case "rechts":
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+					weltX += gp.skala * entityGetroffen.rückstoß / 4;
+				}
+				break;
 
 			}
+		} else {
+
 		}
 
 	}

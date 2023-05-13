@@ -80,10 +80,8 @@ public class KollisionPruefer {
 			if (gp.entities[i] != null && !(entity.equals(gp.entities[i]))) {
 				
 				// Alte Werte Sichern
-				System.out.println("Entity pE before save  "+entity.hitBox.x+" "+entity.hitBox.y);
 				int altesEntityHitboxX = entity.hitBox.x;
 				int altesEntityHitboxY = entity.hitBox.y;
-				System.out.println("Entity pE a  "+altesEntityHitboxX+" "+altesEntityHitboxY);
 				// Alte Werte Sichern
 				int altesObjektHitboxX =  gp.entities[i].hitBox.x;
 				int altesObjektHitboxY =  gp.entities[i].hitBox.y;
@@ -139,11 +137,81 @@ public class KollisionPruefer {
 				// Hitbox X und Y zuruecksetzen
 				entity.hitBox.x = altesEntityHitboxX;
 				entity.hitBox.y = altesEntityHitboxY;
-				System.out.println("Entity pE  "+entity.hitBox.x+" "+entity.hitBox.y);
 				gp.entities[i].hitBox.x = altesObjektHitboxX;
 				gp.entities[i].hitBox.y = altesObjektHitboxY;
-				System.out.println("new Round");
 			}
+		}
+	}	
+	
+	public void pruefePlayer(Entity entity) {
+		
+			if (true) {
+				
+				// Alte Werte Sichern
+				System.out.println("Entity pE before save  "+entity.hitBox.x+" "+entity.hitBox.y);
+				int altesEntityHitboxX = entity.hitBox.x;
+				int altesEntityHitboxY = entity.hitBox.y;
+				System.out.println("Entity pE a  "+altesEntityHitboxX+" "+altesEntityHitboxY);
+				// Alte Werte Sichern
+				int altesObjektHitboxX =  gp.player.hitBox.x;
+				int altesObjektHitboxY =  gp.player.hitBox.y;
+				
+				// Hitbox Weltposition bestimmen
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße/2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße/2);
+				// Hitbox Weltposition bestimmen
+				gp.player.hitBox.x = gp.player.weltX + gp.player.hitBox.x - (gp.feldGroeße/2);
+				gp.player.hitBox.y = gp.player.weltY + gp.player.hitBox.y - (gp.feldGroeße/2);
+				
+				switch (entity.richtung) {
+				case "oben":
+					entity.hitBox.y -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.player.hitBox)) {
+						if (gp.player.kollision==true) {
+							entity.kollidiert = true;
+						}
+						System.out.println("oben Kollision");
+					}
+					break;
+				case "unten":
+					entity.hitBox.y += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.player.hitBox)) {
+						if (gp.player.kollision==true) {
+							entity.kollidiert = true;
+						}
+						System.out.println("unten Kollision");
+					}
+					break;
+				case "links":
+					entity.hitBox.x -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.player.hitBox)) {
+						if (gp.player.kollision==true) {
+							entity.kollidiert = true;
+						}
+						System.out.println("links Kollision");
+					}
+					break;
+				case "rechts":
+					entity.hitBox.x += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.player.hitBox)) {
+						if (gp.player.kollision==true) {
+							entity.kollidiert = true;
+						}
+						System.out.println("rechts Kollision");
+					}
+					break;
+				default:
+					System.out.println("Fehler in: Kollisionpruefer -> pruefeObjekt -> switch-case");
+					break;
+				}
+				// Hitbox X und Y zuruecksetzen
+				entity.hitBox.x = altesEntityHitboxX;
+				entity.hitBox.y = altesEntityHitboxY;
+				System.out.println("Entity pE  "+entity.hitBox.x+" "+entity.hitBox.y);
+				gp.player.hitBox.x = altesObjektHitboxX;
+				gp.player.hitBox.y = altesObjektHitboxY;
+				System.out.println("new Round");
+			
 		}
 	}
 	
