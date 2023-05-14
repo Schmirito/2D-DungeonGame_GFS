@@ -18,7 +18,7 @@ public class Zombie extends Entity {
 		hitBox = new Rectangle();
 		hitBox.x = gp.feldGroeﬂe / 4;
 		hitBox.y = gp.feldGroeﬂe / 2;
-		hitBox.height = gp.feldGroeﬂe;
+		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
 
 		richtung = "unten";
