@@ -75,6 +75,91 @@ public class Player extends Entity {
 		rightRV = setup("/player/char-RightRV");
 
 	}
+	
+	public void interagiereMitObjekt(boolean objGetroffen[]) {
+		for (int i = 0; i < objGetroffen.length; i++) {
+			if (objGetroffen[i] == true) {
+				System.out.println("objekt getroffen: " + i);
+				switch (gp.objekte[i].name) {
+				case "Ausgang":
+					gp.feldM.loadMap();
+					gp.setupGame();
+
+					i = objGetroffen.length;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
+	
+	public void geheZuEingang(boolean auchKamera) {
+		// ERMITTLE KOODRINATEN DES EINGANGS
+		int spalte = 0;
+		int reihe = 0;
+		int indexTuerOben = gp.feldM.getFeldIndex("D004TuerOE");
+		int indexTuerUnten = gp.feldM.getFeldIndex("D004TuerUE");
+		int indexTuerLinks = gp.feldM.getFeldIndex("D004TuerLE");
+		int indexTuerRechts = gp.feldM.getFeldIndex("D004TuerRE");
+		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
+
+			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
+
+			if (feldNr == indexTuerOben) {
+				weltX = spalte * gp.feldGroeße + (gp.feldGroeße / 2);
+				weltY = (reihe + 1) * gp.feldGroeße + (gp.feldGroeße / 2);
+				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
+					gp.kamera.weltX = weltX;
+				} else if (weltX < (gp.BildBreite / 2)) {
+					gp.kamera.weltX = gp.BildBreite / 2;
+				} else if (weltX > (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
+					gp.kamera.weltX = gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2);
+				}
+				gp.kamera.weltY = gp.BildHoehe / 2;
+			} else if (feldNr == indexTuerUnten) {
+				weltX = spalte * gp.feldGroeße + (gp.feldGroeße / 2);
+				weltY = (reihe - 1) * gp.feldGroeße + (gp.feldGroeße / 2);
+				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
+					gp.kamera.weltX = weltX;
+				} else if (weltX < (gp.BildBreite / 2)) {
+					gp.kamera.weltX = gp.BildBreite / 2;
+				} else if (weltX > (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
+					gp.kamera.weltX = gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2);
+				}
+				gp.kamera.weltY = gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2);
+			} else if (feldNr == indexTuerLinks) {
+				weltX = (spalte + 1) * gp.feldGroeße + (gp.feldGroeße / 2);
+				weltY = reihe * gp.feldGroeße + (gp.feldGroeße / 2);
+				gp.kamera.weltX = gp.BildBreite / 2;
+				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
+					gp.kamera.weltY = weltY;
+				} else if (weltY < (gp.BildHoehe / 2)) {
+					gp.kamera.weltY = gp.BildHoehe / 2;
+				} else if (weltY > (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
+					gp.kamera.weltY = gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2);
+				}
+			} else if (feldNr == indexTuerRechts) {
+				weltX = (spalte - 1) * gp.feldGroeße + (gp.feldGroeße / 2);
+				weltY = reihe * gp.feldGroeße + (gp.feldGroeße / 2);
+				gp.kamera.weltX = gp.kamera.weltX = gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2);
+				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
+					gp.kamera.weltY = weltY;
+				} else if (weltY < (gp.BildHoehe / 2)) {
+					gp.kamera.weltY = gp.BildHoehe / 2;
+				} else if (weltY > (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
+					gp.kamera.weltY = gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2);
+
+				}
+			}
+
+			spalte++;
+			if (spalte == gp.mapGroeße) {
+				spalte = 0;
+				reihe++;
+			}
+		}
+	}
 
 	/**
 	 * Der Player wird jetzt in der methode setup skaliert, was die performance
@@ -91,7 +176,7 @@ public class Player extends Entity {
 	public void update() {
 
 		schlage();
-		
+
 		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt) && kollidiert == false) {
 			if (keyH.obenGedrückt == true) {
 				richtung = "oben";
@@ -102,13 +187,16 @@ public class Player extends Entity {
 			} else if (keyH.rechtsGedrückt) {
 				richtung = "rechts";
 			}
-			
 			kollidiert = false;
+			
 			// PRUEFE FELD KOLLISION
 			gp.kPruefer.pruefeFeld(this);
 			// PRUEFE OBJEKT KOLLISION
 			boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 			interagiereMitObjekt(objGetroffen);
+			// PRUEFE ENTITY KOLLISION
+			gp.kPruefer.pruefeEntity(this);
+			
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {
@@ -226,10 +314,14 @@ public class Player extends Entity {
 		
 		// ZEICHNE SCHLAG
 		if (schlag != null) {
-			schlag.draw(g2,this);
+			schlag.draw(g2, this);
 		}
+		// ZEICHNE PLAYER
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeße, gp.feldGroeße, null);
+		// ZEICHNE LEBENSANZEIGE
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
+		
+
 
 		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 

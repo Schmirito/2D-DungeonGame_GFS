@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Kamera kamera = new Kamera(this, keyH, player);
 	// ENTITY, OBJEKTE, ...
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
-	public Entity entity[] = new Entity[10];
+	public Entity entities[] = new Entity[10];
 
 	public GamePanel() {
 
@@ -99,8 +99,8 @@ public class GamePanel extends JPanel implements Runnable {
 		kamera.update();
 		// ENTITIES
 		for (int i = 0; i < objekte.length; i++) {
-			if (entity[i] != null) {
-				entity[i].update();
+			if (entities[i] != null) {
+				entities[i].update();
 			}
 		}
 
@@ -120,8 +120,8 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		// ENTITIES
 		for (int i = 0; i < objekte.length; i++) {
-			if (entity[i] != null) {
-				entity[i].draw(g2);
+			if (entities[i] != null) {
+				entities[i].draw(g2);
 			}
 		}
 		// SPIELER

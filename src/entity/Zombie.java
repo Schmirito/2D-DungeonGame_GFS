@@ -1,98 +1,130 @@
 package entity;
 
-import java.awt.image.BufferedImage;
-
 import main.GamePanel;
+
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Zombie extends Entity {
 
 	int diffSpielerX;
 	int diffSpielerY;
-	String richtungX, richtungY; 
-	
+	String richtungX, richtungY;
+
 	public Zombie(GamePanel gp, int weltX, int weltY) {
 		super(gp);
 		this.weltX = weltX;
 		this.weltY = weltY;
-	
+		hitBox = new Rectangle();
+		hitBox.x = gp.feldGroeße / 4;
+		hitBox.y = gp.feldGroeße / 2;
+		hitBox.height = gp.feldGroeße;
+		hitBox.width = gp.feldGroeße / 2;
+
 		richtung = "unten";
 		geschwindigkeit = gp.skala;
-		
+
 		getImage();
 	}
-	
+
 	public void update() {
+		diffSpielerX = weltX - gp.player.weltX;
+		diffSpielerY = weltY - gp.player.weltY;
+
+		if (diffSpielerX <= 0) {
+			richtungX = "rechts";
+			diffSpielerX = gp.player.weltX - weltX;
+		} else {
+			richtungX = "links";
+		}
+
+		if (diffSpielerY <= 0) {
+			richtungY = "unten";
+			diffSpielerY = gp.player.weltY - weltY;
+		} else {
+			richtungY = "oben";
+		}
+
+		if (diffSpielerX > diffSpielerY) {
+			richtung = richtungX;
+		} else if (diffSpielerY > diffSpielerX) {
+			richtung = richtungY;
+		}
 		
+		kollidiert = false;
+
+		// PRUEFE FELD KOLLISION
+		gp.kPruefer.pruefeFeld(this);
+		// PRUEFE OBJEKT KOLLISION
+		boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
+		interagiereMitObjekt(objGetroffen);
+		// PRUEFE ENTITY KOLLISION
+		gp.kPruefer.pruefeEntity(this);
+		// PRUEFE PLAYER KOLLISION
+		gp.kPruefer.pruefePlayer(this);
 
 		laufeZumSpieler();
-		
+
 		// MOVEMENT
 		if (rundenAnzahlGetroffen > 0) {
 			rundenAnzahlGetroffen--;
 			switch (stoßRichtung) {
 			case "oben":
-				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
-					weltY -= gp.skala*entityGetroffen.rückstoß/4;
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen)==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung)==false) {
+					weltY -= gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen;
 				}
 				break;
-				
+
 			case "unten":
-				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
-					weltY += gp.skala*entityGetroffen.rückstoß/4;
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen)==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung)==false) {
+					weltY += gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen;
 				}
 				break;
-				
+
 			case "links":
-				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
-					weltX -= gp.skala*entityGetroffen.rückstoß/4;
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen)==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung)==false) {
+					weltX -= gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen;
 				}
 				break;
-				
+
 			case "rechts":
-				if (gp.kPruefer.pruefeFeldAndOnlyReturn(this, stoßRichtung, entityGetroffen.rückstoß)==false) {
-					weltX += gp.skala*entityGetroffen.rückstoß/4;
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung, gp.skala *  entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung, gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen)==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung)==false) {
+					weltX += gp.skala * entityGetroffen.rückstoß/rundenMaxAnzahlgetroffen;
 				}
 				break;
-				
+
 			}
 		} else {
-			
+
 		}
-		
+
 	}
-	
+
 	public void laufeZumSpieler() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
-		
+
 		if (diffSpielerX <= 0) {
 			richtungX = "rechts";
 			diffSpielerX = gp.player.weltX - weltX;
-		}
-		else {
+		} else {
 			richtungX = "links";
 		}
-		
-	    if  (diffSpielerY <= 0) {
-	    	richtungY = "unten";
-	    	diffSpielerY = gp.player.weltY - weltY;
-	    }
-		else {
-			richtungY = "oben";	
+
+		if (diffSpielerY <= 0) {
+			richtungY = "unten";
+			diffSpielerY = gp.player.weltY - weltY;
+		} else {
+			richtungY = "oben";
 		}
-	    
-	    if (diffSpielerX > diffSpielerY) {
+
+		if (diffSpielerX > diffSpielerY) {
 			richtung = richtungX;
-		}
-	    else if(diffSpielerY > diffSpielerX){
+		} else if (diffSpielerY > diffSpielerX) {
 			richtung = richtungY;
 		}
-	    kollidiert = false;
-	    gp.kPruefer.pruefeFeld(this);
-	    gp.kPruefer.pruefeObjekt(this, false);
-	    gp.kPruefer.pruefeEntity(this, false, richtung);
-	    
-	    if (kollidiert == false) {
+
+		if (kollidiert == false) {
 			switch (richtung) {
 			case "oben":
 				weltY -= geschwindigkeit;
@@ -107,9 +139,9 @@ public class Zombie extends Entity {
 				weltX += geschwindigkeit;
 				break;
 			}
-	    }
-	    
-	    int framesUnbewegt = 0;
+		}
+
+		int framesUnbewegt = 0;
 		frameCounter++;
 		if (frameCounter > 8) {
 			spriteNumber++;
@@ -119,12 +151,12 @@ public class Zombie extends Entity {
 			frameCounter = 0;
 		}
 
-	framesUnbewegt++;
-	if (framesUnbewegt >= 16) {
-		spriteNumber = 0;
-	}
-	    
-	    BufferedImage zombSprite = null;
+		framesUnbewegt++;
+		if (framesUnbewegt >= 16) {
+			spriteNumber = 0;
+		}
+
+		BufferedImage zombSprite = null;
 
 		switch (richtung) {
 		case "oben":
@@ -192,9 +224,9 @@ public class Zombie extends Entity {
 			}
 			break;
 		}
-	    
+
 	}
-	
+
 	public void getImage() {
 
 		up = setup("/zombie/zombie-Up");
@@ -211,5 +243,4 @@ public class Zombie extends Entity {
 		rightRV = setup("/zombie/zombie-RightRV");
 
 	}
-
 }

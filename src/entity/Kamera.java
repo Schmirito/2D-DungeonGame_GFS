@@ -50,6 +50,31 @@ public class Kamera {
 
 			}
 		}
+
+	}
+	
+	public void versucheBewegung(int bewegung) {
+		String richtung = player.stoßRichtung;
+		if (true) {
+			if ((weltY - bildschirmY) > 0 && player.weltY <= (gp.mapGroeße * gp.feldGroeße) - bildschirmY && richtung.equals("oben")) {
+
+				weltY -= bewegung;
+
+			} else if ((weltY + bildschirmY) < (gp.mapGroeße * gp.feldGroeße) && player.weltY >= bildschirmY && richtung.equals("unten")) {
+
+				weltY += bewegung;
+
+			} else if ((weltX - bildschirmX) > 0 && player.weltX <= (gp.mapGroeße * gp.feldGroeße) - bildschirmX && richtung.equals("links")) {
+
+				weltX -= bewegung;
+
+			} else if ((weltX + bildschirmX) < (gp.mapGroeße * gp.feldGroeße) && player.weltX >= bildschirmX && richtung.equals("rechts")) {
+
+				weltX += bewegung;
+
+			}
+		}
+
 	}
 
 }
