@@ -29,8 +29,9 @@ public class Entity {
 	public int hitCooldownFrames = 0;
 	public double hitCooldownSekunden = 0.5;
 	public Schlag schlag;
-	public int rückstoß = 16;
+	public int rückstoß;
 	public int rundenAnzahlGetroffen;
+	public int rundenMaxAnzahlgetroffen = 4;
 	public String stoßRichtung;
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
@@ -54,6 +55,8 @@ public class Entity {
 		hitBox.y = gp.feldGroeße / 2;
 		hitBox.height = gp.feldGroeße / 2;
 		hitBox.width = gp.feldGroeße / 2;
+		
+		rückstoß = 16;
 	}
 
 	public void update() {
