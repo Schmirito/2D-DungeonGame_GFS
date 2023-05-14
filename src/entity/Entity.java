@@ -189,9 +189,17 @@ public class Entity {
 							gp.entities[i].hitBox.x = altEntHitBoxX;
 							gp.entities[i].hitBox.y = altEntHitBoxY;
 							gp.entities[i].getroffen(this, schlag);
+							
+							
+							if (gp.entities[i].leben <= 0) {
+									gp.entities[i] = null;
+							}
+							
+						} else {
+							gp.entities[i].hitBox.x = altEntHitBoxX;
+							gp.entities[i].hitBox.y = altEntHitBoxY;
 						}
-						gp.entities[i].hitBox.x = altEntHitBoxX;
-						gp.entities[i].hitBox.y = altEntHitBoxY;
+
 					}
 
 				}
@@ -213,8 +221,8 @@ public class Entity {
 		rundenAnzahlGetroffen = 4;
 		stoßRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
-		leben -= gp.skala;
-		System.out.println("" + leben);
+		leben -= 1;
+		System.out.println("Leben =" + leben);
 	}
 
 	public BufferedImage setup(String bildName) {

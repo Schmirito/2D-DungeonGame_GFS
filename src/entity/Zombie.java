@@ -70,25 +70,25 @@ public class Zombie extends Entity {
 			rundenAnzahlGetroffen--;
 			switch (stoßRichtung) {
 			case "oben":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, "oben")==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, "oben")==false) {
 					weltY -= gp.skala * entityGetroffen.rückstoß / 4;
 				}
 				break;
 
 			case "unten":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, "unten")==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, "unten")==false) {
 					weltY += gp.skala * entityGetroffen.rückstoß / 4;
 				}
 				break;
 
 			case "links":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, "links")==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, "links")==false) {
 					weltX -= gp.skala * entityGetroffen.rückstoß / 4;
 				}
 				break;
 
 			case "rechts":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
+				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false && gp.kPruefer.pruefeEntityNurRückgabe(this, "rechts")==false && gp.kPruefer.pruefeObjektOnlyKollidiert(this, "rechts")==false) {
 					weltX += gp.skala * entityGetroffen.rückstoß / 4;
 				}
 				break;

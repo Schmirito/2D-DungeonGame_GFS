@@ -143,6 +143,76 @@ public class KollisionPruefer {
 		}
 	}	
 	
+public boolean pruefeEntityNurRückgabe(Entity entity, String richtung) {
+		boolean kollidiert = false;
+		for (int i = 0; i < gp.entities.length; i++) {
+			if (gp.entities[i] != null && !(entity.equals(gp.entities[i]))) {
+				
+				// Alte Werte Sichern
+				int altesEntityHitboxX = entity.hitBox.x;
+				int altesEntityHitboxY = entity.hitBox.y;
+				// Alte Werte Sichern
+				int altesObjektHitboxX =  gp.entities[i].hitBox.x;
+				int altesObjektHitboxY =  gp.entities[i].hitBox.y;
+				
+				// Hitbox Weltposition bestimmen
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße/2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße/2);
+				// Hitbox Weltposition bestimmen
+				gp.entities[i].hitBox.x = gp.entities[i].weltX + gp.entities[i].hitBox.x - (gp.feldGroeße/2);
+				gp.entities[i].hitBox.y = gp.entities[i].weltY + gp.entities[i].hitBox.y - (gp.feldGroeße/2);
+				
+				switch (richtung) {
+				case "oben":
+					entity.hitBox.y -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.entities[i].hitBox)) {
+						if (gp.entities[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("oben Kollision");
+					}
+					break;
+				case "unten":
+					entity.hitBox.y += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.entities[i].hitBox)) {
+						if (gp.entities[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("unten Kollision");
+					}
+					break;
+				case "links":
+					entity.hitBox.x -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.entities[i].hitBox)) {
+						if (gp.entities[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("links Kollision");
+					}
+					break;
+				case "rechts":
+					entity.hitBox.x += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.entities[i].hitBox)) {
+						if (gp.entities[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("rechts Kollision");
+					}
+					break;
+				default:
+					System.out.println("Fehler in: Kollisionpruefer -> pruefeObjekt -> switch-case");
+					break;
+				}
+				// Hitbox X und Y zuruecksetzen
+				entity.hitBox.x = altesEntityHitboxX;
+				entity.hitBox.y = altesEntityHitboxY;
+				gp.entities[i].hitBox.x = altesObjektHitboxX;
+				gp.entities[i].hitBox.y = altesObjektHitboxY;
+			}
+		}
+		return kollidiert;
+	}	
+	
 	public void pruefePlayer(Entity entity) {
 		
 			if (true) {
@@ -359,5 +429,78 @@ public class KollisionPruefer {
 		}
 		
 		return objGetroffen;
+	}
+	
+	public boolean pruefeObjektOnlyKollidiert(Entity entity, String richtung) {
+		boolean kollidiert = false;
+		
+		for (int i = 0; i < gp.objekte.length; i++) {
+			if (gp.objekte[i] != null) {
+				
+				// Alte Werte Sichern
+				int altesEntityHitboxX = entity.hitBox.x;
+				int altesEntityHitboxY = entity.hitBox.y;
+				// Hitbox Weltposition bestimmen
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße/2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße/2);
+				
+				// Alte Werte Sichern
+				int altesObjektHitboxX =  gp.objekte[i].hitBox.x;
+				int altesObjektHitboxY =  gp.objekte[i].hitBox.y;
+				// Hitbox Weltposition bestimmen
+				gp.objekte[i].hitBox.x = gp.objekte[i].weltX + gp.objekte[i].hitBox.x;
+				gp.objekte[i].hitBox.y = gp.objekte[i].weltY + gp.objekte[i].hitBox.y;
+				
+				switch (richtung) {
+				case "oben":
+					entity.hitBox.y -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("oben Kollision");
+					}
+					break;
+				case "unten":
+					entity.hitBox.y += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							kollidiert = true;
+						}
+
+						System.out.println("unten Kollision");
+					}
+					break;
+				case "links":
+					entity.hitBox.x -= entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("links Kollision");
+					}
+					break;
+				case "rechts":
+					entity.hitBox.x += entity.geschwindigkeit;
+					if (entity.hitBox.intersects(gp.objekte[i].hitBox)) {
+						if (gp.objekte[i].kollision==true) {
+							kollidiert = true;
+						}
+						System.out.println("rechts Kollision");
+					}
+					break;
+				default:
+					System.out.println("Fehler in: Kollisionpruefer -> pruefeObjekt -> switch-case");
+					break;
+				}
+				// Hitbox X und Y zuruecksetzen
+				entity.hitBox.x = altesEntityHitboxX;
+				entity.hitBox.y = altesEntityHitboxY;
+				gp.objekte[i].hitBox.x = altesObjektHitboxX;
+				gp.objekte[i].hitBox.y = altesObjektHitboxY;
+			}
+		}
+		
+		return kollidiert;
 	}
 }
