@@ -148,10 +148,8 @@ public class KollisionPruefer {
 			if (true) {
 				
 				// Alte Werte Sichern
-				System.out.println("Entity pE before save  "+entity.hitBox.x+" "+entity.hitBox.y);
 				int altesEntityHitboxX = entity.hitBox.x;
 				int altesEntityHitboxY = entity.hitBox.y;
-				System.out.println("Entity pE a  "+altesEntityHitboxX+" "+altesEntityHitboxY);
 				// Alte Werte Sichern
 				int altesObjektHitboxX =  gp.player.hitBox.x;
 				int altesObjektHitboxY =  gp.player.hitBox.y;
@@ -207,11 +205,8 @@ public class KollisionPruefer {
 				// Hitbox X und Y zuruecksetzen
 				entity.hitBox.x = altesEntityHitboxX;
 				entity.hitBox.y = altesEntityHitboxY;
-				System.out.println("Entity pE  "+entity.hitBox.x+" "+entity.hitBox.y);
 				gp.player.hitBox.x = altesObjektHitboxX;
 				gp.player.hitBox.y = altesObjektHitboxY;
-				System.out.println("new Round");
-			
 		}
 	}
 	
@@ -261,8 +256,6 @@ public class KollisionPruefer {
 			break;
 		case "rechts":
 			hitBoxRechteSpalte = (hitBoxRechtesWeltX + bewegung) / gp.feldGroeﬂe;
-			System.out.println("rechteSpalte: "+hitBoxRechteSpalte);
-			System.out.println("obereReihe: "+hitBoxObereReihe);
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {

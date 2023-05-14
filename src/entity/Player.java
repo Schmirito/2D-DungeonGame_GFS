@@ -312,12 +312,14 @@ public class Player extends Entity {
 		bildschirmX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
 		
-		// ZEICHNE SCHLAG
-		if (schlag != null) {
-			schlag.draw(g2,this);
-		}
+		
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
+		
+		// ZEICHNE SCHLAG
+				if (schlag != null) {
+					schlag.draw(g2,this);
+				}
 
 		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
 

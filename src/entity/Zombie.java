@@ -5,8 +5,6 @@ import main.GamePanel;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import main.GamePanel;
-
 public class Zombie extends Entity {
 
 	int diffSpielerX;
@@ -30,18 +28,38 @@ public class Zombie extends Entity {
 	}
 
 	public void update() {
+		diffSpielerX = weltX - gp.player.weltX;
+		diffSpielerY = weltY - gp.player.weltY;
+
+		if (diffSpielerX <= 0) {
+			richtungX = "rechts";
+			diffSpielerX = gp.player.weltX - weltX;
+		} else {
+			richtungX = "links";
+		}
+
+		if (diffSpielerY <= 0) {
+			richtungY = "unten";
+			diffSpielerY = gp.player.weltY - weltY;
+		} else {
+			richtungY = "oben";
+		}
+
+		if (diffSpielerX > diffSpielerY) {
+			richtung = richtungX;
+		} else if (diffSpielerY > diffSpielerX) {
+			richtung = richtungY;
+		}
+		
 		kollidiert = false;
 
 		// PRUEFE FELD KOLLISION
 		gp.kPruefer.pruefeFeld(this);
-		System.out.println("Entity pF  " + hitBox.x + " " + hitBox.y);
 		// PRUEFE OBJEKT KOLLISION
 		boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 		interagiereMitObjekt(objGetroffen);
-		System.out.println("Entity pO  " + hitBox.x + " " + hitBox.y);
 		// PRUEFE ENTITY KOLLISION
 		gp.kPruefer.pruefeEntity(this);
-		System.out.println("Entity pE  " + hitBox.x + " " + hitBox.y);
 		// PRUEFE PLAYER KOLLISION
 		gp.kPruefer.pruefePlayer(this);
 

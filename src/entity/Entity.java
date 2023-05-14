@@ -213,7 +213,7 @@ public class Entity {
 		rundenAnzahlGetroffen = 4;
 		stoﬂRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
-		leben -= 1;
+		leben -= gp.skala;
 		System.out.println("" + leben);
 	}
 
