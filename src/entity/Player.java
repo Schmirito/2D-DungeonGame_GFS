@@ -231,7 +231,10 @@ public class Player extends Entity {
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
 		}
-
+		
+		if (keyH.hGedrückt == true) {
+			gp.player.leben = gp.feldGroeße;
+		}
 	}
 
 	/**

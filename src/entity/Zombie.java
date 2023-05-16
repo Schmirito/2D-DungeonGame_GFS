@@ -10,6 +10,8 @@ public class Zombie extends Entity {
 	int diffSpielerX;
 	int diffSpielerY;
 	String richtungX, richtungY;
+	
+	int zaeler = 0;
 
 	public Zombie(GamePanel gp, int weltX, int weltY) {
 		super(gp);
@@ -97,6 +99,11 @@ public class Zombie extends Entity {
 		} else {
 
 		}
+		
+		zaeler++;
+		if (zaeler == 60) {
+			zaeler = 0;
+		}
 
 	}
 
@@ -123,7 +130,11 @@ public class Zombie extends Entity {
 		} else if (diffSpielerY > diffSpielerX) {
 			richtung = richtungY;
 		}
-
+		
+		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße && zaeler == 59) {
+			schlageSpieler();
+		}
+		
 		if (kollidiert == false) {
 			switch (richtung) {
 			case "oben":
@@ -139,8 +150,9 @@ public class Zombie extends Entity {
 				weltX += geschwindigkeit;
 				break;
 			}
+			
 		}
-
+		
 		int framesUnbewegt = 0;
 		frameCounter++;
 		if (frameCounter > 8) {
@@ -226,7 +238,11 @@ public class Zombie extends Entity {
 		}
 
 	}
-
+	
+	public void schlageSpieler() {
+		gp.player.leben -= gp.skala;
+		}
+	
 	public void getImage() {
 
 		up = setup("/zombie/zombie-Up");

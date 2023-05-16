@@ -46,6 +46,8 @@ public class Entity {
 	public int bogenBreite = 4;
 	public int bogenHoehe = 4;
 
+	public int zaeler = 0;
+
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 		leben = gp.skala;
@@ -208,6 +210,7 @@ public class Entity {
 			hitCooldownFrames--;
 		}
 	}
+
 
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
