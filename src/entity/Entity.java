@@ -29,8 +29,9 @@ public class Entity {
 	public int hitCooldownFrames = 0;
 	public double hitCooldownSekunden = 0.5;
 	public Schlag schlag;
-	public int r¸ckstoﬂ = 16;
+	public int r¸ckstoﬂ;
 	public int rundenAnzahlGetroffen;
+	public int rundenMaxAnzahlgetroffen = 4;
 	public String stoﬂRichtung;
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
@@ -56,6 +57,10 @@ public class Entity {
 		hitBox.y = gp.feldGroeﬂe / 2;
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
+
+		
+		r¸ckstoﬂ = 16;
+
 	}
 
 	public void update() {
@@ -191,9 +196,17 @@ public class Entity {
 							gp.entities[i].hitBox.x = altEntHitBoxX;
 							gp.entities[i].hitBox.y = altEntHitBoxY;
 							gp.entities[i].getroffen(this, schlag);
+							
+							
+							if (gp.entities[i].leben <= 0) {
+									gp.entities[i] = null;
+							}
+							
+						} else {
+							gp.entities[i].hitBox.x = altEntHitBoxX;
+							gp.entities[i].hitBox.y = altEntHitBoxY;
 						}
-						gp.entities[i].hitBox.x = altEntHitBoxX;
-						gp.entities[i].hitBox.y = altEntHitBoxY;
+
 					}
 
 				}
@@ -216,8 +229,10 @@ public class Entity {
 		rundenAnzahlGetroffen = 4;
 		stoﬂRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
-		leben -= gp.skala;
-		System.out.println("" + leben);
+
+		leben -= 1;
+		System.out.println("Leben =" + leben);
+
 	}
 
 	public BufferedImage setup(String bildName) {

@@ -10,7 +10,7 @@ public class Zombie extends Entity {
 	int diffSpielerX;
 	int diffSpielerY;
 	String richtungX, richtungY;
-	
+
 	int zaeler = 0;
 
 	public Zombie(GamePanel gp, int weltX, int weltY) {
@@ -20,7 +20,7 @@ public class Zombie extends Entity {
 		hitBox = new Rectangle();
 		hitBox.x = gp.feldGroeße / 4;
 		hitBox.y = gp.feldGroeße / 2;
-		hitBox.height = gp.feldGroeße;
+		hitBox.height = gp.feldGroeße / 2;
 		hitBox.width = gp.feldGroeße / 2;
 
 		richtung = "unten";
@@ -52,7 +52,7 @@ public class Zombie extends Entity {
 		} else if (diffSpielerY > diffSpielerX) {
 			richtung = richtungY;
 		}
-		
+
 		kollidiert = false;
 
 		// PRUEFE FELD KOLLISION
@@ -72,26 +72,50 @@ public class Zombie extends Entity {
 			rundenAnzahlGetroffen--;
 			switch (stoßRichtung) {
 			case "oben":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-					weltY -= gp.skala * entityGetroffen.rückstoß / 4;
+
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
+						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
+								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
+					weltY -= gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+
 				}
 				break;
 
 			case "unten":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-					weltY += gp.skala * entityGetroffen.rückstoß / 4;
+
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
+						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
+								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
+					weltY += gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+
 				}
 				break;
 
 			case "links":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-					weltX -= gp.skala * entityGetroffen.rückstoß / 4;
+
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
+						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
+								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
+					weltX -= gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+
 				}
 				break;
 
 			case "rechts":
-				if (gp.kPruefer.pruefeFeld(this, stoßRichtung, entityGetroffen.rückstoß) == false) {
-					weltX += gp.skala * entityGetroffen.rückstoß / 4;
+
+				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
+						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
+								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
+					weltX += gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+
 				}
 				break;
 
@@ -99,7 +123,7 @@ public class Zombie extends Entity {
 		} else {
 
 		}
-		
+
 		zaeler++;
 		if (zaeler == 60) {
 			zaeler = 0;
@@ -117,7 +141,6 @@ public class Zombie extends Entity {
 		} else {
 			richtungX = "links";
 		}
-
 		
 		if (diffSpielerY <= 0) {
 			richtungY = "unten";
@@ -131,6 +154,7 @@ public class Zombie extends Entity {
 		} else if (diffSpielerY > diffSpielerX) {
 			richtung = richtungY;
 		}
+
 		
 		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße && zaeler == 59) {
 			schlageSpieler();
@@ -151,27 +175,30 @@ public class Zombie extends Entity {
 				weltX += geschwindigkeit;
 				break;
 			}
+
 			
 		}
-		
-		int framesUnbewegt = 0;
-		frameCounter++;
-		if (frameCounter > 8) {
-			spriteNumber++;
-			if (spriteNumber >= 4) {
-				spriteNumber = 0;
-			}
-			frameCounter = 0;
-		}
 
-		framesUnbewegt++;
-		if (framesUnbewegt >= 16) {
+
+
+	int framesUnbewegt = 0;frameCounter++;if(frameCounter>8)
+	{
+		spriteNumber++;
+		if (spriteNumber >= 4) {
 			spriteNumber = 0;
 		}
+		frameCounter = 0;
+	}
 
-		BufferedImage zombSprite = null;
+	framesUnbewegt++;if(framesUnbewegt>=16)
+	{
+		spriteNumber = 0;
+	}
 
-		switch (richtung) {
+	BufferedImage zombSprite = null;
+
+	switch(richtung)
+	{
 		case "oben":
 			switch (spriteNumber) {
 			case 0:
@@ -239,11 +266,11 @@ public class Zombie extends Entity {
 		}
 
 	}
-	
+
 	public void schlageSpieler() {
 		gp.player.leben -= gp.skala;
-		}
-	
+	}
+
 	public void getImage() {
 
 		up = setup("/zombie/zombie-Up");
