@@ -217,9 +217,11 @@ public class FeldManager {
 	public int getFeldIndex(String bildName) {
 		int index = -1;
 		for (int i = 0; i < feld.length; i++) {
-			if (feld[i].bildName.equals(bildName)) {
-				index = i;
-				i = feld.length;
+			if(feld[i] != null) {
+				if (feld[i].bildName.equals(bildName)) {
+					index = i;
+					i = feld.length;
+				}
 			}
 		}
 		return index;
