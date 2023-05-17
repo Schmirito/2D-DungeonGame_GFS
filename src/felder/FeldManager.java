@@ -23,7 +23,6 @@ public class FeldManager {
 	public int mapNr = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
-	public boolean start = true;
 
 	// Etwas unschön gelößt, aber keine zeit.
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
@@ -46,14 +45,7 @@ public class FeldManager {
 	public void loadMap() {
 
 		switch (mapNr) {
-		case 0: // Startraum implementieren
-			// Zum Testen
-			if (start) {
-				start = false;
-			} else {
-				neueNummer = (int) (Math.random() * 12 + 1);
-				mapNr = neueNummer;
-			}
+		case 0: //Startraum
 			break;
 		case 2:
 		case 4:
@@ -124,18 +116,13 @@ public class FeldManager {
 				}
 			}
 			if (startRaum == 0) {
-				neueNummer = (int) (Math.random() * 3);
-				if (neueNummer == 0) {
-					mapNr = 3;
-				}
-				if (neueNummer == 1) {
-					mapNr = 9;
-				}
-				if (neueNummer == 2) {
-					mapNr = 11;
-				}
+				
+				neueNummer = (int) (Math.random() * 3 + 10);
+			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
+			vorherigeNummer = mapNr;
+			mapNr = neueNummer;
 				startRaum++;
-			}
+				
 		} catch (Exception e) {
 
 		}

@@ -125,7 +125,7 @@ public class Zombie extends Entity {
 		}
 		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße) {
 			zaeler++;
-			if (zaeler == 60) {
+			if (zaeler == 35) {
 				zaeler = 0;
 				schlageSpieler();
 			}
