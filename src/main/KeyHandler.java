@@ -5,22 +5,21 @@ import java.awt.event.KeyListener;
 
 import entity.Player;
 
-public class KeyHandler implements KeyListener{
+public class KeyHandler implements KeyListener {
 
-	public boolean	obenGedrückt,untenGedrückt,linksGedrückt,rechtsGedrückt,
-					pfeilHochGedrückt,pfeilRunterGedrückt,pfeilLinksGedrückt,pfeilRechtsGedrückt,
-					hGedrückt;
-	
-	
+	public boolean obenGedrückt, untenGedrückt, linksGedrückt, rechtsGedrückt, pfeilHochGedrückt, pfeilRunterGedrückt,
+			pfeilLinksGedrückt, pfeilRechtsGedrückt, hGedrückt, escGedrueckt;
+
 	@Override
-	public void keyTyped(KeyEvent e) {	
+	public void keyTyped(KeyEvent e) {
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		int tastenCode = e.getKeyCode();
-		
+
 		if (tastenCode == KeyEvent.VK_W) {
 			obenGedrückt = true;
 		}
@@ -48,14 +47,17 @@ public class KeyHandler implements KeyListener{
 		if (tastenCode == KeyEvent.VK_H) {
 			hGedrückt = true;
 		}
-		
+		if (tastenCode == KeyEvent.VK_ESCAPE) {
+			escGedrueckt = true;
+		}
+
 	}
-	
+
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+
 		int tastenCode = e.getKeyCode();
-		
+
 		if (tastenCode == KeyEvent.VK_W) {
 			obenGedrückt = false;
 		}
@@ -83,7 +85,10 @@ public class KeyHandler implements KeyListener{
 		if (tastenCode == KeyEvent.VK_H) {
 			hGedrückt = false;
 		}
-		
+		if (tastenCode == KeyEvent.VK_ESCAPE) {
+			escGedrueckt = false;
+		}
+
 	}
 
 }

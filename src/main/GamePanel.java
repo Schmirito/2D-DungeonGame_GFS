@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int mapGroeﬂe = 30;
 
 	public int FPS = 60;
+	public int gStatus = 0;
 
 	public FeldManager feldM = new FeldManager(this);
 	public KeyHandler keyH = new KeyHandler();
@@ -93,12 +94,31 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 
-		player.update();
-		kamera.update();
-		// ENTITIES
-		for (int i = 0; i < objekte.length; i++) {
-			if (entities[i] != null) {
-				entities[i].update();
+		if (gStatus == 0) { // GAME LƒUFT
+			if (player.leben <= 0) {
+				gStatus = 2;
+			} else if (keyH.escGedrueckt) {
+				gStatus = 1;
+				keyH.escGedrueckt = false;
+			}
+			
+			player.update();
+			kamera.update();
+			// ENTITIES
+			for (int i = 0; i < objekte.length; i++) {
+				if (entities[i] != null) {
+					entities[i].update();
+				}
+			}
+		} else if (gStatus == 1) { // GAME PAUSIERT
+			if (keyH.escGedrueckt) {
+				gStatus = 0;
+				keyH.escGedrueckt = false;
+			}
+		} else if (gStatus == 2) { // SPIELER GESTORBEN
+			if (keyH.escGedrueckt) {
+				gStatus = 0;
+				keyH.escGedrueckt = false;
 			}
 		}
 
