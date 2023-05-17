@@ -58,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
 		player.geheZuEingang(true);
+
 	}
 
 	public void startGameThread() {

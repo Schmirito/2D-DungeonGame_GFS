@@ -123,9 +123,11 @@ public class Zombie extends Entity {
 		} else {
 
 		}
+
 		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße && gp.player.rundenAnzahlGetroffen == 0) {
 			zaeler++;
 			if (zaeler == 20) {
+
 				zaeler = 0;
 				schlageSpieler();
 			}

@@ -23,6 +23,10 @@ public class FeldManager {
 	public int mapNr = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
+<<<<<<< HEAD
+=======
+	public boolean start = true;
+>>>>>>> refs/remotes/origin/WorkingBranchNiklas
 
 	// Etwas unschön gelößt, aber keine zeit.
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
@@ -45,7 +49,9 @@ public class FeldManager {
 	public void loadMap() {
 
 		switch (mapNr) {
+
 		case 0: //Startraum
+
 			break;
 		case 2:
 		case 4:
@@ -122,7 +128,7 @@ public class FeldManager {
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
 				startRaum++;
-				
+
 		} catch (Exception e) {
 
 		}
@@ -204,9 +210,13 @@ public class FeldManager {
 	public int getFeldIndex(String bildName) {
 		int index = -1;
 		for (int i = 0; i < feld.length; i++) {
-			if (feld[i].bildName.equals(bildName)) {
-				index = i;
-				i = feld.length;
+
+			if(feld[i] != null) {
+				if (feld[i].bildName.equals(bildName)) {
+					index = i;
+					i = feld.length;
+				}
+
 			}
 		}
 		return index;

@@ -78,14 +78,18 @@ public class Player extends Entity {
 	
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
+
+			System.out.println("obj " + i + " " + objGetroffen[i]);
 			if (objGetroffen[i] == true) {
 				System.out.println("objekt getroffen: " + i);
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.feldM.loadMap();
-					gp.setupGame();
+					gp.platzierer.setzeAusgang();
+					gp.platzierer.setzeObjekt();
+					gp.platzierer.setzeEntity();
+					gp.player.geheZuEingang(true);
 
-					i = objGetroffen.length;
 					break;
 				default:
 					break;
