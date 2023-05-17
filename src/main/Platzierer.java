@@ -32,6 +32,7 @@ public class Platzierer {
 		gp.entities[5] = new Zombie(gp, 19 * gp.feldGroeﬂe, 18 * gp.feldGroeﬂe);
 		gp.entities[6] = new Zombie(gp, 15 * gp.feldGroeﬂe, 13 * gp.feldGroeﬂe);
 
+
 		
 	}
 	
