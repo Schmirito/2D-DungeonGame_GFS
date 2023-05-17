@@ -15,7 +15,8 @@ public class Schlag extends SuperObjekt {
 
 	public Schlag(GamePanel gp, int weltX, int weltY) {
 		super(gp, weltX, weltY);
-
+		hitBox.x = weltX;
+		hitBox.y = weltY;
 		bildO = setup("FaustHoch");
 		bildU = setup("FaustRunter");
 		bildL = setup("FaustLinks");
