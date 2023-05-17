@@ -35,6 +35,7 @@ public class SuperObjekt {
 		}
 	}
 	
+	
 	public void draw(Graphics2D g2) {
 		if(bild != null) {
 			
