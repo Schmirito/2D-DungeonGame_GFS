@@ -23,10 +23,8 @@ public class FeldManager {
 	public int mapNr = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
-<<<<<<< HEAD
-=======
+
 	public boolean start = true;
->>>>>>> refs/remotes/origin/WorkingBranchNiklas
 
 	// Etwas unschön gelößt, aber keine zeit.
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
