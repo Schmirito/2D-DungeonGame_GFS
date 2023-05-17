@@ -47,6 +47,8 @@ public class Entity {
 	public int bogenBreite = 4;
 	public int bogenHoehe = 4;
 
+	public int zaeler = 0;
+
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 		leben = gp.skala;
@@ -55,8 +57,10 @@ public class Entity {
 		hitBox.y = gp.feldGroeﬂe / 2;
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
+
 		
 		r¸ckstoﬂ = 16;
+
 	}
 
 	public void update() {
@@ -220,12 +224,15 @@ public class Entity {
 		}
 	}
 
+
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
 		stoﬂRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
+
 		leben -= 1;
 		System.out.println("Leben =" + leben);
+
 	}
 
 	public BufferedImage setup(String bildName) {

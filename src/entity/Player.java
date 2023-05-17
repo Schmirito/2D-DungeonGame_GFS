@@ -231,7 +231,10 @@ public class Player extends Entity {
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
 		}
-
+		
+		if (keyH.hGedr¸ckt == true) {
+			gp.player.leben = gp.feldGroeﬂe;
+		}
 	}
 
 	/**
@@ -312,11 +315,13 @@ public class Player extends Entity {
 		bildschirmX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
 		
+
 		// ZEICHNE SCHLAG
 		if (schlag != null) {
 			schlag.draw(g2, this);
 		}
 		// ZEICHNE PLAYER
+
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 		// ZEICHNE LEBENSANZEIGE
 		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
