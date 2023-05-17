@@ -123,11 +123,17 @@ public class Zombie extends Entity {
 		} else {
 
 		}
-
-		zaeler++;
-		if (zaeler == 60) {
+		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße) {
+			zaeler++;
+			if (zaeler == 60) {
+				zaeler = 0;
+				schlageSpieler();
+			}
+		}
+		else {
 			zaeler = 0;
 		}
+		
 
 	}
 
@@ -154,11 +160,8 @@ public class Zombie extends Entity {
 		} else if (diffSpielerY > diffSpielerX) {
 			richtung = richtungY;
 		}
-
 		
-		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße && zaeler == 59) {
-			schlageSpieler();
-		}
+		
 		
 		if (kollidiert == false) {
 			switch (richtung) {
