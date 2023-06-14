@@ -50,6 +50,7 @@ public class Entity {
 	public int zaeler = 0;
 
 	public static int monsterBesiegt;
+	
 	int besiegt;
 	
 	public Entity(GamePanel gp) {

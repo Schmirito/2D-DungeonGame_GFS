@@ -15,7 +15,8 @@ public class Platzierer {
 
 	int randomMonsterAnzahl ;
 	int aktuelleMonsterImRaum;
-
+	boolean ausgangGesetzt = false;
+	
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
 		indexObjekte = 0;
@@ -52,7 +53,7 @@ public class Platzierer {
 		// alten überschüssigen Ausgänge nicht gelöscht
 
 		aktuelleMonsterImRaum = randomMonsterAnzahl - Entity.getBesiegteMonster();
-		if (Entity.getBesiegteMonster() >= aktuelleMonsterImRaum) {
+		if (Entity.getBesiegteMonster() >= aktuelleMonsterImRaum && !ausgangGesetzt) {
 
 			int monsterReset = 0;
 			Entity.setBesiegteMonster(monsterReset);
