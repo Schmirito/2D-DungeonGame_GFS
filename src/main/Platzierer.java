@@ -13,7 +13,7 @@ public class Platzierer {
 	int randomFeldX;
 	int randomFeldY;
 
-	int randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
+	int randomMonsterAnzahl ;
 	int aktuelleMonsterImRaum;
 
 	public Platzierer(GamePanel gp) {
@@ -31,11 +31,13 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
+		randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
+		int anzahl = randomMonsterAnzahl;
 		do {
 			randomFeld();
-			gp.entities[randomMonsterAnzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
-			randomMonsterAnzahl--;
-		} while (randomMonsterAnzahl != 0);
+			gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
+			anzahl--;
+		} while (anzahl != 0);
 	}
 
 	public void randomFeld() {
