@@ -8,9 +8,13 @@ import objekte.SuperObjekt;
 public class Platzierer {
 
 	GamePanel gp;
+
 	int indexObjekte;
 	int randomFeldX;
 	int randomFeldY;
+
+	int randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
+	int aktuelleMonsterImRaum;
 
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
@@ -27,13 +31,11 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
-		randomFeld();
-		gp.entities[0] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
-		randomFeld();
-		gp.entities[1] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
-		randomFeld();
-		gp.entities[2] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
-
+		do {
+			randomFeld();
+			gp.entities[randomMonsterAnzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
+			randomMonsterAnzahl--;
+		} while (randomMonsterAnzahl != 0);
 	}
 
 	public void randomFeld() {
@@ -46,30 +48,38 @@ public class Platzierer {
 	public void setzeAusgang() {
 		// Wenn in der alten map mehr ausgaenge als in der neuen map sind, so werden die
 		// alten ¸bersch¸ssigen Ausg‰nge nicht gelˆscht
-		indexObjekte = 0;
-		int spalte = 0;
-		int reihe = 0;
-		int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
-		int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
-		int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
-		int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 
-		while (spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
+		aktuelleMonsterImRaum = randomMonsterAnzahl - Entity.getBesiegteMonster();
+		if (Entity.getBesiegteMonster() >= aktuelleMonsterImRaum) {
 
-			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
+			int monsterReset = 0;
+			Entity.setBesiegteMonster(monsterReset);
+			
+			indexObjekte = 0;
+			int spalte = 0;
+			int reihe = 0;
+			int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
+			int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
+			int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
+			int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 
-			if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
-					|| feldNr == indexTuerRechts) {
-				int weltX = spalte * gp.feldGroeﬂe;
-				int weltY = reihe * gp.feldGroeﬂe;
-				gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
-				indexObjekte++;
-			}
+			while (spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
 
-			spalte++;
-			if (spalte == gp.mapGroeﬂe) {
-				spalte = 0;
-				reihe++;
+				int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
+
+				if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
+						|| feldNr == indexTuerRechts) {
+					int weltX = spalte * gp.feldGroeﬂe;
+					int weltY = reihe * gp.feldGroeﬂe;
+					gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
+					indexObjekte++;
+				}
+
+				spalte++;
+				if (spalte == gp.mapGroeﬂe) {
+					spalte = 0;
+					reihe++;
+				}
 			}
 		}
 	}
