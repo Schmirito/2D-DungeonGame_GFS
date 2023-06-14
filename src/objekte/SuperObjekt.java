@@ -25,7 +25,7 @@ public class SuperObjekt {
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		name = "SuperObjekt";
-		hitBox = new Rectangle(weltX,weltY,gp.feldGroeﬂe,gp.feldGroeﬂe);
+		hitBox = new Rectangle(0,0,gp.feldGroeﬂe,gp.feldGroeﬂe);
 		this.weltX = weltX;
 		this.weltY = weltY;
 		try {

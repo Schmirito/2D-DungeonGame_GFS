@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int mapGroeße = 30;
 
 	public int FPS = 60;
+	public int gStatus = 0;
 
 	public FeldManager feldM = new FeldManager(this);
 	public KeyHandler keyH = new KeyHandler();
@@ -37,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
 	// ENTITY, OBJEKTE, ...
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
 	public Entity entities[] = new Entity[10];
-
+	
 	public GamePanel() {
 
 		this.setPreferredSize(new Dimension(BildBreite, BildHoehe));
@@ -54,15 +55,11 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void setupGame() {
-		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
-		player.geheZuEingang(true);
-
 	}
 
 	public void startGameThread() {
-
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
@@ -85,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
 			if (delta >= 1) {
 
 				update();
-
+	
 				repaint();
 
 				delta--;
@@ -96,12 +93,32 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 
-		player.update();
-		kamera.update();
-		// ENTITIES
-		for (int i = 0; i < objekte.length; i++) {
-			if (entities[i] != null) {
-				entities[i].update();
+		if (gStatus == 0) { // GAME LÄUFT
+			if (player.leben <= 0) {
+				gStatus = 2;
+			} else if (keyH.escGedrueckt) {
+				gStatus = 1;
+				keyH.escGedrueckt = false;
+			}
+			
+			player.update();
+			kamera.update();
+			platzierer.setzeAusgang();
+			// ENTITIES
+			for (int i = 0; i < objekte.length; i++) {
+				if (entities[i] != null) {
+					entities[i].update();
+				}
+			}
+		} else if (gStatus == 1) { // GAME PAUSIERT
+			if (keyH.escGedrueckt) {
+				gStatus = 0;
+				keyH.escGedrueckt = false;
+			}
+		} else if (gStatus == 2) { // SPIELER GESTORBEN
+			if (keyH.escGedrueckt) {
+				gStatus = 0;
+				keyH.escGedrueckt = false;
 			}
 		}
 

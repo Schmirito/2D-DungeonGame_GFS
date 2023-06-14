@@ -8,7 +8,13 @@ import objekte.SuperObjekt;
 public class Platzierer {
 
 	GamePanel gp;
+
 	int indexObjekte;
+	int randomFeldX;
+	int randomFeldY;
+
+	int randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
+	int aktuelleMonsterImRaum;
 
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
@@ -18,55 +24,62 @@ public class Platzierer {
 	public void setzeObjekt() {
 		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
 		indexObjekte = 4;
-
 		// gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeße,
 		// 10*gp.feldGroeße);
 		// indexObjekte++;
+
 	}
 
 	public void setzeEntity() {
+		do {
+			randomFeld();
+			gp.entities[randomMonsterAnzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
+			randomMonsterAnzahl--;
+		} while (randomMonsterAnzahl != 0);
+	}
 
-		gp.entities[0] = new Zombie(gp, 20 * gp.feldGroeße, 20 * gp.feldGroeße);
-		gp.entities[1] = new Zombie(gp, 18 * gp.feldGroeße, 20 * gp.feldGroeße);
-		gp.entities[2] = new Zombie(gp, 13 * gp.feldGroeße, 10 * gp.feldGroeße);
-		gp.entities[3] = new Zombie(gp, 17 * gp.feldGroeße, 15 * gp.feldGroeße);
-		gp.entities[4] = new Zombie(gp, 15 * gp.feldGroeße, 20 * gp.feldGroeße);
-		gp.entities[5] = new Zombie(gp, 19 * gp.feldGroeße, 18 * gp.feldGroeße);
-		gp.entities[6] = new Zombie(gp, 15 * gp.feldGroeße, 13 * gp.feldGroeße);
-
+	public void randomFeld() {
+		do {
+			randomFeldX = (int) (Math.random() * 29 + 0.5);
+			randomFeldY = (int) (Math.random() * 29 + 0.5);
+		} while (gp.feldM.feld[gp.feldM.mapFeldNr[randomFeldX][randomFeldY]].kollision == true);
 	}
 
 	public void setzeAusgang() {
-
 		// Wenn in der alten map mehr ausgaenge als in der neuen map sind, so werden die
 		// alten überschüssigen Ausgänge nicht gelöscht
 
-		indexObjekte = 0;
-		int spalte = 0;
-		int reihe = 0;
-		int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
-		int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
-		int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
-		int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
+		aktuelleMonsterImRaum = randomMonsterAnzahl - Entity.getBesiegteMonster();
+		if (Entity.getBesiegteMonster() >= aktuelleMonsterImRaum) {
 
-		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
+			int monsterReset = 0;
+			Entity.setBesiegteMonster(monsterReset);
+			
+			indexObjekte = 0;
+			int spalte = 0;
+			int reihe = 0;
+			int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
+			int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
+			int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
+			int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 
-			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
+			while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
 
+				int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
 
-			if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
-					|| feldNr == indexTuerRechts) {
+				if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
+						|| feldNr == indexTuerRechts) {
+					int weltX = spalte * gp.feldGroeße;
+					int weltY = reihe * gp.feldGroeße;
+					gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
+					indexObjekte++;
+				}
 
-				int weltX = spalte * gp.feldGroeße;
-				int weltY = reihe * gp.feldGroeße;
-				gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
-				indexObjekte++;
-			}
-
-			spalte++;
-			if (spalte == gp.mapGroeße) {
-				spalte = 0;
-				reihe++;
+				spalte++;
+				if (spalte == gp.mapGroeße) {
+					spalte = 0;
+					reihe++;
+				}
 			}
 		}
 	}
