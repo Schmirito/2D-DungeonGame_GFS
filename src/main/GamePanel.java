@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import entity.Entity;
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Entity entities[] = new Entity[10];
 	
 	public GamePanel() {
-
+		setupGame();
 		this.setPreferredSize(new Dimension(BildBreite, BildHoehe));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
@@ -55,6 +56,9 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void setupGame() {
+		feldM = new FeldManager(this);
+		player = new Player(this, keyH);
+		kamera = new Kamera(this, keyH, player);
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
@@ -97,6 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
 		if (gStatus == 0) { // GAME LÄUFT
 			if (player.leben <= 0) {
 				gStatus = 2;
+				JOptionPane.showMessageDialog(null, "Game Over");
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;
 				keyH.escGedrueckt = false;
@@ -119,6 +124,7 @@ public class GamePanel extends JPanel implements Runnable {
 			if (keyH.escGedrueckt) {
 				gStatus = 0;
 				keyH.escGedrueckt = false;
+				setupGame();
 			}
 		}
 
