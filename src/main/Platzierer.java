@@ -13,8 +13,8 @@ public class Platzierer {
 	int randomFeldX;
 	int randomFeldY;
 
-	int randomMonsterAnzahl ;
-	int aktuelleMonsterImRaum;
+	public int randomMonsterAnzahl;
+	public int aktuelleMonsterImRaum;
 
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
@@ -32,7 +32,7 @@ public class Platzierer {
 
 	public void setzeEntity() {
 		for (int i = 0; i < gp.entities.length; i++) {
-			gp.entities[i]=null;
+			gp.entities[i] = null;
 		}
 		randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
 		int anzahl = randomMonsterAnzahl;
@@ -53,41 +53,35 @@ public class Platzierer {
 	public void setzeAusgang() {
 		// Wenn in der alten map mehr ausgaenge als in der neuen map sind, so werden die
 		// alten überschüssigen Ausgänge nicht gelöscht
+		Entity.setBesiegteMonster(0);
 
-		aktuelleMonsterImRaum = randomMonsterAnzahl - Entity.getBesiegteMonster();
-		if (Entity.getBesiegteMonster() >= aktuelleMonsterImRaum) {
+		for (int i = 0; i < 4; i++) {
+			gp.objekte[i] = null;
+		}
+		indexObjekte = 0;
+		int spalte = 0;
+		int reihe = 0;
+		int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
+		int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
+		int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
+		int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 
-			int monsterReset = 0;
-			Entity.setBesiegteMonster(monsterReset);
-			
-			for (int i = 0; i < 4; i++) {
-				gp.objekte[i]=null;
+		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
+
+			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
+
+			if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
+					|| feldNr == indexTuerRechts) {
+				int weltX = spalte * gp.feldGroeße;
+				int weltY = reihe * gp.feldGroeße;
+				gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
+				indexObjekte++;
 			}
-			indexObjekte = 0;
-			int spalte = 0;
-			int reihe = 0;
-			int indexTuerOben = gp.feldM.getFeldIndex("D005TuerOA");
-			int indexTuerUnten = gp.feldM.getFeldIndex("D005TuerUA");
-			int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
-			int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 
-			while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
-
-				int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
-
-				if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
-						|| feldNr == indexTuerRechts) {
-					int weltX = spalte * gp.feldGroeße;
-					int weltY = reihe * gp.feldGroeße;
-					gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
-					indexObjekte++;
-				}
-
-				spalte++;
-				if (spalte == gp.mapGroeße) {
-					spalte = 0;
-					reihe++;
-				}
+			spalte++;
+			if (spalte == gp.mapGroeße) {
+				spalte = 0;
+				reihe++;
 			}
 		}
 	}

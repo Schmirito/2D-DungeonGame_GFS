@@ -83,11 +83,14 @@ public class Player extends Entity {
 				System.out.println("objekt getroffen: " + i);
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
+					gp.platzierer.aktuelleMonsterImRaum = gp.platzierer.randomMonsterAnzahl - Entity.getBesiegteMonster();
+					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum) {
 					gp.feldM.loadMap();
 					gp.platzierer.setzeAusgang();
 					gp.platzierer.setzeObjekt();
 					gp.platzierer.setzeEntity();
 					gp.player.geheZuEingang(true);
+					}
 					break;
 				default:
 					break;

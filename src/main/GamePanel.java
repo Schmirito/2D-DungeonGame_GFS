@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void setupGame() {
+		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
 	}
@@ -103,7 +104,6 @@ public class GamePanel extends JPanel implements Runnable {
 			
 			player.update();
 			kamera.update();
-			platzierer.setzeAusgang();
 			// ENTITIES
 			for (int i = 0; i < objekte.length; i++) {
 				if (entities[i] != null) {
