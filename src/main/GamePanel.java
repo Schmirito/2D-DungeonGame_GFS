@@ -57,8 +57,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 		feldM = new FeldManager(this);
-		player = new Player(this, keyH);
-		kamera = new Kamera(this, keyH, player);
+		player.weltX = 14*feldGroeﬂe;
+		player.weltY = 16*feldGroeﬂe;
+		kamera.weltX = 14*feldGroeﬂe;
+		kamera.weltY = 16*feldGroeﬂe;
+		player.leben = feldGroeﬂe;
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
