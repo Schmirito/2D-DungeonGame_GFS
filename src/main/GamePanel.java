@@ -105,6 +105,8 @@ public class GamePanel extends JPanel implements Runnable {
 			if (player.leben <= 0) {
 				gStatus = 2;
 				JOptionPane.showMessageDialog(null, "Game Over");
+				setupGame();
+				gStatus = 0;
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;
 				keyH.escGedrueckt = false;

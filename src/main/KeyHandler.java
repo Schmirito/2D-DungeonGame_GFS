@@ -8,7 +8,7 @@ import entity.Player;
 public class KeyHandler implements KeyListener {
 
 	public boolean obenGedrückt, untenGedrückt, linksGedrückt, rechtsGedrückt, pfeilHochGedrückt, pfeilRunterGedrückt,
-			pfeilLinksGedrückt, pfeilRechtsGedrückt, hGedrückt, escGedrueckt;
+			pfeilLinksGedrückt, pfeilRechtsGedrückt, hGedrückt, escGedrueckt, enterGedrueckt;
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -50,6 +50,9 @@ public class KeyHandler implements KeyListener {
 		if (tastenCode == KeyEvent.VK_ESCAPE) {
 			escGedrueckt = true;
 		}
+		if (tastenCode == KeyEvent.VK_ENTER) {
+			enterGedrueckt = true;
+		}
 
 	}
 
@@ -87,6 +90,9 @@ public class KeyHandler implements KeyListener {
 		}
 		if (tastenCode == KeyEvent.VK_ESCAPE) {
 			escGedrueckt = false;
+		}
+		if (tastenCode == KeyEvent.VK_ENTER) {
+			enterGedrueckt = false;
 		}
 
 	}
