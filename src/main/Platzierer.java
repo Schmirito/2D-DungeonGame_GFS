@@ -60,6 +60,9 @@ public class Platzierer {
 			int monsterReset = 0;
 			Entity.setBesiegteMonster(monsterReset);
 			
+			for (int i = 0; i < 4; i++) {
+				gp.objekte[i]=null;
+			}
 			indexObjekte = 0;
 			int spalte = 0;
 			int reihe = 0;
