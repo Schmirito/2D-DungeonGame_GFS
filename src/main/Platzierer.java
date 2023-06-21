@@ -31,6 +31,9 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
+		for (int i = 0; i < gp.entities.length; i++) {
+			gp.entities[i]=null;
+		}
 		randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
 		int anzahl = randomMonsterAnzahl;
 		do {
