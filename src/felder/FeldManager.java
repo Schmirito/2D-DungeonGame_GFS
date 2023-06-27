@@ -30,8 +30,10 @@ public class FeldManager {
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
 			"/maps/Room3-Test.txt", "/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt",
 			"/maps/Room7-Test.txt", "/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt",
-			"/maps/Room11-Test.txt", "/maps/Room12-Test.txt", "/maps/Safezone1-1L.txt", "/maps/Safezone2-1O.txt",
-			"/maps/Safezone3-1U.txt", "/maps/Safezone4-1L.txt"};
+			"/maps/Room11-Test.txt", "/maps/Room12-Test.txt", "/maps/Safezone1-L.txt", "/maps/Safezone2-L.txt",
+			"/maps/Safezone3-L.txt", "/maps/Safezone1-O.txt", "/maps/Safezone2-O.txt", "/maps/Safezone3-O.txt",
+			"/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt", "/maps/Safezone3-R.txt", "/maps/Safezone1-U.txt",
+			"/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt"};
 
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
