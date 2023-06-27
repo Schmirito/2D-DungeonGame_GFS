@@ -21,19 +21,20 @@ public class FeldManager {
 
 	public int startRaum = 0;
 	public int mapNr = 0;
-	public int raumNr = 0;
+	public int raumZaeler = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
 	public boolean start = true;
 
 	// Etwas unschön gelößt, aber keine zeit.
-	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
-			"/maps/Room3-Test.txt", "/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt",
-			"/maps/Room7-Test.txt", "/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt",
-			"/maps/Room11-Test.txt", "/maps/Room12-Test.txt", "/maps/Safezone1-L.txt", "/maps/Safezone2-L.txt",
-			"/maps/Safezone3-L.txt", "/maps/Safezone1-O.txt", "/maps/Safezone2-O.txt", "/maps/Safezone3-O.txt",
-			"/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt", "/maps/Safezone3-R.txt", "/maps/Safezone1-U.txt",
-			"/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt"};
+	public String[] mapAuswahl = { 
+			"/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt", "/maps/Room3-Test.txt", 
+			"/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt", "/maps/Room7-Test.txt", 
+			"/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt", "/maps/Room11-Test.txt", 
+			"/maps/Room12-Test.txt", "/maps/Safezone1-O.txt", "/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", 
+			"/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt", "/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", 
+			"/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt", "/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", 
+			"/maps/Safezone4-L.txt"};
 
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
@@ -59,7 +60,6 @@ public class FeldManager {
 				neueNummer = (int) (Math.random() * 12 + 1);
 				mapNr = neueNummer;
 			}
-			raumNr++;
 			break;
 		case 2:
 		case 4:
@@ -69,11 +69,11 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
+			raumZaeler++;
 			
-			if (raumNr == 5) {
-				mapNr = 13;
-				raumNr = 0;
+			if (raumZaeler == 5) {
+				mapNr = (int) (Math.random() * 3 + 13);
+				raumZaeler = 0;
 			}
 			break;
 
@@ -85,11 +85,11 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
+			raumZaeler++;
 			
-			if (raumNr == 5) {
-				mapNr = 14;
-				raumNr = 0;
+			if (raumZaeler == 5) {
+				mapNr = (int) (Math.random() * 3 + 16);
+				raumZaeler = 0;
 			}
 			break;
 
@@ -101,11 +101,11 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
+			raumZaeler++;
 			
-			if (raumNr == 5) {
-				mapNr = 15;
-				raumNr = 0;
+			if (raumZaeler == 5) {
+				mapNr = (int) (Math.random() * 3 + 19);
+				raumZaeler = 0;
 			}
 			break;
 
@@ -117,46 +117,52 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
+			raumZaeler++;
 			
-			if (raumNr == 5) {
-				mapNr = 16;
-				raumNr = 0;
+			if (raumZaeler == 5) {
+				mapNr = (int) (Math.random() * 3 + 22);
+				raumZaeler = 0;
 			}
 			break;
 		
 		case 13:
+		case 14:
+		case 15:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 1);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
 			break;
 			
-		case 14:
+		case 16:
+		case 17:
+		case 18:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 4);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
 			break;
-		case 15:
+			
+		case 19:
+		case 20:
+		case 21:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 7);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
 			break;
-		case 16:
+			
+		case 22:
+		case 23:
+		case 24:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 10);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
-			raumNr++;
 			break;
 			
 		default:
