@@ -21,6 +21,7 @@ public class FeldManager {
 
 	public int startRaum = 0;
 	public int mapNr = 0;
+	public int raumNr = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
 	public boolean start = true;
@@ -29,7 +30,8 @@ public class FeldManager {
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt",
 			"/maps/Room3-Test.txt", "/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt",
 			"/maps/Room7-Test.txt", "/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt",
-			"/maps/Room11-Test.txt", "/maps/Room12-Test.txt" };
+			"/maps/Room11-Test.txt", "/maps/Room12-Test.txt", "/maps/Safezone1-1L.txt", "/maps/Safezone2-1O.txt",
+			"/maps/Safezone3-1U.txt", "/maps/Safezone4-1L.txt"};
 
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
@@ -45,6 +47,7 @@ public class FeldManager {
 	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
 	public void loadMap() {
 
+		
 		switch (mapNr) {
 		case 0: // Startraum implementieren
 			// Zum Testen
@@ -54,6 +57,7 @@ public class FeldManager {
 				neueNummer = (int) (Math.random() * 12 + 1);
 				mapNr = neueNummer;
 			}
+			raumNr++;
 			break;
 		case 2:
 		case 4:
@@ -63,6 +67,12 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raumNr++;
+			
+			if (raumNr == 5) {
+				mapNr = 13;
+				raumNr = 0;
+			}
 			break;
 
 		case 1:
@@ -73,6 +83,12 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raumNr++;
+			
+			if (raumNr == 5) {
+				mapNr = 14;
+				raumNr = 0;
+			}
 			break;
 
 		case 6:
@@ -83,6 +99,12 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raumNr++;
+			
+			if (raumNr == 5) {
+				mapNr = 15;
+				raumNr = 0;
+			}
 			break;
 
 		case 3:
@@ -93,8 +115,48 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raumNr++;
+			
+			if (raumNr == 5) {
+				mapNr = 16;
+				raumNr = 0;
+			}
 			break;
-
+		
+		case 13:
+			do {
+				neueNummer = (int) (Math.random() * 3 + 1);
+			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
+			vorherigeNummer = mapNr;
+			mapNr = neueNummer;
+			raumNr++;
+			break;
+			
+		case 14:
+			do {
+				neueNummer = (int) (Math.random() * 3 + 4);
+			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
+			vorherigeNummer = mapNr;
+			mapNr = neueNummer;
+			raumNr++;
+			break;
+		case 15:
+			do {
+				neueNummer = (int) (Math.random() * 3 + 7);
+			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
+			vorherigeNummer = mapNr;
+			mapNr = neueNummer;
+			raumNr++;
+			break;
+		case 16:
+			do {
+				neueNummer = (int) (Math.random() * 3 + 10);
+			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
+			vorherigeNummer = mapNr;
+			mapNr = neueNummer;
+			raumNr++;
+			break;
+			
 		default:
 			break;
 		} // switch case klammer
