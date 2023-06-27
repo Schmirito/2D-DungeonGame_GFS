@@ -26,7 +26,7 @@ public class FeldManager {
 	public int vorherigeNummer;
 	public boolean start = true;
 
-	// Etwas unschön gelößt, aber keine zeit.
+	// Etwas unschön gelößt, aber funktioniert.
 	public String[] mapAuswahl = { 
 			"/maps/Startraum-Test.txt", "/maps/Room1-Test.txt", "/maps/Room2-Test.txt", "/maps/Room3-Test.txt", 
 			"/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt", "/maps/Room7-Test.txt", 
@@ -50,7 +50,6 @@ public class FeldManager {
 	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
 	public void loadMap() {
 
-		
 		switch (mapNr) {
 		case 0: // Startraum implementieren
 			// Zum Testen
@@ -126,8 +125,8 @@ public class FeldManager {
 			break;
 		
 		case 13:
-		case 14:
-		case 15:
+		case 16:
+		case 22:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 1);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
@@ -135,9 +134,9 @@ public class FeldManager {
 			mapNr = neueNummer;
 			break;
 			
-		case 16:
+		case 14:
 		case 17:
-		case 18:
+		case 19:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 4);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
@@ -145,9 +144,9 @@ public class FeldManager {
 			mapNr = neueNummer;
 			break;
 			
-		case 19:
+		case 18:
 		case 20:
-		case 21:
+		case 23:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 7);
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
@@ -155,8 +154,8 @@ public class FeldManager {
 			mapNr = neueNummer;
 			break;
 			
-		case 22:
-		case 23:
+		case 15:
+		case 21:
 		case 24:
 			do {
 				neueNummer = (int) (Math.random() * 3 + 10);

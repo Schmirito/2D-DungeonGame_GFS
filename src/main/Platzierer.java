@@ -3,13 +3,14 @@ package main;
 import entity.Entity;
 import entity.Ghost;
 import entity.Zombie;
+import felder.FeldManager;
 import objekte.Obj_AusgangsTuer;
 import objekte.SuperObjekt;
 
 public class Platzierer {
 
 	GamePanel gp;
-
+	FeldManager fm;
 	int indexObjekte;
 	int randomFeldX;
 	int randomFeldY;
@@ -32,6 +33,7 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
+		
 		for (int i = 0; i < gp.entities.length; i++) {
 			gp.entities[i] = null;
 		}
