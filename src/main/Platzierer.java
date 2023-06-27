@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Ghost;
 import entity.Zombie;
 import objekte.Obj_AusgangsTuer;
 import objekte.SuperObjekt;
@@ -38,8 +39,17 @@ public class Platzierer {
 		int anzahl = randomMonsterAnzahl;
 		do {
 			randomFeld();
-			gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
-			anzahl--;
+			
+			int nr = (int) (Math.random()*2+1);
+			
+			if (nr == 1) {
+				gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
+				anzahl--;
+			}
+			if(nr == 2){
+				gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
+				anzahl--;
+			}
 		} while (anzahl != 0);
 	}
 
