@@ -22,6 +22,7 @@ public class FeldManager {
 	public int startRaum = 0;
 	public int mapNr = 0;
 	public int raumZaeler = 0;
+	public int dungeonRaumAnz = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
 	public boolean start = true;

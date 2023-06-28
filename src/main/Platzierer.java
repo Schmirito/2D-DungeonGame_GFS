@@ -17,7 +17,7 @@ public class Platzierer {
 
 	public int randomMonsterAnzahl;
 	public int aktuelleMonsterImRaum;
-
+	public int monsterAnzRaum = 0;
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
 		indexObjekte = 0;

@@ -114,6 +114,7 @@ public class GamePanel extends JPanel implements Runnable {
 			
 			player.update();
 			kamera.update();
+			System.out.println(feldM.dungeonRaumAnz);
 			// ENTITIES
 			for (int i = 0; i < objekte.length; i++) {
 				if (entities[i] != null) {
