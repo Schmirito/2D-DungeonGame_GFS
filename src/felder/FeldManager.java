@@ -29,10 +29,10 @@ public class FeldManager {
 
 	// Etwas unschön gelößt, aber funktioniert.
 	public String[] mapAuswahl = { 
-			"/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3-Test.txt", 
-			"/maps/Room4-Test.txt", "/maps/Room5-Test.txt", "/maps/Room6-Test.txt", "/maps/Room7-Test.txt", 
-			"/maps/Room8-Test.txt", "/maps/Room9-Test.txt", "/maps/Room10-Test.txt", "/maps/Room11-Test.txt", 
-			"/maps/Room12-Test.txt", "/maps/Safezone1-O.txt", "/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", 
+			"/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt", 
+			"/maps/Room4.txt", "/maps/Room5.txt", "/maps/Room6.txt", "/maps/Room7.txt", 
+			"/maps/Room8.txt", "/maps/Room9.txt", "/maps/Room10.txt", "/maps/Room11.txt", 
+			"/maps/Room12.txt", "/maps/Safezone1-O.txt", "/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", 
 			"/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt", "/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", 
 			"/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt", "/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", 
 			"/maps/Safezone4-L.txt"};
