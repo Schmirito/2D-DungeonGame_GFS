@@ -22,7 +22,7 @@ public class FeldManager {
 	public int startRaum = 0;
 	public int mapNr = 0;
 	public int raumZaeler = 0;
-	public int dungeonRaumAnz = 0;
+	public int raeumeGesamt = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
 	public boolean start = true;
@@ -70,10 +70,10 @@ public class FeldManager {
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
 			raumZaeler++;
-			
+			raeumeGesamt++;
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 13);
-				raumZaeler = 0;
+				raumZaeler = 1;
 			}
 			break;
 
@@ -86,11 +86,13 @@ public class FeldManager {
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
 			raumZaeler++;
+			raeumeGesamt++;
 			
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 16);
-				raumZaeler = 0;
+				raumZaeler = 1;
 			}
+		
 			break;
 
 		case 6:
@@ -102,11 +104,13 @@ public class FeldManager {
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
 			raumZaeler++;
+			raeumeGesamt++;
 			
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 19);
-				raumZaeler = 0;
+				raumZaeler = 1;
 			}
+		
 			break;
 
 		case 3:
@@ -118,11 +122,13 @@ public class FeldManager {
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
 			raumZaeler++;
+			raeumeGesamt++;
 			
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 22);
-				raumZaeler = 0;
+				raumZaeler = 1;
 			}
+		
 			break;
 		
 		case 13:
@@ -133,6 +139,7 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raeumeGesamt++;
 			break;
 			
 		case 14:
@@ -143,6 +150,7 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raeumeGesamt++;
 			break;
 			
 		case 18:
@@ -153,6 +161,7 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raeumeGesamt++;
 			break;
 			
 		case 15:
@@ -163,6 +172,7 @@ public class FeldManager {
 			} while (mapNr == neueNummer && mapNr == vorherigeNummer);
 			vorherigeNummer = mapNr;
 			mapNr = neueNummer;
+			raeumeGesamt++;
 			break;
 			
 		default:

@@ -31,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public FeldManager feldM = new FeldManager(this);
 	public KeyHandler keyH = new KeyHandler();
+	public UI ui = new UI(this);
+	
 	Thread gameThread;
 	public KollisionPruefer kPruefer = new KollisionPruefer(this);
 	public Platzierer platzierer = new Platzierer(this);
@@ -156,6 +158,9 @@ public class GamePanel extends JPanel implements Runnable {
 		// SPIELER
 		player.draw(g2);
 
+		//UI
+		ui.draw(g2);
+		
 		g2.dispose();
 	}
 }

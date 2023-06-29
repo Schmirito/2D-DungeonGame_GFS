@@ -63,7 +63,7 @@ public class Ghost extends Entity {
 		boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
 		interagiereMitObjekt(objGetroffen);
 		// PRUEFE ENTITY KOLLISION
-		gp.kPruefer.pruefeEntity(this);
+		//gp.kPruefer.pruefeEntity(this);
 		
 		// PRUEFE PLAYER KOLLISION
 		gp.kPruefer.pruefePlayer(this);

@@ -52,6 +52,9 @@ public class Entity {
 	public static int monsterBesiegt;
 	int besiegt;
 
+	int muenzenAnzahlProMonster = 0;
+	public static int muenzen = 0;
+	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 		leben = gp.skala;
@@ -203,6 +206,9 @@ public class Entity {
 								gp.entities[i] = null;
 								besiegt++;
 								setBesiegteMonster(besiegt);
+								
+								muenzenAnzahlProMonster = (int) (Math.random()*3+1);
+								muenzen += muenzenAnzahlProMonster;
 							}
 
 						} else {
