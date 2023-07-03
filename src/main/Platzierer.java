@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Ghost;
+
 import entity.NPC;
 import entity.Zombie;
 import felder.FeldManager;
@@ -34,6 +35,7 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
+
 		for (int i = 0; i < gp.entities.length; i++) {
 			gp.entities[i] = null;
 		}

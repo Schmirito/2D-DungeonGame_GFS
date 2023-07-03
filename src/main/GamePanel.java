@@ -73,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
 		Entity.setBesiegteMonster(0);
 		Entity.monsterBesiegt = 0;
 		feldM.loadMap();
+
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
@@ -101,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
 			if (delta >= 1) {
 
 				update();
-
+	
 				repaint();
 
 				delta--;
@@ -171,7 +172,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// SPIELER
 		player.draw(g2);
 
-		// UI
+		//UI
 		ui.draw(g2);
 
 		g2.dispose();
