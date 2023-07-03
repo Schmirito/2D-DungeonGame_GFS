@@ -84,7 +84,7 @@ public class Player extends Entity {
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.platzierer.aktuelleMonsterImRaum = gp.platzierer.randomMonsterAnzahl - Entity.getBesiegteMonster();
-					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0 || gp.feldM.mapNr <= 12) {
+					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0 || gp.feldM.mapNr > 12) {
 					gp.feldM.loadMap();
 					gp.platzierer.setzeAusgang();
 					gp.platzierer.setzeObjekt();
