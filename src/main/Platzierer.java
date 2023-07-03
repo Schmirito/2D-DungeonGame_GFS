@@ -33,26 +33,27 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
-		
 		for (int i = 0; i < gp.entities.length; i++) {
 			gp.entities[i] = null;
 		}
-		randomMonsterAnzahl = (int) (Math.random() * 5 + 1);
-		int anzahl = randomMonsterAnzahl;
-		do {
-			randomFeld();
-			
-			int nr = (int) (Math.random()*2+1);
-			
-			if (nr == 1) {
-				gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
-				anzahl--;
-			}
-			if(nr == 2){
-				gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
-				anzahl--;
-			}
-		} while (anzahl != 0);
+		if (gp.feldM.mapNr != 0 && gp.feldM.mapNr <= 12) {
+			randomMonsterAnzahl = (int) (Math.random() * (5 + gp.feldM.raeumeGesamt - 1) + 1);
+			int anzahl = randomMonsterAnzahl;
+			do {
+				randomFeld();
+
+				int nr = (int) (Math.random() * 2 + 1);
+
+				if (nr == 1) {
+					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
+					anzahl--;
+				}
+				if (nr == 2) {
+					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
+					anzahl--;
+				}
+			} while (anzahl != 0);
+		}
 	}
 
 	public void randomFeld() {
@@ -65,7 +66,6 @@ public class Platzierer {
 	public void setzeAusgang() {
 		// Wenn in der alten map mehr ausgaenge als in der neuen map sind, so werden die
 		// alten überschüssigen Ausgänge nicht gelöscht
-		Entity.setBesiegteMonster(0);
 
 		for (int i = 0; i < 4; i++) {
 			gp.objekte[i] = null;

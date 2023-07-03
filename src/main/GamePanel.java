@@ -64,11 +64,13 @@ public class GamePanel extends JPanel implements Runnable {
 		kamera.weltX = 9 * feldGroeﬂe;
 		kamera.weltY = 17 * feldGroeﬂe;
 		player.leben = feldGroeﬂe;
+		Entity.setBesiegteMonster(0);
+		feldM.loadMap();
+		System.out.println("mapNr: "+ feldM.mapNr);
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
 		Entity.muenzen = 0;
-		feldM.loadMap();
 	}
 
 	public void startGameThread() {
@@ -107,10 +109,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 		if (gStatus == 0) { // GAME LƒUFT
 			if (player.leben <= 0) {
-				gStatus = 2;
 				JOptionPane.showMessageDialog(null, "Game Over");
 				setupGame();
-				gStatus = 0;
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;
 				keyH.escGedrueckt = false;
@@ -124,19 +124,13 @@ public class GamePanel extends JPanel implements Runnable {
 					entities[i].update();
 				}
 			}
+
 		} else if (gStatus == 1) { // GAME PAUSIERT
 			if (keyH.escGedrueckt) {
 				gStatus = 0;
 				keyH.escGedrueckt = false;
 			}
-		} else if (gStatus == 2) { // SPIELER GESTORBEN
-			if (keyH.escGedrueckt) {
-				gStatus = 0;
-				keyH.escGedrueckt = false;
-				setupGame();
-			}
 		}
-
 	}
 
 	/** Methode in der g2 die gew¸nschten sachen zeichnen kann. */
