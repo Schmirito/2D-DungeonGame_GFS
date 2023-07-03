@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
 		Entity.muenzen = 0;
+		feldM.loadMap();
 	}
 
 	public void startGameThread() {

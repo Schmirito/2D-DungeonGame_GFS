@@ -60,7 +60,8 @@ public class Ghost extends Entity {
 		//gp.kPruefer.pruefeFeld(this);
 		
 		// PRUEFE OBJEKT KOLLISION
-		gp.kPruefer.pruefeObjekt(this, false);
+		boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
+		interagiereMitObjekt(objGetroffen);
 		// PRUEFE ENTITY KOLLISION
 		gp.kPruefer.pruefeEntity(this);
 		

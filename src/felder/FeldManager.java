@@ -45,7 +45,7 @@ public class FeldManager {
 		mapFeldNr = new int[30][30];
 
 		getFeldBild();
-		loadMap();
+		//loadMap();
 	}
 
 	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */

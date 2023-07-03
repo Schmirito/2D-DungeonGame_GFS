@@ -58,7 +58,8 @@ public class Zombie extends Entity {
 		// PRUEFE FELD KOLLISION
 		gp.kPruefer.pruefeFeld(this);
 		// PRUEFE OBJEKT KOLLISION
-		gp.kPruefer.pruefeObjekt(this, false);
+		boolean objGetroffen[] = gp.kPruefer.pruefeObjekt(this, true);
+		interagiereMitObjekt(objGetroffen);
 		// PRUEFE ENTITY KOLLISION
 		gp.kPruefer.pruefeEntity(this);
 		// PRUEFE PLAYER KOLLISION
