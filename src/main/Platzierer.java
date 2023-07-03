@@ -55,7 +55,8 @@ public class Platzierer {
 				}
 			} while (anzahl > 0);
 		} else if (gp.feldM.mapNr > 12) {
-			gp.entities[0] = new NPC(gp, 15 * gp.feldGroeﬂe, 15 * gp.feldGroeﬂe);
+			randomFeld();
+			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
 		}
 	}
 
