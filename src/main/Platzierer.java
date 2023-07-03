@@ -37,7 +37,7 @@ public class Platzierer {
 			gp.entities[i] = null;
 		}
 		if (gp.feldM.mapNr != 0 && gp.feldM.mapNr <= 12) {
-			randomMonsterAnzahl = (int) (Math.random() * (5 + gp.feldM.raeumeGesamt - 1) + 1);
+			randomMonsterAnzahl = (int) ((Math.random() * 5) + 1 + gp.feldM.raeumeGesamt - 1);
 			int anzahl = randomMonsterAnzahl;
 			do {
 				randomFeld();
