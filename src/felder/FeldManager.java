@@ -28,14 +28,12 @@ public class FeldManager {
 	public boolean start = true;
 
 	// Etwas unschön gelößt, aber funktioniert.
-	public String[] mapAuswahl = { 
-			"/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt", 
-			"/maps/Room4.txt", "/maps/Room5.txt", "/maps/Room6.txt", "/maps/Room7.txt", 
-			"/maps/Room8.txt", "/maps/Room9.txt", "/maps/Room10.txt", "/maps/Room11.txt", 
-			"/maps/Room12.txt", "/maps/Safezone1-O.txt", "/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", 
-			"/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt", "/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", 
-			"/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt", "/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", 
-			"/maps/Safezone4-L.txt"};
+	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt",
+			"/maps/Room4.txt", "/maps/Room5.txt", "/maps/Room6.txt", "/maps/Room7.txt", "/maps/Room8.txt",
+			"/maps/Room9.txt", "/maps/Room10.txt", "/maps/Room11.txt", "/maps/Room12.txt", "/maps/Safezone1-O.txt",
+			"/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", "/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt",
+			"/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt",
+			"/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", "/maps/Safezone4-L.txt" };
 
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
@@ -45,20 +43,26 @@ public class FeldManager {
 		mapFeldNr = new int[30][30];
 
 		getFeldBild();
-		loadMap();
 	}
 
 	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
 	public void loadMap() {
-
 		switch (mapNr) {
 		case 0: // Startraum implementieren
 			// Zum Testen
 			if (start) {
 				start = false;
 			} else {
-				neueNummer = (int) (Math.random() * 12 + 1);
-				mapNr = neueNummer;
+				neueNummer = (int) (Math.random() * 3);
+				if (neueNummer == 0) {
+					mapNr = 10;
+				}
+				if (neueNummer == 1) {
+					mapNr = 11;
+				}
+				if (neueNummer == 2) {
+					mapNr = 12;
+				}
 			}
 			break;
 		case 2:
@@ -87,12 +91,12 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raumZaeler++;
 			raeumeGesamt++;
-			
+
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 16);
 				raumZaeler = 1;
 			}
-		
+
 			break;
 
 		case 6:
@@ -105,12 +109,12 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raumZaeler++;
 			raeumeGesamt++;
-			
+
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 19);
 				raumZaeler = 1;
 			}
-		
+
 			break;
 
 		case 3:
@@ -123,14 +127,14 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raumZaeler++;
 			raeumeGesamt++;
-			
+
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 22);
 				raumZaeler = 1;
 			}
-		
+
 			break;
-		
+
 		case 13:
 		case 16:
 		case 22:
@@ -141,7 +145,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		case 14:
 		case 17:
 		case 19:
@@ -152,7 +156,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		case 18:
 		case 20:
 		case 23:
@@ -163,7 +167,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		case 15:
 		case 21:
 		case 24:
@@ -174,7 +178,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		default:
 			break;
 		} // switch case klammer
@@ -203,22 +207,10 @@ public class FeldManager {
 					reihe++;
 				}
 			}
-			if (startRaum == 0) {
-				neueNummer = (int) (Math.random() * 3);
-				if (neueNummer == 0) {
-					mapNr = 3;
-				}
-				if (neueNummer == 1) {
-					mapNr = 9;
-				}
-				if (neueNummer == 2) {
-					mapNr = 11;
-				}
-				startRaum++;
-			}
 		} catch (Exception e) {
 
 		}
+		System.out.println("mapNr: "+mapNr);
 	}
 
 	public void getFeldBild() {
@@ -297,7 +289,7 @@ public class FeldManager {
 	public int getFeldIndex(String bildName) {
 		int index = -1;
 		for (int i = 0; i < feld.length; i++) {
-			if(feld[i] != null) {
+			if (feld[i] != null) {
 				if (feld[i].bildName.equals(bildName)) {
 					index = i;
 					i = feld.length;
@@ -316,9 +308,7 @@ public class FeldManager {
 
 		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
 
-			if (x + gp.feldGroeße > 0
-					&& x - gp.feldGroeße < gp.BildBreite
-					&& y + gp.feldGroeße > 0
+			if (x + gp.feldGroeße > 0 && x - gp.feldGroeße < gp.BildBreite && y + gp.feldGroeße > 0
 					&& y - gp.feldGroeße < gp.BildHoehe) {
 				int feldNr = mapFeldNr[spalte][reihe];
 				g2.drawImage(feld[feldNr].image, x, y, gp.feldGroeße, gp.feldGroeße, null);

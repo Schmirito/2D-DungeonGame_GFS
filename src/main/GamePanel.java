@@ -2,9 +2,11 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public FeldManager feldM = new FeldManager(this);
 	public KeyHandler keyH = new KeyHandler();
 	public UI ui = new UI(this);
-	
+
 	Thread gameThread;
 	public KollisionPruefer kPruefer = new KollisionPruefer(this);
 	public Platzierer platzierer = new Platzierer(this);
@@ -41,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
 	// ENTITY, OBJEKTE, ...
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
 	public Entity entities[] = new Entity[20];
-	
+
 	public GamePanel() {
 		setupGame();
 		this.setPreferredSize(new Dimension(BildBreite, BildHoehe));
@@ -59,14 +61,18 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 		feldM = new FeldManager(this);
-		player.weltX = 5*feldGroeße;
-		player.weltY = 16*feldGroeße;
-		kamera.weltX = 9*feldGroeße;
-		kamera.weltY = 17*feldGroeße;
+		keyH = new KeyHandler();
+		player.weltX = 5 * feldGroeße;
+		player.weltY = 16 * feldGroeße;
+		kamera.weltX = 9 * feldGroeße;
+		kamera.weltY = 17 * feldGroeße;
 		player.leben = feldGroeße;
+		Entity.setBesiegteMonster(0);
+		feldM.loadMap();
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
+		Entity.muenzen = 0;
 	}
 
 	public void startGameThread() {
@@ -92,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
 			if (delta >= 1) {
 
 				update();
-	
+
 				repaint();
 
 				delta--;
@@ -105,15 +111,17 @@ public class GamePanel extends JPanel implements Runnable {
 
 		if (gStatus == 0) { // GAME LÄUFT
 			if (player.leben <= 0) {
-				gStatus = 2;
-				JOptionPane.showMessageDialog(null, "Game Over");
+				//JLabel label = new JLabel("MESSAGE");
+				//label.setBackground(new Color(0,0,0));
+				//label.setFont(new Font("Arial", Font.BOLD, 18));
+				//JOptionPane.showMessageDialog(null,label,"Game Over",JOptionPane.OK_OPTION);
+				JOptionPane.showMessageDialog(null,"Game Over");
 				setupGame();
-				gStatus = 0;
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;
 				keyH.escGedrueckt = false;
 			}
-			
+
 			player.update();
 			kamera.update();
 			// ENTITIES
@@ -122,19 +130,13 @@ public class GamePanel extends JPanel implements Runnable {
 					entities[i].update();
 				}
 			}
+
 		} else if (gStatus == 1) { // GAME PAUSIERT
 			if (keyH.escGedrueckt) {
 				gStatus = 0;
 				keyH.escGedrueckt = false;
 			}
-		} else if (gStatus == 2) { // SPIELER GESTORBEN
-			if (keyH.escGedrueckt) {
-				gStatus = 0;
-				keyH.escGedrueckt = false;
-				setupGame();
-			}
 		}
-
 	}
 
 	/** Methode in der g2 die gewünschten sachen zeichnen kann. */
@@ -158,9 +160,9 @@ public class GamePanel extends JPanel implements Runnable {
 		// SPIELER
 		player.draw(g2);
 
-		//UI
+		// UI
 		ui.draw(g2);
-		
+
 		g2.dispose();
 	}
 }

@@ -125,15 +125,13 @@ public class Zombie extends Entity {
 		}
 		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße) {
 			zaeler++;
-			if (zaeler == 60) {
+			if (zaeler == schlageSpielerCooldownSec * 60) {
 				zaeler = 0;
 				schlageSpieler();
 			}
-		}
-		else {
+		} else {
 			zaeler = 0;
 		}
-		
 
 	}
 
@@ -147,7 +145,7 @@ public class Zombie extends Entity {
 		} else {
 			richtungX = "links";
 		}
-		
+
 		if (diffSpielerY <= 0) {
 			richtungY = "unten";
 			diffSpielerY = gp.player.weltY - weltY;
@@ -160,9 +158,7 @@ public class Zombie extends Entity {
 		} else if (diffSpielerY > diffSpielerX) {
 			richtung = richtungY;
 		}
-		
-		
-		
+
 		if (kollidiert == false) {
 			switch (richtung) {
 			case "oben":
@@ -179,29 +175,26 @@ public class Zombie extends Entity {
 				break;
 			}
 
-			
 		}
 
+		int framesUnbewegt = 0;
+		frameCounter++;
+		if (frameCounter > 8) {
+			spriteNumber++;
+			if (spriteNumber >= 4) {
+				spriteNumber = 0;
+			}
+			frameCounter = 0;
+		}
 
-
-	int framesUnbewegt = 0;frameCounter++;if(frameCounter>8)
-	{
-		spriteNumber++;
-		if (spriteNumber >= 4) {
+		framesUnbewegt++;
+		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
 		}
-		frameCounter = 0;
-	}
 
-	framesUnbewegt++;if(framesUnbewegt>=16)
-	{
-		spriteNumber = 0;
-	}
+		BufferedImage zombSprite = null;
 
-	BufferedImage zombSprite = null;
-
-	switch(richtung)
-	{
+		switch (richtung) {
 		case "oben":
 			switch (spriteNumber) {
 			case 0:

@@ -78,13 +78,12 @@ public class Player extends Entity {
 	
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
-			System.out.println("obj " + i + " " + objGetroffen[i]);
 			if (objGetroffen[i] == true) {
 				System.out.println("objekt getroffen: " + i);
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.platzierer.aktuelleMonsterImRaum = gp.platzierer.randomMonsterAnzahl - Entity.getBesiegteMonster();
-					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum) {
+					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0 || gp.feldM.mapNr > 12) {
 					gp.feldM.loadMap();
 					gp.platzierer.setzeAusgang();
 					gp.platzierer.setzeObjekt();

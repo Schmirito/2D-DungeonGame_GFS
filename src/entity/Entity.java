@@ -27,7 +27,7 @@ public class Entity {
 	public int spriteNumber = 0;
 
 	public int hitCooldownFrames = 0;
-	public double hitCooldownSekunden = 0.5;
+	public double hitCooldownSekunden = 0.7;
 	public Schlag schlag;
 	public int rückstoß;
 	public int rundenAnzahlGetroffen;
@@ -35,6 +35,7 @@ public class Entity {
 	public String stoßRichtung;
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
+	public double schlageSpielerCooldownSec = 0.5;
 
 	public Rectangle hitBox;
 
@@ -239,7 +240,6 @@ public class Entity {
 		entityGetroffen = entity;
 
 		leben -= 1;
-		System.out.println("Leben =" + leben);
 
 	}
 
@@ -262,7 +262,6 @@ public class Entity {
 		g2.drawRoundRect(bildschirmX, bildschirmY, breite, hoehe, bogenBreite, bogenHoehe);
 		g2.setColor(Color.RED);
 		g2.fillRoundRect(bildschirmX, bildschirmY, leben, hoehe, bogenBreite, bogenHoehe);
-
 	}
 
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
