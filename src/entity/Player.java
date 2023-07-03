@@ -23,7 +23,10 @@ public class Player extends Entity {
 
 	
 
-	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
+	/**Constructor von Geister entities. Diese erben von Entity.
+	 *@param GamePanel
+	 *@param KeyHandler
+	 * */
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
@@ -42,11 +45,13 @@ public class Player extends Entity {
 		setDefaultValuables();
 		getPlayerImage();
 	}
-
+	
+	/**Dem spieler wird die Kamera zugewiesen. */
 	public void receiveKamera() {
 		kamera = gp.giveKamera();
 	}
 
+	/**Standart-Variablen von dem Spieler werden definiert. */
 	public void setDefaultValuables() {
 		weltX = gp.feldGroeﬂe*5-(gp.feldGroeﬂe/2); // 13 * gp.feldGroeﬂe;
 		weltY = gp.feldGroeﬂe*16; // 13 * gp.feldGroeﬂe;
@@ -58,7 +63,7 @@ public class Player extends Entity {
 		lebensanzeigeHoehe = gp.skala*2;
 	}
 
-	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
+	/**Die Bilder des Spielers werden in der setup-Methode, von der Superklasse Entity, aufgerufen und skaliert.*/
 	public void getPlayerImage() {
 
 		up = setup("/player/char-Up");
@@ -76,6 +81,9 @@ public class Player extends Entity {
 
 	}
 	
+	/**Der Spieler kann mit Objektern, wie Ausg‰ngen, interargieren.
+	 * @param objGetroffen[]
+	 *  */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
@@ -98,6 +106,8 @@ public class Player extends Entity {
 		}
 	}
 	
+	/**Der Spieler wird an die stelle des einganges von den R‰umen gesetzt.
+	 * @param auchKamera */
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
@@ -321,7 +331,7 @@ public class Player extends Entity {
 		
 
 		// ZEICHNE SCHLAG
-		if (schlag != null) {
+		if (schlag != null && gp.feldM.mapNr<=12) {
 			schlag.draw(g2, this);
 		}
 		// ZEICHNE PLAYER

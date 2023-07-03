@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Ghost;
+import entity.NPC;
 import entity.Zombie;
 import felder.FeldManager;
 import objekte.Obj_AusgangsTuer;
@@ -54,7 +55,7 @@ public class Platzierer {
 				}
 			} while (anzahl > 0);
 		} else if (gp.feldM.mapNr > 12) {
-			//gp.entities[0] = new NPC(gp, 15 * gp.feldGroeﬂe, 15 * gp.feldGroeﬂe);
+			gp.entities[0] = new NPC(gp, 15 * gp.feldGroeﬂe, 15 * gp.feldGroeﬂe);
 		}
 	}
 

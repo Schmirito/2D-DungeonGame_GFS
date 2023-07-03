@@ -21,7 +21,7 @@ public class FeldManager {
 
 	public int startRaum = 0;
 	public int mapNr = 0;
-	public int raumZaeler = 0;
+	public int raumZaeler = 4;
 	public int raeumeGesamt = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
@@ -35,6 +35,8 @@ public class FeldManager {
 			"/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt",
 			"/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", "/maps/Safezone4-L.txt" };
 
+	/**Constructor des FeldManagers.
+	 * @param GamePanel */
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
 
@@ -45,7 +47,8 @@ public class FeldManager {
 		getFeldBild();
 	}
 
-	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
+	/**Es wird eine mapNr ausgewählt, welche eine verbindung zu einer .txt datei hat.
+	 * Diese angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
 	public void loadMap() {
 		switch (mapNr) {
 		case 0: // Startraum implementieren
@@ -77,6 +80,7 @@ public class FeldManager {
 			raeumeGesamt++;
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 13);
+				gp.player.leben = gp.feldGroeße;
 				raumZaeler = 1;
 			}
 			break;
@@ -211,8 +215,10 @@ public class FeldManager {
 
 		}
 		System.out.println("mapNr: "+mapNr);
+		System.out.println("raumzähler: "+raumZaeler);
 	}
 
+	/**Jeses Feld wird eingelesen, skaliert und die kollisionen festgelegt. */
 	public void getFeldBild() {
 		setup(0, "D001Boden", false);
 		setup(1, "D002Kiste", true);
@@ -271,6 +277,10 @@ public class FeldManager {
 
 	}
 
+	/**Die Felder werden unter einem Dateipfad gesucht, skaliert und kollisionen hinzugefügt.
+	 * @param index
+	 * @param bildname
+	 * @param kollision */
 	public void setup(int index, String bildName, boolean kollision) {
 		UtilityTool uTool = new UtilityTool();
 
@@ -299,6 +309,9 @@ public class FeldManager {
 		return index;
 	}
 
+	/**Die skalierten Bilder werden an der, ihnen jeweils zugehörigen, mapFeldNr gezeichnet.
+	 * @param Graphics2D
+	 *  */
 	public void draw(Graphics2D g2) {
 
 		int spalte = 0;

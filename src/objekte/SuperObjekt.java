@@ -22,6 +22,11 @@ public class SuperObjekt {
 	public int bildschirmX;
 	public int bildschirmY;
 	
+	/**Constructor SuperObjekt. 
+	 * @param GamePanel
+	 * @param weltX
+	 * @param weltY
+	 * */
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		name = "SuperObjekt";
@@ -35,7 +40,8 @@ public class SuperObjekt {
 		}
 	}
 	
-	
+	/**Zeichen-Methode welche die erbenden klassen nutzen können.
+	 * @param Graphics2D */
 	public void draw(Graphics2D g2) {
 		if(bild != null) {
 			
@@ -51,6 +57,10 @@ public class SuperObjekt {
 			}
 		}
 	}
+	
+	/**Auslesen und skalieren der Objekte.
+	 * @param bildName
+	 * @return bild */
 	public BufferedImage setup(String bildName) {
 
 		UtilityTool uTool = new UtilityTool();

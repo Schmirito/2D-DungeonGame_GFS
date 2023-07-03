@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.OptionPaneUI;
 
 import entity.Entity;
 import entity.Kamera;
@@ -44,24 +45,29 @@ public class GamePanel extends JPanel implements Runnable {
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
 	public Entity entities[] = new Entity[20];
 
+	/**Constructor des GamePanels.*/
 	public GamePanel() {
+		player.receiveKamera();
 		setupGame();
 		this.setPreferredSize(new Dimension(BildBreite, BildHoehe));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-		player.receiveKamera();
-
 	}
 
+	
 	public Kamera giveKamera() {
 		return kamera;
 	}
 
+	/**Start-Variablen für das Spiel werden festgelegt. */
 	public void setupGame() {
 		feldM = new FeldManager(this);
-		keyH = new KeyHandler();
+		keyH.linksGedrückt = false;
+		keyH.rechtsGedrückt = false;
+		keyH.obenGedrückt = false;
+		keyH.untenGedrückt = false;
 		player.weltX = 5 * feldGroeße;
 		player.weltY = 16 * feldGroeße;
 		kamera.weltX = 9 * feldGroeße;
@@ -75,14 +81,16 @@ public class GamePanel extends JPanel implements Runnable {
 		Entity.muenzen = 0;
 	}
 
+	/**Startet ein Thread durch welches das spiel gestartet wird.
+	 * Sobald es erstellt wird, springt das programm in die run Methode. */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
+	/**Es werden die FPS eingestellt, sodass das spiel nur so oft pro sekunde, wie gewünscht, gezeichnet wird. */
 	@Override
 	public void run() {
-
 		double zeichenInterval = 1000000000 / FPS;
 		double delta = 0;
 		long letzteZeit = System.nanoTime();
@@ -107,15 +115,16 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+	/**Je nach momentanem Spiel status wird das Spiel anders geupdated. */
 	public void update() {
 
 		if (gStatus == 0) { // GAME LÄUFT
 			if (player.leben <= 0) {
-				//JLabel label = new JLabel("MESSAGE");
-				//label.setBackground(new Color(0,0,0));
-				//label.setFont(new Font("Arial", Font.BOLD, 18));
-				//JOptionPane.showMessageDialog(null,label,"Game Over",JOptionPane.OK_OPTION);
-				JOptionPane.showMessageDialog(null,"Game Over");
+				JLabel label = new JLabel("YOU DIED");
+				label.setBackground(new Color(0, 0, 0));
+				label.setFont(new Font("Arial", Font.BOLD, 18));
+				JOptionPane.showMessageDialog(null, label, "Game Over", JOptionPane.OK_OPTION, null);
+				// JOptionPane.showMessageDialog(null,"Game Over");
 				setupGame();
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;
@@ -136,10 +145,20 @@ public class GamePanel extends JPanel implements Runnable {
 				gStatus = 0;
 				keyH.escGedrueckt = false;
 			}
+		} else if (gStatus == 2) { // DIALOG MIT NPC
+			for (int i = 0; i < objekte.length; i++) {
+				if (entities[i] != null) {
+					if (entities[i].getClass().getSimpleName().equals("NPC")) {
+						entities[i].update();
+					}
+				}
+			}
 		}
 	}
 
-	/** Methode in der g2 die gewünschten sachen zeichnen kann. */
+	/** Methode in der g2 die gewünschten sachen zeichnen kann. 
+	 * @param Graphics2D
+	 * */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -164,5 +183,19 @@ public class GamePanel extends JPanel implements Runnable {
 		ui.draw(g2);
 
 		g2.dispose();
+
+	}
+
+	/**Zeichnet das Dialogfenster des NPC's 
+	 * @param GRaphics2D
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * */
+	public void drawDialogWindow(Graphics2D g2, int x, int y, int width, int height) {
+		Color c = new Color(0, 0, 0, 210);
+		g2.setColor(c);
+		g2.fillRoundRect(x, y, width, height, 35, 35);
 	}
 }
