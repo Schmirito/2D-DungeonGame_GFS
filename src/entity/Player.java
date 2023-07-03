@@ -321,7 +321,7 @@ public class Player extends Entity {
 		
 
 		// ZEICHNE SCHLAG
-		if (schlag != null) {
+		if (schlag != null && gp.feldM.mapNr<=12) {
 			schlag.draw(g2, this);
 		}
 		// ZEICHNE PLAYER

@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.OptionPaneUI;
 
 import entity.Entity;
 import entity.Kamera;
@@ -45,14 +46,13 @@ public class GamePanel extends JPanel implements Runnable {
 	public Entity entities[] = new Entity[20];
 
 	public GamePanel() {
+		player.receiveKamera();
 		setupGame();
 		this.setPreferredSize(new Dimension(BildBreite, BildHoehe));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-		player.receiveKamera();
-
 	}
 
 	public Kamera giveKamera() {
@@ -61,7 +61,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 		feldM = new FeldManager(this);
-		keyH = new KeyHandler();
+		keyH.linksGedrückt = false;
+		keyH.rechtsGedrückt = false;
+		keyH.obenGedrückt = false;
+		keyH.untenGedrückt = false;
 		player.weltX = 5 * feldGroeße;
 		player.weltY = 16 * feldGroeße;
 		kamera.weltX = 9 * feldGroeße;
@@ -82,7 +85,6 @@ public class GamePanel extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-
 		double zeichenInterval = 1000000000 / FPS;
 		double delta = 0;
 		long letzteZeit = System.nanoTime();
@@ -111,11 +113,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 		if (gStatus == 0) { // GAME LÄUFT
 			if (player.leben <= 0) {
-				//JLabel label = new JLabel("MESSAGE");
-				//label.setBackground(new Color(0,0,0));
-				//label.setFont(new Font("Arial", Font.BOLD, 18));
-				//JOptionPane.showMessageDialog(null,label,"Game Over",JOptionPane.OK_OPTION);
-				JOptionPane.showMessageDialog(null,"Game Over");
+				JLabel label = new JLabel("YOU DIED");
+				label.setBackground(new Color(0, 0, 0));
+				label.setFont(new Font("Arial", Font.BOLD, 18));
+				JOptionPane.showMessageDialog(null, label, "Game Over", JOptionPane.OK_OPTION, null);
+				// JOptionPane.showMessageDialog(null,"Game Over");
 				setupGame();
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;
@@ -135,6 +137,14 @@ public class GamePanel extends JPanel implements Runnable {
 			if (keyH.escGedrueckt) {
 				gStatus = 0;
 				keyH.escGedrueckt = false;
+			}
+		} else if (gStatus == 2) { // DIALOG MIT NPC
+			for (int i = 0; i < objekte.length; i++) {
+				if (entities[i] != null) {
+					if (entities[i].getClass().getSimpleName().equals("NPC")) {
+						entities[i].update();
+					}
+				}
 			}
 		}
 	}
@@ -164,5 +174,12 @@ public class GamePanel extends JPanel implements Runnable {
 		ui.draw(g2);
 
 		g2.dispose();
+
+	}
+
+	public void drawDialogWindow(Graphics2D g2, int x, int y, int width, int height) {
+		Color c = new Color(0, 0, 0, 210);
+		g2.setColor(c);
+		g2.fillRoundRect(x, y, width, height, 35, 35);
 	}
 }
