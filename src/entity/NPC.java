@@ -11,9 +11,8 @@ import objekte.Schlag;
 public class NPC extends Entity {
 	public boolean ichRede = false;
 	public String dialogTexte[] = { "Oh Hallo!", "Mˆchtest du f¸r 150 M¸nzchen ein ominˆses Tr‰nkchen trinken?",
-			"Gute Entscheidung, HeHe", "Tu dir keinen Zwang an." };
+			"Gute Entscheidung, HeHe", "Tu dir keinen Zwang an.", "HeHe","Hm das sind leider zu wenig M¸nzen..."};
 	public int dialogIndex = 0;
-	Font schriftgroesse;
 
 	public NPC(GamePanel gp, int weltX, int weltY) {
 		super(gp);
@@ -24,6 +23,61 @@ public class NPC extends Entity {
 	}
 
 	public void update() {
+
+		// DIALOG
+		switch (dialogIndex) {
+		case 0:
+			if (gp.keyH.enterGedrueckt) {
+				dialogIndex++;
+				gp.keyH.enterGedrueckt = false;
+			}
+			break;
+		case 1:
+			if (gp.keyH.enterGedrueckt) {
+				if (Entity.muenzen -150 >=0) {
+					dialogIndex = 2;
+					Entity.muenzen -= 150;
+					gp.player.schaden++;
+				} else {
+					dialogIndex = 5;
+				}
+				gp.keyH.enterGedrueckt = false;
+			} else if (gp.keyH.escGedrueckt) {
+				dialogIndex = 3;
+				gp.keyH.escGedrueckt = false;
+			}
+			break;
+		case 2:
+			if (gp.keyH.enterGedrueckt) {
+				dialogIndex = 4;
+				gp.gStatus = 0;
+				ichRede = false;
+				gp.keyH.enterGedrueckt = false;
+			}
+			break;
+		case 3:
+			if (gp.keyH.enterGedrueckt) {
+				dialogIndex = 1;
+				gp.gStatus = 0;
+				ichRede = false;
+				gp.keyH.enterGedrueckt = false;
+			}
+			break;
+		case 4:
+			if (gp.keyH.enterGedrueckt) {
+				gp.gStatus = 0;
+				ichRede = false;
+				gp.keyH.enterGedrueckt = false;
+			}
+			break;
+		case 5:
+			if (gp.keyH.enterGedrueckt) {
+				gp.gStatus = 0;
+				ichRede = false;
+				gp.keyH.enterGedrueckt = false;
+			}
+			break;
+		}
 
 	}
 
@@ -46,12 +100,17 @@ public class NPC extends Entity {
 			}
 		}
 		if (ichRede) {
-			int width = gp.feldGroeﬂe * 2;
-			int height = gp.feldGroeﬂe * 1;
+			int width = (int)(gp.feldGroeﬂe * (dialogTexte[dialogIndex].length() / 7) + (gp.feldGroeﬂe*1.25));
+			int height = (int) (gp.feldGroeﬂe * 1);
 			gp.drawDialogWindow(g2, bildschirmX - (width / 2), bildschirmY - height, width, height);
-			g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 			g2.setColor(Color.WHITE);
-			g2.drawString(dialogTexte[dialogIndex], bildschirmX - (width / 2), bildschirmY - gp.feldGroeﬂe);
+			g2.drawString(dialogTexte[dialogIndex], bildschirmX - (width / 2) + (int)(gp.feldGroeﬂe*0.25),
+					(int) (bildschirmY - (gp.feldGroeﬂe * 0.5)));
+			if (dialogIndex == 1) {
+				g2.drawString("[No: ESC]             [Yes: ENTER]", bildschirmX - (width / 2) + (int)(gp.feldGroeﬂe*0.25),
+						(int) (bildschirmY - (gp.feldGroeﬂe * 0.25)));
+			}
 		}
 
 	}

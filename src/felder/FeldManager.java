@@ -21,7 +21,7 @@ public class FeldManager {
 
 	public int startRaum = 0;
 	public int mapNr = 0;
-	public int raumZaeler = 4;
+	public int raumZaeler = 0;
 	public int raeumeGesamt = 0;
 	public int neueNummer;
 	public int vorherigeNummer;

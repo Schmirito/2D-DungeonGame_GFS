@@ -20,6 +20,7 @@ public class Player extends Entity {
 	public int bildschirmX;
 	public int bildschirmY;
 	public int framesUnbewegt;
+	public int schaden = 1;
 
 	
 

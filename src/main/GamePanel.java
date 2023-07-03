@@ -65,12 +65,13 @@ public class GamePanel extends JPanel implements Runnable {
 		keyH.rechtsGedrückt = false;
 		keyH.obenGedrückt = false;
 		keyH.untenGedrückt = false;
-		player.weltX = 5 * feldGroeße;
-		player.weltY = 16 * feldGroeße;
+		player.weltX = 5 * feldGroeße + (feldGroeße/2);
+		player.weltY = 16 * feldGroeße + (feldGroeße/2);
 		kamera.weltX = 9 * feldGroeße;
 		kamera.weltY = 17 * feldGroeße;
 		player.leben = feldGroeße;
 		Entity.setBesiegteMonster(0);
+		Entity.monsterBesiegt = 0;
 		feldM.loadMap();
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();

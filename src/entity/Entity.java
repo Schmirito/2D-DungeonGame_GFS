@@ -239,7 +239,7 @@ public class Entity {
 		stoﬂRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
 
-		leben -= 1;
+		leben -= gp.player.schaden;
 
 	}
 
