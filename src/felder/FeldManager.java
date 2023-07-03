@@ -47,7 +47,6 @@ public class FeldManager {
 
 	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
 	public void loadMap() {
-
 		switch (mapNr) {
 		case 0: // Startraum implementieren
 			// Zum Testen
@@ -56,13 +55,13 @@ public class FeldManager {
 			} else {
 				neueNummer = (int) (Math.random() * 3);
 				if (neueNummer == 0) {
-					mapNr = 3;
+					mapNr = 10;
 				}
 				if (neueNummer == 1) {
-					mapNr = 9;
+					mapNr = 11;
 				}
 				if (neueNummer == 2) {
-					mapNr = 11;
+					mapNr = 12;
 				}
 			}
 			break;
@@ -211,6 +210,7 @@ public class FeldManager {
 		} catch (Exception e) {
 
 		}
+		System.out.println("mapNr: "+mapNr);
 	}
 
 	public void getFeldBild() {

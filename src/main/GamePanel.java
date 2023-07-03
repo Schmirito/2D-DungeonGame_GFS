@@ -2,9 +2,11 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -59,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 		feldM = new FeldManager(this);
+		keyH = new KeyHandler();
 		player.weltX = 5 * feldGroeﬂe;
 		player.weltY = 16 * feldGroeﬂe;
 		kamera.weltX = 9 * feldGroeﬂe;
@@ -66,7 +69,6 @@ public class GamePanel extends JPanel implements Runnable {
 		player.leben = feldGroeﬂe;
 		Entity.setBesiegteMonster(0);
 		feldM.loadMap();
-		System.out.println("mapNr: "+ feldM.mapNr);
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();
@@ -109,7 +111,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 		if (gStatus == 0) { // GAME LƒUFT
 			if (player.leben <= 0) {
-				JOptionPane.showMessageDialog(null, "Game Over");
+				//JLabel label = new JLabel("MESSAGE");
+				//label.setBackground(new Color(0,0,0));
+				//label.setFont(new Font("Arial", Font.BOLD, 18));
+				//JOptionPane.showMessageDialog(null,label,"Game Over",JOptionPane.OK_OPTION);
+				JOptionPane.showMessageDialog(null,"Game Over");
 				setupGame();
 			} else if (keyH.escGedrueckt) {
 				gStatus = 1;

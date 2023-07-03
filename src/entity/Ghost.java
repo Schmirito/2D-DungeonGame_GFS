@@ -129,7 +129,7 @@ public class Ghost extends Entity {
 		}
 		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße) {
 			zaeler++;
-			if (zaeler == 60) {
+			if (zaeler == schlageSpielerCooldownSec * 60) {
 				zaeler = 0;
 				schlageSpieler();
 			}

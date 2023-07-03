@@ -37,7 +37,7 @@ public class Platzierer {
 			gp.entities[i] = null;
 		}
 		if (gp.feldM.mapNr != 0 && gp.feldM.mapNr <= 12) {
-			randomMonsterAnzahl = (int) ((Math.random() * 5) + 1 + gp.feldM.raeumeGesamt - 1);
+			randomMonsterAnzahl = (int) ((Math.random() * 5) + 1 + gp.feldM.raeumeGesamt);
 			int anzahl = randomMonsterAnzahl;
 			do {
 				randomFeld();
@@ -52,7 +52,9 @@ public class Platzierer {
 					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
 					anzahl--;
 				}
-			} while (anzahl != 0);
+			} while (anzahl > 0);
+		} else if (gp.feldM.mapNr > 12) {
+			//gp.entities[0] = new NPC(gp, 15 * gp.feldGroeﬂe, 15 * gp.feldGroeﬂe);
 		}
 	}
 
