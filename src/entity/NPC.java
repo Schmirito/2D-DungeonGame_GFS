@@ -23,60 +23,69 @@ public class NPC extends Entity {
 	}
 
 	public void update() {
-
-		// DIALOG
-		switch (dialogIndex) {
-		case 0:
-			if (gp.keyH.enterGedrueckt) {
-				dialogIndex++;
-				gp.keyH.enterGedrueckt = false;
+		frameCounter++;
+		if (frameCounter >= 30) {
+			spriteNumber++;
+			if (spriteNumber >= 4) {
+				spriteNumber = 0;
 			}
-			break;
-		case 1:
-			if (gp.keyH.enterGedrueckt) {
-				if (Entity.muenzen -150 >=0) {
-					dialogIndex = 2;
-					Entity.muenzen -= 150;
-					gp.player.schaden++;
-				} else {
-					dialogIndex = 5;
+			frameCounter = 0;
+		}
+		if (ichRede) {
+			// DIALOG
+			switch (dialogIndex) {
+			case 0:
+				if (gp.keyH.enterGedrueckt) {
+					dialogIndex++;
+					gp.keyH.enterGedrueckt = false;
 				}
-				gp.keyH.enterGedrueckt = false;
-			} else if (gp.keyH.escGedrueckt) {
-				dialogIndex = 3;
-				gp.keyH.escGedrueckt = false;
+				break;
+			case 1:
+				if (gp.keyH.enterGedrueckt) {
+					if (Entity.muenzen -150 >=0) {
+						dialogIndex = 2;
+						Entity.muenzen -= 150;
+						gp.player.schaden++;
+					} else {
+						dialogIndex = 5;
+					}
+					gp.keyH.enterGedrueckt = false;
+				} else if (gp.keyH.escGedrueckt) {
+					dialogIndex = 3;
+					gp.keyH.escGedrueckt = false;
+				}
+				break;
+			case 2:
+				if (gp.keyH.enterGedrueckt) {
+					dialogIndex = 4;
+					gp.gStatus = 0;
+					ichRede = false;
+					gp.keyH.enterGedrueckt = false;
+				}
+				break;
+			case 3:
+				if (gp.keyH.enterGedrueckt) {
+					dialogIndex = 1;
+					gp.gStatus = 0;
+					ichRede = false;
+					gp.keyH.enterGedrueckt = false;
+				}
+				break;
+			case 4:
+				if (gp.keyH.enterGedrueckt) {
+					gp.gStatus = 0;
+					ichRede = false;
+					gp.keyH.enterGedrueckt = false;
+				}
+				break;
+			case 5:
+				if (gp.keyH.enterGedrueckt) {
+					gp.gStatus = 0;
+					ichRede = false;
+					gp.keyH.enterGedrueckt = false;
+				}
+				break;
 			}
-			break;
-		case 2:
-			if (gp.keyH.enterGedrueckt) {
-				dialogIndex = 4;
-				gp.gStatus = 0;
-				ichRede = false;
-				gp.keyH.enterGedrueckt = false;
-			}
-			break;
-		case 3:
-			if (gp.keyH.enterGedrueckt) {
-				dialogIndex = 1;
-				gp.gStatus = 0;
-				ichRede = false;
-				gp.keyH.enterGedrueckt = false;
-			}
-			break;
-		case 4:
-			if (gp.keyH.enterGedrueckt) {
-				gp.gStatus = 0;
-				ichRede = false;
-				gp.keyH.enterGedrueckt = false;
-			}
-			break;
-		case 5:
-			if (gp.keyH.enterGedrueckt) {
-				gp.gStatus = 0;
-				ichRede = false;
-				gp.keyH.enterGedrueckt = false;
-			}
-			break;
 		}
 
 	}
@@ -87,7 +96,21 @@ public class NPC extends Entity {
 	}
 
 	public void draw(Graphics2D g2) {
-		BufferedImage charSprite = down;
+		BufferedImage charSprite = null;
+		switch (spriteNumber) {
+		case 0:
+			charSprite = down;
+			break;
+		case 1:
+			charSprite = downLV;
+			break;
+		case 2:
+			charSprite = down;
+			break;
+		case 3:
+			charSprite = downRV;
+			break;
+		}
 		int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe / 2);
 		int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe / 2);
 		if (charSprite != null) {
@@ -120,8 +143,8 @@ public class NPC extends Entity {
 		upLV = setup("/objekte/Obj001Test");
 		upRV = setup("/objekte/Obj001Test");
 		down = setup("/npc/haendlerNPCVorne-Sammy");
-		downLV = setup("/objekte/Obj001Test");
-		downRV = setup("/objekte/Obj001Test");
+		downLV = setup("/npc/haendlerNPCVorneLinks-Sammy");
+		downRV = setup("/npc/haendlerNPCVorneRechts-Sammy");
 		left = setup("/objekte/Obj001Test");
 		leftLV = setup("/objekte/Obj001Test");
 		leftRV = setup("/objekte/Obj001Test");

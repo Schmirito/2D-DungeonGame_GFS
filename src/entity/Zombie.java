@@ -10,7 +10,7 @@ public class Zombie extends Entity {
 	int diffSpielerX;
 	int diffSpielerY;
 	String richtungX, richtungY;
-
+	int framesUnbewegt = 0;
 	int zaeler = 0;
 
 	public Zombie(GamePanel gp, int weltX, int weltY) {
@@ -174,11 +174,13 @@ public class Zombie extends Entity {
 				weltX += geschwindigkeit;
 				break;
 			}
-
+			framesUnbewegt=0;
+			frameCounter++;
+		} else {
+			framesUnbewegt++;
+			frameCounter = 0;
 		}
 
-		int framesUnbewegt = 0;
-		frameCounter++;
 		if (frameCounter > 8) {
 			spriteNumber++;
 			if (spriteNumber >= 4) {
@@ -186,79 +188,8 @@ public class Zombie extends Entity {
 			}
 			frameCounter = 0;
 		}
-
-		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
-		}
-
-		BufferedImage zombSprite = null;
-
-		switch (richtung) {
-		case "oben":
-			switch (spriteNumber) {
-			case 0:
-				zombSprite = up;
-				break;
-			case 1:
-				zombSprite = upLV;
-				break;
-			case 2:
-				zombSprite = up;
-				break;
-			case 3:
-				zombSprite = upRV;
-				break;
-			}
-			break;
-		case "unten":
-			switch (spriteNumber) {
-			case 0:
-				zombSprite = down;
-				break;
-			case 1:
-				zombSprite = downLV;
-				break;
-			case 2:
-				zombSprite = down;
-				break;
-			case 3:
-				zombSprite = downRV;
-				break;
-			}
-			break;
-		case "links":
-			switch (spriteNumber) {
-			case 0:
-				zombSprite = left;
-				break;
-			case 1:
-				zombSprite = leftLV;
-				break;
-			case 2:
-				zombSprite = left;
-				break;
-			case 3:
-				zombSprite = leftRV;
-				break;
-			}
-			break;
-		case "rechts":
-			switch (spriteNumber) {
-			case 0:
-				zombSprite = right;
-				break;
-			case 1:
-				zombSprite = rightLV;
-				break;
-			case 2:
-				zombSprite = right;
-				break;
-			case 3:
-				zombSprite = rightRV;
-				break;
-			}
-			break;
 		}
 
 	}

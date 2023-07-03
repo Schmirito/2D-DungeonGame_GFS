@@ -20,12 +20,12 @@ public class FeldManager {
 	public int groeße = 30;
 
 	public int startRaum = 0;
-	public int mapNr = 0;
-	public int raumZaeler = 0;
+	public int mapNr = 3;
+	public int raumZaeler = 4;
 	public int raeumeGesamt = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
-	public boolean start = true;
+	public boolean start = false;
 
 	// Etwas unschön gelößt, aber funktioniert.
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt",
