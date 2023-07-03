@@ -31,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public FeldManager feldM = new FeldManager(this);
 	public KeyHandler keyH = new KeyHandler();
+	public UI ui = new UI(this);
+	
 	Thread gameThread;
 	public KollisionPruefer kPruefer = new KollisionPruefer(this);
 	public Platzierer platzierer = new Platzierer(this);
@@ -38,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Kamera kamera = new Kamera(this, keyH, player);
 	// ENTITY, OBJEKTE, ...
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
-	public Entity entities[] = new Entity[10];
+	public Entity entities[] = new Entity[20];
 	
 	public GamePanel() {
 		setupGame();
@@ -57,10 +59,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 		feldM = new FeldManager(this);
-		player.weltX = 14*feldGroeﬂe;
+		player.weltX = 5*feldGroeﬂe;
 		player.weltY = 16*feldGroeﬂe;
-		kamera.weltX = 14*feldGroeﬂe;
-		kamera.weltY = 16*feldGroeﬂe;
+		kamera.weltX = 9*feldGroeﬂe;
+		kamera.weltY = 17*feldGroeﬂe;
 		player.leben = feldGroeﬂe;
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
@@ -156,6 +158,9 @@ public class GamePanel extends JPanel implements Runnable {
 		// SPIELER
 		player.draw(g2);
 
+		//UI
+		ui.draw(g2);
+		
 		g2.dispose();
 	}
 }

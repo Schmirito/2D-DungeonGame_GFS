@@ -51,6 +51,9 @@ public class Entity {
 
 	public static int monsterBesiegt;
 	int besiegt;
+
+	int muenzenAnzahlProMonster = 0;
+	public static int muenzen = 0;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -61,7 +64,6 @@ public class Entity {
 		hitBox.height = gp.feldGroeﬂe / 2;
 		hitBox.width = gp.feldGroeﬂe / 2;
 
-		
 		r¸ckstoﬂ = 16;
 
 	}
@@ -199,14 +201,16 @@ public class Entity {
 							gp.entities[i].hitBox.x = altEntHitBoxX;
 							gp.entities[i].hitBox.y = altEntHitBoxY;
 							gp.entities[i].getroffen(this, schlag);
-							
-							
+
 							if (gp.entities[i].leben <= 0) {
-									gp.entities[i] = null;
-									besiegt++;
-									setBesiegteMonster(besiegt);
+								gp.entities[i] = null;
+								besiegt++;
+								setBesiegteMonster(besiegt);
+								
+								muenzenAnzahlProMonster = (int) (Math.random()*3+1);
+								muenzen += muenzenAnzahlProMonster;
 							}
-							
+
 						} else {
 							gp.entities[i].hitBox.x = altEntHitBoxX;
 							gp.entities[i].hitBox.y = altEntHitBoxY;
@@ -228,7 +232,6 @@ public class Entity {
 			hitCooldownFrames--;
 		}
 	}
-
 
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
@@ -311,11 +314,13 @@ public class Entity {
 			}
 		}
 	}
-	public static void setBesiegteMonster(int besiegt){
+
+	public static void setBesiegteMonster(int besiegt) {
 		monsterBesiegt = besiegt;
 	}
+
 	public static int getBesiegteMonster() {
-		
+
 		return monsterBesiegt;
 	}
 }

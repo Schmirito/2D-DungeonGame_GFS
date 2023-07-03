@@ -1,14 +1,16 @@
 package main;
 
 import entity.Entity;
+import entity.Ghost;
 import entity.Zombie;
+import felder.FeldManager;
 import objekte.Obj_AusgangsTuer;
 import objekte.SuperObjekt;
 
 public class Platzierer {
 
 	GamePanel gp;
-
+	FeldManager fm;
 	int indexObjekte;
 	int randomFeldX;
 	int randomFeldY;
@@ -31,6 +33,7 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
+		
 		for (int i = 0; i < gp.entities.length; i++) {
 			gp.entities[i] = null;
 		}
@@ -38,8 +41,17 @@ public class Platzierer {
 		int anzahl = randomMonsterAnzahl;
 		do {
 			randomFeld();
-			gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
-			anzahl--;
+			
+			int nr = (int) (Math.random()*2+1);
+			
+			if (nr == 1) {
+				gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
+				anzahl--;
+			}
+			if(nr == 2){
+				gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße, randomFeldY * gp.feldGroeße);
+				anzahl--;
+			}
 		} while (anzahl != 0);
 	}
 
