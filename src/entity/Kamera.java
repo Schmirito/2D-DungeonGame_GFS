@@ -13,22 +13,33 @@ public class Kamera {
 	KeyHandler keyH;
 	Player player;
 
-	/**Constructor der Kamera.
-	 * @param gp
-	 * @param keyH
-	 * @param player
-	 *  */
+	/**
+	 * Konstruktor von Kamera. Der Konstruktor der Superclass wird aufgerufen und
+	 * einige Variablen initialisiert. Bidirektionale Beziehung mit GamePanel.
+	 * Unidirektionale beziehung mit KeyHandler und Spieler.
+	 * 
+	 * @param gp     Das GamePanel, damit wird eine bidirektionale Beziehung
+	 *               erstellt.
+	 * @param keyH   Der KeyHandler wird übergeben, um die Performance zu
+	 *               verbessern.
+	 * @param player Der Spieler wird übergeben, um die Performance zu verbessern.
+	 */
 	public Kamera(GamePanel gp, KeyHandler keyH, Player player) {
 		this.gp = gp;
 		this.keyH = keyH;
 		this.player = player;
 		bildschirmX = gp.BildBreite / 2;
 		bildschirmY = gp.BildHoehe / 2;
-		weltX = player.weltX+gp.feldGroeße*4;
+		weltX = player.weltX + gp.feldGroeße * 4;
 		weltY = player.weltY;
-		
+
 	}
-	/* Die Methode bewegt die Kamera, außer der Spieler kollidiert, die Kamera stößt am Rand an oder der Spieler ist noch nicht wieder mittig im Bildschirm platziert. 
+
+	/**
+	 * Die Methode bewegt die Kamera, außer der Spieler kollidiert, die Kamera stößt
+	 * am Rand an oder der Spieler ist noch nicht wieder mittig im Bildschirm
+	 * platziert. Die Map wird in Referenz zur Kamera gerendert, die Kamera ist
+	 * immer in der Mitte des Bildschirms.
 	 * 
 	 */
 	public void update() {
@@ -44,7 +55,7 @@ public class Kamera {
 				weltY += player.geschwindigkeit;
 
 			} else if ((weltX - bildschirmX) > 0 && player.weltX <= (gp.mapGroeße * gp.feldGroeße) - bildschirmX
-					&& keyH.linksGedrückt && !keyH.obenGedrückt && !keyH.untenGedrückt ) {
+					&& keyH.linksGedrückt && !keyH.obenGedrückt && !keyH.untenGedrückt) {
 
 				weltX -= player.geschwindigkeit;
 
@@ -57,26 +68,35 @@ public class Kamera {
 		}
 
 	}
-	
-	/**Es wird überprüft ob die Kamera sich weiterhin bewegen kann oder ob sie mehr zeigen würde als die map groß ist.
-	 * @param bewegung
-	 *  */
+
+	/**
+	 * Methode, mit der eine Bewegung der Kamera bzw. der Map in die
+	 * entgegengesetzte Richtung ausgeführt werden kann, wenn die kamera dadurch
+	 * nicht am Rand anstößt. Im Rahmen von Testungen zum Rückstoßen des Spieler
+	 * entstanden, aktuell nicht in Verwendung.
+	 * 
+	 * @param bewegung Die Weite der Bewegung die ausgeführt werden soll.
+	 */
 	public void versucheBewegung(int bewegung) {
 		String richtung = player.stoßRichtung;
 		if (true) {
-			if ((weltY - bildschirmY) > 0 && player.weltY <= (gp.mapGroeße * gp.feldGroeße) - bildschirmY && richtung.equals("oben")) {
+			if ((weltY - bildschirmY) > 0 && player.weltY <= (gp.mapGroeße * gp.feldGroeße) - bildschirmY
+					&& richtung.equals("oben")) {
 
 				weltY -= bewegung;
 
-			} else if ((weltY + bildschirmY) < (gp.mapGroeße * gp.feldGroeße) && player.weltY >= bildschirmY && richtung.equals("unten")) {
+			} else if ((weltY + bildschirmY) < (gp.mapGroeße * gp.feldGroeße) && player.weltY >= bildschirmY
+					&& richtung.equals("unten")) {
 
 				weltY += bewegung;
 
-			} else if ((weltX - bildschirmX) > 0 && player.weltX <= (gp.mapGroeße * gp.feldGroeße) - bildschirmX && richtung.equals("links")) {
+			} else if ((weltX - bildschirmX) > 0 && player.weltX <= (gp.mapGroeße * gp.feldGroeße) - bildschirmX
+					&& richtung.equals("links")) {
 
 				weltX -= bewegung;
 
-			} else if ((weltX + bildschirmX) < (gp.mapGroeße * gp.feldGroeße) && player.weltX >= bildschirmX && richtung.equals("rechts")) {
+			} else if ((weltX + bildschirmX) < (gp.mapGroeße * gp.feldGroeße) && player.weltX >= bildschirmX
+					&& richtung.equals("rechts")) {
 
 				weltX += bewegung;
 

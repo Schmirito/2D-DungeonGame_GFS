@@ -14,10 +14,10 @@ public class Zombie extends Entity {
 	int zaeler = 0;
 
 	/**
-	 * Konstruktor für Zombie
-	 * @param gp
-	 * @param weltX
-	 * @param weltY
+	 * Konstruktor für Zombie. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition und weitere Variablen wie die der Hitbox werden initialisiert.
+	 * @param gp Das GamePanel.
+	 * @param weltX Die X-Koordinaate auf der Map.
+	 * @param weltY Die Y-Koordinate auf der Map.
 	 */
 	public Zombie(GamePanel gp, int weltX, int weltY) {
 		super(gp);
@@ -37,9 +37,9 @@ public class Zombie extends Entity {
 	
 	/**Update-Methode von Zombies. Die richtung in welche diese schauen wird bestimmt.
 	 * Die Kollision mit Objekten, Entities und dem Spieler wird überprüft.
-	 * Die Methode "laufeZumSpieler" wird aufgerufen.
+	 * Die Methode laufeZumSpieler() wird aufgerufen.
 	 * Die bewegungen des Zombies werden bestimmt.
-	 * Der Zombie schlägt nach einiger Zeit den Spieler mithilfe der Methode "schlageSpieler". */
+	 * Der Zombie schlägt nach einiger Zeit den Spieler mithilfe der Methode schlageSpieler(). */
 	public void update() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
@@ -146,9 +146,10 @@ public class Zombie extends Entity {
 
 	}
 
-	/**Es wird überprüft on die X oder Y differenz zwischen dem Spieler und dem Zombie größer ist.
-	 * Der Geist bewegt sich in die jeweils größere Koordinaten richtung und kommt somit zum Spieler.
-	 * Es werden nacheinander verschiedene Bilder von den Zombies geladen, wodurch diese eine animation bei der Fortbewegung bekommen.*/
+	/**Wird in der Update-Methode aufgerufen.
+	 * Es wird überprüft, ob die X oder Y differenz zwischen dem Spieler und dem Zombie größer ist.
+	 * Der Zombie bewegt sich in die jeweils größere Koordinaten Differenz und kommt somit zum Spieler.
+	 */
 	public void laufeZumSpieler() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
@@ -209,12 +210,16 @@ public class Zombie extends Entity {
 
 	}
 
-	/**Wenn der Zombie den Spieler schlägt wird diese Methode aufgerufen. Sie zieht dem spieler eine gewisse menge an leben ab. */
+	/**
+	 * Wird von der Update-Methode aufgerufen. Verringert die Leben des Spielers.
+	 */
 	public void schlageSpieler() {
 		gp.player.leben -= gp.skala;
 	}
 
-	/**Die Bilder des Zombies werden in der setup-Methode, von der Superklasse Entity, aufgerufen und skaliert.*/
+	/**
+	 * Die Bilder zur Bewegungsanimation werden aus dem res-Ordner mithilfe der Setup-Methode in deren Variablen geladen.
+	 */
 	public void getImage() {
 
 		up = setup("/zombie/zombie-Up");

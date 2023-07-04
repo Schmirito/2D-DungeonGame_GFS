@@ -23,8 +23,8 @@ public class Player extends Entity {
 
 	/**
 	 * Konstruktor von Player. Der Konstruktor der Superclass wird aufgerufen und
-	 * einige Variablen initialisiert.
-	 * 
+	 * einige Variablen initialisiert. Bidirektionale Beziehung mit GamePanel.
+	 * Unidirektionale beziehung mit KeyHandler.
 	 * @param gp   Das GamePanel, damit wird eine bidirektionale Beziehung erstellt.
 	 * @param keyH Der KeyHandler wird übergeben um die Performance zu verbessern.
 	 */

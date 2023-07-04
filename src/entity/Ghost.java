@@ -13,10 +13,10 @@ public class Ghost extends Entity {
 
 	int zaeler = 0;
 	/**
-	 * Konstruktor für Ghost
-	 * @param gp
-	 * @param weltX
-	 * @param weltY
+	 * Konstruktor für Ghost. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition und weitere Variablen wie die der Hitbox werden initialisiert.
+	 * @param gp Das GamePanel.
+	 * @param weltX Die X-Koordinaate auf der Map.
+	 * @param weltY Die Y-Koordinate auf der Map.
 	 */
 	public Ghost(GamePanel gp, int weltX, int weltY) {
 		super(gp);
@@ -33,7 +33,9 @@ public class Ghost extends Entity {
 
 		getImage();
 	}
-
+	/**
+	 * Das Bewegungsverhalten eines Geist-Objekts wird hier ausgeführt. Gehen zum Spieler und Schlagen diesen, keine Feld-Kollision.
+	 */
 	public void update() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
@@ -145,7 +147,10 @@ public class Ghost extends Entity {
 		}
 
 	}
-
+	/**Wird in der Update-Methode aufgerufen.
+	 * Es wird überprüft, ob die X oder Y differenz zwischen dem Spieler und dem Zombie größer ist.
+	 * Der Zombie bewegt sich in die jeweils größere Koordinaten Differenz und kommt somit zum Spieler.
+	 */
 	public void laufeZumSpieler() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
@@ -274,11 +279,15 @@ public class Ghost extends Entity {
 		}
 
 	}
-
+	/**
+	 * Wird von der Update-Methode aufgerufen. Verringert die Leben des Spielers.
+	 */
 	public void schlageSpieler() {
 		gp.player.leben -= gp.skala;
 	}
-
+	/**
+	 * Die Bilder zur Bewegungsanimation werden aus dem res-Ordner mithilfe der Setup-Methode in deren Variablen geladen.
+	 */
 	public void getImage() {
 
 		up = setup("/ghost/ghost-up1");

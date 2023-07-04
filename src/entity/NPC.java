@@ -14,7 +14,12 @@ public class NPC extends Entity {
 	public String dialogTexte[] = { "Oh Hallo!", "Möchtest du für 150 Münzchen ein ominöses Tränkchen trinken?",
 			"Gute Entscheidung, HeHe", "Tu dir keinen Zwang an.", "HeHe","Hm das sind leider zu wenig Münzen..."};
 	public int dialogIndex = 0;
-
+	/**
+	 * Konstruktor für NPC. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition wird initialisiert. Bilder werden geladen.
+	 * @param gp Das GamePanel.
+	 * @param weltX Die X-Koordinaate auf der Map.
+	 * @param weltY Die Y-Koordinate auf der Map.
+	 */
 	public NPC(GamePanel gp, int weltX, int weltY) {
 		super(gp);
 		this.weltX = weltX;
@@ -22,7 +27,9 @@ public class NPC extends Entity {
 
 		getImage();
 	}
-
+	/**
+	 * Update-Methode des NPC. Hier wird das Wippen des Kopfs des NPC veranlasst und im Dialogfall dieser ermöglicht.
+	 */
 	public void update() {
 		frameCounter++;
 		if (frameCounter >= 30) {
@@ -90,12 +97,18 @@ public class NPC extends Entity {
 		}
 
 	}
-
+	/**
+	 * Wird der NPC von der in der Safe-Zone unsichtbaren Faust getroffen, so verliert er nicht an Leben, sondern der Mechanismus wird zum Ansprechen des NPC genutzt.
+	 * Game-Status wird geändert und boolean ichRede auf true gesetzt.
+	 */
 	public void getroffen(Entity entity, Schlag schlag) { // DIALOG MIT NPC
 		ichRede = true;
 		gp.gStatus = 2;
 	}
-
+	/**
+	 * NPC-Sprite wird re-initialisiert und, wenn innerhalb des Bildschirms, gezeichnet.
+	 * @param Graphics2D-Objekt, welches zum Zeichnen verwendet wird.
+	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage charSprite = null;
 		switch (spriteNumber) {
@@ -138,7 +151,9 @@ public class NPC extends Entity {
 		}
 
 	}
-
+	/**
+	 * Die NPC-Sprites werden aus dem res-Ordner mithilfe der Setup-Methode in deren Variablen geladen.
+	 */
 	public void getImage() {
 		up = setup("/objekte/Obj001Test");
 		upLV = setup("/objekte/Obj001Test");
