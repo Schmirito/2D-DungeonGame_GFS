@@ -247,7 +247,7 @@ public class Player extends Entity {
 	/**
 	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
 	 * Sprite ausgewählt und Schlussendlich an entsprechender Position angezeigt.
-	 * @param Das Graphics2D Objekt g2 wird übergeben
+	 * @param g2 Das Graphics2D Objekt, mit welchem gezeichnet wird.
 	 */
 	public void draw(Graphics2D g2) {
 
