@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
 	public Entity entities[] = new Entity[20];
 
+
 	/**Constructor des GamePanels.*/
 	public GamePanel() {
 		player.receiveKamera();
@@ -68,13 +69,18 @@ public class GamePanel extends JPanel implements Runnable {
 		keyH.rechtsGedr¸ckt = false;
 		keyH.obenGedr¸ckt = false;
 		keyH.untenGedr¸ckt = false;
-		player.weltX = 5 * feldGroeﬂe;
-		player.weltY = 16 * feldGroeﬂe;
+
+		player.weltX = 5 * feldGroeﬂe + (feldGroeﬂe/2);
+		player.weltY = 16 * feldGroeﬂe + (feldGroeﬂe/2);
+		
 		kamera.weltX = 9 * feldGroeﬂe;
 		kamera.weltY = 17 * feldGroeﬂe;
 		player.leben = feldGroeﬂe;
 		Entity.setBesiegteMonster(0);
+
+		Entity.monsterBesiegt = 0;
 		feldM.loadMap();
+
 		platzierer.setzeAusgang();
 		platzierer.setzeObjekt();
 		platzierer.setzeEntity();

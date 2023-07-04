@@ -21,19 +21,24 @@ public class FeldManager {
 
 	public int startRaum = 0;
 	public int mapNr = 0;
-	public int raumZaeler = 4;
+
+	public int raumZaeler = 0;
+	
 	public int raeumeGesamt = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
 	public boolean start = true;
 
 	// Etwas unschön gelößt, aber funktioniert.
+
+
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt",
 			"/maps/Room4.txt", "/maps/Room5.txt", "/maps/Room6.txt", "/maps/Room7.txt", "/maps/Room8.txt",
 			"/maps/Room9.txt", "/maps/Room10.txt", "/maps/Room11.txt", "/maps/Room12.txt", "/maps/Safezone1-O.txt",
 			"/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", "/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt",
 			"/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt",
 			"/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", "/maps/Safezone4-L.txt" };
+
 
 	/**Constructor des FeldManagers.
 	 * @param gp */

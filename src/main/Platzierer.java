@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Ghost;
+
 import entity.NPC;
 import entity.Zombie;
 import felder.FeldManager;
@@ -34,6 +35,7 @@ public class Platzierer {
 	}
 
 	public void setzeEntity() {
+
 		for (int i = 0; i < gp.entities.length; i++) {
 			gp.entities[i] = null;
 		}
@@ -46,23 +48,26 @@ public class Platzierer {
 				int nr = (int) (Math.random() * 2 + 1);
 
 				if (nr == 1) {
-					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
+
+					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe/2), randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe/2));
 					anzahl--;
 				}
 				if (nr == 2) {
-					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe, randomFeldY * gp.feldGroeﬂe);
+					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe/2), randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe/2));
 					anzahl--;
 				}
 			} while (anzahl > 0);
 		} else if (gp.feldM.mapNr > 12) {
-			gp.entities[0] = new NPC(gp, 15 * gp.feldGroeﬂe, 15 * gp.feldGroeﬂe);
+			randomFeld();
+			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe/2), randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe/2));
+
 		}
 	}
 
 	public void randomFeld() {
 		do {
-			randomFeldX = (int) (Math.random() * 29 + 0.5);
-			randomFeldY = (int) (Math.random() * 29 + 0.5);
+			randomFeldX = (int) (Math.random() * 20 + 5);
+			randomFeldY = (int) (Math.random() * 20 + 5);
 		} while (gp.feldM.feld[gp.feldM.mapFeldNr[randomFeldX][randomFeldY]].kollision == true);
 	}
 
