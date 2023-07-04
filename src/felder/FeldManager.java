@@ -105,6 +105,7 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 16);
+				gp.player.leben = gp.feldGroeﬂe;
 				raumZaeler = 1;
 			}
 
@@ -123,6 +124,7 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 19);
+				gp.player.leben = gp.feldGroeﬂe;
 				raumZaeler = 1;
 			}
 
@@ -141,6 +143,7 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 22);
+				gp.player.leben = gp.feldGroeﬂe;
 				raumZaeler = 1;
 			}
 
