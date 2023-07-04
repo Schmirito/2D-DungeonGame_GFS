@@ -21,11 +21,13 @@ public class Player extends Entity {
 	public int framesUnbewegt;
 	public int schaden = 1;
 
-	/**Constructor von Geister entities. Diese erben von Entity.
-	 *@param gp
-	 *@param keyH
-	 * */
-
+	/**
+	 * Konstruktor von Player. Der Konstruktor der Superclass wird aufgerufen und
+	 * einige Variablen initialisiert.
+	 * 
+	 * @param gp   Das GamePanel, damit wird eine bidirektionale Beziehung erstellt.
+	 * @param keyH Der KeyHandler wird übergeben um die Performance zu verbessern.
+	 */
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
@@ -45,18 +47,18 @@ public class Player extends Entity {
 		getPlayerImage();
 	}
 
-
 	/**
-	 * Holt sich das Kamera-Objekt vom GamePanel
+	 * Holt sich das Kamera-Objekt vom GamePanel.
 	 */
 	public void receiveKamera() {
 		kamera = gp.giveKamera();
 	}
 
-
-	/**Setzt einigw Standardwerte wie Geschwindigkeit und Leben.*/
+	/**
+	 * Setzt einige Standardwerte wie Geschwindigkeit und Leben.
+	 */
 	public void setDefaultValuables() {
-		geschwindigkeit = gp.skala * 2; 
+		geschwindigkeit = gp.skala * 2;
 		richtung = "unten";
 
 		leben = gp.feldGroeße;
@@ -65,9 +67,8 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Die Charactersprites werden aus dem res-Ordner in deren Variablen geladen
+	 * Die Charactersprites werden aus dem res-Ordner in deren Variablen geladen.
 	 */
-
 	public void getPlayerImage() {
 
 		up = setup("/player/char-Up");
@@ -86,9 +87,10 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet, welche Objekte ausgelöst/berührt wurden.
+	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstür: Es wird auf die neue Map gewchselt.
+	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet,
+	 * welche Objekte ausgelöst/berührt wurden.
 	 */
-
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
@@ -100,7 +102,7 @@ public class Player extends Entity {
 
 					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0
 							|| gp.feldM.mapNr > 12) {
-						//------------------------------------------------- NEUE MAP WIRD GELADEN
+						// ------------------------------------------------- NEUE MAP WIRD GELADEN
 						Entity.monsterBesiegt = 0;
 						gp.feldM.loadMap();
 						gp.platzierer.setzeAusgang();
@@ -116,8 +118,10 @@ public class Player extends Entity {
 		}
 	}
 
-	/**Der Spieler wird an die stelle des einganges von den Räumen gesetzt.
-	 * @param auchKamera */
+	/**
+	 * Der Spieler wird an die Stelle neben dem Eingang des Raums gesetzt.
+	 * @param auchKamera Entscheidet, ob die Kamera auch entsprechend neu platziert wird. Diese hält anders als der Spieler ihren Abstand zum Rand.
+	 */
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
@@ -184,17 +188,12 @@ public class Player extends Entity {
 			}
 		}
 	}
-
-	/**
-	 * Der Player wird jetzt in der methode setup skaliert, was die performance
-	 * verbessern kann.
-	 */
-
 	/**
 	 * Wenn tasten in die entsprechende Richtung gedrückt wurden, wird die
-	 * Spielerposition neu berechnet. Außerdem wird einer Anzahl an frames die
-	 * Variable für die Animation erhöht bzw zurückgesetzt. Wenn der Character eine
-	 * gewisse Anzahl frames steht, so wird die Richtung auf "steht" gesetzt.
+	 * Spielerposition neu berechnet, vorausgesetzt der Spieler wird dadurch nicht in einem Feld mit Kollision, Entity oder Objekt stehen. 
+	 * Außerdem wird nach einer Anzahl an Frames die
+	 * Variable für die Animation erhöht bzw. zurückgesetzt. Wenn der Character eine
+	 * gewisse Anzahl Frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
 
@@ -261,8 +260,8 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
-	 * Sprite ausgewählt und Schlussendlich an entsprechender Position angezeigt.
+	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu ladende
+	 * Sprite ausgewählt und schlussendlich an entsprechender Position auf dem Bildschirm angezeigt.
 	 * 
 	 * @param g2 Das Graphics2D Objekt, mit welchem gezeichnet wird.
 	 */
