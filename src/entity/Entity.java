@@ -58,7 +58,7 @@ public class Entity {
 
 	/**
 	 * Constructor von Entity, bei dem bestimmte Variablen festgelegt werden.
-	 * @param gp
+	 * @param gp GamePanel wird übergeben
 	 */
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -84,7 +84,7 @@ public class Entity {
 	/**
 	 * Es wird das Bild des Entities bestimmt und daraufhin, wenn es sich innerhalb
 	 * des Bildschirms befindet, gezeichnet.
-	 * @param g2
+	 * @param g2 Graphics2D wird zum zeichnen verwendet
 	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage charSprite = null;
@@ -253,7 +253,7 @@ public class Entity {
 
 	/**
 	 * die leben des getroffenen entities werden verringert.
-	 * @param entity
+	 * @param entity 
 	 * @param schlag
 	 */
 	public void getroffen(Entity entity, Schlag schlag) {

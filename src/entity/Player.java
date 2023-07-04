@@ -22,8 +22,6 @@ public class Player extends Entity {
 	public int framesUnbewegt;
 	public int schaden = 1;
 
-	
-
 	/**Constructor von Geister entities. Diese erben von Entity.
 	 *@param gp
 	 *@param keyH
@@ -92,7 +90,6 @@ public class Player extends Entity {
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					gp.platzierer.aktuelleMonsterImRaum = gp.platzierer.randomMonsterAnzahl - Entity.getBesiegteMonster();
-
 
 					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0 || gp.feldM.mapNr > 12) {
 
