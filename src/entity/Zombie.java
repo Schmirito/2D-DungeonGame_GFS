@@ -14,7 +14,7 @@ public class Zombie extends Entity {
 	int zaeler = 0;
 
 	/**Constructor von Zombie entities
-	 * @param GamePanel
+	 * @param gp
 	 * @param weltX
 	 * @param weltY
 	 *  */

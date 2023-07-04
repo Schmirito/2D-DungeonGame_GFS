@@ -14,9 +14,9 @@ public class Kamera {
 	Player player;
 
 	/**Constructor der Kamera.
-	 * @param GamePanel
-	 * @param KeyHandler
-	 * @param Player
+	 * @param gp
+	 * @param keyH
+	 * @param player
 	 *  */
 	public Kamera(GamePanel gp, KeyHandler keyH, Player player) {
 		this.gp = gp;

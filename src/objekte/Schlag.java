@@ -14,7 +14,7 @@ public class Schlag extends SuperObjekt {
 	int frameCounter = 0;
 
 	/**Constructor für das Schlagen 
-	 * @param GamePanel
+	 * @param gp
 	 * @param weltX
 	 * @param weltY
 	 * */
@@ -29,7 +29,7 @@ public class Schlag extends SuperObjekt {
 	}
 
 	/**Der Schlag wird in die jeweilig ausgeführte richtung geziechnet.
-	 * @param Graphics2D
+	 * @param g2
 	 * @param Entity
 	 *  */
 	public void draw(Graphics2D g2, Entity entity) {

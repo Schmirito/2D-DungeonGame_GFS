@@ -24,8 +24,8 @@ public class Player extends Entity {
 	
 
 	/**Constructor von Geister entities. Diese erben von Entity.
-	 *@param GamePanel
-	 *@param KeyHandler
+	 *@param gp
+	 *@param keyH
 	 * */
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -254,6 +254,7 @@ public class Player extends Entity {
 	/**
 	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
 	 * Sprite ausgewählt und Schlussendlich an entsprechender Position angezeigt.
+	 * @param g2
 	 */
 	public void draw(Graphics2D g2) {
 

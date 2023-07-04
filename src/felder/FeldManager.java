@@ -36,7 +36,7 @@ public class FeldManager {
 			"/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", "/maps/Safezone4-L.txt" };
 
 	/**Constructor des FeldManagers.
-	 * @param GamePanel */
+	 * @param gp */
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
 
@@ -310,7 +310,7 @@ public class FeldManager {
 	}
 
 	/**Die skalierten Bilder werden an der, ihnen jeweils zugehörigen, mapFeldNr gezeichnet.
-	 * @param Graphics2D
+	 * @param g2
 	 *  */
 	public void draw(Graphics2D g2) {
 

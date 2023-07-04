@@ -17,7 +17,7 @@ public class NPC extends Entity {
 	Font schriftgroesse;
 
 	/**Constructor des NPC's
-	 * @param GamePanel
+	 * @param gp
 	 * @param weltX
 	 * @param weltY
 	 *  */

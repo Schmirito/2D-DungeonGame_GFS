@@ -157,7 +157,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/** Methode in der g2 die gewünschten sachen zeichnen kann. 
-	 * @param Graphics2D
+	 * @param g2
 	 * */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -187,7 +187,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**Zeichnet das Dialogfenster des NPC's 
-	 * @param GRaphics2D
+	 * @param g2
 	 * @param x
 	 * @param y
 	 * @param width

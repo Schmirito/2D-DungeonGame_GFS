@@ -21,7 +21,7 @@ public class UI {
 	BufferedImage eisenmuenze, raum;
 	
 	/**Constructor des User-Interface 
-	 * @param GamePanel*/
+	 * @param gp*/
 	public UI(GamePanel gp) {
 		this.gp = gp;
 		
@@ -38,7 +38,7 @@ public class UI {
 	}
 	
 	/**Zeichen-Methode in welcher das User-Interface gezeichnet wird.
-	 * @param Graphics2D */
+	 * @param g2 */
 	public void draw(Graphics2D g2) {
 		
 		g2.drawImage(raum, null, gp.skala*2, gp.skala*2);

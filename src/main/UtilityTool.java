@@ -10,7 +10,7 @@ public class UtilityTool {
 	 * @param original
 	 * @param breite
 	 * @param hoehe
-	 * @return skaliertesBild
+	 * @return
 	 * */
 	public BufferedImage skalaBild(BufferedImage original, int breite, int hoehe){
 		
