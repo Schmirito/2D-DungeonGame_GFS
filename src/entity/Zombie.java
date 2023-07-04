@@ -28,7 +28,7 @@ public class Zombie extends Entity {
 
 		getImage();
 	}
-
+	
 	public void update() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;

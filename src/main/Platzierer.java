@@ -70,8 +70,6 @@ public class Platzierer {
 	}
 
 	public void setzeAusgang() {
-		// Wenn in der alten map mehr ausgaenge als in der neuen map sind, so werden die
-		// alten überschüssigen Ausgänge nicht gelöscht
 
 		for (int i = 0; i < 4; i++) {
 			gp.objekte[i] = null;
