@@ -360,7 +360,7 @@ public class Entity {
 	}
 	/**
 	 * Gibt die Klassenvariable monsterBesiegt zurück. Eigentlich nicht nötigt, da public, entstand durch Tests.
-	 * @return
+	 * @return Der Wert der Klassenvariable monsterBesiegt.
 	 */
 	public static int getBesiegteMonster() {
 
