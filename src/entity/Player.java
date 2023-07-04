@@ -21,12 +21,11 @@ public class Player extends Entity {
 	public int framesUnbewegt;
 	public int schaden = 1;
 
-	/**
-	 * Konstruktor für Player
-	 * 
-	 * @param gp
-	 * @param keyH
-	 */
+	/**Constructor von Geister entities. Diese erben von Entity.
+	 *@param gp
+	 *@param keyH
+	 * */
+
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
@@ -46,6 +45,7 @@ public class Player extends Entity {
 		getPlayerImage();
 	}
 
+
 	/**
 	 * Holt sich das Kamera-Objekt vom GamePanel
 	 */
@@ -53,11 +53,10 @@ public class Player extends Entity {
 		kamera = gp.giveKamera();
 	}
 
-	/**
-	 * Setzt einige Standardwerte wie Geschwindigkeit und Leben.
-	 */
+
+	/**Setzt einigw Standardwerte wie Geschwindigkeit und Leben.*/
 	public void setDefaultValuables() {
-		geschwindigkeit = gp.skala * 2;
+		geschwindigkeit = gp.skala * 2; 
 		richtung = "unten";
 
 		leben = gp.feldGroeße;
@@ -68,6 +67,7 @@ public class Player extends Entity {
 	/**
 	 * Die Charactersprites werden aus dem res-Ordner in deren Variablen geladen
 	 */
+
 	public void getPlayerImage() {
 
 		up = setup("/player/char-Up");
@@ -84,10 +84,11 @@ public class Player extends Entity {
 		rightRV = setup("/player/char-RightRV");
 
 	}
+
 	/**
-	 * Für die Objekte, die ausgelöst wurden, wird eine spezifische Aktion ausgeführt. Aktuell nur Ausgangstüren: Neue Map und Türen, Monster usw. neu platziert.
 	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet, welche Objekte ausgelöst/berührt wurden.
 	 */
+
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
@@ -114,7 +115,9 @@ public class Player extends Entity {
 			}
 		}
 	}
-	
+
+	/**Der Spieler wird an die stelle des einganges von den Räumen gesetzt.
+	 * @param auchKamera */
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;

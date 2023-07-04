@@ -45,6 +45,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
 	public Entity entities[] = new Entity[20];
 
+
+	/**Constructor des GamePanels.*/
 	public GamePanel() {
 		player.receiveKamera();
 		setupGame();
@@ -55,22 +57,27 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
+	
 	public Kamera giveKamera() {
 		return kamera;
 	}
 
+	/**Start-Variablen für das Spiel werden festgelegt. */
 	public void setupGame() {
 		feldM = new FeldManager(this);
 		keyH.linksGedrückt = false;
 		keyH.rechtsGedrückt = false;
 		keyH.obenGedrückt = false;
 		keyH.untenGedrückt = false;
+
 		player.weltX = 5 * feldGroeße + (feldGroeße/2);
 		player.weltY = 16 * feldGroeße + (feldGroeße/2);
+		
 		kamera.weltX = 9 * feldGroeße;
 		kamera.weltY = 17 * feldGroeße;
 		player.leben = feldGroeße;
 		Entity.setBesiegteMonster(0);
+
 		Entity.monsterBesiegt = 0;
 		
 		feldM.loadMap();
@@ -81,11 +88,14 @@ public class GamePanel extends JPanel implements Runnable {
 		Entity.muenzen = 0;
 	}
 
+	/**Startet ein Thread durch welches das spiel gestartet wird.
+	 * Sobald es erstellt wird, springt das programm in die run Methode. */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
+	/**Es werden die FPS eingestellt, sodass das spiel nur so oft pro sekunde, wie gewünscht, gezeichnet wird. */
 	@Override
 	public void run() {
 		double zeichenInterval = 1000000000 / FPS;
@@ -103,7 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
 			if (delta >= 1) {
 
 				update();
-	
+
 				repaint();
 
 				delta--;
@@ -112,6 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+	/**Je nach momentanem Spiel status wird das Spiel anders geupdated. */
 	public void update() {
 
 		if (gStatus == 0) { // GAME LÄUFT
@@ -152,7 +163,9 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-	/** Methode in der g2 die gewünschten sachen zeichnen kann. */
+	/** Methode in der g2 die gewünschten sachen zeichnen kann. 
+	 * @param g
+	 * */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -173,13 +186,20 @@ public class GamePanel extends JPanel implements Runnable {
 		// SPIELER
 		player.draw(g2);
 
-		//UI
+		// UI
 		ui.draw(g2);
 
 		g2.dispose();
 
 	}
 
+	/**Zeichnet das Dialogfenster des NPC's 
+	 * @param g2
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * */
 	public void drawDialogWindow(Graphics2D g2, int x, int y, int width, int height) {
 		Color c = new Color(0, 0, 0, 210);
 		g2.setColor(c);

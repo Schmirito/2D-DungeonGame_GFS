@@ -6,7 +6,12 @@ import java.awt.image.BufferedImage;
 
 public class UtilityTool {
 
-	/**Hier weden in der Methode alle felder, welche im FeldManager erstellt werden sollen, skaliert. Performance kann besser werden.*/
+	/**Hier weden in der Methode alle felder, welche im FeldManager erstellt werden sollen, skaliert. Performance kann besser werden.
+	 * @param original
+	 * @param breite
+	 * @param hoehe
+	 * @return
+	 * */
 	public BufferedImage skalaBild(BufferedImage original, int breite, int hoehe){
 		
 		BufferedImage skaliertesBild = new BufferedImage(breite, hoehe, original.getType());

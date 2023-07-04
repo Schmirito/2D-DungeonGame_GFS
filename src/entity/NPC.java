@@ -9,6 +9,7 @@ import main.GamePanel;
 import objekte.Schlag;
 
 public class NPC extends Entity {
+
 	public boolean ichRede = false;
 	public String dialogTexte[] = { "Oh Hallo!", "Möchtest du für 150 Münzchen ein ominöses Tränkchen trinken?",
 			"Gute Entscheidung, HeHe", "Tu dir keinen Zwang an.", "HeHe","Hm das sind leider zu wenig Münzen..."};

@@ -55,9 +55,10 @@ public class Entity {
 
 	int muenzenAnzahlProMonster = 0;
 	public static int muenzen = 0;
+
 	/**
-	 * Konstruktor von Entity
-	 * @param gp
+	 * Constructor von Entity, bei dem bestimmte Variablen festgelegt werden.
+	 * @param gp GamePanel wird übergeben
 	 */
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -72,10 +73,19 @@ public class Entity {
 
 	}
 
+	/**
+	 * Super-update Methode von Entity, welche von erbenden Klassen genutzt werden
+	 * kann.
+	 */
 	public void update() {
 
 	}
 
+	/**
+	 * Es wird das Bild des Entities bestimmt und daraufhin, wenn es sich innerhalb
+	 * des Bildschirms befindet, gezeichnet.
+	 * @param g2 Graphics2D wird zum zeichnen verwendet
+	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage charSprite = null;
 
@@ -161,6 +171,10 @@ public class Entity {
 
 	}
 
+	/**
+	 * Ein Schlag kann ausgeführt werden. Sobald ein Entity keine leben mehr hat,
+	 * wird dieses gelöscht.
+	 */
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeße / 2) + gp.kamera.bildschirmX;
 		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeße / 2) + gp.kamera.bildschirmY;
@@ -210,8 +224,8 @@ public class Entity {
 								gp.entities[i] = null;
 								besiegt++;
 								setBesiegteMonster(besiegt);
-								
-								muenzenAnzahlProMonster = (int) (Math.random()*3+1);
+
+								muenzenAnzahlProMonster = (int) (Math.random() * 3 + 1);
 								muenzen += muenzenAnzahlProMonster;
 							}
 
@@ -237,6 +251,11 @@ public class Entity {
 		}
 	}
 
+	/**
+	 * die leben des getroffenen entities werden verringert.
+	 * @param entity 
+	 * @param schlag
+	 */
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
 		stoßRichtung = schlag.schlagRichtung;
@@ -244,8 +263,14 @@ public class Entity {
 
 		leben -= gp.player.schaden;
 
+
 	}
 
+	/**
+	 * Die Bilder der Entities werden über einen Dateipfad aufgerufen und skaliert.
+	 * @param bildName
+	 * @return
+	 */
 	public BufferedImage setup(String bildName) {
 
 		UtilityTool uTool = new UtilityTool();
@@ -260,6 +285,16 @@ public class Entity {
 		return bild;
 	}
 
+	/**
+	 * Eine Lebensanzeige wird erstellt, welche von erbenden Entities genutzt werden
+	 * kann.
+	 * @param g2
+	 * @param bildschirmX
+	 * @param bildschirmY
+	 * @param breite
+	 * @param hoehe
+	 * @param leben
+	 */
 	public void lebensanzeige(Graphics2D g2, int bildschirmX, int bildschirmY, int breite, int hoehe, int leben) {
 		g2.setColor(Color.BLACK);
 		g2.drawRoundRect(bildschirmX, bildschirmY, breite, hoehe, bogenBreite, bogenHoehe);
@@ -267,10 +302,15 @@ public class Entity {
 		g2.fillRoundRect(bildschirmX, bildschirmY, leben, hoehe, bogenBreite, bogenHoehe);
 	}
 
+	/**
+	 * Es wird bestimmt was bei einer interaktion mit Objekten passieren soll.
+	 * 
+	 * @param objGetroffen[]
+	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
-				System.out.println("objekt getroffen: " + i);
+				// System.out.println("objekt getroffen: " + i);
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
 					geheZuEingang();
@@ -282,6 +322,9 @@ public class Entity {
 		}
 	}
 
+	/**
+	 * Die Koordinaten des Eingangs werden Ermittelt.
+	 */
 	public void geheZuEingang() {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
@@ -316,7 +359,7 @@ public class Entity {
 			}
 		}
 	}
-
+	
 	public static void setBesiegteMonster(int besiegt) {
 		monsterBesiegt = besiegt;
 	}

@@ -13,6 +13,11 @@ public class Kamera {
 	KeyHandler keyH;
 	Player player;
 
+	/**Constructor der Kamera.
+	 * @param gp
+	 * @param keyH
+	 * @param player
+	 *  */
 	public Kamera(GamePanel gp, KeyHandler keyH, Player player) {
 		this.gp = gp;
 		this.keyH = keyH;
@@ -53,6 +58,9 @@ public class Kamera {
 
 	}
 	
+	/**Es wird überprüft ob die Kamera sich weiterhin bewegen kann oder ob sie mehr zeigen würde als die map groß ist.
+	 * @param bewegung
+	 *  */
 	public void versucheBewegung(int bewegung) {
 		String richtung = player.stoßRichtung;
 		if (true) {

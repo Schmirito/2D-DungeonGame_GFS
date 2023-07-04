@@ -12,6 +12,7 @@ public class Zombie extends Entity {
 	String richtungX, richtungY;
 	int framesUnbewegt = 0;
 	int zaeler = 0;
+
 	/**
 	 * Konstruktor für Zombie
 	 * @param gp
@@ -34,6 +35,11 @@ public class Zombie extends Entity {
 		getImage();
 	}
 	
+	/**Update-Methode von Zombies. Die richtung in welche diese schauen wird bestimmt.
+	 * Die Kollision mit Objekten, Entities und dem Spieler wird überprüft.
+	 * Die Methode "laufeZumSpieler" wird aufgerufen.
+	 * Die bewegungen des Zombies werden bestimmt.
+	 * Der Zombie schlägt nach einiger Zeit den Spieler mithilfe der Methode "schlageSpieler". */
 	public void update() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
@@ -140,6 +146,9 @@ public class Zombie extends Entity {
 
 	}
 
+	/**Es wird überprüft on die X oder Y differenz zwischen dem Spieler und dem Zombie größer ist.
+	 * Der Geist bewegt sich in die jeweils größere Koordinaten richtung und kommt somit zum Spieler.
+	 * Es werden nacheinander verschiedene Bilder von den Zombies geladen, wodurch diese eine animation bei der Fortbewegung bekommen.*/
 	public void laufeZumSpieler() {
 		diffSpielerX = weltX - gp.player.weltX;
 		diffSpielerY = weltY - gp.player.weltY;
@@ -197,12 +206,15 @@ public class Zombie extends Entity {
 			spriteNumber = 0;
 		}
 
+
 	}
 
+	/**Wenn der Zombie den Spieler schlägt wird diese Methode aufgerufen. Sie zieht dem spieler eine gewisse menge an leben ab. */
 	public void schlageSpieler() {
 		gp.player.leben -= gp.skala;
 	}
 
+	/**Die Bilder des Zombies werden in der setup-Methode, von der Superklasse Entity, aufgerufen und skaliert.*/
 	public void getImage() {
 
 		up = setup("/zombie/zombie-Up");

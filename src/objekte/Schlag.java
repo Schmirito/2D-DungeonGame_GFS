@@ -13,6 +13,11 @@ public class Schlag extends SuperObjekt {
 	int maxAnimationFrames = 4;
 	int frameCounter = 0;
 
+	/**Constructor für das Schlagen 
+	 * @param gp
+	 * @param weltX
+	 * @param weltY
+	 * */
 	public Schlag(GamePanel gp, int weltX, int weltY) {
 		super(gp, weltX, weltY);
 		hitBox.x = weltX;
@@ -23,6 +28,10 @@ public class Schlag extends SuperObjekt {
 		bildR = setup("FaustRechts");
 	}
 
+	/**Der Schlag wird in die jeweilig ausgeführte richtung geziechnet.
+	 * @param g2
+	 * @param entity
+	 *  */
 	public void draw(Graphics2D g2, Entity entity) {
 		if (bild != null) {
 			if (animationFrames < maxAnimationFrames) {

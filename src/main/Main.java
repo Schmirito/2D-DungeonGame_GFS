@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 public class Main {
 
+	/**Main klasse, in welcher das Fenster, in dem das Spiel angezeigt wird, erstellt wird.*/
 	public static void main(String[] args) {
 		
 		
@@ -28,7 +29,7 @@ public class Main {
 		window.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//window.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK,4));
-		
+
 		gamePanel.startGameThread();
 	}
 

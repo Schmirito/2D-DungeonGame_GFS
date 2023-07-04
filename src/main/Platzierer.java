@@ -48,6 +48,7 @@ public class Platzierer {
 				int nr = (int) (Math.random() * 2 + 1);
 
 				if (nr == 1) {
+
 					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe/2), randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe/2));
 					anzahl--;
 				}
@@ -59,6 +60,7 @@ public class Platzierer {
 		} else if (gp.feldM.mapNr > 12) {
 			randomFeld();
 			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe/2), randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe/2));
+
 		}
 	}
 

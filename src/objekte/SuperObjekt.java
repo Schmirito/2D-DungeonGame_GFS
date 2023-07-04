@@ -10,6 +10,12 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.UtilityTool;
 
+/**
+ * 
+ * @author programmierer
+ * @version 04/07/2023
+ *
+ */
 public class SuperObjekt {
 	
 	GamePanel gp;
@@ -22,6 +28,12 @@ public class SuperObjekt {
 	public int bildschirmX;
 	public int bildschirmY;
 	
+	/**
+	 * Constructor SuperObjects
+	 * @param gp GamePanel wird übergeben
+	 * @param weltX weltX Koordinate des SuperObj
+	 * @param weltY weltY Koordinate des SuperObj
+	 */
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		name = "SuperObjekt";
@@ -35,7 +47,8 @@ public class SuperObjekt {
 		}
 	}
 	
-	
+	/**Zeichen-Methode welche die erbenden klassen nutzen können.
+	 * @param g2 Graphics2D wird zum zeichnen übergeben*/
 	public void draw(Graphics2D g2) {
 		if(bild != null) {
 			
@@ -51,6 +64,11 @@ public class SuperObjekt {
 			}
 		}
 	}
+	
+	/**Auslesen und skalieren der Objekte.
+	 * @param bildName Der bildname wird übergeben um das jeweilige bild zu skalieren
+	 * @return bild Das bild wird zurückgegeben
+	 */
 	public BufferedImage setup(String bildName) {
 
 		UtilityTool uTool = new UtilityTool();

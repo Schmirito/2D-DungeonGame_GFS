@@ -76,7 +76,6 @@ public class KollisionPruefer {
 
 	}
 
-
 	public void pruefeEntity(Entity entity) {
 
 		for (int i = 0; i < gp.entities.length; i++) {

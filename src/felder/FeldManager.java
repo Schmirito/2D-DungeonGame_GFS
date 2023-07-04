@@ -21,8 +21,9 @@ public class FeldManager {
 
 	public int startRaum = 0;
 	public int mapNr = 0;
-	public int raumZaeler = 0;
 
+	public int raumZaeler = 0;
+	
 	public int raeumeGesamt = 0;
 	public int neueNummer;
 	public int vorherigeNummer;
@@ -30,12 +31,14 @@ public class FeldManager {
 
 	// Etwas unschön gelößt, aber funktioniert.
 
+
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt",
 			"/maps/Room4.txt", "/maps/Room5.txt", "/maps/Room6.txt", "/maps/Room7.txt", "/maps/Room8.txt",
 			"/maps/Room9.txt", "/maps/Room10.txt", "/maps/Room11.txt", "/maps/Room12.txt", "/maps/Safezone1-O.txt",
 			"/maps/Safezone2-O.txt", "/maps/Safezone4-O.txt", "/maps/Safezone1-R.txt", "/maps/Safezone2-R.txt",
 			"/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt",
 			"/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", "/maps/Safezone4-L.txt" };
+
 
 	/**
 	 * Konstruktor für Feldmanager. Manche Variablen werden initialisiert, getFeldBild() wird aufgerufen.
@@ -51,7 +54,8 @@ public class FeldManager {
 		getFeldBild();
 	}
 
-	/** Die angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
+	/**Es wird eine mapNr ausgewählt, welche eine verbindung zu einer .txt datei hat.
+	 * Diese angegebene .txt datei wird ausgelesen, skaliert und gezeichnet. */
 	public void loadMap() {
 		switch (mapNr) {
 		case 0: // Startraum implementieren
@@ -83,6 +87,7 @@ public class FeldManager {
 			raeumeGesamt++;
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 13);
+				gp.player.leben = gp.feldGroeße;
 				raumZaeler = 1;
 			}
 			break;
@@ -100,9 +105,9 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 16);
+				gp.player.leben = gp.feldGroeße;
 				raumZaeler = 1;
 			}
-
 
 			break;
 
@@ -116,12 +121,12 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raumZaeler++;
 			raeumeGesamt++;
-			
+
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 19);
+				gp.player.leben = gp.feldGroeße;
 				raumZaeler = 1;
 			}
-		
 
 			break;
 
@@ -138,11 +143,12 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 22);
+				gp.player.leben = gp.feldGroeße;
 				raumZaeler = 1;
 			}
 
 			break;
-		
+
 		case 13:
 		case 16:
 		case 22:
@@ -153,7 +159,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		case 14:
 		case 17:
 		case 19:
@@ -164,7 +170,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		case 18:
 		case 20:
 		case 23:
@@ -175,7 +181,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		case 15:
 		case 21:
 		case 24:
@@ -186,7 +192,7 @@ public class FeldManager {
 			mapNr = neueNummer;
 			raeumeGesamt++;
 			break;
-			
+
 		default:
 			break;
 		} // switch case klammer
@@ -222,6 +228,7 @@ public class FeldManager {
 		System.out.println("raumzähler: "+raumZaeler);
 	}
 
+	/**Jeses Feld wird eingelesen, skaliert und die kollisionen festgelegt. */
 	public void getFeldBild() {
 		setup(0, "D001Boden", false);
 		setup(1, "D002Kiste", true);
@@ -280,6 +287,10 @@ public class FeldManager {
 
 	}
 
+	/**Die Felder werden unter einem Dateipfad gesucht, skaliert und kollisionen hinzugefügt.
+	 * @param index
+	 * @param bildName
+	 * @param kollision */
 	public void setup(int index, String bildName, boolean kollision) {
 		UtilityTool uTool = new UtilityTool();
 
@@ -308,6 +319,9 @@ public class FeldManager {
 		return index;
 	}
 
+	/**Die skalierten Bilder werden an der, ihnen jeweils zugehörigen, mapFeldNr gezeichnet.
+	 * @param g2
+	 *  */
 	public void draw(Graphics2D g2) {
 
 		int spalte = 0;
