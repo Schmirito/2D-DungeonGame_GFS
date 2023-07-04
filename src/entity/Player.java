@@ -87,7 +87,7 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstür: Es wird auf die neue Map gewchselt.
+	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstür: Es wird auf die neue Map gewechselt.
 	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet,
 	 * welche Objekte ausgelöst/berührt wurden.
 	 */
@@ -119,8 +119,8 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Der Spieler wird an die Stelle neben dem Eingang des Raums gesetzt.
-	 * @param auchKamera Entscheidet, ob die Kamera auch entsprechend neu platziert wird. Diese hält anders als der Spieler ihren Abstand zum Rand.
+	 * Der Spieler wird an die Stelle neben dem Eingang des Raums gesetzt. Die Kamera kann auch entsprechend mit Abstand zum Rand neu platziert werden.
+	 * @param auchKamera Entscheidet, ob die Kamera auch entsprechend neu platziert wird.
 	 */
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS

@@ -58,7 +58,7 @@ public class Entity {
 
 	/**
 	 * Constructor von Entity, bei dem bestimmte Variablen festgelegt werden.
-	 * @param gp GamePanel wird übergeben
+	 * @param gp GamePanel wird übergeben.
 	 */
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -74,17 +74,16 @@ public class Entity {
 	}
 
 	/**
-	 * Super-update Methode von Entity, welche von erbenden Klassen genutzt werden
-	 * kann.
+	 * Update Methode von Entity, diese ist leer. Wird von erbenden Klassen genutzt, wenn diese keine Aktionen ausführen oder andernfalls überschrieben.
 	 */
 	public void update() {
 
 	}
 
 	/**
-	 * Es wird das Bild des Entities bestimmt und daraufhin, wenn es sich innerhalb
+	 * Es wird das Bild des Entities mit verschachtelten Switch-Case Verzeigungen bestimmt und, wenn es sich innerhalb
 	 * des Bildschirms befindet, gezeichnet.
-	 * @param g2 Graphics2D wird zum zeichnen verwendet
+	 * @param g2 Graphics2D wird zum Zeichnen verwendet
 	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage charSprite = null;
@@ -172,39 +171,32 @@ public class Entity {
 	}
 
 	/**
-	 * Ein Schlag kann ausgeführt werden. Sobald ein Entity keine leben mehr hat,
-	 * wird dieses gelöscht.
+	 * Wenn eine der Pfeiltasten gedrückt wird, wird ein Schlag ausgeführt, also ein Faust-Objekt erstellt. Trifft dieses ein Entity, 
+	 * wird die getroffen()-Methode des Entity ausgeführt. Der Schlag hat einen Cooldown.
 	 */
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeße / 2) + gp.kamera.bildschirmX;
 		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeße / 2) + gp.kamera.bildschirmY;
-		if (
-		// gp.keyH.obenGedrückt == false && gp.keyH.untenGedrückt == false &&
-		// gp.keyH.linksGedrückt == false && gp.keyH.rechtsGedrückt == false &&
-		hitCooldownFrames <= 0) {
+		if (hitCooldownFrames <= 0) {
 
 			if (gp.keyH.pfeilHochGedrückt) {
 				schlag = new Schlag(gp, weltX - (gp.feldGroeße / 2), weltY - (gp.feldGroeße / 2) - (gp.feldGroeße / 2));
 				richtung = "oben";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRunterGedrückt) {
 				schlag = new Schlag(gp, weltX - (gp.feldGroeße / 2), weltY - (gp.feldGroeße / 2) + (gp.feldGroeße));
 				richtung = "unten";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-				System.out.println("schlag");
 			} else if (gp.keyH.pfeilLinksGedrückt) {
 				schlag = new Schlag(gp, weltX - (gp.feldGroeße / 2) - (gp.feldGroeße / 2) - (gp.feldGroeße / 4),
 						weltY - (gp.feldGroeße / 2));
 				richtung = "links";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-				System.out.println("schlag");
 			} else if (gp.keyH.pfeilRechtsGedrückt) {
 				schlag = new Schlag(gp, weltX - (gp.feldGroeße / 2) + (gp.feldGroeße / 2) + (gp.feldGroeße / 4),
 						weltY - (gp.feldGroeße / 2));
 				richtung = "rechts";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-				System.out.println("schlag");
 			}
 
 			if (schlag != null) {
@@ -252,9 +244,9 @@ public class Entity {
 	}
 
 	/**
-	 * die leben des getroffenen entities werden verringert.
-	 * @param entity 
-	 * @param schlag
+	 * Die Leben des getroffenen Entity werden verringert und Variablen für die Rückstoßanimation gesetzt.
+	 * @param entity Das Entity, welches dieses Entity, in dem diese Methode ausgeführt wird, geschlagen hat. Bisher immer der Spieler.
+	 * @param schlag Das Schlag-Objekt, welches das Entity getroffen hat.
 	 */
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
@@ -267,9 +259,9 @@ public class Entity {
 	}
 
 	/**
-	 * Die Bilder der Entities werden über einen Dateipfad aufgerufen und skaliert.
-	 * @param bildName
-	 * @return
+	 * Die Bilder des Entity wird über einen Dateipfad aufgerufen, skaliert und zurückgegeben.
+	 * @param bildName Der Bildname mit Dateipfad.
+	 * @return BufferedImage Das zurückgegebene Bild.
 	 */
 	public BufferedImage setup(String bildName) {
 
@@ -286,14 +278,14 @@ public class Entity {
 	}
 
 	/**
-	 * Eine Lebensanzeige wird erstellt, welche von erbenden Entities genutzt werden
+	 * Eine Lebensanzeige wird gezichnet, dafür werden verschiedene Parameter übergeben, sodass diese theoretisch von allen Entities genutzt werden
 	 * kann.
-	 * @param g2
-	 * @param bildschirmX
-	 * @param bildschirmY
-	 * @param breite
-	 * @param hoehe
-	 * @param leben
+	 * @param g2 Das Graphics2D-Objekt, mit dem gezeichnet wird.
+	 * @param bildschirmX Position auf dem Bildschirm auf der X-Achse.
+	 * @param bildschirmY Position auf dem Bildschirm auf der Y-Achse.
+	 * @param breite Breite des Hintergrunds der Lebensanzeige.
+	 * @param hoehe Höhe der Lebensanzeige.
+	 * @param leben Breite der Lebensanzeige bzw. die Leben.
 	 */
 	public void lebensanzeige(Graphics2D g2, int bildschirmX, int bildschirmY, int breite, int hoehe, int leben) {
 		g2.setColor(Color.BLACK);
@@ -303,9 +295,9 @@ public class Entity {
 	}
 
 	/**
-	 * Es wird bestimmt was bei einer interaktion mit Objekten passieren soll.
-	 * 
-	 * @param objGetroffen[]
+	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstür: Das Entity kommt bei der Eingangstür der Map wieder raus.
+	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet,
+	 * welche Objekte ausgelöst/berührt wurden.
 	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
@@ -323,7 +315,7 @@ public class Entity {
 	}
 
 	/**
-	 * Die Koordinaten des Eingangs werden Ermittelt.
+	 * Das Entity wird an die Stelle neben dem Eingang des Raums gesetzt.
 	 */
 	public void geheZuEingang() {
 		// ERMITTLE KOODRINATEN DES EINGANGS
@@ -359,11 +351,17 @@ public class Entity {
 			}
 		}
 	}
-	
+	/**
+	 * Setzt die Klassenvariable auf den übergebenen Wert. Eigentlich nicht nötig, da diese public ist, entstand durch Tests und wurde nicht mehr geändert.
+	 * @param besiegt Anzahl, wieviele Monster im aktuellen Raum besiegt wurden.
+	 */
 	public static void setBesiegteMonster(int besiegt) {
 		monsterBesiegt = besiegt;
 	}
-
+	/**
+	 * Gibt die Klassenvariable monsterBesiegt zurück. Eigentlich nicht nötigt, da public, entstand durch Tests.
+	 * @return
+	 */
 	public static int getBesiegteMonster() {
 
 		return monsterBesiegt;
