@@ -20,11 +20,21 @@ public class Platzierer {
 	public int randomMonsterAnzahl = 0;
 	public int aktuelleMonsterImRaum;
 
+	/**
+	 * Konstruktor des Platzierers. Bidirektionale Assoziation mit GamePanel wird
+	 * erstellt.
+	 * 
+	 * @param gp GamePanel-Objekt für bidirektionale Berziehung.
+	 */
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
 		indexObjekte = 0;
 	}
 
+	/**
+	 * Beliebige Objekte können hier zum Platzieren codiert werden. Die ersten vier
+	 * Plätze im Objekte-Array sind für Türen und Specials reserviert.
+	 */
 	public void setzeObjekt() {
 		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
 		indexObjekte = 4;
@@ -34,6 +44,9 @@ public class Platzierer {
 
 	}
 
+	/**
+	 * Die Monster sowie der NPC werden hier an zufällig freier Stelle platziert.
+	 */
 	public void setzeEntity() {
 
 		for (int i = 0; i < gp.entities.length; i++) {
@@ -49,21 +62,27 @@ public class Platzierer {
 
 				if (nr == 1) {
 
-					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeße + (gp.feldGroeße/2), randomFeldY * gp.feldGroeße + (gp.feldGroeße/2));
+					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeße + (gp.feldGroeße / 2),
+							randomFeldY * gp.feldGroeße + (gp.feldGroeße / 2));
 					anzahl--;
 				}
 				if (nr == 2) {
-					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße + (gp.feldGroeße/2), randomFeldY * gp.feldGroeße + (gp.feldGroeße/2));
+					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeße + (gp.feldGroeße / 2),
+							randomFeldY * gp.feldGroeße + (gp.feldGroeße / 2));
 					anzahl--;
 				}
 			} while (anzahl > 0);
 		} else if (gp.feldM.mapNr > 12) {
 			randomFeld();
-			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroeße + (gp.feldGroeße/2), randomFeldY * gp.feldGroeße + (gp.feldGroeße/2));
+			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroeße + (gp.feldGroeße / 2),
+					randomFeldY * gp.feldGroeße + (gp.feldGroeße / 2));
 
 		}
 	}
 
+	/**
+	 * Ermittelt zufällig freie Felder
+	 */
 	public void randomFeld() {
 		do {
 			randomFeldX = (int) (Math.random() * 20 + 5);
@@ -71,6 +90,11 @@ public class Platzierer {
 		} while (gp.feldM.feld[gp.feldM.mapFeldNr[randomFeldX][randomFeldY]].kollision == true);
 	}
 
+	/**
+	 * Setzt die Ausgang-Objekte an die Stellen, an welchen sich auch Ausgang-Felder
+	 * befinden. Zur ermittlung des Index des Felds nach dem Bildnamen wird hier die
+	 * getFeldIndex()-Methode aus dem Feldmanager benutzt.
+	 */
 	public void setzeAusgang() {
 
 		for (int i = 0; i < 4; i++) {

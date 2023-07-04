@@ -48,15 +48,6 @@ public class Player extends Entity {
 		getPlayerImage();
 	}
 
-
-	/**
-	 * Holt sich das Kamera-Objekt vom GamePanel.
-	 */
-	public void receiveKamera() {
-		kamera = gp.giveKamera();
-	}
-
-
 	/**Setzt einigw Standardwerte wie Geschwindigkeit und Leben.*/
 	public void setDefaultValuables() {
 		geschwindigkeit = gp.skala * 2; 

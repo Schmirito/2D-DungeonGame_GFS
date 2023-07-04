@@ -15,8 +15,8 @@ public class KeyHandler implements KeyListener {
 
 	}
 
-	/**Sobald eine Taste gedrückt ist, wird die jeweils zugehörige variable auf true gesetzt. 
-	 * @param e
+	/**Sobald eine Taste gedrückt ist, so wird die jeweils zugehörige Variable auf "true" gesetzt. 
+	 * @param e KeyEvent, enthält welche Tasten gedrückt sind.
 	 * */
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -59,8 +59,8 @@ public class KeyHandler implements KeyListener {
 
 	}
 
-	/**Sobald eine Taste losgelassen wird, dann wird die jeweils zugehörige variable auf false gesetzt. 
-	 * @param e
+	/**Sobald eine Taste losgelassen wird, so wird die jeweils zugehörige Variable auf "false" gesetzt. 
+	 * @param e KeyEvent, enthält welche Tasten gedrückt sind.
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {

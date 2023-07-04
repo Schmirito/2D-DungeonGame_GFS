@@ -11,8 +11,8 @@ public class KollisionPruefer {
 	}
 
 	/**
-	 * Es wird geprüft ob ein Feld auf welches das Entity laufen will Kollision hat,
-	 * dementsprechend 'entity.kollidiert' gesetzt
+	 * Kollision zwischen dem übergeben Entity und anderen Feldern mit Kollision wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision überprüfen will.
 	 */
 	public boolean pruefeFeld(Entity entity) {
 
@@ -75,7 +75,10 @@ public class KollisionPruefer {
 		return kollidiert;
 
 	}
-
+	/**
+	 * Kollision zwischen dem übergeben Entity und anderen Entities im Entity-Array wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision überprüfen will.
+	 */
 	public void pruefeEntity(Entity entity) {
 
 		for (int i = 0; i < gp.entities.length; i++) {
@@ -140,7 +143,10 @@ public class KollisionPruefer {
 			}
 		}
 	}
-
+	/**
+	 * Kollision zwischen dem übergeben Entity und anderen Entities im Entity-Array wird geprüft. Wenn zutreffend wird "true" zurückgegeben, ansonsten "false".
+	 * @param entity Entity, welches die Kollision überprüfen will.
+	 */
 	public boolean pruefeEntityNurRückgabe(Entity entity, String richtung, int bewegung) {
 		boolean kollidiert = false;
 		for (int i = 0; i < gp.entities.length; i++) {
@@ -210,7 +216,10 @@ public class KollisionPruefer {
 		}
 		return kollidiert;
 	}
-
+	/**
+	 * Kollision zwischen dem übergeben Entity und dem Player wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision überprüfen will.
+	 */
 	public void pruefePlayer(Entity entity) {
 
 		if (true) {
@@ -273,7 +282,10 @@ public class KollisionPruefer {
 			gp.player.hitBox.y = altesObjektHitboxY;
 		}
 	}
-
+	/**
+	 * Kollision zwischen dem übergeben Entity und anderen Feldern mit Kollision wird geprüft. Wenn zutreffend wird "true" zurückgegeben, ansonsten "false".
+	 * @param entity Entity, welches die Kollision überprüfen will.
+	 */
 	public boolean pruefeFeldOnlyRückgabe(Entity entity, String richtung, int bewegung) {
 
 		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeße / 2) + entity.hitBox.x;
@@ -332,7 +344,10 @@ public class KollisionPruefer {
 		return kollidiert;
 
 	}
-
+	/**
+	 * Kollision zwischen dem übergeben Entity und Objekten im Objekte-Array wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision überprüfen will.
+	 */
 	public boolean[] pruefeObjekt(Entity entity, boolean kannInteragieren) {
 		boolean objGetroffen[] = new boolean[gp.objekte.length];
 		for (int i = 0; i < objGetroffen.length; i++) {
@@ -423,7 +438,10 @@ public class KollisionPruefer {
 
 		return objGetroffen;
 	}
-
+	/**
+	 * Kollision zwischen dem übergeben Entity und Objekten im Objekte-Array wird geprüft. Wenn zutreffend wird "true" zurückgegeben, ansonsten "false".
+	 * @param entity Entity, welches die Kollision überprüfen will.
+	 */
 	public boolean pruefeObjektOnlyKollidiert(Entity entity, String richtung) {
 		boolean kollidiert = false;
 

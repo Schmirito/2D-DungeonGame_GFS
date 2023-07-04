@@ -37,7 +37,7 @@ public class UI {
 		}
 	}
 	
-	/**Zeichen-Methode in welcher das User-Interface gezeichnet wird.
+	/**Zeichen-Methode in welcher das User-Interface(Eisenmünzen und Raumanzahl links oben) gezeichnet wird.
 	 * @param g2 */
 	public void draw(Graphics2D g2) {
 		

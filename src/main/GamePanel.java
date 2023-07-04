@@ -45,10 +45,11 @@ public class GamePanel extends JPanel implements Runnable {
 	public SuperObjekt objekte[] = new SuperObjekt[10]; // maximale Anzahl an Objekten: 10
 	public Entity entities[] = new Entity[20];
 
-
-	/**Constructor des GamePanels.*/
+	/**
+	 * Konstruktor des GamePanels. Ruft setupGame() auf und veranlasst
+	 * Einstellungen.
+	 */
 	public GamePanel() {
-		player.receiveKamera();
 		setupGame();
 		this.setPreferredSize(new Dimension(BildBreite, BildHoehe));
 		this.setBackground(Color.black);
@@ -57,29 +58,15 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
-	
-	public Kamera giveKamera() {
-		return kamera;
-	}
-
-	/**Start-Variablen für das Spiel werden festgelegt. */
+	/** Start-Variablen für das Spiel werden festgelegt, die Map geladen und Entity, Objekte und Ausgänge gesetzt. */
 	public void setupGame() {
-		feldM = new FeldManager(this);
-		keyH.linksGedrückt = false;
-		keyH.rechtsGedrückt = false;
-		keyH.obenGedrückt = false;
-		keyH.untenGedrückt = false;
+		player.weltX = 5 * feldGroeße + (feldGroeße / 2);
+		player.weltY = 16 * feldGroeße + (feldGroeße / 2);
 
-		player.weltX = 5 * feldGroeße + (feldGroeße/2);
-		player.weltY = 16 * feldGroeße + (feldGroeße/2);
-		
 		kamera.weltX = 9 * feldGroeße;
 		kamera.weltY = 17 * feldGroeße;
 		player.leben = feldGroeße;
-		Entity.setBesiegteMonster(0);
 
-		Entity.monsterBesiegt = 0;
-		
 		feldM.loadMap();
 
 		platzierer.setzeAusgang();
@@ -88,14 +75,18 @@ public class GamePanel extends JPanel implements Runnable {
 		Entity.muenzen = 0;
 	}
 
-	/**Startet ein Thread durch welches das spiel gestartet wird.
-	 * Sobald es erstellt wird, springt das programm in die run Methode. */
+	/**
+	 * Startet einen Thread in welchem das Spiel läuft. Der Thread durchläuft die run()-Methode.
+	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
-	/**Es werden die FPS eingestellt, sodass das spiel nur so oft pro sekunde, wie gewünscht, gezeichnet wird. */
+	/**
+	 * Es werden die FPS eingestellt, sodass das spiel nur so oft pro sekunde, wie
+	 * gewünscht, gezeichnet wird. Hier 60 mal.
+	 */
 	@Override
 	public void run() {
 		double zeichenInterval = 1000000000 / FPS;
@@ -122,7 +113,9 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-	/**Je nach momentanem Spiel status wird das Spiel anders geupdated. */
+	/**
+	 * Wird von der run()-Methode aufgerufen. Veranlasst je nach Spielstatus z.B. den normalen Spielablauf durch aufrufen der update()-Methoden der einzelnen Klassen.
+	 */
 	public void update() {
 
 		if (gStatus == 0) { // GAME LÄUFT
@@ -163,9 +156,10 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-	/** Methode in der g2 die gewünschten sachen zeichnen kann. 
-	 * @param g
-	 * */
+	/**
+	 * Wird von der Methode repaint() in run() aufgerufen. Hier wird das Spiel durch Aufrufen der draw()-Methoden der Klassen gerendert/gezeichnet.
+	 * @param g Wird von der Bibliothek mitgegeben. Wird durch typecasting zum Graphics2D-Objekt.
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -193,13 +187,15 @@ public class GamePanel extends JPanel implements Runnable {
 
 	}
 
-	/**Zeichnet das Dialogfenster des NPC's 
-	 * @param g2
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * */
+	/**
+	 * Hiermit lassen sich verschiedene Diaglog-Hintergründe rendern.
+	 * 
+	 * @param g2 Graphics2D-Objekt zum Render.
+	 * @param x Parameter zur X-Position auf dem Bildschirm.
+	 * @param y Parameter zur Y-Position auf dem Bildschirm.
+	 * @param width Parameter zur Breite des Fensters.
+	 * @param height Parameter zur Höhe des Fensters.
+	 */
 	public void drawDialogWindow(Graphics2D g2, int x, int y, int width, int height) {
 		Color c = new Color(0, 0, 0, 210);
 		g2.setColor(c);

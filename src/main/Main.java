@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 
 public class Main {
 
-	/**Main klasse, in welcher das Fenster, in dem das Spiel angezeigt wird, erstellt wird.*/
+	/**Main Klasse, welche das Fenster erstellt und das Spiel startet.*/
 	public static void main(String[] args) {
 		
 		

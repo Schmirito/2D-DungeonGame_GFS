@@ -32,7 +32,7 @@ public class Kamera {
 		bildschirmY = gp.BildHoehe / 2;
 		weltX = player.weltX + gp.feldGroeﬂe * 4;
 		weltY = player.weltY;
-
+		player.kamera = this;
 	}
 
 	/**
