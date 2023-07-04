@@ -85,6 +85,7 @@ public class Player extends Entity {
 
 	}
 	/**
+	 * Für die Objekte, die ausgelöst wurden, wird eine spezifische Aktion ausgeführt. Aktuell nur Ausgangstüren: Neue Map und Türen, Monster usw. neu platziert.
 	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet, welche Objekte ausgelöst/berührt wurden.
 	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
