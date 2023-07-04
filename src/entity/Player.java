@@ -114,7 +114,7 @@ public class Player extends Entity {
 			}
 		}
 	}
-
+	
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
