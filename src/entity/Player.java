@@ -14,7 +14,6 @@ import main.UtilityTool;
 
 public class Player extends Entity {
 
-	/** Deklaration der Variablen */
 	KeyHandler keyH;
 	Kamera kamera;
 	public int bildschirmX;
@@ -22,13 +21,16 @@ public class Player extends Entity {
 	public int framesUnbewegt;
 	public int schaden = 1;
 
-	
-
-	/** Constructor mit Uebergabeparametern GamePanel und KeyHandler */
+	/**
+	 * Konstruktor f¸r Player
+	 * 
+	 * @param gp
+	 * @param keyH
+	 */
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
-		
+
 		bildschirmX = gp.BildBreite / 2;
 		bildschirmY = gp.BildHoehe / 2;
 		framesUnbewegt = 0;
@@ -44,22 +46,28 @@ public class Player extends Entity {
 		getPlayerImage();
 	}
 
+	/**
+	 * Holt sich das Kamera-Objekt vom GamePanel
+	 */
 	public void receiveKamera() {
 		kamera = gp.giveKamera();
 	}
 
+	/**
+	 * Setzt einige Standardwerte wie Geschwindigkeit und Leben.
+	 */
 	public void setDefaultValuables() {
-		weltX = gp.feldGroeﬂe*5-(gp.feldGroeﬂe/2); // 13 * gp.feldGroeﬂe;
-		weltY = gp.feldGroeﬂe*16; // 13 * gp.feldGroeﬂe;
-		geschwindigkeit = gp.skala*2;
+		geschwindigkeit = gp.skala * 2;
 		richtung = "unten";
-		
+
 		leben = gp.feldGroeﬂe;
 		lebensanzeigeBreite = gp.feldGroeﬂe;
-		lebensanzeigeHoehe = gp.skala*2;
+		lebensanzeigeHoehe = gp.skala * 2;
 	}
 
-	/** Die Charactersprites werden aus dem res Ordner in deren variablen geladen */
+	/**
+	 * Die Charactersprites werden aus dem res-Ordner in deren Variablen geladen
+	 */
 	public void getPlayerImage() {
 
 		up = setup("/player/char-Up");
@@ -76,22 +84,27 @@ public class Player extends Entity {
 		rightRV = setup("/player/char-RightRV");
 
 	}
-	
+	/**
+	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet, welche Objekte ausgelˆst/ber¸hrt wurden.
+	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
 			if (objGetroffen[i] == true) {
 				System.out.println("objekt getroffen: " + i);
 				switch (gp.objekte[i].name) {
 				case "Ausgang":
-					gp.platzierer.aktuelleMonsterImRaum = gp.platzierer.randomMonsterAnzahl - Entity.getBesiegteMonster();
+					gp.platzierer.aktuelleMonsterImRaum = gp.platzierer.randomMonsterAnzahl
+							- Entity.getBesiegteMonster();
 
-					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0 || gp.feldM.mapNr > 12) {
-
-					gp.feldM.loadMap();
-					gp.platzierer.setzeAusgang();
-					gp.platzierer.setzeObjekt();
-					gp.platzierer.setzeEntity();
-					gp.player.geheZuEingang(true);
+					if (Entity.getBesiegteMonster() >= gp.platzierer.aktuelleMonsterImRaum || gp.feldM.mapNr == 0
+							|| gp.feldM.mapNr > 12) {
+						//------------------------------------------------- NEUE MAP WIRD GELADEN
+						Entity.monsterBesiegt = 0;
+						gp.feldM.loadMap();
+						gp.platzierer.setzeAusgang();
+						gp.platzierer.setzeObjekt();
+						gp.platzierer.setzeEntity();
+						gp.player.geheZuEingang(true);
 					}
 					break;
 				default:
@@ -100,7 +113,7 @@ public class Player extends Entity {
 			}
 		}
 	}
-	
+
 	public void geheZuEingang(boolean auchKamera) {
 		// ERMITTLE KOODRINATEN DES EINGANGS
 		int spalte = 0;
@@ -172,7 +185,6 @@ public class Player extends Entity {
 	 * Der Player wird jetzt in der methode setup skaliert, was die performance
 	 * verbessern kann.
 	 */
-	
 
 	/**
 	 * Wenn tasten in die entsprechende Richtung gedr¸ckt wurden, wird die
@@ -184,7 +196,8 @@ public class Player extends Entity {
 
 		schlage();
 
-		if ((keyH.obenGedr¸ckt || keyH.untenGedr¸ckt || keyH.linksGedr¸ckt || keyH.rechtsGedr¸ckt) && kollidiert == false) {
+		if ((keyH.obenGedr¸ckt || keyH.untenGedr¸ckt || keyH.linksGedr¸ckt || keyH.rechtsGedr¸ckt)
+				&& kollidiert == false) {
 			if (keyH.obenGedr¸ckt == true) {
 				richtung = "oben";
 			} else if (keyH.untenGedr¸ckt) {
@@ -195,7 +208,7 @@ public class Player extends Entity {
 				richtung = "rechts";
 			}
 			kollidiert = false;
-			
+
 			// PRUEFE FELD KOLLISION
 			gp.kPruefer.pruefeFeld(this);
 			// PRUEFE OBJEKT KOLLISION
@@ -203,7 +216,7 @@ public class Player extends Entity {
 			interagiereMitObjekt(objGetroffen);
 			// PRUEFE ENTITY KOLLISION
 			gp.kPruefer.pruefeEntity(this);
-			
+
 			// WENN PLAYER NICHT KOLLIDIERT
 			if (kollidiert == false) {
 				switch (richtung) {
@@ -220,7 +233,7 @@ public class Player extends Entity {
 					weltX += geschwindigkeit;
 					break;
 				}
-				
+
 			}
 			framesUnbewegt = 0;
 			frameCounter++;
@@ -233,12 +246,11 @@ public class Player extends Entity {
 			}
 		}
 
-
 		framesUnbewegt++;
 		if (framesUnbewegt >= 16) {
 			spriteNumber = 0;
 		}
-		
+
 		if (keyH.hGedr¸ckt == true) {
 			gp.player.leben = gp.feldGroeﬂe;
 		}
@@ -247,6 +259,7 @@ public class Player extends Entity {
 	/**
 	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu Ladende
 	 * Sprite ausgew‰hlt und Schlussendlich an entsprechender Position angezeigt.
+	 * 
 	 * @param g2 Das Graphics2D Objekt, mit welchem gezeichnet wird.
 	 */
 	public void draw(Graphics2D g2) {
@@ -322,21 +335,19 @@ public class Player extends Entity {
 		// bildX und bildY berechnen
 		bildschirmX = weltX - kamera.weltX - (gp.feldGroeﬂe / 2) + kamera.bildschirmX;
 		bildschirmY = weltY - kamera.weltY - (gp.feldGroeﬂe / 2) + kamera.bildschirmY;
-		
 
 		// ZEICHNE SCHLAG
-		if (schlag != null && gp.feldM.mapNr<=12) {
+		if (schlag != null && gp.feldM.mapNr <= 12) {
 			schlag.draw(g2, this);
 		}
 		// ZEICHNE PLAYER
 
 		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
 		// ZEICHNE LEBENSANZEIGE
-		lebensanzeige(g2, bildschirmX, bildschirmY-gp.skala*3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
-		
+		lebensanzeige(g2, bildschirmX, bildschirmY - gp.skala * 3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
 
-
-		//g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width, hitBox.height);
+		// g2.drawRect(bildschirmX + hitBox.x, bildschirmY + hitBox.y, hitBox.width,
+		// hitBox.height);
 
 	}
 

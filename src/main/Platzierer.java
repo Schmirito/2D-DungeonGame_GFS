@@ -17,7 +17,7 @@ public class Platzierer {
 	int randomFeldX;
 	int randomFeldY;
 
-	public int randomMonsterAnzahl;
+	public int randomMonsterAnzahl = 0;
 	public int aktuelleMonsterImRaum;
 
 	public Platzierer(GamePanel gp) {

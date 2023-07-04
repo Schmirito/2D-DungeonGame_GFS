@@ -37,7 +37,10 @@ public class FeldManager {
 			"/maps/Safezone3-R.txt", "/maps/Safezone2-U.txt", "/maps/Safezone3-U.txt", "/maps/Safezone4-U.txt",
 			"/maps/Safezone1-L.txt", "/maps/Safezone3-L.txt", "/maps/Safezone4-L.txt" };
 
-
+	/**
+	 * Konstruktor für Feldmanager. Manche Variablen werden initialisiert, getFeldBild() wird aufgerufen.
+	 * @param gp
+	 */
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
 

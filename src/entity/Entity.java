@@ -50,12 +50,15 @@ public class Entity {
 
 	public int zaeler = 0;
 
-	public static int monsterBesiegt;
+	public static int monsterBesiegt = 0;
 	int besiegt;
 
 	int muenzenAnzahlProMonster = 0;
 	public static int muenzen = 0;
-	
+	/**
+	 * Konstruktor von Entity
+	 * @param gp
+	 */
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 		leben = gp.skala;
