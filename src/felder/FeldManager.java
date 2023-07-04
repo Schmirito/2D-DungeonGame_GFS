@@ -286,7 +286,7 @@ public class FeldManager {
 
 	/**Die Felder werden unter einem Dateipfad gesucht, skaliert und kollisionen hinzugefügt.
 	 * @param index
-	 * @param bildname
+	 * @param bildName
 	 * @param kollision */
 	public void setup(int index, String bildName, boolean kollision) {
 		UtilityTool uTool = new UtilityTool();

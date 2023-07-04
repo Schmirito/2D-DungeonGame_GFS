@@ -164,7 +164,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/** Methode in der g2 die gewünschten sachen zeichnen kann. 
-	 * @param g2
+	 * @param g
 	 * */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

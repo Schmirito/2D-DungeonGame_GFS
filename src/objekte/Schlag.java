@@ -30,7 +30,7 @@ public class Schlag extends SuperObjekt {
 
 	/**Der Schlag wird in die jeweilig ausgeführte richtung geziechnet.
 	 * @param g2
-	 * @param Entity
+	 * @param entity
 	 *  */
 	public void draw(Graphics2D g2, Entity entity) {
 		if (bild != null) {

@@ -268,7 +268,7 @@ public class Entity {
 
 	/**
 	 * Die Bilder der Entities werden über einen Dateipfad aufgerufen und skaliert.
-	 * @param bildname
+	 * @param bildName
 	 * @return
 	 */
 	public BufferedImage setup(String bildName) {
