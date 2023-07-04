@@ -13,11 +13,12 @@ public class Zombie extends Entity {
 	int framesUnbewegt = 0;
 	int zaeler = 0;
 
-	/**Constructor von Zombie entities
+	/**
+	 * Konstruktor für Zombie
 	 * @param gp
 	 * @param weltX
 	 * @param weltY
-	 *  */
+	 */
 	public Zombie(GamePanel gp, int weltX, int weltY) {
 		super(gp);
 		this.weltX = weltX;

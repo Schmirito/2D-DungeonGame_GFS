@@ -79,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 		Entity.setBesiegteMonster(0);
 
 		Entity.monsterBesiegt = 0;
+		
 		feldM.loadMap();
 
 		platzierer.setzeAusgang();

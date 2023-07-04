@@ -50,7 +50,7 @@ public class Entity {
 
 	public int zaeler = 0;
 
-	public static int monsterBesiegt;
+	public static int monsterBesiegt = 0;
 	int besiegt;
 
 	int muenzenAnzahlProMonster = 0;

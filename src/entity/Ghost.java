@@ -12,7 +12,12 @@ public class Ghost extends Entity {
 	String richtungX, richtungY;
 
 	int zaeler = 0;
-
+	/**
+	 * Konstruktor für Ghost
+	 * @param gp
+	 * @param weltX
+	 * @param weltY
+	 */
 	public Ghost(GamePanel gp, int weltX, int weltY) {
 		super(gp);
 		this.weltX = weltX;
