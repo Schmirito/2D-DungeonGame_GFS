@@ -74,16 +74,23 @@ public class Entity {
 	}
 
 	/**
-	 * Update Methode von Entity, diese ist leer. Wird von erbenden Klassen genutzt, wenn diese keine Aktionen ausführen oder andernfalls überschrieben.
+	 * Update Methode von Entity, diese ist leer. Wird von erbenden
+	 * Klassen genutzt, wenn diese keine Aktionen ausführen oder andernfalls
+	 * überschrieben. ======= Super-update Methode von Entity, welche von erbenden
+	 * Klassen genutzt werden kann. 
 	 */
 	public void update() {
 
 	}
 
 	/**
-	 * Es wird das Bild des Entities mit verschachtelten Switch-Case Verzeigungen bestimmt und, wenn es sich innerhalb
-	 * des Bildschirms befindet, gezeichnet.
-	 * @param g2 Graphics2D wird zum Zeichnen verwendet
+	 * Es wird das Bild des Entities mit verschachtelten Switch-Case
+	 * Verzeigungen bestimmt und, wenn es sich innerhalb des Bildschirms befindet,
+	 * gezeichnet.
+	 * @param g2 Graphics2D wird zum Zeichnen verwendet ======= Es wird das Bild des
+	 *           Entities bestimmt und daraufhin, wenn es sich innerhalb des
+	 *           Bildschirms befindet, gezeichnet.
+	 * @param g2 Graphics2D wird zum zeichnen verwendet.
 	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage charSprite = null;
@@ -171,8 +178,9 @@ public class Entity {
 	}
 
 	/**
-	 * Wenn eine der Pfeiltasten gedrückt wird, wird ein Schlag ausgeführt, also ein Faust-Objekt erstellt. Trifft dieses ein Entity, 
-	 * wird die getroffen()-Methode des Entity ausgeführt. Der Schlag hat einen Cooldown.
+	 * Wenn eine der Pfeiltasten gedrückt wird, wird ein Schlag ausgeführt, also ein
+	 * Faust-Objekt erstellt. Trifft dieses ein Entity, wird die getroffen()-Methode
+	 * des Entity ausgeführt. Der Schlag hat einen Cooldown.
 	 */
 	public void schlage() {
 		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeße / 2) + gp.kamera.bildschirmX;
@@ -244,8 +252,11 @@ public class Entity {
 	}
 
 	/**
-	 * Die Leben des getroffenen Entity werden verringert und Variablen für die Rückstoßanimation gesetzt.
-	 * @param entity Das Entity, welches dieses Entity, in dem diese Methode ausgeführt wird, geschlagen hat. Bisher immer der Spieler.
+	 * Die Leben des getroffenen Entity werden verringert und Variablen für die
+	 * Rückstoßanimation gesetzt.
+	 * 
+	 * @param entity Das Entity, welches dieses Entity, in dem diese Methode
+	 *               ausgeführt wird, geschlagen hat. Bisher immer der Spieler.
 	 * @param schlag Das Schlag-Objekt, welches das Entity getroffen hat.
 	 */
 	public void getroffen(Entity entity, Schlag schlag) {
@@ -255,11 +266,12 @@ public class Entity {
 
 		leben -= gp.player.schaden;
 
-
 	}
 
 	/**
-	 * Die Bilder des Entity wird über einen Dateipfad aufgerufen, skaliert und zurückgegeben.
+	 * Die Bilder des Entity wird über einen Dateipfad aufgerufen, skaliert und
+	 * zurückgegeben.
+	 * 
 	 * @param bildName Der Bildname mit Dateipfad.
 	 * @return BufferedImage Das zurückgegebene Bild.
 	 */
@@ -278,14 +290,15 @@ public class Entity {
 	}
 
 	/**
-	 * Eine Lebensanzeige wird gezichnet, dafür werden verschiedene Parameter übergeben, sodass diese theoretisch von allen Entities genutzt werden
-	 * kann.
-	 * @param g2 Das Graphics2D-Objekt, mit dem gezeichnet wird.
+	 * Eine Lebensanzeige wird gezichnet, dafür werden verschiedene Parameter
+	 * übergeben, sodass diese theoretisch von allen Entities genutzt werden kann.
+	 * 
+	 * @param g2          Das Graphics2D-Objekt, mit dem gezeichnet wird.
 	 * @param bildschirmX Position auf dem Bildschirm auf der X-Achse.
 	 * @param bildschirmY Position auf dem Bildschirm auf der Y-Achse.
-	 * @param breite Breite des Hintergrunds der Lebensanzeige.
-	 * @param hoehe Höhe der Lebensanzeige.
-	 * @param leben Breite der Lebensanzeige bzw. die Leben.
+	 * @param breite      Breite des Hintergrunds der Lebensanzeige.
+	 * @param hoehe       Höhe der Lebensanzeige.
+	 * @param leben       Breite der Lebensanzeige bzw. die Leben.
 	 */
 	public void lebensanzeige(Graphics2D g2, int bildschirmX, int bildschirmY, int breite, int hoehe, int leben) {
 		g2.setColor(Color.BLACK);
@@ -295,9 +308,11 @@ public class Entity {
 	}
 
 	/**
-	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstür: Das Entity kommt bei der Eingangstür der Map wieder raus.
+	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die
+	 * Ausgangstür: Das Entity kommt bei der Eingangstür der Map wieder raus.
+	 * 
 	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet,
-	 * welche Objekte ausgelöst/berührt wurden.
+	 *        welche Objekte ausgelöst/berührt wurden.
 	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
@@ -351,15 +366,21 @@ public class Entity {
 			}
 		}
 	}
+
 	/**
-	 * Setzt die Klassenvariable auf den übergebenen Wert. Eigentlich nicht nötig, da diese public ist, entstand durch Tests und wurde nicht mehr geändert.
+	 * Setzt die Klassenvariable auf den übergebenen Wert. Eigentlich nicht nötig,
+	 * da diese public ist, entstand durch Tests und wurde nicht mehr geändert.
+	 * 
 	 * @param besiegt Anzahl, wieviele Monster im aktuellen Raum besiegt wurden.
 	 */
 	public static void setBesiegteMonster(int besiegt) {
 		monsterBesiegt = besiegt;
 	}
+
 	/**
-	 * Gibt die Klassenvariable monsterBesiegt zurück. Eigentlich nicht nötigt, da public, entstand durch Tests.
+	 * Gibt die Klassenvariable monsterBesiegt zurück. Eigentlich nicht nötigt, da
+	 * public, entstand durch Tests.
+	 * 
 	 * @return Der Wert der Klassenvariable monsterBesiegt.
 	 */
 	public static int getBesiegteMonster() {

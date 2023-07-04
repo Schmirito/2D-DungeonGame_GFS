@@ -28,6 +28,7 @@ public class Player extends Entity {
 	 * @param gp   Das GamePanel, damit wird eine bidirektionale Beziehung erstellt.
 	 * @param keyH Der KeyHandler wird übergeben um die Performance zu verbessern.
 	 */
+
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
@@ -47,6 +48,7 @@ public class Player extends Entity {
 		getPlayerImage();
 	}
 
+
 	/**
 	 * Holt sich das Kamera-Objekt vom GamePanel.
 	 */
@@ -54,11 +56,10 @@ public class Player extends Entity {
 		kamera = gp.giveKamera();
 	}
 
-	/**
-	 * Setzt einige Standardwerte wie Geschwindigkeit und Leben.
-	 */
+
+	/**Setzt einigw Standardwerte wie Geschwindigkeit und Leben.*/
 	public void setDefaultValuables() {
-		geschwindigkeit = gp.skala * 2;
+		geschwindigkeit = gp.skala * 2; 
 		richtung = "unten";
 
 		leben = gp.feldGroeße;
