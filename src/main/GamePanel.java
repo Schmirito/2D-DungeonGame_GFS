@@ -58,7 +58,10 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
-	/** Start-Variablen für das Spiel werden festgelegt, die Map geladen und Entity, Objekte und Ausgänge gesetzt. */
+	/**
+	 * Start-Variablen für das Spiel werden festgelegt, die Map geladen und Entity,
+	 * Objekte und Ausgänge gesetzt.
+	 */
 	public void setupGame() {
 		player.weltX = 5 * feldGroeße + (feldGroeße / 2);
 		player.weltY = 16 * feldGroeße + (feldGroeße / 2);
@@ -76,7 +79,8 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Startet einen Thread in welchem das Spiel läuft. Der Thread durchläuft die run()-Methode.
+	 * Startet einen Thread in welchem das Spiel läuft. Der Thread durchläuft die
+	 * run()-Methode.
 	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -114,7 +118,9 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Wird von der run()-Methode aufgerufen. Veranlasst je nach Spielstatus z.B. den normalen Spielablauf durch aufrufen der update()-Methoden der einzelnen Klassen.
+	 * Wird von der run()-Methode aufgerufen. Veranlasst je nach Spielstatus z.B.
+	 * den normalen Spielablauf durch aufrufen der update()-Methoden der einzelnen
+	 * Klassen.
 	 */
 	public void update() {
 
@@ -157,8 +163,11 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Wird von der Methode repaint() in run() aufgerufen. Hier wird das Spiel durch Aufrufen der draw()-Methoden der Klassen gerendert/gezeichnet.
-	 * @param g Wird von der Bibliothek mitgegeben. Wird durch typecasting zum Graphics2D-Objekt.
+	 * Wird von der Methode repaint() in run() aufgerufen. Hier wird das Spiel durch
+	 * Aufrufen der draw()-Methoden der Klassen gerendert/gezeichnet.
+	 * 
+	 * @param g Wird von der Bibliothek mitgegeben. Wird durch typecasting zum
+	 *          Graphics2D-Objekt.
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -172,6 +181,7 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 		}
 		// ENTITIES
+		entities = sortEntities();
 		for (int i = 0; i < objekte.length; i++) {
 			if (entities[i] != null) {
 				entities[i].draw(g2);
@@ -187,13 +197,35 @@ public class GamePanel extends JPanel implements Runnable {
 
 	}
 
+	public Entity[] sortEntities() {
+		Entity entitiesSorted[] = new Entity[entities.length];
+		int index = 0;
+		for (int i = 0; i < entities.length; i++) {
+			if (entities[i] != null) {
+				index = 0;
+				for (int j = 0; j < entities.length; j++) {
+					if (entities[j]!=null) {
+						if (entities[i].weltX > entities[j].weltX) {
+							index++;
+						} else
+						if (entities[i].weltX == entities[j].weltX && entities[i].weltY > entities[j].weltY) {
+							index++;
+						}
+					}
+				}
+				entitiesSorted[index] = entities[i];
+			}
+		}
+		return entitiesSorted;
+	}
+
 	/**
 	 * Hiermit lassen sich verschiedene Diaglog-Hintergründe rendern.
 	 * 
-	 * @param g2 Graphics2D-Objekt zum Render.
-	 * @param x Parameter zur X-Position auf dem Bildschirm.
-	 * @param y Parameter zur Y-Position auf dem Bildschirm.
-	 * @param width Parameter zur Breite des Fensters.
+	 * @param g2     Graphics2D-Objekt zum Render.
+	 * @param x      Parameter zur X-Position auf dem Bildschirm.
+	 * @param y      Parameter zur Y-Position auf dem Bildschirm.
+	 * @param width  Parameter zur Breite des Fensters.
 	 * @param height Parameter zur Höhe des Fensters.
 	 */
 	public void drawDialogWindow(Graphics2D g2, int x, int y, int width, int height) {
