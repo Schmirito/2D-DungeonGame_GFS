@@ -66,7 +66,8 @@ public class GamePanel extends JPanel implements Runnable {
 		kamera.weltX = 9 * feldGroeﬂe;
 		kamera.weltY = 17 * feldGroeﬂe;
 		player.leben = feldGroeﬂe;
-
+		feldM.mapNr = 0;
+		feldM.start = true;
 		feldM.loadMap();
 
 		platzierer.setzeAusgang();
