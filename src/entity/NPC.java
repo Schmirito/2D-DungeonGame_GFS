@@ -11,11 +11,11 @@ import objekte.Schlag;
 public class NPC extends Entity {
 
 	public boolean ichRede = false;
-	public String dialogTexte[] = { "Oh Hallo!", "Mˆchtest du f¸r 150 M¸nzchen ein ominˆses Tr‰nkchen trinken?",
-			"Gute Entscheidung, HeHe", "Tu dir keinen Zwang an.", "HeHe","Hm das sind leider zu wenig M¸nzen..."};
+	public String dialogTexte[] = { "Oh Hallo!", "MÔøΩchtest du fÔøΩr 150 MÔøΩnzchen ein ominÔøΩses TrÔøΩnkchen trinken?",
+			"Gute Entscheidung, HeHe", "Tu dir keinen Zwang an.", "HeHe","Hm das sind leider zu wenig MÔøΩnzen..."};
 	public int dialogIndex = 0;
 	/**
-	 * Konstruktor f¸r NPC. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition wird initialisiert. Bilder werden geladen.
+	 * Konstruktor fÔøΩr NPC. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition wird initialisiert. Bilder werden geladen.
 	 * @param gp Das GamePanel.
 	 * @param weltX Die X-Koordinaate auf der Map.
 	 * @param weltY Die Y-Koordinate auf der Map.
@@ -28,7 +28,7 @@ public class NPC extends Entity {
 		getImage();
 	}
 	/**
-	 * Update-Methode des NPC. Hier wird das Wippen des Kopfs des NPC veranlasst und im Dialogfall dieser ermˆglicht.
+	 * Update-Methode des NPC. Hier wird das Wippen des Kopfs des NPC veranlasst und im Dialogfall dieser ermÔøΩglicht.
 	 */
 	public void update() {
 		frameCounter++;
@@ -99,7 +99,7 @@ public class NPC extends Entity {
 	}
 	/**
 	 * Wird der NPC von der in der Safe-Zone unsichtbaren Faust getroffen, so verliert er nicht an Leben, sondern der Mechanismus wird zum Ansprechen des NPC genutzt.
-	 * Game-Status wird ge‰ndert und boolean ichRede auf true gesetzt.
+	 * Game-Status wird geÔøΩndert und boolean ichRede auf true gesetzt.
 	 */
 	public void getroffen(Entity entity, Schlag schlag) { // DIALOG MIT NPC
 		ichRede = true;
@@ -125,28 +125,28 @@ public class NPC extends Entity {
 			charSprite = downRV;
 			break;
 		}
-		int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe / 2);
-		int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe / 2);
+		int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroesse / 2);
+		int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroesse / 2);
 		if (charSprite != null) {
-			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX
-					&& weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX
-					&& weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY
-					&& weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+			if (weltX + gp.feldGroesse > gp.kamera.weltX - gp.kamera.bildschirmX
+					&& weltX - gp.feldGroesse < gp.kamera.weltX + gp.kamera.bildschirmX
+					&& weltY + gp.feldGroesse > gp.kamera.weltY - gp.kamera.bildschirmY
+					&& weltY - gp.feldGroesse < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
-				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 			}
 		}
 		if (ichRede) {
-			int width = (int)(gp.feldGroeﬂe * (dialogTexte[dialogIndex].length() / 7) + (gp.feldGroeﬂe*1.25));
-			int height = (int) (gp.feldGroeﬂe * 1);
+			int width = (int)(gp.feldGroesse * (dialogTexte[dialogIndex].length() / 7) + (gp.feldGroesse*1.25));
+			int height = (int) (gp.feldGroesse * 1);
 			gp.drawDialogWindow(g2, bildschirmX - (width / 2), bildschirmY - height, width, height);
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 			g2.setColor(Color.WHITE);
-			g2.drawString(dialogTexte[dialogIndex], bildschirmX - (width / 2) + (int)(gp.feldGroeﬂe*0.25),
-					(int) (bildschirmY - (gp.feldGroeﬂe * 0.5)));
+			g2.drawString(dialogTexte[dialogIndex], bildschirmX - (width / 2) + (int)(gp.feldGroesse*0.25),
+					(int) (bildschirmY - (gp.feldGroesse * 0.5)));
 			if (dialogIndex == 1) {
-				g2.drawString("[No: ESC]             [Yes: ENTER]", bildschirmX - (width / 2) + (int)(gp.feldGroeﬂe*0.25),
-						(int) (bildschirmY - (gp.feldGroeﬂe * 0.25)));
+				g2.drawString("[No: ESC]             [Yes: ENTER]", bildschirmX - (width / 2) + (int)(gp.feldGroesse*0.25),
+						(int) (bildschirmY - (gp.feldGroesse * 0.25)));
 			}
 		}
 

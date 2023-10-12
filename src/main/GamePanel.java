@@ -19,15 +19,15 @@ import objekte.SuperObjekt;
 
 public class GamePanel extends JPanel implements Runnable {
 
-	public final int originaleFeldGroeße = 16;
+	public final int originaleFeldGroesse = 16;
 	public final int skala = 7;
 
-	public final int feldGroeße = originaleFeldGroeße * skala;
+	public final int feldGroesse = originaleFeldGroesse * skala;
 	public final int maxBildSpalte = 20;
 	public final int maxBildReihe = 12;
-	public final int BildBreite = 1920;// feldGroeße * maxBildSpalte;
-	public final int BildHoehe = 1080;// feldGroeße * maxBildReihe;
-	public final int mapGroeße = 30;
+	public final int BildBreite = 1920;// feldGroeï¿½e * maxBildSpalte;
+	public final int BildHoehe = 1080;// feldGroeï¿½e * maxBildReihe;
+	public final int mapGroesse = 30;
 
 	public int FPS = 60;
 	public int gStatus = 0;
@@ -58,14 +58,14 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
-	/** Start-Variablen für das Spiel werden festgelegt, die Map geladen und Entity, Objekte und Ausgänge gesetzt. */
+	/** Start-Variablen fï¿½r das Spiel werden festgelegt, die Map geladen und Entity, Objekte und Ausgï¿½nge gesetzt. */
 	public void setupGame() {
-		player.weltX = 5 * feldGroeße + (feldGroeße / 2);
-		player.weltY = 16 * feldGroeße + (feldGroeße / 2);
+		player.weltX = 5 * feldGroesse + (feldGroesse / 2);
+		player.weltY = 16 * feldGroesse + (feldGroesse / 2);
 
-		kamera.weltX = 9 * feldGroeße;
-		kamera.weltY = 17 * feldGroeße;
-		player.leben = feldGroeße;
+		kamera.weltX = 9 * feldGroesse;
+		kamera.weltY = 17 * feldGroesse;
+		player.leben = feldGroesse;
 		feldM.mapNr = 0;
 		feldM.start = true;
 		feldM.loadMap();
@@ -80,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Startet einen Thread in welchem das Spiel läuft. Der Thread durchläuft die run()-Methode.
+	 * Startet einen Thread in welchem das Spiel lï¿½uft. Der Thread durchlï¿½uft die run()-Methode.
 	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -89,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	/**
 	 * Es werden die FPS eingestellt, sodass das spiel nur so oft pro sekunde, wie
-	 * gewünscht, gezeichnet wird. Hier 60 mal.
+	 * gewï¿½nscht, gezeichnet wird. Hier 60 mal.
 	 */
 	@Override
 	public void run() {
@@ -122,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void update() {
 
-		if (gStatus == 0) { // GAME LÄUFT
+		if (gStatus == 0) { // GAME Lï¿½UFT
 			if (player.leben <= 0) {
 				JLabel label = new JLabel("YOU DIED");
 				label.setBackground(new Color(0, 0, 0));
@@ -192,13 +192,13 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Hiermit lassen sich verschiedene Diaglog-Hintergründe rendern.
+	 * Hiermit lassen sich verschiedene Diaglog-Hintergrï¿½nde rendern.
 	 * 
 	 * @param g2 Graphics2D-Objekt zum Render.
 	 * @param x Parameter zur X-Position auf dem Bildschirm.
 	 * @param y Parameter zur Y-Position auf dem Bildschirm.
 	 * @param width Parameter zur Breite des Fensters.
-	 * @param height Parameter zur Höhe des Fensters.
+	 * @param height Parameter zur Hï¿½he des Fensters.
 	 */
 	public void drawDialogWindow(Graphics2D g2, int x, int y, int width, int height) {
 		Color c = new Color(0, 0, 0, 210);

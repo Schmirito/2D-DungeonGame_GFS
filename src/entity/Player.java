@@ -26,7 +26,7 @@ public class Player extends Entity {
 	 * einige Variablen initialisiert. Bidirektionale Beziehung mit GamePanel.
 	 * Unidirektionale beziehung mit KeyHandler.
 	 * @param gp   Das GamePanel, damit wird eine bidirektionale Beziehung erstellt.
-	 * @param keyH Der KeyHandler wird übergeben um die Performance zu verbessern.
+	 * @param keyH Der KeyHandler wird ï¿½bergeben um die Performance zu verbessern.
 	 */
 
 	public Player(GamePanel gp, KeyHandler keyH) {
@@ -39,10 +39,10 @@ public class Player extends Entity {
 
 		// Hitbox des Spielers festlegen
 		hitBox = new Rectangle();
-		hitBox.x = gp.feldGroeße / 4;
-		hitBox.y = gp.feldGroeße / 2;
-		hitBox.height = gp.feldGroeße / 2;
-		hitBox.width = gp.feldGroeße / 2;
+		hitBox.x = gp.feldGroesse / 4;
+		hitBox.y = gp.feldGroesse / 2;
+		hitBox.height = gp.feldGroesse / 2;
+		hitBox.width = gp.feldGroesse / 2;
 
 		setDefaultValuables();
 		getPlayerImage();
@@ -53,8 +53,8 @@ public class Player extends Entity {
 		geschwindigkeit = gp.skala * 2; 
 		richtung = "unten";
 
-		leben = gp.feldGroeße;
-		lebensanzeigeBreite = gp.feldGroeße;
+		leben = gp.feldGroesse;
+		lebensanzeigeBreite = gp.feldGroesse;
 		lebensanzeigeHoehe = gp.skala * 2;
 	}
 
@@ -79,9 +79,9 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Führt für die berührten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstür: Es wird auf die neue Map gewechselt.
+	 * Fï¿½hrt fï¿½r die berï¿½hrten Objekte bestimmte Aktionen aus, aktuell nur die Ausgangstï¿½r: Es wird auf die neue Map gewechselt.
 	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet,
-	 * welche Objekte ausgelöst/berührt wurden.
+	 * welche Objekte ausgelï¿½st/berï¿½hrt wurden.
 	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
@@ -122,84 +122,84 @@ public class Player extends Entity {
 		int indexTuerUnten = gp.feldM.getFeldIndex("D004TuerUE");
 		int indexTuerLinks = gp.feldM.getFeldIndex("D004TuerLE");
 		int indexTuerRechts = gp.feldM.getFeldIndex("D004TuerRE");
-		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
+		while (spalte < gp.mapGroesse && reihe < gp.mapGroesse) {
 
 			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
 
 			if (feldNr == indexTuerOben) {
-				weltX = spalte * gp.feldGroeße + (gp.feldGroeße / 2);
-				weltY = (reihe + 1) * gp.feldGroeße + (gp.feldGroeße / 2);
-				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
+				weltX = spalte * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = (reihe + 1) * gp.feldGroesse + (gp.feldGroesse / 2);
+				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2))) {
 					gp.kamera.weltX = weltX;
 				} else if (weltX < (gp.BildBreite / 2)) {
 					gp.kamera.weltX = gp.BildBreite / 2;
-				} else if (weltX > (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
-					gp.kamera.weltX = gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2);
+				} else if (weltX > (gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2))) {
+					gp.kamera.weltX = gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2);
 				}
 				gp.kamera.weltY = gp.BildHoehe / 2;
 			} else if (feldNr == indexTuerUnten) {
-				weltX = spalte * gp.feldGroeße + (gp.feldGroeße / 2);
-				weltY = (reihe - 1) * gp.feldGroeße + (gp.feldGroeße / 2);
-				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
+				weltX = spalte * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = (reihe - 1) * gp.feldGroesse + (gp.feldGroesse / 2);
+				if (weltX > (gp.BildBreite / 2) && weltX < (gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2))) {
 					gp.kamera.weltX = weltX;
 				} else if (weltX < (gp.BildBreite / 2)) {
 					gp.kamera.weltX = gp.BildBreite / 2;
-				} else if (weltX > (gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2))) {
-					gp.kamera.weltX = gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2);
+				} else if (weltX > (gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2))) {
+					gp.kamera.weltX = gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2);
 				}
-				gp.kamera.weltY = gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2);
+				gp.kamera.weltY = gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2);
 			} else if (feldNr == indexTuerLinks) {
-				weltX = (spalte + 1) * gp.feldGroeße + (gp.feldGroeße / 2);
-				weltY = reihe * gp.feldGroeße + (gp.feldGroeße / 2);
+				weltX = (spalte + 1) * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = reihe * gp.feldGroesse + (gp.feldGroesse / 2);
 				gp.kamera.weltX = gp.BildBreite / 2;
-				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
+				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2))) {
 					gp.kamera.weltY = weltY;
 				} else if (weltY < (gp.BildHoehe / 2)) {
 					gp.kamera.weltY = gp.BildHoehe / 2;
-				} else if (weltY > (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
-					gp.kamera.weltY = gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2);
+				} else if (weltY > (gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2))) {
+					gp.kamera.weltY = gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2);
 				}
 			} else if (feldNr == indexTuerRechts) {
-				weltX = (spalte - 1) * gp.feldGroeße + (gp.feldGroeße / 2);
-				weltY = reihe * gp.feldGroeße + (gp.feldGroeße / 2);
-				gp.kamera.weltX = gp.kamera.weltX = gp.mapGroeße * gp.feldGroeße - (gp.BildBreite / 2);
-				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
+				weltX = (spalte - 1) * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = reihe * gp.feldGroesse + (gp.feldGroesse / 2);
+				gp.kamera.weltX = gp.kamera.weltX = gp.mapGroesse * gp.feldGroesse - (gp.BildBreite / 2);
+				if (weltY > (gp.BildHoehe / 2) && weltY < (gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2))) {
 					gp.kamera.weltY = weltY;
 				} else if (weltY < (gp.BildHoehe / 2)) {
 					gp.kamera.weltY = gp.BildHoehe / 2;
-				} else if (weltY > (gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2))) {
-					gp.kamera.weltY = gp.mapGroeße * gp.feldGroeße - (gp.BildHoehe / 2);
+				} else if (weltY > (gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2))) {
+					gp.kamera.weltY = gp.mapGroesse * gp.feldGroesse - (gp.BildHoehe / 2);
 
 				}
 			}
 
 			spalte++;
-			if (spalte == gp.mapGroeße) {
+			if (spalte == gp.mapGroesse) {
 				spalte = 0;
 				reihe++;
 			}
 		}
 	}
 	/**
-	 * Wenn tasten in die entsprechende Richtung gedrückt wurden, wird die
+	 * Wenn tasten in die entsprechende Richtung gedrï¿½ckt wurden, wird die
 	 * Spielerposition neu berechnet, vorausgesetzt der Spieler wird dadurch nicht in einem Feld mit Kollision, Entity oder Objekt stehen. 
-	 * Außerdem wird nach einer Anzahl an Frames die
-	 * Variable für die Animation erhöht bzw. zurückgesetzt. Wenn der Character eine
+	 * Auï¿½erdem wird nach einer Anzahl an Frames die
+	 * Variable fï¿½r die Animation erhï¿½ht bzw. zurï¿½ckgesetzt. Wenn der Character eine
 	 * gewisse Anzahl Frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
 
 		schlage();
 
-		if ((keyH.obenGedrückt || keyH.untenGedrückt || keyH.linksGedrückt || keyH.rechtsGedrückt)
+		if ((keyH.obenGedrueckt || keyH.untenGedrueckt || keyH.linksGedrueckt || keyH.rechtsGedrueckt)
 				&& kollidiert == false) {
-			if (keyH.obenGedrückt == true) {
+			if (keyH.obenGedrueckt == true) {
 				richtung = "oben";
-			} else if (keyH.untenGedrückt) {
+			} else if (keyH.untenGedrueckt) {
 				richtung = "unten";
-			} else if (keyH.linksGedrückt) {
+			} else if (keyH.linksGedrueckt) {
 				richtung = "links";
-			} else if (keyH.rechtsGedrückt) {
+			} else if (keyH.rechtsGedrueckt) {
 				richtung = "rechts";
 			}
 			kollidiert = false;
@@ -246,14 +246,14 @@ public class Player extends Entity {
 			spriteNumber = 0;
 		}
 
-		if (keyH.hGedrückt == true) {
-			gp.player.leben = gp.feldGroeße;
+		if (keyH.hGedrueckt == true) {
+			gp.player.leben = gp.feldGroesse;
 		}
 	}
 
 	/**
 	 * Mithilfe von verschachtelten switch-case Verzweigungen wird das zu ladende
-	 * Sprite ausgewählt und schlussendlich an entsprechender Position auf dem Bildschirm angezeigt.
+	 * Sprite ausgewï¿½hlt und schlussendlich an entsprechender Position auf dem Bildschirm angezeigt.
 	 * 
 	 * @param g2 Das Graphics2D Objekt, mit welchem gezeichnet wird.
 	 */
@@ -328,8 +328,8 @@ public class Player extends Entity {
 			break;
 		}
 		// bildX und bildY berechnen
-		bildschirmX = weltX - kamera.weltX - (gp.feldGroeße / 2) + kamera.bildschirmX;
-		bildschirmY = weltY - kamera.weltY - (gp.feldGroeße / 2) + kamera.bildschirmY;
+		bildschirmX = weltX - kamera.weltX - (gp.feldGroesse / 2) + kamera.bildschirmX;
+		bildschirmY = weltY - kamera.weltY - (gp.feldGroesse / 2) + kamera.bildschirmY;
 
 		// ZEICHNE SCHLAG
 		if (schlag != null && gp.feldM.mapNr <= 12) {
@@ -337,7 +337,7 @@ public class Player extends Entity {
 		}
 		// ZEICHNE PLAYER
 
-		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeße, gp.feldGroeße, null);
+		g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 		// ZEICHNE LEBENSANZEIGE
 		lebensanzeige(g2, bildschirmX, bildschirmY - gp.skala * 3, lebensanzeigeBreite, lebensanzeigeHoehe, leben);
 
