@@ -188,9 +188,7 @@ public class Player extends Entity {
 	 * gewisse Anzahl Frames steht, so wird die Richtung auf "steht" gesetzt.
 	 */
 	public void update() {
-
 		schlage();
-
 		if ((keyH.obenGedrueckt || keyH.untenGedrueckt || keyH.linksGedrueckt || keyH.rechtsGedrueckt)
 				&& kollidiert == false) {
 			if (keyH.obenGedrueckt == true) {
