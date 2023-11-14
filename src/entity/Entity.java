@@ -54,7 +54,7 @@ public class Entity {
 	int besiegt;
 
 	int muenzenAnzahlProMonster = 0;
-	public static int muenzen = 0;
+	public static int muenzen = 130;
 
 	/**
 	 * Constructor von Entity, bei dem bestimmte Variablen festgelegt werden.
