@@ -7,16 +7,16 @@ import entity.Player;
 
 public class KeyHandler implements KeyListener {
 
-	public boolean obenGedrückt, untenGedrückt, linksGedrückt, rechtsGedrückt, pfeilHochGedrückt, pfeilRunterGedrückt,
-			pfeilLinksGedrückt, pfeilRechtsGedrückt, hGedrückt, escGedrueckt, enterGedrueckt;
+	public boolean obenGedrueckt, untenGedrueckt, linksGedrueckt, rechtsGedrueckt, pfeilHochGedrueckt, pfeilRunterGedrueckt,
+			pfeilLinksGedrueckt, pfeilRechtsGedrueckt, hGedrueckt, escGedrueckt, enterGedrueckt;
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 
 	}
 
-	/**Sobald eine Taste gedrückt ist, so wird die jeweils zugehörige Variable auf "true" gesetzt. 
-	 * @param e KeyEvent, enthält welche Tasten gedrückt sind.
+	/**Sobald eine Taste gedrï¿½ckt ist, so wird die jeweils zugehï¿½rige Variable auf "true" gesetzt. 
+	 * @param e KeyEvent, enthï¿½lt welche Tasten gedrï¿½ckt sind.
 	 * */
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -24,31 +24,31 @@ public class KeyHandler implements KeyListener {
 		int tastenCode = e.getKeyCode();
 
 		if (tastenCode == KeyEvent.VK_W) {
-			obenGedrückt = true;
+			obenGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_A) {
-			linksGedrückt = true;
+			linksGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_S) {
-			untenGedrückt = true;
+			untenGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_D) {
-			rechtsGedrückt = true;
+			rechtsGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_UP) {
-			pfeilHochGedrückt = true;
+			pfeilHochGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_DOWN) {
-			pfeilRunterGedrückt = true;
+			pfeilRunterGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_LEFT) {
-			pfeilLinksGedrückt = true;
+			pfeilLinksGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_RIGHT) {
-			pfeilRechtsGedrückt = true;
+			pfeilRechtsGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_H) {
-			hGedrückt = true;
+			hGedrueckt = true;
 		}
 		if (tastenCode == KeyEvent.VK_ESCAPE) {
 			escGedrueckt = true;
@@ -59,8 +59,8 @@ public class KeyHandler implements KeyListener {
 
 	}
 
-	/**Sobald eine Taste losgelassen wird, so wird die jeweils zugehörige Variable auf "false" gesetzt. 
-	 * @param e KeyEvent, enthält welche Tasten gedrückt sind.
+	/**Sobald eine Taste losgelassen wird, so wird die jeweils zugehï¿½rige Variable auf "false" gesetzt. 
+	 * @param e KeyEvent, enthï¿½lt welche Tasten gedrï¿½ckt sind.
 	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -68,31 +68,31 @@ public class KeyHandler implements KeyListener {
 		int tastenCode = e.getKeyCode();
 
 		if (tastenCode == KeyEvent.VK_W) {
-			obenGedrückt = false;
+			obenGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_A) {
-			linksGedrückt = false;
+			linksGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_S) {
-			untenGedrückt = false;
+			untenGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_D) {
-			rechtsGedrückt = false;
+			rechtsGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_UP) {
-			pfeilHochGedrückt = false;
+			pfeilHochGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_DOWN) {
-			pfeilRunterGedrückt = false;
+			pfeilRunterGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_LEFT) {
-			pfeilLinksGedrückt = false;
+			pfeilLinksGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_RIGHT) {
-			pfeilRechtsGedrückt = false;
+			pfeilRechtsGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_H) {
-			hGedrückt = false;
+			hGedrueckt = false;
 		}
 		if (tastenCode == KeyEvent.VK_ESCAPE) {
 			escGedrueckt = false;

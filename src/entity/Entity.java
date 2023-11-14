@@ -29,10 +29,10 @@ public class Entity {
 	public int hitCooldownFrames = 0;
 	public double hitCooldownSekunden = 0.7;
 	public Schlag schlag;
-	public int r¸ckstoﬂ;
+	public int rueckstoss;
 	public int rundenAnzahlGetroffen;
 	public int rundenMaxAnzahlgetroffen = 4;
-	public String stoﬂRichtung;
+	public String stossRichtung;
 	public Entity entityGetroffen;
 	public int framesBewegungsunfaehig = 0;
 	public double schlageSpielerCooldownSec = 0.5;
@@ -58,25 +58,25 @@ public class Entity {
 
 	/**
 	 * Constructor von Entity, bei dem bestimmte Variablen festgelegt werden.
-	 * @param gp GamePanel wird ¸bergeben.
+	 * @param gp GamePanel wird ÔøΩbergeben.
 	 */
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 		leben = gp.skala;
 		hitBox = new Rectangle();
-		hitBox.x = gp.feldGroeﬂe / 4;
-		hitBox.y = gp.feldGroeﬂe / 2;
-		hitBox.height = gp.feldGroeﬂe / 2;
-		hitBox.width = gp.feldGroeﬂe / 2;
+		hitBox.x = gp.feldGroesse / 4;
+		hitBox.y = gp.feldGroesse / 2;
+		hitBox.height = gp.feldGroesse / 2;
+		hitBox.width = gp.feldGroesse / 2;
 
-		r¸ckstoﬂ = 16;
+		rueckstoss = 16;
 
 	}
 
 	/**
 	 * Update Methode von Entity, diese ist leer. Wird von erbenden
-	 * Klassen genutzt, wenn diese keine Aktionen ausf¸hren oder andernfalls
-	 * ¸berschrieben. ======= Super-update Methode von Entity, welche von erbenden
+	 * Klassen genutzt, wenn diese keine Aktionen ausfÔøΩhren oder andernfalls
+	 * ÔøΩberschrieben. ======= Super-update Methode von Entity, welche von erbenden
 	 * Klassen genutzt werden kann. 
 	 */
 	public void update() {
@@ -163,46 +163,46 @@ public class Entity {
 		}
 		if (charSprite != null) {
 
-			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroeﬂe / 2);
-			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroeﬂe / 2);
+			int bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - (gp.feldGroesse / 2);
+			int bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - (gp.feldGroesse / 2);
 
-			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX
-					&& weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX
-					&& weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY
-					&& weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+			if (weltX + gp.feldGroesse > gp.kamera.weltX - gp.kamera.bildschirmX
+					&& weltX - gp.feldGroesse < gp.kamera.weltX + gp.kamera.bildschirmX
+					&& weltY + gp.feldGroesse > gp.kamera.weltY - gp.kamera.bildschirmY
+					&& weltY - gp.feldGroesse < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
-				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+				g2.drawImage(charSprite, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 			}
 		}
 
 	}
 
 	/**
-	 * Wenn eine der Pfeiltasten gedr¸ckt wird, wird ein Schlag ausgef¸hrt, also ein
+	 * Wenn eine der Pfeiltasten gedrÔøΩckt wird, wird ein Schlag ausgefÔøΩhrt, also ein
 	 * Faust-Objekt erstellt. Trifft dieses ein Entity, wird die getroffen()-Methode
-	 * des Entity ausgef¸hrt. Der Schlag hat einen Cooldown.
+	 * des Entity ausgefÔøΩhrt. Der Schlag hat einen Cooldown.
 	 */
 	public void schlage() {
-		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmX;
-		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroeﬂe / 2) + gp.kamera.bildschirmY;
+		bildschirmX = weltX - gp.kamera.weltX - (gp.feldGroesse / 2) + gp.kamera.bildschirmX;
+		bildschirmY = weltY - gp.kamera.weltY - (gp.feldGroesse / 2) + gp.kamera.bildschirmY;
 		if (hitCooldownFrames <= 0) {
 
-			if (gp.keyH.pfeilHochGedr¸ckt) {
-				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2), weltY - (gp.feldGroeﬂe / 2) - (gp.feldGroeﬂe / 2));
+			if (gp.keyH.pfeilHochGedrueckt) {
+				schlag = new Schlag(gp, weltX - (gp.feldGroesse / 2), weltY - (gp.feldGroesse / 2) - (gp.feldGroesse / 2));
 				richtung = "oben";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-			} else if (gp.keyH.pfeilRunterGedr¸ckt) {
-				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2), weltY - (gp.feldGroeﬂe / 2) + (gp.feldGroeﬂe));
+			} else if (gp.keyH.pfeilRunterGedrueckt) {
+				schlag = new Schlag(gp, weltX - (gp.feldGroesse / 2), weltY - (gp.feldGroesse / 2) + (gp.feldGroesse));
 				richtung = "unten";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-			} else if (gp.keyH.pfeilLinksGedr¸ckt) {
-				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2) - (gp.feldGroeﬂe / 2) - (gp.feldGroeﬂe / 4),
-						weltY - (gp.feldGroeﬂe / 2));
+			} else if (gp.keyH.pfeilLinksGedrueckt) {
+				schlag = new Schlag(gp, weltX - (gp.feldGroesse / 2) - (gp.feldGroesse / 2) - (gp.feldGroesse / 4),
+						weltY - (gp.feldGroesse / 2));
 				richtung = "links";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
-			} else if (gp.keyH.pfeilRechtsGedr¸ckt) {
-				schlag = new Schlag(gp, weltX - (gp.feldGroeﬂe / 2) + (gp.feldGroeﬂe / 2) + (gp.feldGroeﬂe / 4),
-						weltY - (gp.feldGroeﬂe / 2));
+			} else if (gp.keyH.pfeilRechtsGedrueckt) {
+				schlag = new Schlag(gp, weltX - (gp.feldGroesse / 2) + (gp.feldGroesse / 2) + (gp.feldGroesse / 4),
+						weltY - (gp.feldGroesse / 2));
 				richtung = "rechts";
 				hitCooldownFrames = (int) (hitCooldownSekunden * gp.FPS);
 			}
@@ -213,8 +213,8 @@ public class Entity {
 					if (gp.entities[i] != null) {
 						int altEntHitBoxX = gp.entities[i].hitBox.x;
 						int altEntHitBoxY = gp.entities[i].hitBox.y;
-						gp.entities[i].hitBox.x += gp.entities[i].weltX - (gp.feldGroeﬂe / 2);
-						gp.entities[i].hitBox.y += gp.entities[i].weltY - (gp.feldGroeﬂe / 2);
+						gp.entities[i].hitBox.x += gp.entities[i].weltX - (gp.feldGroesse / 2);
+						gp.entities[i].hitBox.y += gp.entities[i].weltY - (gp.feldGroesse / 2);
 						if (schlag.hitBox.intersects(gp.entities[i].hitBox)) {
 							gp.entities[i].hitBox.x = altEntHitBoxX;
 							gp.entities[i].hitBox.y = altEntHitBoxY;
@@ -252,16 +252,16 @@ public class Entity {
 	}
 
 	/**
-	 * Die Leben des getroffenen Entity werden verringert und Variablen f¸r die
-	 * R¸ckstoﬂanimation gesetzt.
+	 * Die Leben des getroffenen Entity werden verringert und Variablen fÔøΩr die
+	 * RÔøΩckstoÔøΩanimation gesetzt.
 	 * 
 	 * @param entity Das Entity, welches dieses Entity, in dem diese Methode
-	 *               ausgef¸hrt wird, geschlagen hat. Bisher immer der Spieler.
+	 *               ausgefÔøΩhrt wird, geschlagen hat. Bisher immer der Spieler.
 	 * @param schlag Das Schlag-Objekt, welches das Entity getroffen hat.
 	 */
 	public void getroffen(Entity entity, Schlag schlag) {
 		rundenAnzahlGetroffen = 4;
-		stoﬂRichtung = schlag.schlagRichtung;
+		stossRichtung = schlag.schlagRichtung;
 		entityGetroffen = entity;
 
 		leben -= gp.player.schaden;
@@ -269,11 +269,11 @@ public class Entity {
 	}
 
 	/**
-	 * Die Bilder des Entity wird ¸ber einen Dateipfad aufgerufen, skaliert und
-	 * zur¸ckgegeben.
+	 * Die Bilder des Entity wird ÔøΩber einen Dateipfad aufgerufen, skaliert und
+	 * zurÔøΩckgegeben.
 	 * 
 	 * @param bildName Der Bildname mit Dateipfad.
-	 * @return BufferedImage Das zur¸ckgegebene Bild.
+	 * @return BufferedImage Das zurÔøΩckgegebene Bild.
 	 */
 	public BufferedImage setup(String bildName) {
 
@@ -282,7 +282,7 @@ public class Entity {
 
 		try {
 			bild = ImageIO.read(getClass().getResourceAsStream(bildName + ".png"));
-			bild = uTool.skalaBild(bild, gp.feldGroeﬂe, gp.feldGroeﬂe);
+			bild = uTool.skalaBild(bild, gp.feldGroesse, gp.feldGroesse);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -290,14 +290,14 @@ public class Entity {
 	}
 
 	/**
-	 * Eine Lebensanzeige wird gezichnet, daf¸r werden verschiedene Parameter
-	 * ¸bergeben, sodass diese theoretisch von allen Entities genutzt werden kann.
+	 * Eine Lebensanzeige wird gezichnet, dafÔøΩr werden verschiedene Parameter
+	 * ÔøΩbergeben, sodass diese theoretisch von allen Entities genutzt werden kann.
 	 * 
 	 * @param g2          Das Graphics2D-Objekt, mit dem gezeichnet wird.
 	 * @param bildschirmX Position auf dem Bildschirm auf der X-Achse.
 	 * @param bildschirmY Position auf dem Bildschirm auf der Y-Achse.
 	 * @param breite      Breite des Hintergrunds der Lebensanzeige.
-	 * @param hoehe       Hˆhe der Lebensanzeige.
+	 * @param hoehe       HÔøΩhe der Lebensanzeige.
 	 * @param leben       Breite der Lebensanzeige bzw. die Leben.
 	 */
 	public void lebensanzeige(Graphics2D g2, int bildschirmX, int bildschirmY, int breite, int hoehe, int leben) {
@@ -308,11 +308,11 @@ public class Entity {
 	}
 
 	/**
-	 * F¸hrt f¸r die ber¸hrten Objekte bestimmte Aktionen aus, aktuell nur die
-	 * Ausgangst¸r: Das Entity kommt bei der Eingangst¸r der Map wieder raus.
+	 * FÔøΩhrt fÔøΩr die berÔøΩhrten Objekte bestimmte Aktionen aus, aktuell nur die
+	 * AusgangstÔøΩr: Das Entity kommt bei der EingangstÔøΩr der Map wieder raus.
 	 * 
 	 * @param objGetroffen[] Boolean-Array, welches die Information beinhaltet,
-	 *        welche Objekte ausgelˆst/ber¸hrt wurden.
+	 *        welche Objekte ausgelÔøΩst/berÔøΩhrt wurden.
 	 */
 	public void interagiereMitObjekt(boolean objGetroffen[]) {
 		for (int i = 0; i < objGetroffen.length; i++) {
@@ -340,27 +340,27 @@ public class Entity {
 		int indexTuerUnten = gp.feldM.getFeldIndex("D004TuerUE");
 		int indexTuerLinks = gp.feldM.getFeldIndex("D004TuerLE");
 		int indexTuerRechts = gp.feldM.getFeldIndex("D004TuerRE");
-		while (spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
+		while (spalte < gp.mapGroesse && reihe < gp.mapGroesse) {
 
 			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
 
 			if (feldNr == indexTuerOben) {
-				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				weltY = (reihe + 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltX = spalte * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = (reihe + 1) * gp.feldGroesse + (gp.feldGroesse / 2);
 			} else if (feldNr == indexTuerUnten) {
-				weltX = spalte * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				weltY = (reihe - 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltX = spalte * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = (reihe - 1) * gp.feldGroesse + (gp.feldGroesse / 2);
 			} else if (feldNr == indexTuerLinks) {
-				weltX = (spalte + 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltX = (spalte + 1) * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = reihe * gp.feldGroesse + (gp.feldGroesse / 2);
 
 			} else if (feldNr == indexTuerRechts) {
-				weltX = (spalte - 1) * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
-				weltY = reihe * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2);
+				weltX = (spalte - 1) * gp.feldGroesse + (gp.feldGroesse / 2);
+				weltY = reihe * gp.feldGroesse + (gp.feldGroesse / 2);
 			}
 
 			spalte++;
-			if (spalte == gp.mapGroeﬂe) {
+			if (spalte == gp.mapGroesse) {
 				spalte = 0;
 				reihe++;
 			}
@@ -368,8 +368,8 @@ public class Entity {
 	}
 
 	/**
-	 * Setzt die Klassenvariable auf den ¸bergebenen Wert. Eigentlich nicht nˆtig,
-	 * da diese public ist, entstand durch Tests und wurde nicht mehr ge‰ndert.
+	 * Setzt die Klassenvariable auf den ÔøΩbergebenen Wert. Eigentlich nicht nÔøΩtig,
+	 * da diese public ist, entstand durch Tests und wurde nicht mehr geÔøΩndert.
 	 * 
 	 * @param besiegt Anzahl, wieviele Monster im aktuellen Raum besiegt wurden.
 	 */
@@ -378,7 +378,7 @@ public class Entity {
 	}
 
 	/**
-	 * Gibt die Klassenvariable monsterBesiegt zur¸ck. Eigentlich nicht nˆtigt, da
+	 * Gibt die Klassenvariable monsterBesiegt zurÔøΩck. Eigentlich nicht nÔøΩtigt, da
 	 * public, entstand durch Tests.
 	 * 
 	 * @return Der Wert der Klassenvariable monsterBesiegt.

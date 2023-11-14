@@ -24,7 +24,7 @@ public class Platzierer {
 	 * Konstruktor des Platzierers. Bidirektionale Assoziation mit GamePanel wird
 	 * erstellt.
 	 * 
-	 * @param gp GamePanel-Objekt f¸r bidirektionale Berziehung.
+	 * @param gp GamePanel-Objekt fÔøΩr bidirektionale Berziehung.
 	 */
 	public Platzierer(GamePanel gp) {
 		this.gp = gp;
@@ -32,20 +32,20 @@ public class Platzierer {
 	}
 
 	/**
-	 * Beliebige Objekte kˆnnen hier zum Platzieren codiert werden. Die ersten vier
-	 * Pl‰tze im Objekte-Array sind f¸r T¸ren und Specials reserviert.
+	 * Beliebige Objekte kÔøΩnnen hier zum Platzieren codiert werden. Die ersten vier
+	 * PlÔøΩtze im Objekte-Array sind fÔøΩr TÔøΩren und Specials reserviert.
 	 */
 	public void setzeObjekt() {
 		// gp.objekte[0] = new Objekt(gp, weltX, weltY);
 		indexObjekte = 4;
-		// gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeﬂe,
-		// 10*gp.feldGroeﬂe);
+		// gp.objekte[indexObjekte] = new SuperObjekt(gp, 10*gp.feldGroeÔøΩe,
+		// 10*gp.feldGroeÔøΩe);
 		// indexObjekte++;
 
 	}
 
 	/**
-	 * Die Monster sowie der NPC werden hier an zuf‰llig freier Stelle platziert.
+	 * Die Monster sowie der NPC werden hier an zufÔøΩllig freier Stelle platziert.
 	 */
 	public void setzeEntity() {
 
@@ -62,26 +62,26 @@ public class Platzierer {
 
 				if (nr == 1) {
 
-					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2),
-							randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2));
+					gp.entities[anzahl] = new Ghost(gp, randomFeldX * gp.feldGroesse + (gp.feldGroesse / 2),
+							randomFeldY * gp.feldGroesse + (gp.feldGroesse / 2));
 					anzahl--;
 				}
 				if (nr == 2) {
-					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2),
-							randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2));
+					gp.entities[anzahl] = new Zombie(gp, randomFeldX * gp.feldGroesse + (gp.feldGroesse / 2),
+							randomFeldY * gp.feldGroesse + (gp.feldGroesse / 2));
 					anzahl--;
 				}
 			} while (anzahl > 0);
 		} else if (gp.feldM.mapNr > 12) {
 			randomFeld();
-			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2),
-					randomFeldY * gp.feldGroeﬂe + (gp.feldGroeﬂe / 2));
+			gp.entities[0] = new NPC(gp, randomFeldX * gp.feldGroesse + (gp.feldGroesse / 2),
+					randomFeldY * gp.feldGroesse + (gp.feldGroesse / 2));
 
 		}
 	}
 
 	/**
-	 * Ermittelt zuf‰llig freie Felder
+	 * Ermittelt zufÔøΩllig freie Felder
 	 */
 	public void randomFeld() {
 		do {
@@ -108,20 +108,20 @@ public class Platzierer {
 		int indexTuerLinks = gp.feldM.getFeldIndex("D005TuerLA");
 		int indexTuerRechts = gp.feldM.getFeldIndex("D005TuerRA");
 
-		while (spalte < gp.mapGroeﬂe && reihe < gp.mapGroeﬂe) {
+		while (spalte < gp.mapGroesse && reihe < gp.mapGroesse) {
 
 			int feldNr = gp.feldM.mapFeldNr[spalte][reihe];
 
 			if (feldNr == indexTuerOben || feldNr == indexTuerUnten || feldNr == indexTuerLinks
 					|| feldNr == indexTuerRechts) {
-				int weltX = spalte * gp.feldGroeﬂe;
-				int weltY = reihe * gp.feldGroeﬂe;
+				int weltX = spalte * gp.feldGroesse;
+				int weltY = reihe * gp.feldGroesse;
 				gp.objekte[indexObjekte] = new Obj_AusgangsTuer(gp, weltX, weltY);
 				indexObjekte++;
 			}
 
 			spalte++;
-			if (spalte == gp.mapGroeﬂe) {
+			if (spalte == gp.mapGroesse) {
 				spalte = 0;
 				reihe++;
 			}

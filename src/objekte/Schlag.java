@@ -13,7 +13,7 @@ public class Schlag extends SuperObjekt {
 	int maxAnimationFrames = 4;
 	int frameCounter = 0;
 
-	/**Constructor f¸r das Schlagen 
+	/**Constructor fÔøΩr das Schlagen 
 	 * @param gp
 	 * @param weltX
 	 * @param weltY
@@ -28,7 +28,7 @@ public class Schlag extends SuperObjekt {
 		bildR = setup("FaustRechts");
 	}
 
-	/**Der Schlag wird in die jeweilig ausgef¸hrte richtung geziechnet.
+	/**Der Schlag wird in die jeweilig ausgefÔøΩhrte richtung geziechnet.
 	 * @param g2
 	 * @param entity
 	 *  */
@@ -40,22 +40,22 @@ public class Schlag extends SuperObjekt {
 				case "oben":
 					bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
 					bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY + maxAnimationFrames*gp.skala - animationFrames*gp.skala;
-					g2.drawImage(bildO, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildO, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				case "unten":
 					bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
 					bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY - maxAnimationFrames*gp.skala + animationFrames*gp.skala;
-					g2.drawImage(bildU, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildU, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				case "links":
 					bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX + maxAnimationFrames*gp.skala - animationFrames*gp.skala;
 					bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
-					g2.drawImage(bildL, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildL, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				case "rechts":
 					bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX - maxAnimationFrames*gp.skala + animationFrames*gp.skala;
 					bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
-					g2.drawImage(bildR, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildR, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				}
 				frameCounter++;
@@ -69,16 +69,16 @@ public class Schlag extends SuperObjekt {
 				
 				switch (schlagRichtung) {
 				case "oben":
-					g2.drawImage(bildO, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildO, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				case "unten":
-					g2.drawImage(bildU, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildU, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				case "links":
-					g2.drawImage(bildL, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildL, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				case "rechts":
-					g2.drawImage(bildR, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+					g2.drawImage(bildR, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 					break;
 				} 
 			}

@@ -30,14 +30,14 @@ public class SuperObjekt {
 	
 	/**
 	 * Constructor SuperObjects
-	 * @param gp GamePanel wird ¸bergeben
+	 * @param gp GamePanel wird ÔøΩbergeben
 	 * @param weltX weltX Koordinate des SuperObj
 	 * @param weltY weltY Koordinate des SuperObj
 	 */
 	public SuperObjekt(GamePanel gp, int weltX, int weltY) {
 		this.gp = gp;
 		name = "SuperObjekt";
-		hitBox = new Rectangle(0,0,gp.feldGroeﬂe,gp.feldGroeﬂe);
+		hitBox = new Rectangle(0,0,gp.feldGroesse,gp.feldGroesse);
 		this.weltX = weltX;
 		this.weltY = weltY;
 		try {
@@ -47,27 +47,27 @@ public class SuperObjekt {
 		}
 	}
 	
-	/**Zeichen-Methode welche die erbenden klassen nutzen kˆnnen.
-	 * @param g2 Graphics2D wird zum zeichnen ¸bergeben*/
+	/**Zeichen-Methode welche die erbenden klassen nutzen kÔøΩnnen.
+	 * @param g2 Graphics2D wird zum zeichnen ÔøΩbergeben*/
 	public void draw(Graphics2D g2) {
 		if(bild != null) {
 			
 			bildschirmX = weltX - gp.kamera.weltX + gp.kamera.bildschirmX;
 			bildschirmY = weltY - gp.kamera.weltY + gp.kamera.bildschirmY;
 			
-			if (weltX + gp.feldGroeﬂe > gp.kamera.weltX - gp.kamera.bildschirmX && 
-				weltX - gp.feldGroeﬂe < gp.kamera.weltX + gp.kamera.bildschirmX && 
-				weltY + gp.feldGroeﬂe > gp.kamera.weltY - gp.kamera.bildschirmY && 
-				weltY - gp.feldGroeﬂe < gp.kamera.weltY + gp.kamera.bildschirmY) {
+			if (weltX + gp.feldGroesse > gp.kamera.weltX - gp.kamera.bildschirmX && 
+				weltX - gp.feldGroesse < gp.kamera.weltX + gp.kamera.bildschirmX && 
+				weltY + gp.feldGroesse > gp.kamera.weltY - gp.kamera.bildschirmY && 
+				weltY - gp.feldGroesse < gp.kamera.weltY + gp.kamera.bildschirmY) {
 
-				g2.drawImage(bild, bildschirmX, bildschirmY, gp.feldGroeﬂe, gp.feldGroeﬂe, null);
+				g2.drawImage(bild, bildschirmX, bildschirmY, gp.feldGroesse, gp.feldGroesse, null);
 			}
 		}
 	}
 	
 	/**Auslesen und skalieren der Objekte.
-	 * @param bildName Der bildname wird ¸bergeben um das jeweilige bild zu skalieren
-	 * @return bild Das bild wird zur¸ckgegeben
+	 * @param bildName Der bildname wird ÔøΩbergeben um das jeweilige bild zu skalieren
+	 * @return bild Das bild wird zurÔøΩckgegeben
 	 */
 	public BufferedImage setup(String bildName) {
 
@@ -76,7 +76,7 @@ public class SuperObjekt {
 
 		try {
 			bild = ImageIO.read(getClass().getResourceAsStream("/objekte/" + bildName + ".png"));
-			bild = uTool.skalaBild(bild, gp.feldGroeﬂe, gp.feldGroeﬂe);
+			bild = uTool.skalaBild(bild, gp.feldGroesse, gp.feldGroesse);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

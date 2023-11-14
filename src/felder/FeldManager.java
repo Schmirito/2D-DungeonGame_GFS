@@ -17,7 +17,7 @@ public class FeldManager {
 	GamePanel gp;
 	public Feld[] feld;
 	public int mapFeldNr[][];
-	public int groeße = 30;
+	public int groesse = 30;
 
 	public int startRaum = 0;
 	public int mapNr = 0;
@@ -29,7 +29,7 @@ public class FeldManager {
 	public int vorherigeNummer;
 	public boolean start = true;
 
-	// Etwas unschön gelößt, aber funktioniert.
+	// Etwas unschï¿½n gelï¿½ï¿½t, aber funktioniert.
 
 
 	public String[] mapAuswahl = { "/maps/Startraum-Test.txt", "/maps/Room1.txt", "/maps/Room2.txt", "/maps/Room3.txt",
@@ -41,8 +41,8 @@ public class FeldManager {
 
 
 	/**
-	 * Konstruktor für Feldmanager. Manche Variablen werden initialisiert, getFeldBild() wird aufgerufen.
-	 * @param gp GamePanel wird für Bidirektionale Assoziation übergeben.
+	 * Konstruktor fï¿½r Feldmanager. Manche Variablen werden initialisiert, getFeldBild() wird aufgerufen.
+	 * @param gp GamePanel wird fï¿½r Bidirektionale Assoziation ï¿½bergeben.
 	 */
 	public FeldManager(GamePanel gp) {
 		this.gp = gp;
@@ -54,8 +54,8 @@ public class FeldManager {
 		getFeldBild();
 	}
 
-	/**Es wird eine mapNr nach einem bestimmten Vorgang ausgewählt, welche für einen Dateipfad zu einer .txt-Datei, gespeichert im Array mapAuswahl[], steht.
-	 * Daraufhin wird die (neu) ausgewählte Map aus der .txt-Datei in das Integer Array mapFeldNr[][] geladen.
+	/**Es wird eine mapNr nach einem bestimmten Vorgang ausgewï¿½hlt, welche fï¿½r einen Dateipfad zu einer .txt-Datei, gespeichert im Array mapAuswahl[], steht.
+	 * Daraufhin wird die (neu) ausgewï¿½hlte Map aus der .txt-Datei in das Integer Array mapFeldNr[][] geladen.
 	 */
 	public void loadMap() {
 		switch (mapNr) {
@@ -88,7 +88,7 @@ public class FeldManager {
 			raeumeGesamt++;
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 13);
-				gp.player.leben = gp.feldGroeße;
+				gp.player.leben = gp.feldGroesse;
 				raumZaeler = 1;
 			}
 			break;
@@ -106,7 +106,7 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 16);
-				gp.player.leben = gp.feldGroeße;
+				gp.player.leben = gp.feldGroesse;
 				raumZaeler = 1;
 			}
 
@@ -125,7 +125,7 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 19);
-				gp.player.leben = gp.feldGroeße;
+				gp.player.leben = gp.feldGroesse;
 				raumZaeler = 1;
 			}
 
@@ -144,7 +144,7 @@ public class FeldManager {
 
 			if (raumZaeler == 5) {
 				mapNr = (int) (Math.random() * 3 + 22);
-				gp.player.leben = gp.feldGroeße;
+				gp.player.leben = gp.feldGroesse;
 				raumZaeler = 1;
 			}
 
@@ -206,10 +206,10 @@ public class FeldManager {
 			int spalte = 0;
 			int reihe = 0;
 
-			while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
+			while (spalte < gp.mapGroesse && reihe < gp.mapGroesse) {
 				String line = br.readLine();
 
-				while (spalte < gp.mapGroeße) {
+				while (spalte < gp.mapGroesse) {
 					String nummern[] = line.split(" ");
 
 					int num = Integer.parseInt(nummern[spalte]);
@@ -217,7 +217,7 @@ public class FeldManager {
 					mapFeldNr[spalte][reihe] = num;
 					spalte++;
 				}
-				if (spalte >= gp.mapGroeße) {
+				if (spalte >= gp.mapGroesse) {
 					spalte = 0;
 					reihe++;
 				}
@@ -226,7 +226,7 @@ public class FeldManager {
 
 		}
 		System.out.println("mapNr: "+mapNr);
-		System.out.println("raumzähler: "+raumZaeler);
+		System.out.println("raumzï¿½hler: "+raumZaeler);
 	}
 
 	/**Jedes Feld wird mithilfe der Setup-methode eingelesen, skaliert und der Boolean zur Kollision festgelegt. 
@@ -289,10 +289,10 @@ public class FeldManager {
 
 	}
 
-	/**Die Felder werden unter einem Dateipfad gesucht, skaliert und kollisionen hinzugefügt.
-	 * @param index	Die Nummer, welche in der .txt-Dateit für dieses Feld steht.
+	/**Die Felder werden unter einem Dateipfad gesucht, skaliert und kollisionen hinzugefï¿½gt.
+	 * @param index	Die Nummer, welche in der .txt-Dateit fï¿½r dieses Feld steht.
 	 * @param bildName Der Bildname ohne weiteren Pfad.
-	 * @param kollision Ob Kollison mit diesem Block möglich ist.
+	 * @param kollision Ob Kollison mit diesem Block mï¿½glich ist.
 	 */
 	public void setup(int index, String bildName, boolean kollision) {
 		UtilityTool uTool = new UtilityTool();
@@ -300,7 +300,7 @@ public class FeldManager {
 		try {
 			feld[index] = new Feld();
 			feld[index].image = ImageIO.read(getClass().getResourceAsStream("/feld/" + bildName + ".png"));
-			feld[index].image = uTool.skalaBild(feld[index].image, gp.feldGroeße, gp.feldGroeße);
+			feld[index].image = uTool.skalaBild(feld[index].image, gp.feldGroesse, gp.feldGroesse);
 			feld[index].bildName = bildName;
 			feld[index].kollision = kollision;
 
@@ -309,8 +309,8 @@ public class FeldManager {
 		}
 	}
 	/**
-	 * Gibt den Index für das Feld mit dem übergebenen Bildnamen zurück.
-	 * @param bildName Der Bildname des Felds, für welches der Index gesucht werden soll.
+	 * Gibt den Index fï¿½r das Feld mit dem ï¿½bergebenen Bildnamen zurï¿½ck.
+	 * @param bildName Der Bildname des Felds, fï¿½r welches der Index gesucht werden soll.
 	 * @return Der Index als Integer-Wert.
 	 */
 	public int getFeldIndex(String bildName) {
@@ -326,7 +326,7 @@ public class FeldManager {
 		return index;
 	}
 
-	/**Die Bilder der jeweiligen Felder werden an der ihnen jeweils zugehörigen Position in der Welt, wenn sich diese auf dem Bildschirm befindet, gezeichnet.
+	/**Die Bilder der jeweiligen Felder werden an der ihnen jeweils zugehï¿½rigen Position in der Welt, wenn sich diese auf dem Bildschirm befindet, gezeichnet.
 	 * @param g2 Das Graphics2D-Objekt zum Zeichnen der Felder.
 	 */
 	public void draw(Graphics2D g2) {
@@ -336,21 +336,21 @@ public class FeldManager {
 		int x = 0 - gp.kamera.weltX + gp.kamera.bildschirmX;
 		int y = 0 - gp.kamera.weltY + gp.kamera.bildschirmY;
 
-		while (spalte < gp.mapGroeße && reihe < gp.mapGroeße) {
+		while (spalte < gp.mapGroesse && reihe < gp.mapGroesse) {
 
-			if (x + gp.feldGroeße > 0 && x - gp.feldGroeße < gp.BildBreite && y + gp.feldGroeße > 0
-					&& y - gp.feldGroeße < gp.BildHoehe) {
+			if (x + gp.feldGroesse > 0 && x - gp.feldGroesse < gp.BildBreite && y + gp.feldGroesse > 0
+					&& y - gp.feldGroesse < gp.BildHoehe) {
 				int feldNr = mapFeldNr[spalte][reihe];
-				g2.drawImage(feld[feldNr].image, x, y, gp.feldGroeße, gp.feldGroeße, null);
+				g2.drawImage(feld[feldNr].image, x, y, gp.feldGroesse, gp.feldGroesse, null);
 			}
 			spalte++;
-			x += gp.feldGroeße;
+			x += gp.feldGroesse;
 
-			if (spalte == gp.mapGroeße) {
+			if (spalte == gp.mapGroesse) {
 				spalte = 0;
 				x = 0 - gp.kamera.weltX + gp.kamera.bildschirmX;
 				reihe++;
-				y += gp.feldGroeße;
+				y += gp.feldGroesse;
 			}
 		}
 	}

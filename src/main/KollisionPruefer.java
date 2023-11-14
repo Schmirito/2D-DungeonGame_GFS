@@ -11,20 +11,20 @@ public class KollisionPruefer {
 	}
 
 	/**
-	 * Kollision zwischen dem übergeben Entity und anderen Feldern mit Kollision wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und anderen Feldern mit Kollision wird geprï¿½ft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
 	public boolean pruefeFeld(Entity entity) {
 
-		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeße / 2) + entity.hitBox.x;
-		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroeße / 2) + entity.hitBox.x + entity.hitBox.width - 1;
-		int hitBoxOberesWeltY = entity.weltY - (gp.feldGroeße / 2) + entity.hitBox.y;
-		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroeße / 2) + entity.hitBox.y + entity.hitBox.height - 1;
+		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroesse / 2) + entity.hitBox.x;
+		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroesse / 2) + entity.hitBox.x + entity.hitBox.width - 1;
+		int hitBoxOberesWeltY = entity.weltY - (gp.feldGroesse / 2) + entity.hitBox.y;
+		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroesse / 2) + entity.hitBox.y + entity.hitBox.height - 1;
 
-		int hitBoxLinkeSpalte = hitBoxLinkesWeltX / gp.feldGroeße;
-		int hitBoxRechteSpalte = hitBoxRechtesWeltX / gp.feldGroeße;
-		int hitBoxObereReihe = hitBoxOberesWeltY / gp.feldGroeße;
-		int hitBoxUntereReihe = hitBoxUnteresWeltY / gp.feldGroeße;
+		int hitBoxLinkeSpalte = hitBoxLinkesWeltX / gp.feldGroesse;
+		int hitBoxRechteSpalte = hitBoxRechtesWeltX / gp.feldGroesse;
+		int hitBoxObereReihe = hitBoxOberesWeltY / gp.feldGroesse;
+		int hitBoxUntereReihe = hitBoxUnteresWeltY / gp.feldGroesse;
 
 		int feldNr1, feldNr2;
 
@@ -32,7 +32,7 @@ public class KollisionPruefer {
 
 		switch (entity.richtung) {
 		case "oben":
-			hitBoxObereReihe = (hitBoxOberesWeltY - entity.geschwindigkeit) / gp.feldGroeße;
+			hitBoxObereReihe = (hitBoxOberesWeltY - entity.geschwindigkeit) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -41,7 +41,7 @@ public class KollisionPruefer {
 			}
 			break;
 		case "unten":
-			hitBoxUntereReihe = (hitBoxUnteresWeltY + entity.geschwindigkeit) / gp.feldGroeße;
+			hitBoxUntereReihe = (hitBoxUnteresWeltY + entity.geschwindigkeit) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -50,7 +50,7 @@ public class KollisionPruefer {
 			}
 			break;
 		case "links":
-			hitBoxLinkeSpalte = (hitBoxLinkesWeltX - entity.geschwindigkeit) / gp.feldGroeße;
+			hitBoxLinkeSpalte = (hitBoxLinkesWeltX - entity.geschwindigkeit) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -59,7 +59,7 @@ public class KollisionPruefer {
 			}
 			break;
 		case "rechts":
-			hitBoxRechteSpalte = (hitBoxRechtesWeltX + entity.geschwindigkeit) / gp.feldGroeße;
+			hitBoxRechteSpalte = (hitBoxRechtesWeltX + entity.geschwindigkeit) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -69,15 +69,15 @@ public class KollisionPruefer {
 			break;
 		default:
 			System.out.println("In " + this.getClass().getSimpleName()
-					+ "wurde in 'PruefeFeld' kein case für diese Richtung gewählt.");
+					+ "wurde in 'PruefeFeld' kein case fï¿½r diese Richtung gewï¿½hlt.");
 			break;
 		}
 		return kollidiert;
 
 	}
 	/**
-	 * Kollision zwischen dem übergeben Entity und anderen Entities im Entity-Array wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und anderen Entities im Entity-Array wird geprï¿½ft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
 	public void pruefeEntity(Entity entity) {
 
@@ -92,11 +92,11 @@ public class KollisionPruefer {
 				int altesObjektHitboxY = gp.entities[i].hitBox.y;
 
 				// Hitbox Weltposition bestimmen
-				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße / 2);
-				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße / 2);
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroesse / 2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroesse / 2);
 				// Hitbox Weltposition bestimmen
-				gp.entities[i].hitBox.x = gp.entities[i].weltX + gp.entities[i].hitBox.x - (gp.feldGroeße / 2);
-				gp.entities[i].hitBox.y = gp.entities[i].weltY + gp.entities[i].hitBox.y - (gp.feldGroeße / 2);
+				gp.entities[i].hitBox.x = gp.entities[i].weltX + gp.entities[i].hitBox.x - (gp.feldGroesse / 2);
+				gp.entities[i].hitBox.y = gp.entities[i].weltY + gp.entities[i].hitBox.y - (gp.feldGroesse / 2);
 
 				switch (entity.richtung) {
 				case "oben":
@@ -144,10 +144,10 @@ public class KollisionPruefer {
 		}
 	}
 	/**
-	 * Kollision zwischen dem übergeben Entity und anderen Entities im Entity-Array wird geprüft. Wenn zutreffend wird "true" zurückgegeben, ansonsten "false".
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und anderen Entities im Entity-Array wird geprï¿½ft. Wenn zutreffend wird "true" zurï¿½ckgegeben, ansonsten "false".
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
-	public boolean pruefeEntityNurRückgabe(Entity entity, String richtung, int bewegung) {
+	public boolean pruefeEntityNurRueckgabe(Entity entity, String richtung, int bewegung) {
 		boolean kollidiert = false;
 		for (int i = 0; i < gp.entities.length; i++) {
 			if (gp.entities[i] != null && !(entity.equals(gp.entities[i]))) {
@@ -160,11 +160,11 @@ public class KollisionPruefer {
 				int altesObjektHitboxY = gp.entities[i].hitBox.y;
 
 				// Hitbox Weltposition bestimmen
-				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße / 2);
-				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße / 2);
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroesse / 2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroesse / 2);
 				// Hitbox Weltposition bestimmen
-				gp.entities[i].hitBox.x = gp.entities[i].weltX + gp.entities[i].hitBox.x - (gp.feldGroeße / 2);
-				gp.entities[i].hitBox.y = gp.entities[i].weltY + gp.entities[i].hitBox.y - (gp.feldGroeße / 2);
+				gp.entities[i].hitBox.x = gp.entities[i].weltX + gp.entities[i].hitBox.x - (gp.feldGroesse / 2);
+				gp.entities[i].hitBox.y = gp.entities[i].weltY + gp.entities[i].hitBox.y - (gp.feldGroesse / 2);
 
 				switch (richtung) {
 				case "oben":
@@ -217,8 +217,8 @@ public class KollisionPruefer {
 		return kollidiert;
 	}
 	/**
-	 * Kollision zwischen dem übergeben Entity und dem Player wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und dem Player wird geprï¿½ft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
 	public void pruefePlayer(Entity entity) {
 
@@ -232,11 +232,11 @@ public class KollisionPruefer {
 			int altesObjektHitboxY = gp.player.hitBox.y;
 
 			// Hitbox Weltposition bestimmen
-			entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße / 2);
-			entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße / 2);
+			entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroesse / 2);
+			entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroesse / 2);
 			// Hitbox Weltposition bestimmen
-			gp.player.hitBox.x = gp.player.weltX + gp.player.hitBox.x - (gp.feldGroeße / 2);
-			gp.player.hitBox.y = gp.player.weltY + gp.player.hitBox.y - (gp.feldGroeße / 2);
+			gp.player.hitBox.x = gp.player.weltX + gp.player.hitBox.x - (gp.feldGroesse / 2);
+			gp.player.hitBox.y = gp.player.weltY + gp.player.hitBox.y - (gp.feldGroesse / 2);
 
 			switch (entity.richtung) {
 			case "oben":
@@ -283,20 +283,20 @@ public class KollisionPruefer {
 		}
 	}
 	/**
-	 * Kollision zwischen dem übergeben Entity und anderen Feldern mit Kollision wird geprüft. Wenn zutreffend wird "true" zurückgegeben, ansonsten "false".
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und anderen Feldern mit Kollision wird geprï¿½ft. Wenn zutreffend wird "true" zurï¿½ckgegeben, ansonsten "false".
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
-	public boolean pruefeFeldOnlyRückgabe(Entity entity, String richtung, int bewegung) {
+	public boolean pruefeFeldOnlyRueckgabe(Entity entity, String richtung, int bewegung) {
 
-		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroeße / 2) + entity.hitBox.x;
-		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroeße / 2) + entity.hitBox.x + entity.hitBox.width - 1;
-		int hitBoxOberesWeltY = entity.weltY - (gp.feldGroeße / 2) + entity.hitBox.y;
-		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroeße / 2) + entity.hitBox.y + entity.hitBox.height - 1;
+		int hitBoxLinkesWeltX = entity.weltX - (gp.feldGroesse / 2) + entity.hitBox.x;
+		int hitBoxRechtesWeltX = entity.weltX - (gp.feldGroesse / 2) + entity.hitBox.x + entity.hitBox.width - 1;
+		int hitBoxOberesWeltY = entity.weltY - (gp.feldGroesse / 2) + entity.hitBox.y;
+		int hitBoxUnteresWeltY = entity.weltY - (gp.feldGroesse / 2) + entity.hitBox.y + entity.hitBox.height - 1;
 
-		int hitBoxLinkeSpalte = hitBoxLinkesWeltX / gp.feldGroeße;
-		int hitBoxRechteSpalte = hitBoxRechtesWeltX / gp.feldGroeße;
-		int hitBoxObereReihe = hitBoxOberesWeltY / gp.feldGroeße;
-		int hitBoxUntereReihe = hitBoxUnteresWeltY / gp.feldGroeße;
+		int hitBoxLinkeSpalte = hitBoxLinkesWeltX / gp.feldGroesse;
+		int hitBoxRechteSpalte = hitBoxRechtesWeltX / gp.feldGroesse;
+		int hitBoxObereReihe = hitBoxOberesWeltY / gp.feldGroesse;
+		int hitBoxUntereReihe = hitBoxUnteresWeltY / gp.feldGroesse;
 
 		int feldNr1, feldNr2;
 
@@ -304,7 +304,7 @@ public class KollisionPruefer {
 
 		switch (richtung) {
 		case "oben":
-			hitBoxObereReihe = (hitBoxOberesWeltY - bewegung) / gp.feldGroeße;
+			hitBoxObereReihe = (hitBoxOberesWeltY - bewegung) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -313,7 +313,7 @@ public class KollisionPruefer {
 			}
 			break;
 		case "unten":
-			hitBoxUntereReihe = (hitBoxUnteresWeltY + bewegung) / gp.feldGroeße;
+			hitBoxUntereReihe = (hitBoxUnteresWeltY + bewegung) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -321,7 +321,7 @@ public class KollisionPruefer {
 			}
 			break;
 		case "links":
-			hitBoxLinkeSpalte = (hitBoxLinkesWeltX - bewegung) / gp.feldGroeße;
+			hitBoxLinkeSpalte = (hitBoxLinkesWeltX - bewegung) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxLinkeSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -329,7 +329,7 @@ public class KollisionPruefer {
 			}
 			break;
 		case "rechts":
-			hitBoxRechteSpalte = (hitBoxRechtesWeltX + bewegung) / gp.feldGroeße;
+			hitBoxRechteSpalte = (hitBoxRechtesWeltX + bewegung) / gp.feldGroesse;
 			feldNr1 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxObereReihe];
 			feldNr2 = gp.feldM.mapFeldNr[hitBoxRechteSpalte][hitBoxUntereReihe];
 			if (gp.feldM.feld[feldNr1].kollision == true || gp.feldM.feld[feldNr2].kollision == true) {
@@ -338,15 +338,15 @@ public class KollisionPruefer {
 			break;
 		default:
 			System.out.println("In " + this.getClass().getSimpleName()
-					+ "wurde in 'PruefeFeld' kein case für diese Richtung gewählt.");
+					+ "wurde in 'PruefeFeld' kein case fï¿½r diese Richtung gewï¿½hlt.");
 			break;
 		}
 		return kollidiert;
 
 	}
 	/**
-	 * Kollision zwischen dem übergeben Entity und Objekten im Objekte-Array wird geprüft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und Objekten im Objekte-Array wird geprï¿½ft. Wenn zutreffend wird Entity.kollidiert auf "true" gesetzt.
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
 	public boolean[] pruefeObjekt(Entity entity, boolean kannInteragieren) {
 		boolean objGetroffen[] = new boolean[gp.objekte.length];
@@ -361,8 +361,8 @@ public class KollisionPruefer {
 				int altesEntityHitboxX = entity.hitBox.x;
 				int altesEntityHitboxY = entity.hitBox.y;
 				// Hitbox Weltposition bestimmen
-				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße / 2);
-				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße / 2);
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroesse / 2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroesse / 2);
 
 				// Alte Werte Sichern
 				int altesObjektHitboxX = gp.objekte[i].hitBox.x;
@@ -439,8 +439,8 @@ public class KollisionPruefer {
 		return objGetroffen;
 	}
 	/**
-	 * Kollision zwischen dem übergeben Entity und Objekten im Objekte-Array wird geprüft. Wenn zutreffend wird "true" zurückgegeben, ansonsten "false".
-	 * @param entity Entity, welches die Kollision überprüfen will.
+	 * Kollision zwischen dem ï¿½bergeben Entity und Objekten im Objekte-Array wird geprï¿½ft. Wenn zutreffend wird "true" zurï¿½ckgegeben, ansonsten "false".
+	 * @param entity Entity, welches die Kollision ï¿½berprï¿½fen will.
 	 */
 	public boolean pruefeObjektOnlyKollidiert(Entity entity, String richtung) {
 		boolean kollidiert = false;
@@ -452,8 +452,8 @@ public class KollisionPruefer {
 				int altesEntityHitboxX = entity.hitBox.x;
 				int altesEntityHitboxY = entity.hitBox.y;
 				// Hitbox Weltposition bestimmen
-				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroeße / 2);
-				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroeße / 2);
+				entity.hitBox.x = entity.weltX + entity.hitBox.x - (gp.feldGroesse / 2);
+				entity.hitBox.y = entity.weltY + entity.hitBox.y - (gp.feldGroesse / 2);
 
 				// Alte Werte Sichern
 				int altesObjektHitboxX = gp.objekte[i].hitBox.x;

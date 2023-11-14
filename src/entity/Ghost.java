@@ -13,7 +13,7 @@ public class Ghost extends Entity {
 
 	int zaeler = 0;
 	/**
-	 * Konstruktor für Ghost. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition und weitere Variablen wie die der Hitbox werden initialisiert.
+	 * Konstruktor fï¿½r Ghost. Geht bidirektionale Beziehung mit GamePanel ein. Weltposition und weitere Variablen wie die der Hitbox werden initialisiert.
 	 * @param gp Das GamePanel.
 	 * @param weltX Die X-Koordinaate auf der Map.
 	 * @param weltY Die Y-Koordinate auf der Map.
@@ -23,10 +23,10 @@ public class Ghost extends Entity {
 		this.weltX = weltX;
 		this.weltY = weltY;
 		hitBox = new Rectangle();
-		hitBox.x = gp.feldGroeße / 4;
-		hitBox.y = gp.feldGroeße / 2;
-		hitBox.height = gp.feldGroeße / 2;
-		hitBox.width = gp.feldGroeße / 2;
+		hitBox.x = gp.feldGroesse / 4;
+		hitBox.y = gp.feldGroesse / 2;
+		hitBox.height = gp.feldGroesse / 2;
+		hitBox.width = gp.feldGroesse / 2;
 
 		richtung = "unten";
 		geschwindigkeit = gp.skala;
@@ -34,7 +34,7 @@ public class Ghost extends Entity {
 		getImage();
 	}
 	/**
-	 * Das Bewegungsverhalten eines Geist-Objekts wird hier ausgeführt. Gehen zum Spieler und Schlagen diesen, keine Feld-Kollision.
+	 * Das Bewegungsverhalten eines Geist-Objekts wird hier ausgefï¿½hrt. Gehen zum Spieler und Schlagen diesen, keine Feld-Kollision.
 	 */
 	public void update() {
 		diffSpielerX = weltX - gp.player.weltX;
@@ -81,51 +81,51 @@ public class Ghost extends Entity {
 		// MOVEMENT
 		if (rundenAnzahlGetroffen > 0) {
 			rundenAnzahlGetroffen--;
-			switch (stoßRichtung) {
+			switch (stossRichtung) {
 			case "oben":
 
-				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
-						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
-								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
-					weltY -= gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+				if (gp.kPruefer.pruefeFeldOnlyRueckgabe(this, stossRichtung,
+						gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRueckgabe(this, stossRichtung,
+								gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stossRichtung) == false) {
+					weltY -= gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen;
 
 				}
 				break;
 
 			case "unten":
 
-				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
-						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
-								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
-					weltY += gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+				if (gp.kPruefer.pruefeFeldOnlyRueckgabe(this, stossRichtung,
+						gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRueckgabe(this, stossRichtung,
+								gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stossRichtung) == false) {
+					weltY += gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen;
 
 				}
 				break;
 
 			case "links":
 
-				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
-						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
-								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
-					weltX -= gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+				if (gp.kPruefer.pruefeFeldOnlyRueckgabe(this, stossRichtung,
+						gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRueckgabe(this, stossRichtung,
+								gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stossRichtung) == false) {
+					weltX -= gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen;
 
 				}
 				break;
 
 			case "rechts":
 
-				if (gp.kPruefer.pruefeFeldOnlyRückgabe(this, stoßRichtung,
-						gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeEntityNurRückgabe(this, stoßRichtung,
-								gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen) == false
-						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stoßRichtung) == false) {
-					weltX += gp.skala * entityGetroffen.rückstoß / rundenMaxAnzahlgetroffen;
+				if (gp.kPruefer.pruefeFeldOnlyRueckgabe(this, stossRichtung,
+						gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeEntityNurRueckgabe(this, stossRichtung,
+								gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen) == false
+						&& gp.kPruefer.pruefeObjektOnlyKollidiert(this, stossRichtung) == false) {
+					weltX += gp.skala * entityGetroffen.rueckstoss / rundenMaxAnzahlgetroffen;
 
 				}
 				break;
@@ -134,7 +134,7 @@ public class Ghost extends Entity {
 		} else {
 
 		}
-		if (diffSpielerX <= gp.feldGroeße && diffSpielerY <= gp.feldGroeße) {
+		if (diffSpielerX <= gp.feldGroesse && diffSpielerY <= gp.feldGroesse) {
 			zaeler++;
 
 			if (zaeler == schlageSpielerCooldownSec * 60) {
@@ -148,8 +148,8 @@ public class Ghost extends Entity {
 
 	}
 	/**Wird in der Update-Methode aufgerufen.
-	 * Es wird überprüft, ob die X oder Y differenz zwischen dem Spieler und dem Zombie größer ist.
-	 * Der Zombie bewegt sich in die jeweils größere Koordinaten Differenz und kommt somit zum Spieler.
+	 * Es wird ï¿½berprï¿½ft, ob die X oder Y differenz zwischen dem Spieler und dem Zombie grï¿½ï¿½er ist.
+	 * Der Zombie bewegt sich in die jeweils grï¿½ï¿½ere Koordinaten Differenz und kommt somit zum Spieler.
 	 */
 	public void laufeZumSpieler() {
 		diffSpielerX = weltX - gp.player.weltX;
